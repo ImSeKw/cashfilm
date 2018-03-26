@@ -53,6 +53,15 @@
 		<property name="mapperLocations">
 			<list>
 				<value>classpath:com/boa/cashfilm/mapper/cashfilmMapper.xml</value>
+				<value>classpath:com/boa/cashfilm/mapper/companyMapper.xml</value>
+				<value>classpath:com/boa/cashfilm/mapper/itemMapper.xml</value>
+				<value>classpath:com/boa/cashfilm/mapper/memberMapper.xml</value>
+				<value>classpath:com/boa/cashfilm/mapper/statementCompanyMapper.xml</value>
+				<value>classpath:com/boa/cashfilm/mapper/statementIndividualMapper.xml</value>
+				<value>classpath:com/boa/cashfilm/mapper/statisticCompanyMapper.xml</value>
+				<value>classpath:com/boa/cashfilm/mapper/statisticIndividualMapper.xml</value>
+				<value>classpath:com/boa/cashfilm/mapper/systemCompanyMapper.xml</value>
+				<value>classpath:com/boa/cashfilm/mapper/systemIndividualMapper.xml</value>
 			</list>
 		</property>
 	</bean>
