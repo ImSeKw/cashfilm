@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.boa.cashfilm.member.dto.EmailAndPassword;
-import com.boa.cashfilm.member.dto.MemberDetails;
+import com.boa.cashfilm.member.dto.MemberInfo;
 import com.boa.cashfilm.member.dto.MemberSignUp;
 import com.boa.cashfilm.member.dto.MemberSimple;
 import com.boa.cashfilm.service.MemberService;
@@ -24,6 +24,14 @@ public class MemberController {
 	MemberService memberService;
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
+	// 회원 정보 조회
+	@RequestMapping(value = "/member/memberInfo", method = RequestMethod.GET)
+	public String selectMemberInfo(Model model, @RequestParam("memberEmail") String memberEmail) {
+		logger.debug("{} : < memberEmail selectMemberInfo () MemberController", memberEmail);
+		MemberInfo memberInfo = memberService.selectMemberInfo(memberEmail);
+		model.addAttribute("memberInfo", memberInfo);
+		return "member/memberInfo";
+	}
 	
 	// 회원가입 처리
 	@RequestMapping(value = "/member/signUp", method = RequestMethod.POST)

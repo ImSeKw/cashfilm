@@ -11,7 +11,7 @@
 	</c:when>
 	<c:otherwise>
 		<a href="">로그아웃</a>
-		<a href="">나의정보</a>
+		<a href="${pageContext.request.contextPath}/member/memberInfo?memberEmail=${memberSimple.memberEmail}">나의정보</a>
 		<c:choose>
 			<c:when test="${empty memberSimple.comCode || memberSimple.comCode == ''}">
 				<a href="">회사등록</a>
