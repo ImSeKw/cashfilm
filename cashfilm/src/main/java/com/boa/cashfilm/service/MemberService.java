@@ -22,14 +22,15 @@ public class MemberService {
 	// 회원가입 처리
 	public void insertSignUp(MemberSignUp memberSignUp) {
 		logger.debug("{} : < memberSignUp insertSignUp() MemberService", memberSignUp);
+		// 간단
 		MemberSimple memberSimple = new MemberSimple();
 		memberSimple.setMemberEmail(memberSignUp.getMemberEmail());
 		memberSimple.setMemberName(memberSignUp.getMemberName());
 		memberSimple.setMemberPassword(memberSignUp.getMemberPassword());
-		String memberEmail = memberDao.insertSignUpSimple(memberSimple);
-		logger.debug("{} : > memberEmail insertSignUp() MemberService", memberEmail);
+		memberDao.insertSignUpSimple(memberSimple);
+		// 상세
 		MemberDetails memberDetails = new MemberDetails();
-		memberDetails.setMemberEmail(memberEmail);
+		memberDetails.setMemberEmail(memberSignUp.getMemberEmail());
 		memberDetails.setMemberPhoneFirst(memberSignUp.getMemberPhoneFirst());
 		memberDetails.setMemberPhoneSecond(memberSignUp.getMemberPhoneSecond());
 		memberDetails.setMemberPostalCode(memberSignUp.getMemberPostalCode());

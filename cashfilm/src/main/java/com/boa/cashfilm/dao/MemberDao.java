@@ -27,25 +27,9 @@ public class MemberDao {
 	}
 	
 	// 회원가입 간단 처리
-	@Insert("INSERT INTO cfmemberemail (" + 
-				"memberEmail" + 
-				", memberClassificationCode" + 
-				", memberName" + 
-				", memberPassword" + 
-				", memberCondition" + 
-			") VALUES (" + 
-				"#{memberEmail}" + 
-				", #{memberClassificationCode}" + 
-				", #{memberName}" + 
-				", #{memberPassword}" + 
-				", '활동'" + 
-			")")
-	@Options(useGeneratedKeys = true, keyProperty = "memberEmail")
-	public String insertSignUpSimple(MemberSimple memberSimple) {
+	public void insertSignUpSimple(MemberSimple memberSimple) {
 		logger.debug("{} : < memberSimple insertSignUp() MemberDao", memberSimple);
 		sqlSessionTemplate.insert(NAMESPACE + "insertSignUpSimple", memberSimple);
-		String memberEmail = memberSimple.getMemberEmail();
-		return memberEmail;
 	}
 	
 	// 로그인 처리
