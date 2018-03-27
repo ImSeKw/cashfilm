@@ -4,7 +4,54 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.boa.cashfilm.mapper.memberMapper">
-	<!-- 로그인 -->
+	<!-- 회원가입 상세 처리 -->
+	<insert id="insertSignUpDetails" parameterType="com.boa.cashfilm.member.dto.MemberSignUp">
+		INSERT INTO cfmemberdetails (
+			memberEmail
+			, memberPhoneFirst
+			, memberPhoneSecond
+			, memberPostalCode
+			, memberAddress
+			, memberCertification
+			, memberPhone
+			, memberSignDay
+		) VALUES (
+			#{memberEmail}
+			, #{memberPhoneFirst}
+			, #{memberPhoneSecond}
+			, #{memberPostalCode}
+			, #{memberAddress}
+			, #{memberCertification}
+			, #{memberPhone}
+			, NOW()
+		)
+	</insert>
+
+	<!-- 회원가입 간단 처리 -->
+	<insert id="insertSignUpSimple" parameterType="com.boa.cashfilm.member.dto.MemberSignUp">
+		INSERT INTO cfmemberemail (
+			memberEmail
+			, memberClassificationCode
+			, memberName
+			, memberPassword
+			, memberCondition
+		) VALUES (
+			#{memberEmail}
+			, 3
+			, #{memberName}
+			, #{memberPassword}
+			, '활동'
+		)
+	</insert>
+	
+	<!-- 이메일 중복 검사 -->
+	<select id="selectEmailOverlap" parameterType="String" resultType="int">
+		SELECT COUNT(memberEmail)
+		FROM cfmemberemail
+		WHERE memberEmail = #{memberEmail}
+	</select>
+	
+	<!-- 로그인 처리 -->
 	<select id="selectSignIn" parameterType="com.boa.cashfilm.member.dto.EmailAndPassword" resultType="com.boa.cashfilm.member.dto.MemberSimple">
 		SELECT
 			memberEmail

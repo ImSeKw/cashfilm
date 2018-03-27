@@ -6,11 +6,8 @@
 <c:set var="memberSimple" value="${memberSimple}"/>
 <c:choose>
 	<c:when test="${empty memberSimple.memberEmail}">
-		<form action="${pageContext.request.contextPath}/member/signIn" method="post">
-			<input type="text" name="memberEmail">
-			<input type="text" name="memberPassword">
-			<button type="submit">확인</button>
-		</form>
+		<a href="${pageContext.request.contextPath}/member/signIn">로그인</a>
+		<a href="${pageContext.request.contextPath}/member/signUp">회원가입</a>
 	</c:when>
 	<c:otherwise>
 		<a href="">로그아웃</a>
