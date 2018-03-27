@@ -6,8 +6,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.boa.cashfilm.member.dto.EmailAndPassword;
 import com.boa.cashfilm.member.dto.MemberDetails;
@@ -28,6 +31,15 @@ public class MemberController {
 		logger.debug("{} : < memberSignUp insertSignUp() MemberController", memberSignUp);
 		memberService.insertSignUp(memberSignUp);
 		return "redirect:/";
+	}
+	
+	// 이메일 중복 검사
+	@RequestMapping(value = "/member/emailOverlap", method = RequestMethod.POST)
+	public @ResponseBody int selectEmailOverlap(@RequestParam("memberEmail") String memberEmail) {
+		logger.debug("{} : < memberEmail selectEmailOverlap() MemberController", memberEmail);
+		int result = memberService.selectEmailOverlap(memberEmail);
+		logger.debug("{} : > result selectEmailOverlap() MemberController", result);
+		return result;
 	}
 	
 	// 회원가입 화면

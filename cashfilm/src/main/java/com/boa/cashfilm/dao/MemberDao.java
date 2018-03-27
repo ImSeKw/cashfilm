@@ -33,6 +33,12 @@ public class MemberDao {
 		sqlSessionTemplate.insert(NAMESPACE + "insertSignUpSimple", memberSignUp);
 	}
 	
+	// 이메일 중복 검사
+	public int selectEmailOverlap(String memberEmail) {
+		logger.debug("{} : < memberEmail selectEmailOverlap() MemberDao", memberEmail);
+		return sqlSessionTemplate.selectOne(NAMESPACE + "selectEmailOverlap", memberEmail);
+	}
+	
 	// 로그인 처리
 	public MemberSimple selectSignIn(EmailAndPassword emailAndPassword) {
 		logger.debug("{} : < emailAndPassword selectSignIn() MemberDao", emailAndPassword);

@@ -26,6 +26,12 @@ public class MemberService {
 		memberDao.insertSignUpDetails(memberSignUp);
 	}
 	
+	// 이메일 중복 검사
+	public int selectEmailOverlap(String memberEmail) {
+		logger.debug("{} : < memberEmail selectEmailOverlap() MemberService", memberEmail);
+		return memberDao.selectEmailOverlap(memberEmail);
+	}
+	
 	// 로그인 처리
 	public MemberSimple selectSignIn(EmailAndPassword emailAndPassword) {
 		logger.debug("{} : < emailAndPassword selectSignIn() MemberService", emailAndPassword);
