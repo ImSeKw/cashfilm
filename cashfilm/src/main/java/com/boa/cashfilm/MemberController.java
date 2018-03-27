@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.boa.cashfilm.member.dto.EmailAndPassword;
+import com.boa.cashfilm.member.dto.MemberDetails;
+import com.boa.cashfilm.member.dto.MemberSignUp;
 import com.boa.cashfilm.member.dto.MemberSimple;
 import com.boa.cashfilm.service.MemberService;
 
@@ -19,7 +21,22 @@ public class MemberController {
 	MemberService memberService;
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
-	// 로그인
+	
+	// 회원가입 처리
+	@RequestMapping(value = "/member/signUp", method = RequestMethod.POST)
+	public String insertSignUp(MemberSignUp memberSignUp) {
+		logger.debug("{} : < memberSignUp insertSignUp() MemberController", memberSignUp);
+		memberService.insertSignUp(memberSignUp);
+		return "redirect:/";
+	}
+	
+	// 회원가입 화면
+	@RequestMapping(value = "/member/signUp", method = RequestMethod.GET)
+	public String insertSignUp() {
+		return "member/memberSignUp";
+	}
+	
+	// 로그인 처리
 	@RequestMapping(value = "/member/signIn", method = RequestMethod.POST)
 	public String selectSignIn(HttpSession httpSession, EmailAndPassword emailAndPassword) {
 		logger.debug("{} : < emailAndPassword.getMemberEmail() selectSignIn() MemberController", emailAndPassword.getMemberEmail());
@@ -43,9 +60,10 @@ public class MemberController {
 		return view;
 	}
 	
-	// 메인화면
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String cashfilm() {
-		return "cashfilm";
+	// 로그인 화면
+	@RequestMapping(value = "/member/signIn", method = RequestMethod.GET)
+	public String selectSignIn() {
+		logger.debug("로그인 화면 : < selectSignIn() MemberController");
+		return "member/memberSignIn";
 	}
 }
