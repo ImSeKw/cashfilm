@@ -1,5 +1,51 @@
 package com.boa.cashfilm.service;
 
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.boa.cashfilm.dao.SystemIndividualDao;
+import com.boa.cashfilm.sysindi.dto.IndividualSystem;
+
+@Service
+@Transactional
 public class SystemIndividualService {
+	@Autowired
+	private SystemIndividualDao systemindividualDao;
+	private static final Logger logger = LoggerFactory.getLogger(SystemIndividualService.class);
+	
+	//계정체계관리 삭제 
+	public int deleteIndividualSystem(IndividualSystem isystem) {
+		logger.debug("{} :deleteIndividualSystem SystemIndividualService.java",isystem);
+		return systemindividualDao.deleteIndividualSystem(isystem);
+	}
+	
+	//계정체계관리 수정 
+	public int updateIndividualSystem(IndividualSystem isystem) {
+		logger.debug("{} :updateIndividualSystem SystemIndividualService.java",isystem);
+		return systemindividualDao.updateIndividualSystem(isystem);
+	}
+	
+	//계정체계관리수정을 위한 검색
+	public IndividualSystem selectOneIndividualSystem(int individualSystemNumeral) {
+		logger.debug("{} : selectOneIndividualSystem SystemIndividualService.java",individualSystemNumeral);
+		return systemindividualDao.selectOneIndividualSystem(individualSystemNumeral);
+	}
+	
+	//계정체계관리 검색
+	public List<IndividualSystem> selectIndividualSystem() {
+		logger.debug("selectIndividualSystem SystemIndividualService.java");
+		return systemindividualDao.selectIndividualSystem();
+	}
+	
+	//계정체계관리 등록
+	public int insertIndividualSystem(IndividualSystem isystem) {
+		logger.debug("{} :insertIndividualSystem SystemIndividualService.java",isystem);
+		return systemindividualDao.insertIndividualSystem(isystem);
+	}
 
 }
