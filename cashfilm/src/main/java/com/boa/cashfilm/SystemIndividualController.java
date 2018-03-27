@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.boa.cashfilm.service.SystemIndividualService;
+import com.boa.cashfilm.sysindi.dto.IndividualSubject;
 import com.boa.cashfilm.sysindi.dto.IndividualSystem;
 
 @Controller
@@ -22,15 +23,39 @@ public class SystemIndividualController {
 	private SystemIndividualService systemIndiService;
 	private static final Logger logger=LoggerFactory.getLogger(SystemIndividualService.class);
 	
+	//개인계정과목 검색 
+	@RequestMapping(value="/IndividualSystem/selectIndividualSubject",method = RequestMethod.GET)
+	public String selectAllIndividualSubject(Model model){
+		logger.debug("selectAllIndividualSubject SystemIndividualService.java");
+		List<IndividualSubject> list=systemIndiService.selectAllIndividualSubject();
+		model.addAttribute("list", list);
+		return "system/selectIndividualSubject";
+	}
+	
+	//개인계정과목 등록 action
+	@RequestMapping(value="/IndividualSystem/insertIndividualSubject",method = RequestMethod.POST)
+	public String addIndividualSubject(IndividualSubject isubject) {
+		logger.debug("{} :insertIndividualSubject action SystemIndividualController.java",isubject);
+		systemIndiService.insertIndividualSubject(isubject);
+		return "redirect:/IndividualSystem/selectIndividualSubject";
+	}
+	
+	//개인계정과목 등록 form
+	@RequestMapping(value="/IndividualSystem/insertIndividualSubject",method = RequestMethod.GET)
+	public String addIndividualSubject(Model model) {
+		logger.debug("{} :insertIndividualSubject form SystemIndividualController.java");
+		List<IndividualSystem> list = systemIndiService.selectIndividualSystem();
+		model.addAttribute("list",list);
+		return "system/insertIndividualSubject";
+	}
+	
 	//계정체계관리 삭제 
 	@RequestMapping(value="/IndividualSystem/deleteIndividualSystem",method = RequestMethod.GET)
 	public String deleteIndividualSystem(IndividualSystem isystem){
 		logger.debug("{} :deleteIndividualSystem action SystemIndividualController.java",isystem);
 		systemIndiService.deleteIndividualSystem(isystem);
 		return "redirect:/IndividualSystem/selectIndividualSystem";
-		
 	}
-	
 	
 	//계정체계관리 수정 action
 	@RequestMapping(value="/IndividualSystem/updateIndividualSystem",method = RequestMethod.POST)
@@ -50,7 +75,7 @@ public class SystemIndividualController {
 	}
 	
 		
-	//계정체계관리 목록
+	//계정체계관리 검색
 	@RequestMapping(value="/IndividualSystem/selectIndividualSystem", method = RequestMethod.GET)
 	public String selectindisystem(Model model) {
 		logger.debug("selectindisystem form SystemIndividualController.java");
@@ -70,7 +95,7 @@ public class SystemIndividualController {
 	public String addindisystem(IndividualSystem isystem){
 		logger.debug("{} : addindisystem Action SystemIndividualController.java",isystem);
 		systemIndiService.insertIndividualSystem(isystem);
-		return "redirect:/";
+		return "redirect:/IndividualSystem/selectIndividualSystem";
 	}
 
 }

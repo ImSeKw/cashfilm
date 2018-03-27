@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.boa.cashfilm.sysindi.dto.IndividualSubject;
 import com.boa.cashfilm.sysindi.dto.IndividualSystem;
 
 @Repository
@@ -17,6 +18,18 @@ public class SystemIndividualDao {
 	private static final Logger logger = LoggerFactory.getLogger(SystemIndividualDao.class);
 	private final String NAMESPACE ="com.boa.cashfilm.mapper.systemIndividualMapper.";
 	
+	//개인계정과목 검색 
+	public List<IndividualSubject> selectAllIndividualSubject(){
+		logger.debug("isubject selectAllIndividualSubject");
+		return sqlsessiontemplate.selectList(NAMESPACE +"selectAllIndividualSubject");
+	}
+	
+	//개인계정과목 등록 
+	public int insertIndividualSubject(IndividualSubject isubject) {
+		logger.debug("isubject insertIndividualSubject");
+		return sqlsessiontemplate.insert(NAMESPACE + "insertIndividualSubject",isubject);
+	}
+		
 	//계정체계관리 삭제 
 	public int deleteIndividualSystem(IndividualSystem isystem) {
 		logger.debug("isystem deleteIndividualSystem");
