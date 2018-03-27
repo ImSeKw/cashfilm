@@ -5,7 +5,7 @@
 
 <mapper namespace="com.boa.cashfilm.mapper.memberMapper">
 	<!-- 회원가입 상세 처리 -->
-	<insert id="insertSignUpDetails" parameterType="com.boa.cashfilm.member.dto.MemberDetails">
+	<insert id="insertSignUpDetails" parameterType="com.boa.cashfilm.member.dto.MemberSignUp">
 		INSERT INTO cfmemberdetails (
 			memberEmail
 			, memberPhoneFirst
@@ -28,7 +28,7 @@
 	</insert>
 
 	<!-- 회원가입 간단 처리 -->
-	<insert id="insertSignUpSimple" parameterType="com.boa.cashfilm.member.dto.MemberSimple">
+	<insert id="insertSignUpSimple" parameterType="com.boa.cashfilm.member.dto.MemberSignUp">
 		INSERT INTO cfmemberemail (
 			memberEmail
 			, memberClassificationCode

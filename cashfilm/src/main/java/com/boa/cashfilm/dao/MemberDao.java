@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.boa.cashfilm.member.dto.EmailAndPassword;
 import com.boa.cashfilm.member.dto.MemberDetails;
+import com.boa.cashfilm.member.dto.MemberSignUp;
 import com.boa.cashfilm.member.dto.MemberSimple;
 
 @Repository
@@ -21,15 +22,15 @@ public class MemberDao {
 	private static final Logger logger = LoggerFactory.getLogger(MemberDao.class);
 	
 	// 회원가입 상세 처리
-	public void insertSignUpDetails(MemberDetails memberDetails) {
-		logger.debug("{} : < memberDetails insertSignUpDetails() MemberDao", memberDetails);
-		sqlSessionTemplate.insert(NAMESPACE + "insertSignUpDetails", memberDetails);
+	public void insertSignUpDetails(MemberSignUp memberSignUp) {
+		logger.debug("{} : < memberSignUp insertSignUpDetails() MemberDao", memberSignUp);
+		sqlSessionTemplate.insert(NAMESPACE + "insertSignUpDetails", memberSignUp);
 	}
 	
 	// 회원가입 간단 처리
-	public void insertSignUpSimple(MemberSimple memberSimple) {
-		logger.debug("{} : < memberSimple insertSignUp() MemberDao", memberSimple);
-		sqlSessionTemplate.insert(NAMESPACE + "insertSignUpSimple", memberSimple);
+	public void insertSignUpSimple(MemberSignUp memberSignUp) {
+		logger.debug("{} : < memberSignUp insertSignUp() MemberDao", memberSignUp);
+		sqlSessionTemplate.insert(NAMESPACE + "insertSignUpSimple", memberSignUp);
 	}
 	
 	// 로그인 처리
