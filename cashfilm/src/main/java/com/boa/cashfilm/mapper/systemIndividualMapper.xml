@@ -3,6 +3,39 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.boa.cashfilm.mapper.cashfilmMapper">
+<mapper namespace="com.boa.cashfilm.mapper.systemIndividualMapper">
 	
+	<!--계정체계관리 삭제  -->
+	<delete id="deleteIndividualSystem" parameterType="com.boa.cashfilm.sysindi.dto.IndividualSystem">
+		DELETE FROM cfindividualsystem WHERE individualSystemNumeral=#{individualSystemNumeral};
+	</delete>
+	
+	<!--계정체계관리 수정 action -->
+	<update id="updateIndividualSystem" parameterType="com.boa.cashfilm.sysindi.dto.IndividualSystem">
+		UPDATE cfindividualsystem 
+		SET individualSystemName=#{individualSystemName} 
+		WHERE individualSystemNumeral=#{individualSystemNumeral};
+	</update>
+	
+	<!--계정체계관리 수정을 위한 검색 -->
+	<select id="selectOneIndividualSystem" parameterType="int" resultType="com.boa.cashfilm.sysindi.dto.IndividualSystem">
+		SELECT individualSystemNumeral, individualSystemName 
+		FROM cfindividualsystem 
+		WHERE individualSystemNumeral=#{individualSystemNumeral}
+	</select>
+	
+	
+	<!--계정체계관리 검색  -->
+	<select id="selectIndividualSystem" resultType="com.boa.cashfilm.sysindi.dto.IndividualSystem">
+		SELECT individualSystemNumeral,individualSystemName FROM cfindividualsystem; 
+	</select>
+	
+	<!--계정체계관리 등록  -->
+	<insert id="insertIndividualSystem" parameterType="com.boa.cashfilm.sysindi.dto.IndividualSystem">
+		INSERT INTO cfindividualsystem (
+			individualSystemName
+		) VALUES (
+			#{individualSystemName}
+		)
+	</insert>
 </mapper>
