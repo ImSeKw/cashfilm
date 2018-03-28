@@ -5,12 +5,20 @@
 
 <mapper namespace="com.boa.cashfilm.mapper.memberMapper">
 	<!-- 회원 탈퇴 요청 -->
-	<insert id="">
-		
+	<insert id="insertMemberDel" parameterType="com.boa.cashfilm.member.dto.MemberCheck">
+		INSERT INTO cfmemberdel (
+			memberEmail
+			, memberDelRequestDay
+			, memberDelReason
+		) VALUES (
+			#{memberEmail}
+			, NOW()
+			, #{memberDelReason}
+		)
 	</insert>
 
 	<!-- 회원 탈퇴 체크 처리 -->
-	<select id="selectMemberDelCheck" parameterType="com.boa.cashfilm.member.dto.EmailAndPassword" resultType="int">
+	<select id="selectMemberDelCheck" parameterType="com.boa.cashfilm.member.dto.MemberCheck" resultType="int">
 		SELECT COUNT(memberPassword)
 		FROM cfmemberemail
 		WHERE memberEmail = #{memberEmail}
@@ -122,7 +130,7 @@
 	</select>
 	
 	<!-- 로그인 처리 -->
-	<select id="selectSignIn" parameterType="com.boa.cashfilm.member.dto.EmailAndPassword" resultType="com.boa.cashfilm.member.dto.MemberSimple">
+	<select id="selectSignIn" parameterType="com.boa.cashfilm.member.dto.MemberCheck" resultType="com.boa.cashfilm.member.dto.MemberSimple">
 		SELECT
 			memberEmail
 			, memberClassificationCode

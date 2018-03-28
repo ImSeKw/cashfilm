@@ -1,8 +1,9 @@
 package com.boa.cashfilm.member.dto;
 
-public class EmailAndPassword {
+public class MemberCheck {
 	private String memberEmail;
 	private String memberPassword;
+	private String memberDelReason;
 	
 	public String getMemberEmail() {
 		return memberEmail;
@@ -15,5 +16,11 @@ public class EmailAndPassword {
 	}
 	public void setMemberPassword(String memberPassword) {
 		this.memberPassword = memberPassword;
+	}
+	public String getMemberDelReason() {
+		return memberDelReason;
+	}
+	public void setMemberDelReason(String memberDelReason) {
+		this.memberDelReason = memberDelReason;
 	}
 }

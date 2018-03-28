@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.boa.cashfilm.member.dto.EmailAndPassword;
+import com.boa.cashfilm.member.dto.MemberCheck;
 import com.boa.cashfilm.member.dto.MemberInfo;
 import com.boa.cashfilm.member.dto.MemberSignUp;
 import com.boa.cashfilm.member.dto.MemberSimple;
@@ -24,16 +24,21 @@ public class MemberController {
 	MemberService memberService;
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	// 회원 탈퇴 요청
-	public String insertMemberDel() {
-		
+	@RequestMapping(value = "/member/memberDel", method = RequestMethod.POST)
+	public @ResponseBody int insertMemberDel(MemberCheck memberCheck) {
+		logger.debug("{} : < memberEmail insertMemberDel() MemberController", memberCheck.getMemberEmail());
+		logger.debug("{} : < memberDelReason insertMemberDel() MemberController", memberCheck.getMemberDelReason());
+		int result = memberService.insertMemberDel(memberCheck);
+		logger.debug("{} : > result insertMemberDel() MemberController", result);
+		return result;
 	}
 	
 	// 회원 탈퇴 체크 처리
 	@RequestMapping(value = "/member/memberDelCheck", method = RequestMethod.POST)
-	public @ResponseBody int selectMemberDelCheck(Model model, EmailAndPassword emailAndPassword) {
-		logger.debug("{} : < memberEmail memberDelCheck() MemberController", emailAndPassword.getMemberEmail());
-		logger.debug("{} : < memberPassword memberDelCheck() MemberController", emailAndPassword.getMemberPassword());
-		int memberDelCheckCount = memberService.selectMemberDelCheck(emailAndPassword);
+	public @ResponseBody int selectMemberDelCheck(Model model, MemberCheck memberCheck) {
+		logger.debug("{} : < memberEmail memberDelCheck() MemberController", memberCheck.getMemberEmail());
+		logger.debug("{} : < memberPassword memberDelCheck() MemberController", memberCheck.getMemberPassword());
+		int memberDelCheckCount = memberService.selectMemberDelCheck(memberCheck);
 		logger.debug("{} : > memberDelCheckCount memberDelCheck() MemberController", memberDelCheckCount);
 		return memberDelCheckCount;
 	}
@@ -96,17 +101,17 @@ public class MemberController {
 	
 	// 로그인 처리
 	@RequestMapping(value = "/member/signIn", method = RequestMethod.POST)
-	public String selectSignIn(HttpSession httpSession, EmailAndPassword emailAndPassword) {
-		logger.debug("{} : < emailAndPassword.getMemberEmail() selectSignIn() MemberController", emailAndPassword.getMemberEmail());
-		logger.debug("{} : < emailAndPassword.getMemberPassword() selectSignIn() MemberController", emailAndPassword.getMemberPassword());
+	public String selectSignIn(HttpSession httpSession, MemberCheck memberCheck) {
+		logger.debug("{} : < memberCheck.getMemberEmail() selectSignIn() MemberController", memberCheck.getMemberEmail());
+		logger.debug("{} : < memberCheck.getMemberPassword() selectSignIn() MemberController", memberCheck.getMemberPassword());
 		
-		MemberSimple memberSimple = memberService.selectSignIn(emailAndPassword);
+		MemberSimple memberSimple = memberService.selectSignIn(memberCheck);
 		String view = null;
 		if(memberSimple == null) {
 			logger.debug("{} : > null memberSimple selectSignIn() MemberController", memberSimple);
 			view = "redirect:/";
-		} else if(memberSimple.getMemberEmail().equals(emailAndPassword.getMemberEmail())) {
-			if(memberSimple.getMemberPassword().equals(emailAndPassword.getMemberPassword())) {
+		} else if(memberSimple.getMemberEmail().equals(memberCheck.getMemberEmail())) {
+			if(memberSimple.getMemberPassword().equals(memberCheck.getMemberPassword())) {
 				logger.debug("{} : > password memberSimple selectSignIn() MemberController", memberSimple);
 				httpSession.setAttribute("memberSimple", memberSimple);
 				view = "redirect:/";

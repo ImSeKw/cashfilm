@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.boa.cashfilm.member.dto.EmailAndPassword;
+import com.boa.cashfilm.member.dto.MemberCheck;
 import com.boa.cashfilm.member.dto.MemberInfo;
 import com.boa.cashfilm.member.dto.MemberSignUp;
 import com.boa.cashfilm.member.dto.MemberSimple;
@@ -20,10 +20,17 @@ public class MemberDao {
 	SqlSessionTemplate sqlSessionTemplate;
 	private final String NAMESPACE = "com.boa.cashfilm.mapper.memberMapper.";
 	private static final Logger logger = LoggerFactory.getLogger(MemberDao.class);
+	
+	// 회원 탈퇴 요청
+	public int insertMemberDel(MemberCheck memberCheck) {
+		logger.debug("{} : < memberCheck insertMemberDel() MemberDao", memberCheck);
+		return sqlSessionTemplate.insert(NAMESPACE + "insertMemberDel", memberCheck);
+	}
+	
 	// 회원 탈퇴 체크 처리
-	public int selectMemberDelCheck(EmailAndPassword emailAndPassword) {
-		logger.debug("{} : < emailAndPassword selectMemberDelCheck() MemberDao", emailAndPassword);
-		return sqlSessionTemplate.selectOne(NAMESPACE + "selectMemberDelCheck", emailAndPassword);
+	public int selectMemberDelCheck(MemberCheck memberCheck) {
+		logger.debug("{} : < memberCheck selectMemberDelCheck() MemberDao", memberCheck);
+		return sqlSessionTemplate.selectOne(NAMESPACE + "selectMemberDelCheck", memberCheck);
 	}
 	
 	// 회원 정보 수정 처리
@@ -63,8 +70,8 @@ public class MemberDao {
 	}
 	
 	// 로그인 처리
-	public MemberSimple selectSignIn(EmailAndPassword emailAndPassword) {
-		logger.debug("{} : < emailAndPassword selectSignIn() MemberDao", emailAndPassword);
-		return sqlSessionTemplate.selectOne(NAMESPACE + "selectSignIn", emailAndPassword);
+	public MemberSimple selectSignIn(MemberCheck memberCheck) {
+		logger.debug("{} : < memberCheck selectSignIn() MemberDao", memberCheck);
+		return sqlSessionTemplate.selectOne(NAMESPACE + "selectSignIn", memberCheck);
 	}
 }

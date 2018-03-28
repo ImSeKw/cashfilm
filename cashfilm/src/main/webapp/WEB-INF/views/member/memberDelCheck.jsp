@@ -21,6 +21,11 @@
 								, data : {
 									memberEmail : $("#memberEmail").val()
 									, memberDelReason : $("#memberDelReason").val()}
+								, success : function(result){
+									if(result==1){
+										window.location.replace('/cashfilm');
+									}
+								}
 							});
 						} else {
 							alert("비밀번호를 확인해주세요.");
@@ -35,7 +40,7 @@
 <jsp:include page="/WEB-INF/views/module/topSecond.jsp"/>
 
 <input type="hidden" id="memberEmail" name="memberEmail" value="${memberSimple.memberEmail}">
-탈퇴이유 : <input type="text" name="memberDelReason">
+탈퇴이유 : <input type="text" id="memberDelReason" name="memberDelReason">
 비밀번호 확인 : <input type="text" id="memberDelCheck">
 <button type="button" id="memberDelCheckButton">확인</button>
 

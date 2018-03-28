@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.boa.cashfilm.dao.MemberDao;
-import com.boa.cashfilm.member.dto.EmailAndPassword;
+import com.boa.cashfilm.member.dto.MemberCheck;
 import com.boa.cashfilm.member.dto.MemberInfo;
 import com.boa.cashfilm.member.dto.MemberSignUp;
 import com.boa.cashfilm.member.dto.MemberSimple;
@@ -21,10 +21,17 @@ public class MemberService {
 	@Autowired
 	MemberDao memberDao;
 	private static final Logger logger = LoggerFactory.getLogger(MemberService.class);
+	
+	// 회원 탈퇴 요청
+	public int insertMemberDel(MemberCheck memberCheck) {
+		logger.debug("{} : memberCheck insertMemberDel() MemberService", memberCheck);
+		return memberDao.insertMemberDel(memberCheck);
+	}
+	
 	// 회원 탈퇴 체크 처리
-	public int selectMemberDelCheck(EmailAndPassword emailAndPassword) {
-		logger.debug("{} : < emailAndPassword selectMemberDelCheck() MemberService", emailAndPassword);
-		return memberDao.selectMemberDelCheck(emailAndPassword);
+	public int selectMemberDelCheck(MemberCheck memberCheck) {
+		logger.debug("{} : < memberCheck selectMemberDelCheck() MemberService", memberCheck);
+		return memberDao.selectMemberDelCheck(memberCheck);
 	}
 	
 	// 회원 정보 수정 처리
@@ -59,8 +66,8 @@ public class MemberService {
 	}
 
 	// 로그인 처리
-	public MemberSimple selectSignIn(EmailAndPassword emailAndPassword) {
-		logger.debug("{} : < emailAndPassword selectSignIn() MemberService", emailAndPassword);
-		return memberDao.selectSignIn(emailAndPassword);
+	public MemberSimple selectSignIn(MemberCheck memberCheck) {
+		logger.debug("{} : < memberCheck selectSignIn() MemberService", memberCheck);
+		return memberDao.selectSignIn(memberCheck);
 	}
 }
