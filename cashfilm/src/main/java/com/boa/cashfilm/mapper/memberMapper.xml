@@ -4,6 +4,53 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.boa.cashfilm.mapper.memberMapper">
+	<!-- 회원 탈퇴 요청 -->
+	<insert id="">
+		
+	</insert>
+
+	<!-- 회원 탈퇴 체크 처리 -->
+	<select id="selectMemberDelCheck" parameterType="com.boa.cashfilm.member.dto.EmailAndPassword" resultType="int">
+		SELECT COUNT(memberPassword)
+		FROM cfmemberemail
+		WHERE memberEmail = #{memberEmail}
+		AND memberPassword = #{memberPassword}
+	</select>
+
+	<!-- 회원 정보 수정 처리 -->
+	<insert id="insertMemberModification" parameterType="com.boa.cashfilm.member.dto.MemberInfo">
+		UPDATE cfmemberemail AS e
+		INNER JOIN cfmemberdetails AS d
+		ON e.memberEmail = d.memberEmail
+		SET
+			e.memberName = #{memberName}
+		<if test = "memberPassword != null || memberPassword != ''">
+			, e.memberPassword = #{memberPassword}
+		</if>
+			, d.memberPhoneFirst = #{memberPhoneFirst}
+			, d.memberPhoneSecond = #{memberPhoneSecond}
+			, d.memberPostalCode = #{memberPostalCode}
+			, d.memberAddress = #{memberAddress}
+			, d.memberPhone = #{memberPhone}
+		WHERE e.memberEmail = #{memberEmail}
+	</insert>
+	
+	<!-- 회원 정보 수정 화면 -->
+	<select id="selectMemberModification" parameterType="String" resultType="com.boa.cashfilm.member.dto.MemberInfo">
+		SELECT
+			e.memberEmail
+			, e.memberName
+			, d.memberPhoneFirst
+			, d.memberPhoneSecond
+			, d.memberPostalCode
+			, d.memberAddress
+			, d.memberPhone
+		FROM cfmemberemail AS e 
+		INNER JOIN cfmemberdetails AS d
+		ON e.memberEmail = d.memberEmail
+		WHERE e.memberEmail = #{memberEmail}
+	</select>
+	
 	<!-- 회원 정보 조회 -->
 	<select id="selectMemberInfo" parameterType="String" resultType="com.boa.cashfilm.member.dto.MemberInfo">
 		SELECT
@@ -14,6 +61,7 @@
 			, d.memberPostalCode
 			, d.memberAddress
 			, d.memberPhone
+			, d.memberSignDay
 			, c.memberClassificationName
 			, b.comName
 		FROM cfmemberemail AS e 

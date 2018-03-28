@@ -1,6 +1,8 @@
 package com.boa.cashfilm.dao;
 
 
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +20,23 @@ public class MemberDao {
 	SqlSessionTemplate sqlSessionTemplate;
 	private final String NAMESPACE = "com.boa.cashfilm.mapper.memberMapper.";
 	private static final Logger logger = LoggerFactory.getLogger(MemberDao.class);
+	// 회원 탈퇴 체크 처리
+	public int selectMemberDelCheck(EmailAndPassword emailAndPassword) {
+		logger.debug("{} : < emailAndPassword selectMemberDelCheck() MemberDao", emailAndPassword);
+		return sqlSessionTemplate.selectOne(NAMESPACE + "selectMemberDelCheck", emailAndPassword);
+	}
+	
+	// 회원 정보 수정 처리
+	public void insertMemberModification(MemberInfo memberInfo) {
+		logger.debug("{} : < memberInfo insertMemberModification() MemberDao", memberInfo);
+		sqlSessionTemplate.insert(NAMESPACE + "insertMemberModification", memberInfo);
+	}
+	
+	// 회원 정보 수정 화면
+	public MemberInfo selectMemberModification(String memberEmail) {
+		logger.debug("{} : < memberEmail selectMemberModification() MemberDao", memberEmail);
+		return sqlSessionTemplate.selectOne(NAMESPACE + "selectMemberModification", memberEmail);
+	}
 	
 	// 회원 정보 조회
 	public MemberInfo selectMemberInfo(String memberEmail) {

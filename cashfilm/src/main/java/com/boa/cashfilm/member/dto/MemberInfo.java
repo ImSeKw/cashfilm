@@ -3,11 +3,13 @@ package com.boa.cashfilm.member.dto;
 public class MemberInfo {
 	private String memberEmail;
 	private String memberName;
+	private String memberPassword;
 	private String memberPhoneFirst;
 	private String memberPhoneSecond;
 	private String memberPostalCode;
 	private String memberAddress;
 	private String memberPhone;
+	private String memberSignDay;
 	private String memberClassificationName;
 	private String comName;
 	
@@ -22,6 +24,12 @@ public class MemberInfo {
 	}
 	public void setMemberName(String memberName) {
 		this.memberName = memberName;
+	}
+	public String getMemberPassword() {
+		return memberPassword;
+	}
+	public void setMemberPassword(String memberPassword) {
+		this.memberPassword = memberPassword;
 	}
 	public String getMemberPhoneFirst() {
 		return memberPhoneFirst;
@@ -52,6 +60,12 @@ public class MemberInfo {
 	}
 	public void setMemberPhone(String memberPhone) {
 		this.memberPhone = memberPhone;
+	}
+	public String getMemberSignDay() {
+		return memberSignDay;
+	}
+	public void setMemberSignDay(String memberSignDay) {
+		this.memberSignDay = memberSignDay;
 	}
 	public String getMemberClassificationName() {
 		return memberClassificationName;

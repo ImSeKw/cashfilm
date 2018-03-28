@@ -23,6 +23,44 @@ public class MemberController {
 	@Autowired
 	MemberService memberService;
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+	// 회원 탈퇴 요청
+	public String insertMemberDel() {
+		
+	}
+	
+	// 회원 탈퇴 체크 처리
+	@RequestMapping(value = "/member/memberDelCheck", method = RequestMethod.POST)
+	public @ResponseBody int selectMemberDelCheck(Model model, EmailAndPassword emailAndPassword) {
+		logger.debug("{} : < memberEmail memberDelCheck() MemberController", emailAndPassword.getMemberEmail());
+		logger.debug("{} : < memberPassword memberDelCheck() MemberController", emailAndPassword.getMemberPassword());
+		int memberDelCheckCount = memberService.selectMemberDelCheck(emailAndPassword);
+		logger.debug("{} : > memberDelCheckCount memberDelCheck() MemberController", memberDelCheckCount);
+		return memberDelCheckCount;
+	}
+	
+	// 회원 탈퇴 체크 화면
+	@RequestMapping(value = "/member/memberDelCheck", method = RequestMethod.GET)
+	public String selectMemberDelCheck() {
+		logger.debug("< 회원탈퇴체크화면 memberDelCheck() MemberController");
+		return "member/memberDelCheck";
+	}
+	
+	// 회원 정보 수정 처리
+	@RequestMapping(value = "/member/memberModification", method = RequestMethod.POST)
+	public String insertMemberModification(MemberInfo memberInfo) {
+		logger.debug("{} : < memberInfo insertMemberModification() MemberController", memberInfo);
+		memberService.insertMemberModification(memberInfo);
+		return "redirect:/";
+	}
+	
+	// 회원 정보 수정 화면
+	@RequestMapping(value = "/member/memberModification", method = RequestMethod.GET)
+	public String selectMemberModification(Model model, @RequestParam("memberEmail") String memberEmail) {
+		logger.debug("{} : < memberEmail selectMemberModification() MemberController", memberEmail);
+		MemberInfo memberInfo = memberService.selectMemberModification(memberEmail);
+		model.addAttribute("memberInfo", memberInfo);
+		return "member/memberModification";
+	}
 	
 	// 회원 정보 조회
 	@RequestMapping(value = "/member/memberInfo", method = RequestMethod.GET)

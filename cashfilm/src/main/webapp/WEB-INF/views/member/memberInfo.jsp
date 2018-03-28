@@ -13,8 +13,10 @@
 		<td>우편번호</td>
 		<td>주소</td>
 		<td>전화번호</td>
+		<td>가입일</td>
 		<td>등급</td>
 		<td>회사명</td>
+		<td><td>
 		<td><td>
 	</tr>
 	<tr>
@@ -25,9 +27,11 @@
 		<td>${memberInfo.memberPostalCode}</td>
 		<td>${memberInfo.memberAddress}</td>
 		<td>${memberInfo.memberPhone}</td>
+		<td>${memberInfo.memberSignDay}</td>
 		<td>${memberInfo.memberClassificationName}</td>
 		<td>${memberInfo.comName}</td>
-		<td><a href="${pageContext.request.contextPath}/member/memberModification">수정</a><td>
+		<td><a href="${pageContext.request.contextPath}/member/memberModification?memberEmail=${memberInfo.memberEmail}">수정</a><td>
+		<td><a href="${pageContext.request.contextPath}/member/memberDelCheck">탈퇴요청</a><td>
 	</tr>
 </table>
 
