@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.boa.cashfilm.dao.SystemIndividualDao;
+import com.boa.cashfilm.sysindi.dto.IndividualSubject;
 import com.boa.cashfilm.sysindi.dto.IndividualSystem;
 
 @Service
@@ -17,6 +18,18 @@ public class SystemIndividualService {
 	@Autowired
 	private SystemIndividualDao systemindividualDao;
 	private static final Logger logger = LoggerFactory.getLogger(SystemIndividualService.class);
+	
+	//개인계정과목 검색 
+	public List<IndividualSubject> selectAllIndividualSubject(){
+		logger.debug("selectAllIndividualSubject SystemIndividualService.java");
+		return systemindividualDao.selectAllIndividualSubject();
+	}
+	
+	//개인계정과목 등록 
+	public int insertIndividualSubject(IndividualSubject isubject) {
+		logger.debug("{} :insertIndividualSubject SystemIndividualService.java",isubject);
+		return systemindividualDao.insertIndividualSubject(isubject);
+	}
 	
 	//계정체계관리 삭제 
 	public int deleteIndividualSystem(IndividualSystem isystem) {

@@ -4,6 +4,18 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.boa.cashfilm.mapper.systemIndividualMapper">
+
+	<!--개인계정과목 검색 -->
+	<select id="selectAllIndividualSubject" resultType="com.boa.cashfilm.sysindi.dto.IndividualSubject">
+		SELECT individualSubjectNumeral,individualSystemNumeral,individualSubjectName 
+		FROM cfindividualsubject;
+	</select>
+
+	<!--개인계정과목 등록 -->
+	<insert id="insertIndividualSubject" parameterType="com.boa.cashfilm.sysindi.dto.IndividualSubject">
+		INSERT INTO cfindividualsubject(individualSystemNumeral,individualSubjectName)
+		VALUES (#{individualSystemNumeral},#{individualSubjectName});
+	</insert>
 	
 	<!--계정체계관리 삭제  -->
 	<delete id="deleteIndividualSystem" parameterType="com.boa.cashfilm.sysindi.dto.IndividualSystem">
