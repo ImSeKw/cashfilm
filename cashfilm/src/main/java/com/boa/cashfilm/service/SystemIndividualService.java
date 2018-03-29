@@ -21,6 +21,24 @@ public class SystemIndividualService {
 	private SystemIndividualDao systemindividualDao;
 	private static final Logger logger = LoggerFactory.getLogger(SystemIndividualService.class);
 	
+	//개인계정과목 삭제 
+	public int deleteIndividualSubject(IndividualSubject isubject) {
+		logger.debug("{} :deleteIndividualSubject SystemIndividualService.java",isubject);
+		return systemindividualDao.deleteIndividualSubject(isubject);
+	}
+	
+	//개인계정과목 수정 
+	public int updateIndividualSubject(IndividualSubject isubject) {
+		logger.debug("{} :updateIndividualSubject SystemIndividualService.java",isubject);
+		return systemindividualDao.updateIndividualSubject(isubject);
+	}
+	
+	//개인계정 과목 수정을 위한 검색
+	public IndividualSubject selectOneIndividualSubject(int individualSubjectNumeral) {
+		logger.debug("{} :selectOneIndividualSubject SystemIndividualService.java",individualSubjectNumeral);
+		return systemindividualDao.selectOneIndividualSubject(individualSubjectNumeral);
+	}
+	
 	//개인계정과목 체계별검색 
 	public List<IndividualSystemAndSubject> selectIndividualSubjectOfIndividualSystem(int individualSystemNumeral){
 		logger.debug("{} :selectIndividualSubjectOfIndividualSystem SystemIndividualService.java",individualSystemNumeral);

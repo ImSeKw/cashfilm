@@ -5,8 +5,8 @@
 
 	<h1>계정체계</h1>
 	<form action="${pageContext.request.contextPath}/IndividualSystem/updateIndividualSystem" method="post">
-	<input type="hidden" name="individualSystemNumeral" value="${IndiSystem.individualSystemNumeral}">
-	<input type="text" name="individualSystemName" value="${IndiSystem.individualSystemName}">
+	<input type="hidden" name="individualSystemNumeral" value="${indiSystem.individualSystemNumeral}">
+	<input type="text" name="individualSystemName" value="${indiSystem.individualSystemName}">
 	<input type="submit" value="수정"> 
 	</form>
  

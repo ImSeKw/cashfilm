@@ -5,6 +5,26 @@
 
 <mapper namespace="com.boa.cashfilm.mapper.systemIndividualMapper">
 	
+	<!--개인계정과목 삭제 -->
+	<delete id="deleteIndividualSubject" parameterType="com.boa.cashfilm.sysindi.dto.IndividualSubject">
+		DELETE FROM cfindividualsubject WHERE individualSubjectNumeral=#{individualSubjectNumeral};
+	</delete>
+	
+	<!--개인계정과목 수정 -->
+	<update id="updateIndividualSubject" parameterType="com.boa.cashfilm.sysindi.dto.IndividualSubject">
+		UPDATE cfindividualsubject 
+		SET individualSystemNumeral= #{individualSystemNumeral}
+			,individualSubjectName= #{individualSubjectName} 
+		WHERE individualSubjectNumeral= #{individualSubjectNumeral};
+	</update>
+	
+	<!--개인계정 과목 수정을 위한 검색-->
+	<select id="selectOneIndividualSubject" parameterType="int" resultType="com.boa.cashfilm.sysindi.dto.IndividualSubject">
+		SELECT individualSystemNumeral
+				,individualSubjectName 
+		FROM cfindividualsubject  
+		WHERE individualSubjectNumeral= #{individualSubjectNumeral};
+	</select>
 	
 	<!--개인계정과목 체계별검색 -->
 	<select id="selectIndividualSubjectOfIndividualSystem" parameterType="int" resultType="com.boa.cashfilm.sysindi.dto.IndividualSystemAndSubject" >
