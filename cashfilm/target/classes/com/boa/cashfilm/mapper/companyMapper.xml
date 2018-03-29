@@ -3,6 +3,76 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.boa.cashfilm.mapper.cashfilmMapper">
+<mapper namespace="com.boa.cashfilm.mapper.CompanyMapper">
+	<!--개인회원이  회사소속으로 승인요청  -->
+	<insert id="comApprovalByIndividual" parameterType= "java.util.Map" >
+	INSERT INTO
+		cfComAuthority(
+		comCode
+		, memberEmail
+	)VALUES(
+		#{comCode}
+		, #{memberEmail}
+	)
+	</insert>
 	
+	<!--개인회원이 승인된 전채 화사 조회  -->
+	<select id="comListByIndividual" parameterType="int" resultType="com.boa.cashfilm.company.dto.ComListByIndividual">
+	SELECT
+		 comCode
+		 , comName
+		 , comCeoName
+		 , comRegistrationNumber
+		 , comInfo
+		 , comAddress
+		 , comPhone
+		 , comIndustry
+	FROM 
+		cfComBaseInfo
+	WHERE 
+		managerApproval = 1
+	ORDER BY comName ASC			
+	</select>
+	<!--insert 회사 기본정보 등록  -->
+	<insert id="insertCompanyBaseInfo" parameterType="com.boa.cashfilm.company.dto.InsertCompanyBaseInfo">
+	INSERT INTO 
+		cfComBaseInfo (
+		comName
+		, comRegistrationNumber
+		, comWebPage
+		, comCeoName
+		, comInfo
+		, comIntroduction
+		, comAddress
+		, comPhone
+		, memberEmail
+		, comRegistrationRequestDay
+		, comIndustry
+		, comCondition
+	) VALUES (
+		#{comName}
+		, #{comRegistrationNumber}
+		, #{comWebPage}
+		, #{comCeoName}
+		, #{comInfo}
+		, #{comIntroduction}
+		, #{comAddress}
+		, #{comPhone}
+		, #{memberEmail}
+		, now()
+		, #{comIndustry}
+		, #{comCondition}
+	)
+	</insert>	
+	<!--update 회사 등록 요청 (cashfilm 관리자에게 등록 요청)  -->
+<!-- 	<update id="updateCompanyManagerApproval" parameterType="com.boa.cashfilm.company.dto.Company">
+	UPDATE 
+		cfcombaseinfo
+	SET
+		managerApproval = 1
+		, managerApprovalDay = NOW()
+		, managerApprovalEmail = #{}
+	WHERE 
+		comCode = #{}
+	</update> -->
 </mapper>

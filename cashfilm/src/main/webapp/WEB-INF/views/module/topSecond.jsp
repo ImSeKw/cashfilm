@@ -16,8 +16,8 @@
 		<a href="${pageContext.request.contextPath}/member/memberInfo?memberEmail=${memberSession.memberEmail}">나의정보</a>
 		<c:choose>
 			<c:when test="${empty memberSession.comCode || memberSession.comCode == ''}">
-				<a href="">회사등록</a>
-				<a href="">회사검색</a>
+				<a href="${pageContext.request.contextPath}/company/insertCompanyBaseInfo">회사등록</a>
+				<a href="${pageContext.request.contextPath}/company/comListByIndividual">회사검색</a>
 			</c:when>
 			<c:otherwise>
 				<a href="">회사정보</a>
