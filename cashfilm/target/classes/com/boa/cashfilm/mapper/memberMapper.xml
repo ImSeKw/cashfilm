@@ -182,10 +182,10 @@
 				, b.comName
 				, e.memberName
 				, e.memberCondition
-			FROM cfMemberEmail AS e
-			INNER JOIN cfMemberClassification AS c
+			FROM cfmemberemail AS e
+			INNER JOIN cfmemberclassification AS c
 			ON e.memberClassificationCode = c.memberClassificationCode
-			LEFT JOIN cfComBaseInfo AS b
+			LEFT JOIN cfcombaseinfo AS b
 			ON e.comCode = b.comCode
 			WHERE e.memberEmail = #{memberEmail}
 			AND e.memberPassword = #{memberPassword}
@@ -198,16 +198,16 @@
 				, v.voucherPaymentDay
 				, i.myItemCode
 				, i.myItemName
-			FROM cfOrders AS o
-			INNER JOIN cfVoucherPayment AS v
+			FROM cforders AS o
+			INNER JOIN cfvoucherpayment AS v
 			ON o.ordersCode = v.ordersCode
-			INNER JOIN cfMyItem AS i
+			INNER JOIN cfmyitem AS i
 			ON o.myItemCode = i.myItemCode
 			WHERE o.memberEmail = #{memberEmail}
 			AND v.voucherPaymentDay 
 				= ( SELECT MAX(vo.voucherPaymentDay) 
-					FROM cfVoucherPayment AS vo
-					INNER JOIN cfOrders AS od 
+					FROM cfvoucherpayment AS vo
+					INNER JOIN cforders AS od 
 					ON vo.ordersCode = od.ordersCode
 					WHERE od.comCode IS NULL 
 					AND od.memberEmail = #{memberEmail}
