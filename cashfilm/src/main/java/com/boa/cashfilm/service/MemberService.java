@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.boa.cashfilm.dao.MemberDao;
 import com.boa.cashfilm.member.dto.MemberCheck;
 import com.boa.cashfilm.member.dto.MemberInfo;
+import com.boa.cashfilm.member.dto.MemberSession;
+import com.boa.cashfilm.member.dto.MemberSessionByCompanyPayment;
 import com.boa.cashfilm.member.dto.MemberSignUp;
 import com.boa.cashfilm.member.dto.MemberSimple;
 
@@ -66,8 +68,19 @@ public class MemberService {
 	}
 
 	// 로그인 처리
-	public MemberSimple selectSignIn(MemberCheck memberCheck) {
+	public Map selectSignIn(MemberCheck memberCheck) {
 		logger.debug("{} : < memberCheck selectSignIn() MemberService", memberCheck);
-		return memberDao.selectSignIn(memberCheck);
+		Map sessionMap = new HashMap();
+		MemberSession memberSession = memberDao.selectSignInMember(memberCheck);
+		logger.debug("{} : > memberSession selectSignIn() MemberService", memberSession);
+		logger.debug("{} : > comCode selectSignIn() MemberService", memberSession.getComCode());
+		sessionMap.put("memberSession", memberSession);
+		if(memberSession.getComCode() != 0) {
+			MemberSimple memberSimple = memberDao.selectSignInEmailCheck(memberSession.getComCode());
+			logger.debug("{} : > memberEmail selectSignIn() MemberService", memberSimple.getMemberEmail());
+			MemberSessionByCompanyPayment memberSessionByCompanyPayment = memberDao.selectSignInCompany(memberSimple);
+			sessionMap.put("memberSessionByCompanyPayment", memberSessionByCompanyPayment);
+		}
+		return sessionMap;
 	}
 }

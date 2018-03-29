@@ -129,16 +129,90 @@
 		WHERE memberEmail = #{memberEmail}
 	</select>
 	
-	<!-- 로그인 처리 -->
-	<select id="selectSignIn" parameterType="com.boa.cashfilm.member.dto.MemberCheck" resultType="com.boa.cashfilm.member.dto.MemberSimple">
-		SELECT
+	<!-- 로그인 처리 (기업결제 정보) -->
+	<select id="selectSignInCompany" parameterType="com.boa.cashfilm.member.dto.MemberSimple" resultType="com.boa.cashfilm.member.dto.MemberSessionByCompanyPayment">
+		SELECT 
+			o.memberEmail
+			, o.comCode
+			, v.voucherPaymentCode
+			, v.voucherPaymentDay
+			, i.myItemCode
+			, i.myItemName
+		FROM cforders AS o
+		INNER JOIN cfvoucherpayment AS v
+		ON o.ordersCode = v.ordersCode
+		INNER JOIN cfmyitem AS i
+		ON o.myItemCode = i.myItemCode
+		WHERE o.memberEmail = #{memberEmail}
+		AND v.voucherPaymentDay 
+			= (SELECT MAX(vo.voucherPaymentDay) FROM cfvoucherpayment AS vo
+				INNER JOIN cforders AS od ON vo.ordersCode = od.ordersCode
+				WHERE od.comCode = #{comCode} AND od.memberEmail = #{memberEmail})
+	</select>
+	
+	<!-- 로그인 처리 (개인이메일과 기업이메일 일치여부) -->
+	<select id="selectSignInEmailCheck" parameterType="int" resultType="com.boa.cashfilm.member.dto.MemberSimple">
+		SELECT 
 			memberEmail
-			, memberClassificationCode
 			, comCode
-			, memberName
-			, memberPassword
-			, memberCondition
-		FROM cfmemberemail
-		WHERE memberEmail = #{memberEmail} AND memberPassword = #{memberPassword}
+		FROM cfcombaseinfo
+		WHERE comCode = #{comCode}
+	</select>
+	
+	<!-- 로그인 처리 (개인 및 개인결제 정보) -->
+	<select id="selectSignInMember" parameterType="com.boa.cashfilm.member.dto.MemberCheck" resultType="com.boa.cashfilm.member.dto.MemberSession">
+		SELECT 
+			ecb.memberEmail
+			, ecb.memberClassificationCode
+			, ecb.memberClassificationName
+			, ecb.comCode
+			, ecb.comName
+			, ecb.memberName
+			, ecb.memberCondition
+			, ovi.voucherPaymentCode
+			, ovi.voucherPaymentDay
+			, ovi.myItemCode
+			, ovi.myItemName
+		FROM (
+			SELECT
+				e.memberEmail
+				, e.memberClassificationCode
+				, c.memberClassificationName
+				, e.comCode
+				, b.comName
+				, e.memberName
+				, e.memberCondition
+			FROM cfmemberemail AS e
+			INNER JOIN cfmemberclassification AS c
+			ON e.memberClassificationCode = c.memberClassificationCode
+			LEFT JOIN cfcombaseinfo AS b
+			ON e.comCode = b.comCode
+			WHERE e.memberEmail = #{memberEmail}
+			AND e.memberPassword = #{memberPassword}
+		) AS ecb
+		INNER JOIN (
+			SELECT 
+				o.memberEmail
+				, o.comCode
+				, v.voucherPaymentCode
+				, v.voucherPaymentDay
+				, i.myItemCode
+				, i.myItemName
+			FROM cforders AS o
+			INNER JOIN cfvoucherpayment AS v
+			ON o.ordersCode = v.ordersCode
+			INNER JOIN cfmyitem AS i
+			ON o.myItemCode = i.myItemCode
+			WHERE o.memberEmail = #{memberEmail}
+			AND v.voucherPaymentDay 
+				= ( SELECT MAX(vo.voucherPaymentDay) 
+					FROM cfvoucherpayment AS vo
+					INNER JOIN cforders AS od 
+					ON vo.ordersCode = od.ordersCode
+					WHERE od.comCode IS NULL 
+					AND od.memberEmail = #{memberEmail}
+				)
+		) AS ovi
+		ON ecb.memberEmail = ovi.memberEmail
 	</select>
 </mapper>

@@ -1,5 +1,7 @@
 package com.boa.cashfilm;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -14,8 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.boa.cashfilm.member.dto.MemberCheck;
 import com.boa.cashfilm.member.dto.MemberInfo;
+import com.boa.cashfilm.member.dto.MemberSession;
+import com.boa.cashfilm.member.dto.MemberSessionByCompanyPayment;
 import com.boa.cashfilm.member.dto.MemberSignUp;
-import com.boa.cashfilm.member.dto.MemberSimple;
 import com.boa.cashfilm.service.MemberService;
 
 @Controller
@@ -104,21 +107,21 @@ public class MemberController {
 	public String selectSignIn(HttpSession httpSession, MemberCheck memberCheck) {
 		logger.debug("{} : < memberCheck.getMemberEmail() selectSignIn() MemberController", memberCheck.getMemberEmail());
 		logger.debug("{} : < memberCheck.getMemberPassword() selectSignIn() MemberController", memberCheck.getMemberPassword());
-		
-		MemberSimple memberSimple = memberService.selectSignIn(memberCheck);
+		Map sessionMap = null;
+		logger.debug("{} : < start sessionMap selectSignIn() MemberController", sessionMap);
+		sessionMap = memberService.selectSignIn(memberCheck);
+		logger.debug("{} : > end sessionMap selectSignIn() MemberController", sessionMap);
 		String view = null;
-		if(memberSimple == null) {
-			logger.debug("{} : > null memberSimple selectSignIn() MemberController", memberSimple);
+		if(sessionMap == null) {
+			logger.debug("{} : > null sessionMap selectSignIn() MemberController", sessionMap);
 			view = "redirect:/";
-		} else if(memberSimple.getMemberEmail().equals(memberCheck.getMemberEmail())) {
-			if(memberSimple.getMemberPassword().equals(memberCheck.getMemberPassword())) {
-				logger.debug("{} : > password memberSimple selectSignIn() MemberController", memberSimple);
-				httpSession.setAttribute("memberSimple", memberSimple);
-				view = "redirect:/";
-			} else {
-				logger.debug("{} : > email memberSimple selectSignIn() MemberController", memberSimple);
-				view = "redirect:/";
-			}
+		} else {
+			logger.debug("{} : > ok sessionMap selectSignIn() MemberController", sessionMap);
+			MemberSession memberSession = (MemberSession)sessionMap.get("memberSession");
+			MemberSessionByCompanyPayment memberSessionByCompanyPayment = (MemberSessionByCompanyPayment)sessionMap.get("memberSessionByCompanyPayment");
+			httpSession.setAttribute("memberSession", memberSession);
+			httpSession.setAttribute("memberSessionByCompanyPayment", memberSessionByCompanyPayment);
+			view = "redirect:/";
 		}
 		return view;
 	}

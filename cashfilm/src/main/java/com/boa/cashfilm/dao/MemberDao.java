@@ -1,8 +1,6 @@
 package com.boa.cashfilm.dao;
 
 
-import java.util.Map;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +9,8 @@ import org.springframework.stereotype.Repository;
 
 import com.boa.cashfilm.member.dto.MemberCheck;
 import com.boa.cashfilm.member.dto.MemberInfo;
+import com.boa.cashfilm.member.dto.MemberSession;
+import com.boa.cashfilm.member.dto.MemberSessionByCompanyPayment;
 import com.boa.cashfilm.member.dto.MemberSignUp;
 import com.boa.cashfilm.member.dto.MemberSimple;
 
@@ -69,9 +69,21 @@ public class MemberDao {
 		return sqlSessionTemplate.selectOne(NAMESPACE + "selectEmailOverlap", memberEmail);
 	}
 	
-	// 로그인 처리
-	public MemberSimple selectSignIn(MemberCheck memberCheck) {
-		logger.debug("{} : < memberCheck selectSignIn() MemberDao", memberCheck);
-		return sqlSessionTemplate.selectOne(NAMESPACE + "selectSignIn", memberCheck);
+	// 로그인 처리 (기업결제 정보)
+	public MemberSessionByCompanyPayment selectSignInCompany(MemberSimple memberSimple) {
+		logger.debug("{} : < comCode selectSignInCompany() MemberDao", memberSimple.getComCode());
+		return sqlSessionTemplate.selectOne(NAMESPACE + "selectSignInCompany",memberSimple);
+	}
+	
+	// 로그인 처리 (개인이메일과 기업이메일 일치여부)
+	public MemberSimple selectSignInEmailCheck(int comCode) {
+		logger.debug("{} : < comCode selectSignInEmailCheck() MemberDao", comCode);
+		return sqlSessionTemplate.selectOne(NAMESPACE + "selectSignInEmailCheck", comCode);
+	}
+	
+	// 로그인 처리 (개인)
+	public MemberSession selectSignInMember(MemberCheck memberCheck) {
+		logger.debug("{} : < memberCheck selectSignInMember() MemberDao", memberCheck);
+		return sqlSessionTemplate.selectOne(NAMESPACE + "selectSignInMember", memberCheck);
 	}
 }
