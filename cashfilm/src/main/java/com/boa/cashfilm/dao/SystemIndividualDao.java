@@ -20,6 +20,8 @@ public class SystemIndividualDao {
 	private static final Logger logger = LoggerFactory.getLogger(SystemIndividualDao.class);
 	private final String NAMESPACE ="com.boa.cashfilm.mapper.systemIndividualMapper.";
 	
+	
+	
 	//개인계정과목 삭제 
 	public int deleteIndividualSubject(IndividualSubject isubject) {
 		logger.debug("isubject deleteIndividualSubject");
