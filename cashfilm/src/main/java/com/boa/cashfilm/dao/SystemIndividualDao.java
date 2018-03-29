@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 
 import com.boa.cashfilm.sysindi.dto.IndividualSubject;
 import com.boa.cashfilm.sysindi.dto.IndividualSystem;
+import com.boa.cashfilm.sysindi.dto.IndividualSystemAndSubject;
+
 
 @Repository
 public class SystemIndividualDao {
@@ -17,6 +19,12 @@ public class SystemIndividualDao {
 	private SqlSessionTemplate sqlsessiontemplate;
 	private static final Logger logger = LoggerFactory.getLogger(SystemIndividualDao.class);
 	private final String NAMESPACE ="com.boa.cashfilm.mapper.systemIndividualMapper.";
+	
+	//개인계정과목 체계별검색 
+	public List<IndividualSystemAndSubject> selectIndividualSubjectOfIndividualSystem(int individualSystemNumeral){
+		logger.debug("isubject selectIndividualSubjectOfIndividualSystem");
+		return sqlsessiontemplate.selectList(NAMESPACE + "selectIndividualSubjectOfIndividualSystem", individualSystemNumeral);
+	}
 	
 	//개인계정과목 검색 
 	public List<IndividualSubject> selectAllIndividualSubject(){

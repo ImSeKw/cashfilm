@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.boa.cashfilm.service.SystemIndividualService;
 import com.boa.cashfilm.sysindi.dto.IndividualSubject;
 import com.boa.cashfilm.sysindi.dto.IndividualSystem;
+import com.boa.cashfilm.sysindi.dto.IndividualSystemAndSubject;
 
 @Controller
 public class SystemIndividualController {
@@ -23,13 +24,27 @@ public class SystemIndividualController {
 	private SystemIndividualService systemIndiService;
 	private static final Logger logger=LoggerFactory.getLogger(SystemIndividualService.class);
 	
+	//개인계정과목 체계별검색 action
+	@RequestMapping(value="/IndividualSystem/selectIndividualSubjectOfSystem",method = RequestMethod.POST)
+	public String selectIndividualSubjectOfIndividualSystem(Model model,@RequestParam(value="individualSystemNumeral",required=true) int individualSystemNumeral) {
+		List<IndividualSystemAndSubject> indisysandsub =systemIndiService.selectIndividualSubjectOfIndividualSystem(individualSystemNumeral);
+		model.addAttribute("indisysandsub", indisysandsub);
+		return"system/selectIndividuanlSysAndSub";
+	}
+	//개인계정과정 체계별 검색 form
+	@RequestMapping(value="/IndividualSystem/selectIndividualSubjectOfSystem",method = RequestMethod.GET)
+	public String selectIndividualSubjectOfIndividualSystem(Model model) {
+		List<IndividualSystem> syslist = systemIndiService.selectIndividualSystem();
+		model.addAttribute("syslist",syslist);
+		return "system/insertIndividuanlSysAndSub";
+	}
 	//개인계정과목 검색 
 	@RequestMapping(value="/IndividualSystem/selectIndividualSubject",method = RequestMethod.GET)
 	public String selectAllIndividualSubject(Model model){
 		logger.debug("selectAllIndividualSubject SystemIndividualService.java");
 		List<IndividualSubject> list=systemIndiService.selectAllIndividualSubject();
 		model.addAttribute("list", list);
-		return "system/selectIndividualSubject";
+		return"system/selectIndividualSubject";
 	}
 	
 	//개인계정과목 등록 action
@@ -44,8 +59,8 @@ public class SystemIndividualController {
 	@RequestMapping(value="/IndividualSystem/insertIndividualSubject",method = RequestMethod.GET)
 	public String addIndividualSubject(Model model) {
 		logger.debug("{} :insertIndividualSubject form SystemIndividualController.java");
-		List<IndividualSystem> list = systemIndiService.selectIndividualSystem();
-		model.addAttribute("list",list);
+		List<IndividualSystem> syslist = systemIndiService.selectIndividualSystem();
+		model.addAttribute("syslist",syslist);
 		return "system/insertIndividualSubject";
 	}
 	

@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.boa.cashfilm.dao.SystemIndividualDao;
 import com.boa.cashfilm.sysindi.dto.IndividualSubject;
 import com.boa.cashfilm.sysindi.dto.IndividualSystem;
+import com.boa.cashfilm.sysindi.dto.IndividualSystemAndSubject;
+
 
 @Service
 @Transactional
@@ -18,6 +20,13 @@ public class SystemIndividualService {
 	@Autowired
 	private SystemIndividualDao systemindividualDao;
 	private static final Logger logger = LoggerFactory.getLogger(SystemIndividualService.class);
+	
+	//개인계정과목 체계별검색 
+	public List<IndividualSystemAndSubject> selectIndividualSubjectOfIndividualSystem(int individualSystemNumeral){
+		logger.debug("{} :selectIndividualSubjectOfIndividualSystem SystemIndividualService.java",individualSystemNumeral);
+		return systemindividualDao.selectIndividualSubjectOfIndividualSystem(individualSystemNumeral);
+	}
+	
 	
 	//개인계정과목 검색 
 	public List<IndividualSubject> selectAllIndividualSubject(){

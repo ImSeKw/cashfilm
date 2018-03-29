@@ -5,7 +5,7 @@
 	<h1>계정과목관리</h1>
 	<form action="${pageContext.request.contextPath}/IndividualSystem/insertIndividualSubject" method="post">
 	<select name="individualSystemNumeral">
-		<c:forEach var="IndividualSystem" items="${list}">
+		<c:forEach var="IndividualSystem" items="${syslist}">
        <option value="${IndividualSystem.individualSystemNumeral}">${IndividualSystem.individualSystemName}</option>
        </c:forEach>
 	</select>

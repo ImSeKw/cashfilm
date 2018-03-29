@@ -4,7 +4,19 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.boa.cashfilm.mapper.systemIndividualMapper">
-
+	
+	
+	<!--개인계정과목 체계별검색 -->
+	<select id="selectIndividualSubjectOfIndividualSystem" parameterType="int" resultType="com.boa.cashfilm.sysindi.dto.IndividualSystemAndSubject" >
+		SELECT s.individualSystemNumeral
+				,s.individualSystemName
+				,b.individualSubjectNumeral
+				,b.individualSubjectName 
+		FROM cfindividualsubject AS b INNER JOIN cfindividualsystem AS s 
+		ON b.individualSystemNumeral = s.individualSystemNumeral 
+		WHERE s.individualSystemNumeral = #{individualSystemNumeral};
+	</select>
+	
 	<!--개인계정과목 검색 -->
 	<select id="selectAllIndividualSubject" resultType="com.boa.cashfilm.sysindi.dto.IndividualSubject">
 		SELECT individualSubjectNumeral,individualSystemNumeral,individualSubjectName 
