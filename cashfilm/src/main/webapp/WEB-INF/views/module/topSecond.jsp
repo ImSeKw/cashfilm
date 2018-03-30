@@ -23,6 +23,9 @@
 				<a href="">회사정보</a>
 			</c:otherwise>
 		</c:choose>
+		<c:if test="${memberSession eq 1}">
+			<a href="${pageContext.request.contextPath}/cashfilm/cashfilmControlTower"></a>
+		</c:if>
 	</c:otherwise>
 </c:choose>
 
