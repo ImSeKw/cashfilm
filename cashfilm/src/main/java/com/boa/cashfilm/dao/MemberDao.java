@@ -1,6 +1,8 @@
 package com.boa.cashfilm.dao;
 
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.boa.cashfilm.member.dto.MemberCheck;
+import com.boa.cashfilm.member.dto.MemberDel;
 import com.boa.cashfilm.member.dto.MemberInfo;
 import com.boa.cashfilm.member.dto.MemberSession;
 import com.boa.cashfilm.member.dto.MemberSessionByCompanyPayment;
@@ -20,6 +23,12 @@ public class MemberDao {
 	SqlSessionTemplate sqlSessionTemplate;
 	private final String NAMESPACE = "com.boa.cashfilm.mapper.memberMapper.";
 	private static final Logger logger = LoggerFactory.getLogger(MemberDao.class);
+	
+	// 회원 탈퇴 요청 조회
+	public List<MemberDel> selectMemberDelList() {
+		logger.debug("< selectMemberDelList() MemberDao");
+		return sqlSessionTemplate.selectList(NAMESPACE + "selectMemberDelList");
+	}
 	
 	// 회원 탈퇴 요청
 	public int insertMemberDel(MemberCheck memberCheck) {

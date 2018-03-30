@@ -1,6 +1,7 @@
 package com.boa.cashfilm.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.boa.cashfilm.dao.MemberDao;
 import com.boa.cashfilm.member.dto.MemberCheck;
+import com.boa.cashfilm.member.dto.MemberDel;
 import com.boa.cashfilm.member.dto.MemberInfo;
 import com.boa.cashfilm.member.dto.MemberSession;
 import com.boa.cashfilm.member.dto.MemberSessionByCompanyPayment;
@@ -23,6 +25,13 @@ public class MemberService {
 	@Autowired
 	MemberDao memberDao;
 	private static final Logger logger = LoggerFactory.getLogger(MemberService.class);
+	
+	// 회원 탈퇴 요청 조회
+	public List<MemberDel> selectMemberDelList() {
+		logger.debug("< selectMemberDelList() MemberService");
+		List list = memberDao.selectMemberDelList();
+		return list;
+	}
 	
 	// 회원 탈퇴 요청
 	public int insertMemberDel(MemberCheck memberCheck) {

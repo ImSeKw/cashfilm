@@ -1,5 +1,6 @@
 package com.boa.cashfilm;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -26,9 +27,20 @@ public class MemberController {
 	@Autowired
 	MemberService memberService;
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+	
+	// 회원 탈퇴 요청 조회 (관리자)
+	@RequestMapping(value = "/member/memberDelList", method = RequestMethod.GET)
+	public String selectMemberDelList(Model model) {
+		logger.debug("< 회원 탈퇴 요청 조회 selectMemberDelList() MemberController");
+		List list = memberService.selectMemberDelList();
+		model.addAttribute("memberDelList", list);
+		return "member/memberDelList";
+	}
+	
 	// 회원 탈퇴 요청
 	@RequestMapping(value = "/member/memberDel", method = RequestMethod.POST)
 	public @ResponseBody int insertMemberDel(MemberCheck memberCheck) {
+		logger.debug("< 회원 탈퇴 요청 insertMemberDel() MemberController");
 		logger.debug("{} : < memberEmail insertMemberDel() MemberController", memberCheck.getMemberEmail());
 		logger.debug("{} : < memberDelReason insertMemberDel() MemberController", memberCheck.getMemberDelReason());
 		int result = memberService.insertMemberDel(memberCheck);

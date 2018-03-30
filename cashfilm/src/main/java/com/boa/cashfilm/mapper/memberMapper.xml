@@ -4,7 +4,16 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.boa.cashfilm.mapper.memberMapper">
-	<!-- 회원 탈퇴 조회 -->
+	<!-- 회원 탈퇴 요청 조회 -->
+	<select id="selectMemberDelList" resultType="com.boa.cashfilm.member.dto.MemberDel">
+		SELECT
+			memberEmail
+			, memberDelRequestDay
+			, memberDelDay
+			, memberDelReason
+			, memberDelApprovalEmail
+		FROM cfmemberdel
+	</select>
 	
 	<!-- 회원 탈퇴 요청 -->
 	<insert id="insertMemberDel" parameterType="com.boa.cashfilm.member.dto.MemberCheck">
