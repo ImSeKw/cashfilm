@@ -5,7 +5,19 @@
 
 <mapper namespace="com.boa.cashfilm.mapper.systemIndividualMapper">
 	
-	
+	<!--개인 사용자 계정과목 등록  -->
+	<insert id="insertUserIndiSubject" parameterType="com.boa.cashfilm.sysindi.dto.UserIndividualSubject">
+		INSERT INTO cfuserindividualsubject(
+			individualSystemNumeral
+			,userIndividualSubjectName
+			,memberEmail
+			,userIndividualSubjectNumeral) 
+		VALUES (
+			#{individualSystemNumeral}
+			,#{userIndividualSubjectName}
+			,#{memberEmail}
+			,#{userIndividualSubjectNumeral});
+	</insert>
 	
 	<!--개인계정과목 삭제 -->
 	<delete id="deleteIndividualSubject" parameterType="com.boa.cashfilm.sysindi.dto.IndividualSubject">

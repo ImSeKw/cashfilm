@@ -12,6 +12,7 @@ import com.boa.cashfilm.dao.SystemIndividualDao;
 import com.boa.cashfilm.sysindi.dto.IndividualSubject;
 import com.boa.cashfilm.sysindi.dto.IndividualSystem;
 import com.boa.cashfilm.sysindi.dto.IndividualSystemAndSubject;
+import com.boa.cashfilm.sysindi.dto.UserIndividualSubject;
 
 
 @Service
@@ -20,6 +21,12 @@ public class SystemIndividualService {
 	@Autowired
 	private SystemIndividualDao systemindividualDao;
 	private static final Logger logger = LoggerFactory.getLogger(SystemIndividualService.class);
+	
+	//개인 사용자 계정과목 등록  
+	public int insertUserIndiSubject(UserIndividualSubject uisubject) {
+		logger.debug("{} :insertUserIndiSubject SystemIndividualService.java",uisubject);
+		return systemindividualDao.insertUserIndiSubject(uisubject);
+	}
 	
 	//개인계정과목 삭제 
 	public int deleteIndividualSubject(IndividualSubject isubject) {

@@ -17,6 +17,7 @@ import com.boa.cashfilm.service.SystemIndividualService;
 import com.boa.cashfilm.sysindi.dto.IndividualSubject;
 import com.boa.cashfilm.sysindi.dto.IndividualSystem;
 import com.boa.cashfilm.sysindi.dto.IndividualSystemAndSubject;
+import com.boa.cashfilm.sysindi.dto.UserIndividualSubject;
 
 @Controller
 public class SystemIndividualController {
@@ -24,8 +25,27 @@ public class SystemIndividualController {
 	private SystemIndividualService systemIndiService;
 	private static final Logger logger=LoggerFactory.getLogger(SystemIndividualService.class);
 	
+	
+	
+	//개인 사용자 계정과목 등록 action
+	@RequestMapping(value="/IndividualSystem/insertUserIndiSubject", method = RequestMethod.POST)
+	public String addIndiSubject(UserIndividualSubject uisubject) {
+		logger.debug("{} :insertUserIndiSubject action SystemIndividualController.java");
+		systemIndiService.insertUserIndiSubject(uisubject);
+		return "redirect:/";
+	}
+		
+	//개인 사용자 계정과목 등록  form
+	@RequestMapping(value="/IndividualSystem/insertUserIndiSubject", method = RequestMethod.GET)
+	public String addIndiSubject(Model model) {
+		logger.debug("{} :insertUserIndiSubject form SystemIndividualController.java");
+		List<IndividualSystem> syslist = systemIndiService.selectIndividualSystem();
+		model.addAttribute("syslist",syslist);
+		return "system/insertUserIndiSubject";
+	}
+	
 	//개인계정과목 삭제 
-	@RequestMapping(value="/IndividualSystem/deleteIndividualSubject")
+	@RequestMapping(value="/IndividualSystem/deleteIndividualSubject", method = RequestMethod.GET)
 	public String deleteIndividualSubject(IndividualSubject isubject) {
 		logger.debug("{} :deleteIndividualSubject form SystemIndividualController.java",isubject);
 		systemIndiService.deleteIndividualSubject(isubject);
