@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.boa.cashfilm.sysindi.dto.IndividualSubject;
 import com.boa.cashfilm.sysindi.dto.IndividualSystem;
 import com.boa.cashfilm.sysindi.dto.IndividualSystemAndSubject;
+import com.boa.cashfilm.sysindi.dto.IndividualSystemAndUSubject;
 import com.boa.cashfilm.sysindi.dto.UserIndividualSubject;
 
 
@@ -20,6 +21,31 @@ public class SystemIndividualDao {
 	private SqlSessionTemplate sqlsessiontemplate;
 	private static final Logger logger = LoggerFactory.getLogger(SystemIndividualDao.class);
 	private final String NAMESPACE ="com.boa.cashfilm.mapper.systemIndividualMapper.";
+	
+	//개인 사용자 계정과목  삭제 
+	public int deleteUserIndiSubject(UserIndividualSubject uis) {
+		logger.debug("uisubject deleteUserIndiSubject");
+		return sqlsessiontemplate.delete(NAMESPACE + "deleteUserIndiSubject", uis);
+	}
+		
+	//개인 사용자 계정과목 수정
+	public int updateUserIndiSubject(UserIndividualSubject uis) {
+		logger.debug("uisubject updateUserIndiSubject");
+		return sqlsessiontemplate.update(NAMESPACE + "updateUserIndiSubject", uis);
+	}
+	
+	
+	//개인 사용자 계정과목 수정을 위한 검색 
+	public UserIndividualSubject selectOneUserIndiSubject(int userIndividualSubjectCode) {
+		logger.debug("uisubject selectOneUserIndiSubject");
+		return sqlsessiontemplate.selectOne(NAMESPACE + "selectOneUserIndiSubject", userIndividualSubjectCode);
+	}
+	
+	//개인 사용자 계정과목 검색 
+	public List<IndividualSystemAndUSubject> selectUserIndiSubject(String memberEmail){
+		logger.debug("uisubject selectUserIndiSubject");
+		return sqlsessiontemplate.selectList(NAMESPACE + "selectUserIndiSubject", memberEmail);
+	}
 	
 	//개인 사용자 계정과목 등록  
 	public int insertUserIndiSubject(UserIndividualSubject uisubject) {

@@ -12,6 +12,7 @@ import com.boa.cashfilm.dao.SystemIndividualDao;
 import com.boa.cashfilm.sysindi.dto.IndividualSubject;
 import com.boa.cashfilm.sysindi.dto.IndividualSystem;
 import com.boa.cashfilm.sysindi.dto.IndividualSystemAndSubject;
+import com.boa.cashfilm.sysindi.dto.IndividualSystemAndUSubject;
 import com.boa.cashfilm.sysindi.dto.UserIndividualSubject;
 
 
@@ -21,6 +22,31 @@ public class SystemIndividualService {
 	@Autowired
 	private SystemIndividualDao systemindividualDao;
 	private static final Logger logger = LoggerFactory.getLogger(SystemIndividualService.class);
+	
+	
+	//개인 사용자 계정과목  삭제 
+	public int deleteUserIndiSubject(UserIndividualSubject uis) {
+		logger.debug("{} :deleteUserIndiSubject SystemIndividualService.java",uis);
+		return systemindividualDao.deleteUserIndiSubject(uis);
+	}
+	
+	//개인 사용자 계정과목 수정
+	public int updateUserIndiSubject(UserIndividualSubject uis) {
+		logger.debug("{} :updateUserIndiSubject SystemIndividualService.java",uis);
+		return systemindividualDao.updateUserIndiSubject(uis);
+	}
+		
+	//개인 사용자 계정과목 수정을 위한 검색 
+	public UserIndividualSubject selectOneUserIndiSubject(int userIndividualSubjectCode) {
+		logger.debug("{} :selectOneUserIndiSubject SystemIndividualService.java",userIndividualSubjectCode);
+		return systemindividualDao.selectOneUserIndiSubject(userIndividualSubjectCode);
+	}
+	
+	//개인 사용자 계정과목 검색 
+	public List<IndividualSystemAndUSubject> selectUserIndiSubject(String memberEmail){
+		logger.debug("{} :selectUserIndiSubject SystemIndividualService.java",memberEmail);
+		return systemindividualDao.selectUserIndiSubject(memberEmail);
+	}
 	
 	//개인 사용자 계정과목 등록  
 	public int insertUserIndiSubject(UserIndividualSubject uisubject) {

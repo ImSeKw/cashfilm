@@ -17,6 +17,7 @@ import com.boa.cashfilm.service.SystemIndividualService;
 import com.boa.cashfilm.sysindi.dto.IndividualSubject;
 import com.boa.cashfilm.sysindi.dto.IndividualSystem;
 import com.boa.cashfilm.sysindi.dto.IndividualSystemAndSubject;
+import com.boa.cashfilm.sysindi.dto.IndividualSystemAndUSubject;
 import com.boa.cashfilm.sysindi.dto.UserIndividualSubject;
 
 @Controller
@@ -25,14 +26,48 @@ public class SystemIndividualController {
 	private SystemIndividualService systemIndiService;
 	private static final Logger logger=LoggerFactory.getLogger(SystemIndividualService.class);
 	
+	//개인 사용자 계정과목  삭제 
+	@RequestMapping(value="/IndividualSystem/deleteUserIndiSubject",method = RequestMethod.GET)
+	public String deleteUserIndiSubject(UserIndividualSubject uis) {
+		logger.debug("{} :deleteUserIndiSubject form SystemIndividualController.java",uis);
+		systemIndiService.deleteUserIndiSubject(uis);
+		return "redirect:/";
+	}
+		
+	//개인 사용자 계정과목 수정 action
+	@RequestMapping(value="/IndividualSystem/updateUserIndiSubject",method = RequestMethod.POST)
+	public String updateUserIndiSubject(Model model,UserIndividualSubject uis) {
+		logger.debug("{} :updateUserIndiSubject form SystemIndividualController.java",uis);
+		systemIndiService.updateUserIndiSubject(uis);
+		return "redirect:/";
+	}
 	
+	//개인 사용자 계정과목 수정 form
+	@RequestMapping(value="/IndividualSystem/updateUserIndiSubject",method = RequestMethod.GET)
+	public String selectOneUserIndiSubject(Model model,int userIndividualSubjectCode) {
+		logger.debug("{} :updateUserIndiSubject form SystemIndividualController.java",userIndividualSubjectCode);
+		List<IndividualSystem> syslist = systemIndiService.selectIndividualSystem();
+		model.addAttribute("syslist",syslist);
+		UserIndividualSubject uis =systemIndiService.selectOneUserIndiSubject(userIndividualSubjectCode);
+		model.addAttribute("uis", uis);
+		return "system/updateUserIndiSubject"; 
+	}
+	
+	//개인 사용자 계정과목 검색 (이메일별 체계별검색)
+	@RequestMapping(value="/IndividualSystem/selectUserIndiSubject",method = RequestMethod.GET)
+	public String selectUserIndiSubject(Model model,@RequestParam(value="memberEmail",required=true)String memberEmail){
+		logger.debug("{} :selectUserIndiSubject action SystemIndividualController.java",memberEmail);
+		List<IndividualSystemAndUSubject> isuslist=systemIndiService.selectUserIndiSubject(memberEmail);
+		model.addAttribute ("isuslist",  isuslist);
+		return "system/selectIndividuanlSysAndUSub";
+	}
 	
 	//개인 사용자 계정과목 등록 action
 	@RequestMapping(value="/IndividualSystem/insertUserIndiSubject", method = RequestMethod.POST)
 	public String addIndiSubject(UserIndividualSubject uisubject) {
 		logger.debug("{} :insertUserIndiSubject action SystemIndividualController.java");
 		systemIndiService.insertUserIndiSubject(uisubject);
-		return "redirect:/";
+		return "redirect:/IndividualSystem/selectUserIndiSubject";
 	}
 		
 	//개인 사용자 계정과목 등록  form
@@ -58,7 +93,6 @@ public class SystemIndividualController {
 		logger.debug("{} :updateIndividualSubject form SystemIndividualController.java",isubject);
 		systemIndiService.updateIndividualSubject(isubject);
 		return "redirect:/IndividualSystem/selectIndividualSubject";
-		
 	}
 	
 	//개인계정 과목 수정을  form
@@ -79,6 +113,7 @@ public class SystemIndividualController {
 		model.addAttribute("indisysandsub", indisysandsub);
 		return"system/selectIndividuanlSysAndSub";
 	}
+	
 	//개인계정과정 체계별 검색 form
 	@RequestMapping(value="/IndividualSystem/selectIndividualSubjectOfSystem",method = RequestMethod.GET)
 	public String selectIndividualSubjectOfIndividualSystem(Model model) {
@@ -86,6 +121,7 @@ public class SystemIndividualController {
 		model.addAttribute("syslist",syslist);
 		return "system/insertIndividuanlSysAndSub";
 	}
+	
 	//개인계정과목 검색 
 	@RequestMapping(value="/IndividualSystem/selectIndividualSubject",method = RequestMethod.GET)
 	public String selectAllIndividualSubject(Model model){

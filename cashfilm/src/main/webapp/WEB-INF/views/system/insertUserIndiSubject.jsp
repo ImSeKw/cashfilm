@@ -17,9 +17,11 @@
 	        회원 이메일:<c:set var="memberSession" value="${memberSession}"/>
 	    <input type="text" name="memberEmail" value="${memberSession.memberEmail}" readonly="readonly">
 	    <br>  
-	   	 개인 사용자 계정과목:<input type="text" name="userIndividualSubjectNumeral" vlaue="숫자를 입력하세요">
+	   	 개인 사용자 계정과목:<input type="text" name="userIndividualSubjectNumeral" value="숫자를 입력하세요">
 	   	<input type="submit" value="등록"> 
 	</form>
+	<c:set var="memberSession" value="${memberSession}"/>
+	<a href="${pageContext.request.contextPath}//IndividualSystem/selectUserIndiSubject?memberEmail=${memberSession.memberEmail}">내 계정과목조회</a></td>
 	
 
 
