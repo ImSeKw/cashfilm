@@ -81,6 +81,41 @@
 		ON e.comCode = b.comCode
 		WHERE e.memberEmail = #{memberEmail}
 	</select>
+	
+	<!-- 회원가입 무료이용권 부여 (결제) -->
+	<insert id="insertSignUpVoucherPayment" parameterType="int">
+		INSERT INTO cfvoucherpayment (
+			ordersCode
+			, paymentMeansCode
+			, voucherPaymentApproval
+			, voucherPaymentDay
+		) VALUES (
+			#{ordersCode}
+			, 1
+			, 1
+			, NOW()
+		)
+	</insert>
+	
+	<!-- 회원가입 무료이용권 부여 (주문조회) -->
+	<select id="selectSignUpOrders" parameterType="String" resultType="int">
+		SELECT
+			MAX(ordersCode) AS ordersCode
+		FROM cforders
+		WHERE memberEmail = #{memberEmail}
+	</select>
+	
+	<!-- 회원가입 무료이용권 부여 (주문) -->
+	<insert id="insertSignUpOrders" parameterType="String">
+		INSERT INTO cforders (
+			memberEmail
+			, myItemCode
+		)
+		VALUES (
+			#{memberEmail}
+			, 1
+		)
+	</insert>
 
 	<!-- 회원가입 상세 처리 -->
 	<insert id="insertSignUpDetails" parameterType="com.boa.cashfilm.member.dto.MemberSignUp">

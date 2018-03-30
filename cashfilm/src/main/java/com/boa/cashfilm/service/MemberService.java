@@ -59,6 +59,10 @@ public class MemberService {
 		logger.debug("{} : < memberSignUp insertSignUp() MemberService", memberSignUp);
 		memberDao.insertSignUpSimple(memberSignUp);
 		memberDao.insertSignUpDetails(memberSignUp);
+		String memberEmail = memberSignUp.getMemberEmail();
+		memberDao.insertSignUpOrders(memberEmail);
+		int ordersCode = memberDao.selectSignUpOrders(memberEmail);
+		memberDao.insertSignUpVoucherPayment(ordersCode);
 	}
 
 	// 이메일 중복 검사

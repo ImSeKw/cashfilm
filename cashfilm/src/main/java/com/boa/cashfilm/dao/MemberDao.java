@@ -51,6 +51,24 @@ public class MemberDao {
 		return sqlSessionTemplate.selectOne(NAMESPACE + "selectMemberInfo", memberEmail);
 	}
 	
+	// 회원가입 무료이용권 부여 (결제)
+	public void insertSignUpVoucherPayment(int ordersCode) {
+		logger.debug("{} : < ordersCode insertSignUpVoucherPayment() MemberDao", ordersCode);
+		sqlSessionTemplate.insert(NAMESPACE + "insertSignUpVoucherPayment", ordersCode);
+	}
+	
+	// 회원가입 무료이용권 부여 (주문조회)
+	public int selectSignUpOrders(String memberEmail) {
+		logger.debug("{} : < memberEmail selectSignUpOrders() MemberDao", memberEmail);
+		return sqlSessionTemplate.selectOne(NAMESPACE + "selectSignUpOrders", memberEmail);
+	}
+	
+	// 회원가입 무료이용권 부여 (주문)
+	public void insertSignUpOrders(String memberEmail) {
+		logger.debug("{} : < memberEmail insertSignUpOrders() MemberDao", memberEmail);
+		sqlSessionTemplate.insert(NAMESPACE + "insertSignUpOrders", memberEmail);
+	}
+	
 	// 회원가입 상세 처리
 	public void insertSignUpDetails(MemberSignUp memberSignUp) {
 		logger.debug("{} : < memberSignUp insertSignUpDetails() MemberDao", memberSignUp);
