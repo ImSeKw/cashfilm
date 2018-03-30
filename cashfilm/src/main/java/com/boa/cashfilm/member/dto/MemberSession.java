@@ -79,4 +79,13 @@ public class MemberSession {
 	public void setMyItemName(String myItemName) {
 		this.myItemName = myItemName;
 	}
+	
+	@Override
+	public String toString() {
+		return "MemberSession [memberEmail=" + memberEmail + ", memberClassificationCode=" + memberClassificationCode
+				+ ", memberClassificationName=" + memberClassificationName + ", comCode=" + comCode + ", comName="
+				+ comName + ", memberName=" + memberName + ", memberCondition=" + memberCondition
+				+ ", voucherPaymentCode=" + voucherPaymentCode + ", voucherPaymentDay=" + voucherPaymentDay
+				+ ", myItemCode=" + myItemCode + ", myItemName=" + myItemName + "]";
+	}
 }

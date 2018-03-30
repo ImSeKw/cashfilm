@@ -58,4 +58,12 @@ public class MemberDetails {
 	public void setMemberSignDay(String memberSignDay) {
 		this.memberSignDay = memberSignDay;
 	}
+	
+	@Override
+	public String toString() {
+		return "MemberDetails [memberEmail=" + memberEmail + ", memberPhoneFirst=" + memberPhoneFirst
+				+ ", memberPhoneSecond=" + memberPhoneSecond + ", memberPostalCode=" + memberPostalCode
+				+ ", memberAddress=" + memberAddress + ", memberCertification=" + memberCertification + ", memberPhone="
+				+ memberPhone + ", memberSignDay=" + memberSignDay + "]";
+	}
 }

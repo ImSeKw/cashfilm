@@ -23,4 +23,10 @@ public class MemberCheck {
 	public void setMemberDelReason(String memberDelReason) {
 		this.memberDelReason = memberDelReason;
 	}
+	
+	@Override
+	public String toString() {
+		return "MemberCheck [memberEmail=" + memberEmail + ", memberPassword=" + memberPassword + ", memberDelReason="
+				+ memberDelReason + "]";
+	}
 }

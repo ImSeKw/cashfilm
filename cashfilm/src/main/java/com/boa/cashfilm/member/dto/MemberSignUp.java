@@ -65,4 +65,12 @@ public class MemberSignUp {
 	public void setMemberPhone(String memberPhone) {
 		this.memberPhone = memberPhone;
 	}
+	
+	@Override
+	public String toString() {
+		return "MemberSignUp [memberEmail=" + memberEmail + ", memberName=" + memberName + ", memberPassword="
+				+ memberPassword + ", memberPhoneFirst=" + memberPhoneFirst + ", memberPhoneSecond=" + memberPhoneSecond
+				+ ", memberPostalCode=" + memberPostalCode + ", memberAddress=" + memberAddress
+				+ ", memberCertification=" + memberCertification + ", memberPhone=" + memberPhone + "]";
+	}
 }

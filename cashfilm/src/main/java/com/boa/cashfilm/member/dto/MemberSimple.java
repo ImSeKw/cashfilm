@@ -44,4 +44,11 @@ public class MemberSimple {
 	public void setMemberCondition(String memberCondition) {
 		this.memberCondition = memberCondition;
 	}
+	
+	@Override
+	public String toString() {
+		return "MemberSimple [memberEmail=" + memberEmail + ", memberClassificationCode=" + memberClassificationCode
+				+ ", comCode=" + comCode + ", memberName=" + memberName + ", memberPassword=" + memberPassword
+				+ ", memberCondition=" + memberCondition + "]";
+	}
 }

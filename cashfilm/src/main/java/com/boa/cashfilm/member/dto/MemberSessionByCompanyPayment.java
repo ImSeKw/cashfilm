@@ -44,4 +44,11 @@ public class MemberSessionByCompanyPayment {
 	public void setMyItemName(String myItemName) {
 		this.myItemName = myItemName;
 	}
+	
+	@Override
+	public String toString() {
+		return "MemberSessionByCompanyPayment [memberEmail=" + memberEmail + ", comCode=" + comCode
+				+ ", voucherPaymentCode=" + voucherPaymentCode + ", voucherPaymentDay=" + voucherPaymentDay
+				+ ", myItemCode=" + myItemCode + ", myItemName=" + myItemName + "]";
+	}
 }

@@ -4,8 +4,26 @@
 <jsp:include page="/WEB-INF/views/module/topSecond.jsp"/>
 
 <form action="${pageContext.request.contextPath}/member/signIn" method="post">
-	<input type="text" name="memberEmail">
-	<input type="text" name="memberPassword">
+	관리자 : <input type="text" name="memberEmail" value="id001@naver.com">
+	<input type="text" name="memberPassword" value="pw001">
+	<button type="submit">확인</button>
+</form>
+	<br>
+<form action="${pageContext.request.contextPath}/member/signIn" method="post">
+	기업 + 개인 : <input type="text" name="memberEmail" value="id011@naver.com">
+	<input type="text" name="memberPassword" value="pw011">
+	<button type="submit">확인</button>
+</form>
+	<br>
+<form action="${pageContext.request.contextPath}/member/signIn" method="post">
+	기업회원 : <input type="text" name="memberEmail" value="samsung01@naver.com">
+	<input type="text" name="memberPassword" value="samsung01">
+	<button type="submit">확인</button>
+</form>
+	<br>
+<form action="${pageContext.request.contextPath}/member/signIn" method="post">
+	개인회원 : <input type="text" name="memberEmail" value="id111@naver.com">
+	<input type="text" name="memberPassword" value="pw111">
 	<button type="submit">확인</button>
 </form>
 

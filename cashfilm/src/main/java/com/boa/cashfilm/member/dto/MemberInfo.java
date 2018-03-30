@@ -79,4 +79,13 @@ public class MemberInfo {
 	public void setComName(String comName) {
 		this.comName = comName;
 	}
+	
+	@Override
+	public String toString() {
+		return "MemberInfo [memberEmail=" + memberEmail + ", memberName=" + memberName + ", memberPassword="
+				+ memberPassword + ", memberPhoneFirst=" + memberPhoneFirst + ", memberPhoneSecond=" + memberPhoneSecond
+				+ ", memberPostalCode=" + memberPostalCode + ", memberAddress=" + memberAddress + ", memberPhone="
+				+ memberPhone + ", memberSignDay=" + memberSignDay + ", memberClassificationName="
+				+ memberClassificationName + ", comName=" + comName + "]";
+	}
 }

@@ -28,7 +28,7 @@
 
 <br>
 
-<table>
+<table border="1">
 	<tr>
 		<td>이메일</td>
 		<td>${memberSession.memberEmail}</td>
