@@ -20,6 +20,26 @@ public class SystemIndividualDao {
 	private static final Logger logger = LoggerFactory.getLogger(SystemIndividualDao.class);
 	private final String NAMESPACE ="com.boa.cashfilm.mapper.systemIndividualMapper.";
 	
+	
+	
+	//개인계정과목 삭제 
+	public int deleteIndividualSubject(IndividualSubject isubject) {
+		logger.debug("isubject deleteIndividualSubject");
+		return sqlsessiontemplate.delete(NAMESPACE + "deleteIndividualSubject",isubject);
+	}
+	
+	//개인계정과목 수정 
+	public int updateIndividualSubject(IndividualSubject isubject) {
+		logger.debug("isubject updateIndividualSubject");
+		return sqlsessiontemplate.update(NAMESPACE + "updateIndividualSubject",isubject);
+	}
+		
+	//개인계정 과목 수정을 위한 검색
+	public IndividualSubject selectOneIndividualSubject(int individualSubjectNumeral) {
+		logger.debug("isubject selectOneIndividualSubject");
+		return sqlsessiontemplate.selectOne(NAMESPACE + "selectOneIndividualSubject",individualSubjectNumeral);
+	}
+	
 	//개인계정과목 체계별검색 
 	public List<IndividualSystemAndSubject> selectIndividualSubjectOfIndividualSystem(int individualSystemNumeral){
 		logger.debug("isubject selectIndividualSubjectOfIndividualSystem");

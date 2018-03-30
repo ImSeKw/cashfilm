@@ -24,6 +24,34 @@ public class SystemIndividualController {
 	private SystemIndividualService systemIndiService;
 	private static final Logger logger=LoggerFactory.getLogger(SystemIndividualService.class);
 	
+	//개인계정과목 삭제 
+	@RequestMapping(value="/IndividualSystem/deleteIndividualSubject")
+	public String deleteIndividualSubject(IndividualSubject isubject) {
+		logger.debug("{} :deleteIndividualSubject form SystemIndividualController.java",isubject);
+		systemIndiService.deleteIndividualSubject(isubject);
+		return "redirect:/IndividualSystem/selectIndividualSubject";
+	}
+	
+	//개인계정 과목 수정을  action
+	@RequestMapping(value="/IndividualSystem/updateIndividualSubject", method = RequestMethod.POST)
+	public String updateIndividualSubject(IndividualSubject isubject) {
+		logger.debug("{} :updateIndividualSubject form SystemIndividualController.java",isubject);
+		systemIndiService.updateIndividualSubject(isubject);
+		return "redirect:/IndividualSystem/selectIndividualSubject";
+		
+	}
+	
+	//개인계정 과목 수정을  form
+	@RequestMapping(value="/IndividualSystem/updateIndividualSubject", method = RequestMethod.GET)
+	public String selectOneIndividualSubject(Model model,@RequestParam(value="individualSubjectNumeral",required=true) int individualSubjectNumeral) {
+		logger.debug("{} :selectOneIndividualSubject form SystemIndividualController.java",individualSubjectNumeral);
+		List<IndividualSystem> syslist = systemIndiService.selectIndividualSystem();
+		model.addAttribute("syslist",syslist);
+		IndividualSubject isubject =systemIndiService.selectOneIndividualSubject(individualSubjectNumeral);
+		model.addAttribute("isubject", isubject);
+		return "system/updateIndividualSubject";
+	}
+	
 	//개인계정과목 체계별검색 action
 	@RequestMapping(value="/IndividualSystem/selectIndividualSubjectOfSystem",method = RequestMethod.POST)
 	public String selectIndividualSubjectOfIndividualSystem(Model model,@RequestParam(value="individualSystemNumeral",required=true) int individualSystemNumeral) {
@@ -84,8 +112,8 @@ public class SystemIndividualController {
 	@RequestMapping(value="/IndividualSystem/updateIndividualSystem",method = RequestMethod.GET)
 	public String updateIndividualSystem(Model model,@RequestParam(value="individualSystemNumeral",required=true) int individualSystemNumeral) {
 		logger.debug("{} :updateIndividualSystem form SystemIndividualController.java");
-		IndividualSystem IndiSystem=systemIndiService.selectOneIndividualSystem(individualSystemNumeral);
-		model.addAttribute("IndiSystem", IndiSystem);
+		IndividualSystem indiSystem=systemIndiService.selectOneIndividualSystem(individualSystemNumeral);
+		model.addAttribute("indiSystem", indiSystem);
 		return "system/updateIndividualSystem";
 	}
 	

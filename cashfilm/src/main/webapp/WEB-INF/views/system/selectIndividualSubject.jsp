@@ -5,6 +5,7 @@
 	<table border="1">
 	  <tr>
 	  	  <th>계정체계코드</th>	
+	      <th>계정과목코드</th>
 	      <th>계정과목명</th>
 	      <th>수정</th>
 	      <th>삭제</th>
@@ -12,6 +13,7 @@
 	  <c:forEach var="IndividualSubject" items="${list}">
 		  <tr>
 		  	<td>${IndividualSubject.individualSystemNumeral}</td>
+		    <td>${IndividualSubject.individualSubjectNumeral}</td>
 		    <td>${IndividualSubject.individualSubjectName}</td>
 		    <td><a href="${pageContext.request.contextPath}/IndividualSystem/updateIndividualSubject?individualSubjectNumeral=${IndividualSubject.individualSubjectNumeral}">수정</a></td>
 		    <td><a href="${pageContext.request.contextPath}/IndividualSystem/deleteIndividualSubject?individualSubjectNumeral=${IndividualSubject.individualSubjectNumeral}">삭제</a></td>
