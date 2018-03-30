@@ -39,7 +39,7 @@
 
 <jsp:include page="/WEB-INF/views/module/topSecond.jsp"/>
 
-<input type="hidden" id="memberEmail" name="memberEmail" value="${memberSimple.memberEmail}">
+<input type="hidden" id="memberEmail" name="memberEmail" value="${memberSession.memberEmail}">
 탈퇴이유 : <input type="text" id="memberDelReason" name="memberDelReason">
 비밀번호 확인 : <input type="text" id="memberDelCheck">
 <button type="button" id="memberDelCheckButton">확인</button>

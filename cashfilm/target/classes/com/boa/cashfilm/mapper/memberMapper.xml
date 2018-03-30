@@ -4,6 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.boa.cashfilm.mapper.memberMapper">
+	<!-- 회원 탈퇴 조회 -->
+	
 	<!-- 회원 탈퇴 요청 -->
 	<insert id="insertMemberDel" parameterType="com.boa.cashfilm.member.dto.MemberCheck">
 		INSERT INTO cfmemberdel (

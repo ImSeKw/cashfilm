@@ -102,6 +102,15 @@ public class MemberController {
 		return "member/memberSignUp";
 	}
 	
+	// 로그아웃 처리
+	@RequestMapping(value = "/member/signOut", method = RequestMethod.GET)
+	public String signOut(HttpSession httpSession) {
+		MemberSession memberSession = (MemberSession)httpSession.getAttribute("memberSession");
+		logger.debug("{} : < memberEmail signOut() MemberController", memberSession.getMemberEmail());
+		httpSession.invalidate();
+		return "redirect:/";
+	}
+	
 	// 로그인 처리
 	@RequestMapping(value = "/member/signIn", method = RequestMethod.POST)
 	public String selectSignIn(HttpSession httpSession, MemberCheck memberCheck) {

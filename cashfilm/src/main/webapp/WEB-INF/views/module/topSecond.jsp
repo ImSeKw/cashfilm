@@ -12,7 +12,7 @@
 		<a href="${pageContext.request.contextPath}/member/signUp">회원가입</a>
 	</c:when>
 	<c:otherwise>
-		<a href="">로그아웃</a>
+		<a href="${pageContext.request.contextPath}/member/signOut">로그아웃</a>
 		<a href="${pageContext.request.contextPath}/member/memberInfo?memberEmail=${memberSession.memberEmail}">나의정보</a>
 		<c:choose>
 			<c:when test="${empty memberSession.comCode || memberSession.comCode == ''}">
