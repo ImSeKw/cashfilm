@@ -4,6 +4,45 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.boa.cashfilm.mapper.memberMapper">
+	<!-- 회원 구분 삭제 -->
+	<delete id="deleteMemberClassification" parameterType="int">
+		DELETE FROM cfmemberclassification
+		WHERE memberClassificationCode = #{memberClassificationCode}
+	</delete>
+
+	<!-- 회원 구분 수정 -->
+	<update id="updateMemberClassification" parameterType="com.boa.cashfilm.member.dto.MemberClassification">
+		UPDATE cfmemberclassification
+		SET memberClassificationName = #{memberClassificationName}
+		WHERE memberClassificationCode = #{memberClassificationCode}
+	</update>
+	
+	<!-- 회원 구분 조회 -->
+	<select id="selectMemberClassification" resultType="com.boa.cashfilm.member.dto.MemberClassification">
+		SELECT
+			memberClassificationCode
+			, memberClassificationName
+		FROM cfmemberclassification
+	</select>
+	
+	<!-- 회원 구분 등록 -->
+	<insert id="insertMemberClassification" parameterType="String">
+		INSERT INTO cfmemberclassification (memberClassificationName)
+		VALUES (#{memberClassificationName})
+	</insert>
+
+	<!-- 회원 탈퇴 정보 삭제 :  -->
+	
+	
+	<!-- 회원 탈퇴 요청 승인 -->
+	<update id="updateMemberDel" parameterType="Map">
+		UPDATE cfmemberdel
+		SET
+			memberDelDay = NOW()
+			, memberDelApprovalEmail = #{memberDelApprovalEmail}
+		WHERE memberEmail = #{memberEmail} AND memberDelRequestDay = #{memberDelRequestDay}
+	</update>
+	
 	<!-- 회원 탈퇴 요청 조회 -->
 	<select id="selectMemberDelList" resultType="com.boa.cashfilm.member.dto.MemberDel">
 		SELECT
@@ -13,6 +52,7 @@
 			, memberDelReason
 			, memberDelApprovalEmail
 		FROM cfmemberdel
+		ORDER BY memberDelRequestDay DESC
 	</select>
 	
 	<!-- 회원 탈퇴 요청 -->

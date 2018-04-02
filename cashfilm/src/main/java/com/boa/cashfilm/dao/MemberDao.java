@@ -2,6 +2,7 @@ package com.boa.cashfilm.dao;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.boa.cashfilm.member.dto.MemberCheck;
+import com.boa.cashfilm.member.dto.MemberClassification;
 import com.boa.cashfilm.member.dto.MemberDel;
 import com.boa.cashfilm.member.dto.MemberInfo;
 import com.boa.cashfilm.member.dto.MemberSession;
@@ -23,6 +25,36 @@ public class MemberDao {
 	SqlSessionTemplate sqlSessionTemplate;
 	private final String NAMESPACE = "com.boa.cashfilm.mapper.memberMapper.";
 	private static final Logger logger = LoggerFactory.getLogger(MemberDao.class);
+	
+	// 회원 구분 삭제
+	public void deleteMemberClassification(int memberClassificationCode) {
+		logger.debug("{} : < memberClassifcationCode deleteMemberClassification() MemberDao", memberClassificationCode);
+		sqlSessionTemplate.delete(NAMESPACE + "deleteMemberClassification", memberClassificationCode);
+	}
+	
+	// 회원 구분 수정
+	public void updateMemberClassification(MemberClassification memberClassification) {
+		logger.debug("{} : < memberClassification updateMemberClassification() MemberDao", memberClassification);
+		sqlSessionTemplate.update(NAMESPACE + "updateMemberClassification", memberClassification);
+	}
+	
+	// 회원 구분 조회
+	public List<MemberClassification> selectMemberClassification() {
+		logger.debug("{} : < selectMemberClassification() MemberDao");
+		return sqlSessionTemplate.selectList(NAMESPACE + "selectMemberClassification");
+	}
+	
+	// 회원 구분 등록
+	public void insertMemberClassification(String memberClassificationName) {
+		logger.debug("{} : < memberClassificationName insertMemberClassification() MemberDao", memberClassificationName);
+		sqlSessionTemplate.insert(NAMESPACE + "insertMemberClassification", memberClassificationName);
+	}
+	
+	// 회원 탈퇴 요청 승인
+	public void updateMemberDel(Map map) {
+		logger.debug("{} : < map  updateMemberDel() MemberDao", map);
+		sqlSessionTemplate.update(NAMESPACE + "updateMemberDel", map);
+	}
 	
 	// 회원 탈퇴 요청 조회
 	public List<MemberDel> selectMemberDelList() {

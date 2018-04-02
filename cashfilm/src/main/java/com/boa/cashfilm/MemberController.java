@@ -1,5 +1,6 @@
 package com.boa.cashfilm;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.boa.cashfilm.member.dto.MemberCheck;
+import com.boa.cashfilm.member.dto.MemberClassification;
 import com.boa.cashfilm.member.dto.MemberInfo;
 import com.boa.cashfilm.member.dto.MemberSession;
 import com.boa.cashfilm.member.dto.MemberSessionByCompanyPayment;
@@ -27,6 +29,59 @@ public class MemberController {
 	@Autowired
 	MemberService memberService;
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+	
+	// 회원 구분 삭제
+	@RequestMapping(value = "/member/memberClassificationDeletion", method = RequestMethod.GET)
+	public String deleteMemberClassification(@RequestParam("memberClassificationCode") int memberClassificationCode) {
+		logger.debug("{} : < memberClassificationCode deleteMemberClassification() MemberController", memberClassificationCode);
+		memberService.deleteMemberClassification(memberClassificationCode);
+		return "redirect:/member/memberClassificationList";
+	}
+	
+	// 회원 구분 수정
+	@RequestMapping(value = "/member/memberClassificationModification", method = RequestMethod.POST)
+	public String updateMemberClassification(MemberClassification memberClassification) {
+		logger.debug("{} : < memberClassificationCode updateMemberClassification() MemberController", memberClassification.getMemberClassificationCode());
+		logger.debug("{} : < memberClassificationName updateMemberClassification() MemberController", memberClassification.getMemberClassificationName());
+		memberService.updateMemberClassification(memberClassification);
+		return "redirect:/member/memberClassificationList";
+	}
+	
+	// 회원 구분 조회
+	@RequestMapping(value = "/member/memberClassificationList", method = RequestMethod.GET)
+	public String selectMemberClassification(Model model) {
+		logger.debug("{} : < selectMemberClassification() MemberController");
+		List<MemberClassification> list = memberService.selectMemberClassification();
+		for(MemberClassification mc : list) {
+			logger.debug("{} : > memberClassificationName selectMemberClassification() MemberController", mc.getMemberClassificationName());
+		}
+		model.addAttribute("memberClassificationList", list);
+		return "member/memberClassificationList";
+	}
+	
+	// 회원 구분 등록
+	@RequestMapping(value = "/member/memberClassificationRegistration", method = RequestMethod.GET)
+	public String insertMemberClassification(@RequestParam("memberClassificationName") String memberClassificationName) {
+		logger.debug("{} : < memberClassificationName insertMemberClassification() MemberController", memberClassificationName);
+		memberService.insertMemberClassification(memberClassificationName);
+		return "redirect:/member/memberClassificationList";
+	}
+	
+	// 회원 탈퇴 요청 승인 (관리자)
+	@RequestMapping(value = "/member/memberDelApproval", method = RequestMethod.POST)
+	public String updateMemberDel(@RequestParam("memberEmail") String memberEmail
+								, @RequestParam("memberDelRequestDay") String memberDelRequestDay
+								, @RequestParam("memberDelApprovalEmail") String memberDelApprovalEmail) {
+		logger.debug("{} : < memberEmail updateMemberDel() MemberController", memberEmail);
+		logger.debug("{} : < memberDelRequestDay updateMemberDel() MemberController", memberDelRequestDay);
+		logger.debug("{} : < memberDelApprovalEmail updateMemberDel() MemberController", memberDelApprovalEmail);
+		Map map = new HashMap();
+		map.put("memberEmail", memberEmail);
+		map.put("memberDelRequestDay", memberDelRequestDay);
+		map.put("memberDelApprovalEmail", memberDelApprovalEmail);
+		memberService.updateMemberDel(map);
+		return "redirect:/member/memberDelList";
+	}
 	
 	// 회원 탈퇴 요청 조회 (관리자)
 	@RequestMapping(value = "/member/memberDelList", method = RequestMethod.GET)
