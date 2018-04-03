@@ -3,7 +3,8 @@
 <jsp:include page="/WEB-INF/views/module/topFirst.jsp"/>
 <jsp:include page="/WEB-INF/views/module/topSecond.jsp"/>
 
-<c:set var="memberSimple" value="${memberSimple}"/>
+<c:set var="memberSession" value="${memberSession}"/>
+<c:set var="memberSessionBCP" value="${memberSessionByCompanyPayment}" />
 	<script type="text/javascript">
 	$(document).ready(function(){
 		$("#insertButton").click(function(){
@@ -30,7 +31,7 @@
 		<br>
 		*회사전화번호 :<input type="text" name ="ComPhone" id = "ComPhone" value="063-212-4734">	
 		<br>
-		등록이메일 : <input type="text" name ="MemberEmail" id = "MemberEmail" value="${memberSimple.memberEmail}" readonly >	
+		등록이메일 : <input type="text" name ="MemberEmail" id = "MemberEmail" value="${memberSession.memberEmail}" readonly >	
 		<br>
 		*업종 : <input type="text" name ="ComIndustry" id = "ComIndustry" value="생활용품도소매업">	
 		<br>
