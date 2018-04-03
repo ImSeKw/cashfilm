@@ -16,7 +16,7 @@ public class StatementCompanyService {
 	StatementCompanyDao statementCompanyDao;
 	private static final Logger logger = LoggerFactory.getLogger(StatementCompanyService.class);
 	
-	// 회사 처음 입력 재무 등록
+	// 회사 처음 입력 재무 등록 처리
 	public void insertStatementCompanyFinance(StatementCompanyFinance statementCompanyFinance) {
 		logger.debug("{} : < statementCompanyFinance insertStatementCompanyFinance() StatementCompanyService", statementCompanyFinance);
 		statementCompanyDao.insertStatementCompanyFinance(statementCompanyFinance);

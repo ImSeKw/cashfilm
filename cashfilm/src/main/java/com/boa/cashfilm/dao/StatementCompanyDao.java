@@ -15,7 +15,7 @@ public class StatementCompanyDao {
 	private final String NAMESPACE = "com.boa.cashfilm.mapper.statementCompanyMapper.";
 	private static final Logger logger = LoggerFactory.getLogger(StatementCompanyDao.class);
 	
-	// 회사 처음 입력 재무 등록
+	// 회사 처음 입력 재무 등록 처리
 	public void insertStatementCompanyFinance(StatementCompanyFinance statementCompanyFinance) {
 		logger.debug("{} : < statementCompanyFinance insertStatementCompanyFinance() StatementCompanyDao", statementCompanyFinance);
 		sqlSessionTemplate.insert(NAMESPACE + "insertStatementCompanyFinance", statementCompanyFinance);
