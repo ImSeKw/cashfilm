@@ -3,6 +3,21 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.boa.cashfilm.mapper.cashfilmMapper">
-	
+<mapper namespace="com.boa.cashfilm.mapper.statementCompanyMapper">
+	<!-- 회사 처음 입력 재무 등록 -->
+	<insert id="insertStatementCompanyFinance" parameterType="com.boa.cashfilm.smtcom.dto.StatementCompanyFinance">
+		INSERT INTO cffinance (
+			comCode
+			, comSystemNumeral
+			, memberEmail
+			, financeAmount
+			, closingStatementCode
+		) VALUES (
+			#{comCode}
+			, #{comSystemNumeral}
+			, #{memberEmail}
+			, #{financeAmount}
+			, #{closingStatementCode}
+		)
+	</insert>
 </mapper>

@@ -1,6 +1,6 @@
 package com.boa.cashfilm.smtcom.dto;
 
-public class StatementCompany {
+public class StatementCompanyFinance {
 	private int financeCode;
 	private int comCode;
 	private int comSystemNumeral;
