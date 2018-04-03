@@ -29,6 +29,15 @@ public class SystemIndividualController {
 	private SystemIndividualService systemIndiService;
 	private static final Logger logger=LoggerFactory.getLogger(SystemIndividualService.class);
 	
+	//개인적요 수정(form)
+	@RequestMapping(value="/IndividualSystem/updateIndividualcontent",method = RequestMethod.GET)
+	public String selectOneIndividualcontent(Model model,@RequestParam(value="individualContentCode",required=true)int individualContentCode) {
+		logger.debug("{} :selectOneIndividualcontent SystemIndividualService.java",individualContentCode);
+		IndividualcontentAndSubAndUsub icsus =systemIndiService.selectOneIndividualcontent(individualContentCode);
+		model.addAttribute("icsus", icsus);
+		return "system/updateIndividualcontent";
+	}
+	
 	//개인적요 검색(이메일별)
 	@RequestMapping(value="/IndividualSystem/selectIndividualcontent",method = RequestMethod.GET)
 	public String selectIndividualcontent(Model model,@RequestParam(value="memberEmail",required=true)String memberEmail){

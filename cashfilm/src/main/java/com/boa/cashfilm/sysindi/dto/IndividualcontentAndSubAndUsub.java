@@ -4,7 +4,7 @@ public class IndividualcontentAndSubAndUsub {
 	private int individualContentCode;
 	private int individualSubjectNumeral;
 	private String individualSubjectName;
-	private int intuserIndividualSubjectCode;
+	private int userIndividualSubjectCode;
 	private String userIndividualSubjectName;
 	private String individualContentName;
 	private String memberEmail;
@@ -48,14 +48,14 @@ public class IndividualcontentAndSubAndUsub {
 	/**
 	 * @return the intuserIndividualSubjectCode
 	 */
-	public int getIntuserIndividualSubjectCode() {
-		return intuserIndividualSubjectCode;
+	public int getUserIndividualSubjectCode() {
+		return userIndividualSubjectCode;
 	}
 	/**
 	 * @param intuserIndividualSubjectCode the intuserIndividualSubjectCode to set
 	 */
-	public void setIntuserIndividualSubjectCode(int intuserIndividualSubjectCode) {
-		this.intuserIndividualSubjectCode = intuserIndividualSubjectCode;
+	public void setUserIndividualSubjectCode(int userIndividualSubjectCode) {
+		this.userIndividualSubjectCode = userIndividualSubjectCode;
 	}
 	/**
 	 * @return the userIndividualSubjectName
@@ -112,7 +112,7 @@ public class IndividualcontentAndSubAndUsub {
 	public String toString() {
 		return "IndividualcontentAndSubAndUsub [individualContentCode=" + individualContentCode
 				+ ", individualSubjectNumeral=" + individualSubjectNumeral + ", individualSubjectName="
-				+ individualSubjectName + ", intuserIndividualSubjectCode=" + intuserIndividualSubjectCode
+				+ individualSubjectName + ", userIndividualSubjectCode=" + userIndividualSubjectCode
 				+ ", userIndividualSubjectName=" + userIndividualSubjectName + ", individualContentName="
 				+ individualContentName + ", memberEmail=" + memberEmail + ", individualContentRegistrationDay="
 				+ individualContentRegistrationDay + "]";

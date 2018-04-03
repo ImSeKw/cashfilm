@@ -25,6 +25,12 @@ public class SystemIndividualDao {
 	private static final Logger logger = LoggerFactory.getLogger(SystemIndividualDao.class);
 	private final String NAMESPACE ="com.boa.cashfilm.mapper.systemIndividualMapper.";
 	
+	//개인적요 수정을위한 검색
+	public IndividualcontentAndSubAndUsub selectOneIndividualcontent(int individualContentCode) {
+		logger.debug("uisubject selectOneIndividualcontent");
+		return sqlsessiontemplate.selectOne(NAMESPACE + "selectOneIndividualcontent", individualContentCode);
+	}
+	
 	//개인적요 검색(이메일별)
 	public List<IndividualcontentAndSubAndUsub> selectIndividualcontent(String memberEmail) {
 		logger.debug("uisubject selectIndividualcontent");
