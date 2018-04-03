@@ -70,11 +70,7 @@ public class CompanyController {
 	//회사 거래처 수정 form
 	@RequestMapping(value = "company/comCustomerModification" , method = RequestMethod.GET)
 	public String comCustomerModification(@RequestParam("comCode") int comCode,@RequestParam("memberEmail") String memberEmail,@RequestParam("customerCode") int customerCode) {
-		//자신이 소속된 회사에 수정권한을 확인
-/*		List<Object> ComAuthorityApproval = companyService.selectComAuthorityApproval(memberEmail, comCode);	
-		if(ComAuthorityApproval) {
-			
-		}*/
+
 		return "";
 	}
 	//회사 거래처 수정 Action
@@ -125,6 +121,7 @@ public class CompanyController {
 	//회사 부서 삭제
 	@RequestMapping(value = "company/comSectionDel" , method = RequestMethod.GET)
 	public String comSectionDel() {
+		
 		return "";
 	}
 	//회사 직급 등록
@@ -168,8 +165,8 @@ public class CompanyController {
 	@RequestMapping(value = "company/comInfo" , method = RequestMethod.GET)
 	public String comInfo(@RequestParam("comCode") int comCode,Model model) {
 		List<Company> list = companyService.comInfo(comCode);
-		model.addAttribute("list", list);
 		logger.debug("{} : CompanyController comInfo list", list);
+		model.addAttribute("list", list);
 		return "company/comInfo";
 	}
 	//cashfilm 관리자 권한으로 승인 전 회사 검색

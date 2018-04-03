@@ -52,10 +52,10 @@
 				${list.customerRemarks}
 			</td>
 			<td>
-			<a href="${pageContext.request.contextPath}/company/comCustomerModification?comCode=${list.comCode}&customerCode=${list.customerCode}&memberEmail=${memberSession.memberEmail}" > 거래처 수정
+			<%-- <a href="${pageContext.request.contextPath}/company/comCustomerModification?comCode=${list.comCode}&customerCode=${list.customerCode}&memberEmail=${memberSession.memberEmail}" > 거래처 수정
 			</a>
 			<a href="${pageContext.request.contextPath}/company/?comCode=${list.comCode}&customerCode=${list.customerCode}&memberEmail=${memberSession.memberEmail}" > 거래처 삭제
-			</a>
+			</a> --%>
 			</td>
 		</tr>
 	</c:forEach>

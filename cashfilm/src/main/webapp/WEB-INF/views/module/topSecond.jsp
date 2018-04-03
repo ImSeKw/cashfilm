@@ -20,7 +20,11 @@
 				<a href="${pageContext.request.contextPath}/company/comListByIndividual">회사검색</a>
 			</c:when>
 			<c:otherwise>
-				<a href="">회사정보</a>
+				<a href="${pageContext.request.contextPath}/company/comInfo?comCode=${memberSession.comCode}">회사정보</a>
+				<a href="${pageContext.request.contextPath}/company/comCustomerRegistration">거래처 등록</a>
+				<a href="${pageContext.request.contextPath}/company/comCustomerList?comCode=${memberSession.comCode}">거래처 조회</a>
+				<a href="${pageContext.request.contextPath}/company/comInfo?comCode=${memberSession.comCode}">회사정보</a>
+				<a href="${pageContext.request.contextPath}/company/comInfo?comCode=${memberSession.comCode}">회사정보</a>
 			</c:otherwise>
 		</c:choose>
 		<c:if test="${memberSession.memberClassificationCode eq 1}">
