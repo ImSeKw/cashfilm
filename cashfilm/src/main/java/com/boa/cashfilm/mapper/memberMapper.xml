@@ -173,10 +173,12 @@
 	<insert id="insertSignUpOrders" parameterType="String">
 		INSERT INTO cforders (
 			memberEmail
+			, comCode
 			, myItemCode
 		)
 		VALUES (
 			#{memberEmail}
+			, 0
 			, 1
 		)
 	</insert>
