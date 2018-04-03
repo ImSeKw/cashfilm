@@ -5,6 +5,11 @@
 
 <mapper namespace="com.boa.cashfilm.mapper.systemIndividualMapper">
 
+	<!--개인계정 세부 삭제  -->
+	<delete id="deleteIndividualSubjectDetail" parameterType="com.boa.cashfilm.sysindi.dto.IndividualSubjectDetail">
+		DELETE FROM cfindividualsubjectdetail WHERE individualSubjectDetailNumeral=#{individualSubjectDetailNumeral};
+	</delete>
+		
 	<!--개인계정 세부 수정 -->
 	<update id="updateIndividualSubjectDetail" parameterType="com.boa.cashfilm.sysindi.dto.IndividualSubjectDetail">
 		UPDATE cfindividualsubjectdetail 

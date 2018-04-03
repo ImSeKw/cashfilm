@@ -23,6 +23,13 @@ public class SystemIndividualDao {
 	private static final Logger logger = LoggerFactory.getLogger(SystemIndividualDao.class);
 	private final String NAMESPACE ="com.boa.cashfilm.mapper.systemIndividualMapper.";
 	
+	//개인계정 세부 삭제
+	public int deleteIndividualSubjectDetail(IndividualSubjectDetail isd) {
+		logger.debug("uisubject deleteIndividualSubjectDetail");
+		return sqlsessiontemplate.delete(NAMESPACE + "deleteIndividualSubjectDetail", isd);
+	}
+		
+	
 	//개인계정 세부 수정
 	public int updateIndividualSubjectDetail(IndividualSubjectDetail isd) {
 		logger.debug("uisubject updateIndividualSubjectDetail");

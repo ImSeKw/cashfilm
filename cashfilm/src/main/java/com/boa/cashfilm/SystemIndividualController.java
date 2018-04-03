@@ -27,10 +27,18 @@ public class SystemIndividualController {
 	private SystemIndividualService systemIndiService;
 	private static final Logger logger=LoggerFactory.getLogger(SystemIndividualService.class);
 	
+	//개인계정 세부 삭제
+	@RequestMapping(value="/IndividualSystem/deleteIndividualSubjectDetail",method = RequestMethod.GET)
+	public String deleteIndividualSubjectDetail(IndividualSubjectDetail isd){
+		logger.debug("{} :deleteIndividualSubjectDetail SystemIndividualController.java",isd);
+		systemIndiService.deleteIndividualSubjectDetail(isd);
+		return "redirect:/IndividualSystem/selectIndividualSubjectDetail";
+	}
+	
 	//개인계정 세부 수정action
 	@RequestMapping(value="/IndividualSystem/updateIndividualSubjectDetail",method = RequestMethod.POST)
-	public String updateIndividualSubjectDetail(IndividualSubjectDetail isd) {
-		logger.debug("{} :updateIndividualSubjectDetail action SystemIndividualController.java",isd);
+	public String updateIndividualSubjectDetail(IndividualSubjectDetail isd){
+		logger.debug("{} :updateIndividualSubjectDetail SystemIndividualController.java",isd);
 		systemIndiService.updateIndividualSubjectDetail(isd);
 		return "redirect:/IndividualSystem/selectIndividualSubjectDetail";
 	}

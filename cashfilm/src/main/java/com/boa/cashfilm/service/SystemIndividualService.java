@@ -24,6 +24,12 @@ public class SystemIndividualService {
 	private SystemIndividualDao systemindividualDao;
 	private static final Logger logger = LoggerFactory.getLogger(SystemIndividualService.class);
 	
+	//개인계정 세부 삭제
+	public int deleteIndividualSubjectDetail(IndividualSubjectDetail isd) {
+		logger.debug("{} :deleteIndividualSubjectDetail SystemIndividualService.java",isd);
+		return systemindividualDao.deleteIndividualSubjectDetail(isd);
+	}
+	
 	//개인계정 세부 수정
 	public int updateIndividualSubjectDetail(IndividualSubjectDetail isd) {
 		logger.debug("{} :updateIndividualSubjectDetail SystemIndividualService.java",isd);
