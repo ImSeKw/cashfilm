@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.boa.cashfilm.sysindi.dto.IndividualSubject;
+import com.boa.cashfilm.sysindi.dto.IndividualSubjectDetail;
 import com.boa.cashfilm.sysindi.dto.IndividualSystem;
 import com.boa.cashfilm.sysindi.dto.IndividualSystemAndSubject;
 import com.boa.cashfilm.sysindi.dto.IndividualSystemAndUSubject;
@@ -21,6 +22,12 @@ public class SystemIndividualDao {
 	private SqlSessionTemplate sqlsessiontemplate;
 	private static final Logger logger = LoggerFactory.getLogger(SystemIndividualDao.class);
 	private final String NAMESPACE ="com.boa.cashfilm.mapper.systemIndividualMapper.";
+	
+	//개인계정 세부 등록
+	public int insertIndividualSubjectDetail(IndividualSubjectDetail isd) {
+		logger.debug("uisubject insertIndividualSubjectDetail");
+		return sqlsessiontemplate.insert(NAMESPACE + "insertIndividualSubjectDetail",isd);
+	}
 	
 	//개인 사용자 계정과목  삭제 
 	public int deleteUserIndiSubject(UserIndividualSubject uis) {
