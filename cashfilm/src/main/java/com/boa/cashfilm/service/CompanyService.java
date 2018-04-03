@@ -65,7 +65,9 @@ public class CompanyService {
 	}
 	//자신의 회사 정보 조회
 	public List<Company> comInfo(int comCode){
-		return companyDao.comInfo(comCode);
+		List<Company> returnList = companyDao.comInfo(comCode);
+		logger.debug("{} : CountryService comInfo returnList", returnList);
+		return returnList;
 	}
 	//cashfilm 관리자 권한으로 승인 전 회사 검색
 	public List<Company> comListBeforeApproval(){

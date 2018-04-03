@@ -165,8 +165,8 @@ public class CompanyController {
 	@RequestMapping(value = "company/comInfo" , method = RequestMethod.GET)
 	public String comInfo(@RequestParam("comCode") int comCode,Model model) {
 		List<Company> list = companyService.comInfo(comCode);
-		model.addAttribute("list", list);
 		logger.debug("{} : CompanyController comInfo list", list);
+		model.addAttribute("list", list);
 		return "company/comInfo";
 	}
 	//cashfilm 관리자 권한으로 승인 전 회사 검색
