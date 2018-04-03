@@ -22,7 +22,7 @@
 	</form>
 	<c:set var="memberSession" value="${memberSession}"/>
 	<a href="${pageContext.request.contextPath}//IndividualSystem/selectUserIndiSubject?memberEmail=${memberSession.memberEmail}">내 계정과목조회</a></td>
-	
+	<a href="${pageContext.request.contextPath}/IndividualSystem/insertIndividualcontent?memberEmail=${memberSession.memberEmail}">개인적요 등록</a></td>
 
 
 <jsp:include page="/WEB-INF/views/module/bottom.jsp"/>

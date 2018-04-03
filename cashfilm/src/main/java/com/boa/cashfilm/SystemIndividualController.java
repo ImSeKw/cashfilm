@@ -19,6 +19,7 @@ import com.boa.cashfilm.sysindi.dto.IndividualSubjectDetail;
 import com.boa.cashfilm.sysindi.dto.IndividualSystem;
 import com.boa.cashfilm.sysindi.dto.IndividualSystemAndSubject;
 import com.boa.cashfilm.sysindi.dto.IndividualSystemAndUSubject;
+import com.boa.cashfilm.sysindi.dto.Individualcontent;
 import com.boa.cashfilm.sysindi.dto.UserIndividualSubject;
 
 @Controller
@@ -26,6 +27,25 @@ public class SystemIndividualController {
 	@Autowired
 	private SystemIndividualService systemIndiService;
 	private static final Logger logger=LoggerFactory.getLogger(SystemIndividualService.class);
+	
+	//개인적요 등록 action
+	@RequestMapping(value="/IndividualSystem/insertIndividualcontent",method = RequestMethod.POST)
+	public String insertIndividualcontent(Individualcontent ic) {
+		logger.debug("{} :addIndividualcontent SystemIndividualController.java",ic);
+		systemIndiService.insertIndividualcontent(ic);
+		return "redirect:/";
+	}
+	
+	//개인적요 등록 form
+	@RequestMapping(value="/IndividualSystem/insertIndividualcontent",method = RequestMethod.GET)
+	public String addIndividualcontent(Model model,@RequestParam(value="memberEmail",required=true)String memberEmail) {
+		logger.debug("{} :addIndividualcontent SystemIndividualController.java",memberEmail);
+		List<IndividualSubject> list=systemIndiService.selectAllIndividualSubject();
+		model.addAttribute("list", list);
+		List<IndividualSystemAndUSubject> isuslist=systemIndiService.selectUserIndiSubject(memberEmail);
+		model.addAttribute ("isuslist",  isuslist);
+		return "system/insertIndividualcontent";
+	}
 	
 	//개인계정 세부 삭제
 	@RequestMapping(value="/IndividualSystem/deleteIndividualSubjectDetail",method = RequestMethod.GET)

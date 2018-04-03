@@ -13,6 +13,7 @@ import com.boa.cashfilm.sysindi.dto.IndividualSubjectDetail;
 import com.boa.cashfilm.sysindi.dto.IndividualSystem;
 import com.boa.cashfilm.sysindi.dto.IndividualSystemAndSubject;
 import com.boa.cashfilm.sysindi.dto.IndividualSystemAndUSubject;
+import com.boa.cashfilm.sysindi.dto.Individualcontent;
 import com.boa.cashfilm.sysindi.dto.UserIndividualSubject;
 
 
@@ -22,6 +23,13 @@ public class SystemIndividualDao {
 	private SqlSessionTemplate sqlsessiontemplate;
 	private static final Logger logger = LoggerFactory.getLogger(SystemIndividualDao.class);
 	private final String NAMESPACE ="com.boa.cashfilm.mapper.systemIndividualMapper.";
+	
+	//개인적요 등록
+	public int insertIndividualcontent(Individualcontent ic) {
+		logger.debug("uisubject insertIndividualcontent");
+		return sqlsessiontemplate.insert(NAMESPACE + "insertIndividualcontent", ic);
+	}
+		
 	
 	//개인계정 세부 삭제
 	public int deleteIndividualSubjectDetail(IndividualSubjectDetail isd) {
