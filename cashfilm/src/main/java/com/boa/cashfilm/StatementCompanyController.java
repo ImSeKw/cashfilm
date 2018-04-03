@@ -1,14 +1,18 @@
 package com.boa.cashfilm;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.boa.cashfilm.company.dto.ComSystem;
 import com.boa.cashfilm.service.StatementCompanyService;
-import com.boa.cashfilm.smtcom.dto.StatementCompanyFinance;
 
 @Controller
 public class StatementCompanyController {
@@ -18,20 +22,28 @@ public class StatementCompanyController {
 	
 	// 회사 처음 입력 재무 등록 처리
 	@RequestMapping(value = "/statement/financeRegistrationByCompany", method = RequestMethod.POST)
-	public String insertStatementCompanyFinance(StatementCompanyFinance statementCompanyFinance) {
-		logger.debug("{} : < closingStatementCode insertStatementCompanyFinance() StatementCompanyController", statementCompanyFinance.getClosingStatementCode());
-		logger.debug("{} : < comCode insertStatementCompanyFinance() StatementCompanyController", statementCompanyFinance.getComCode());
-		logger.debug("{} : < comSystemNumeral insertStatementCompanyFinance() StatementCompanyController", statementCompanyFinance.getComSystemNumeral());
-		logger.debug("{} : < financeAmount insertStatementCompanyFinance() StatementCompanyController", statementCompanyFinance.getFinanceAmount());
-		logger.debug("{} : < financeCode insertStatementCompanyFinance() StatementCompanyController", statementCompanyFinance.getFinanceCode());
-		logger.debug("{} : < memberEmail insertStatementCompanyFinance() StatementCompanyController", statementCompanyFinance.getMemberEmail());
-		statementCompanyService.insertStatementCompanyFinance(statementCompanyFinance);
+	public String insertStatementCompanyFinance(@RequestParam("comSystemNumeral") List<Integer> comSystemNumeralList
+												, @RequestParam("financeAmount") List<Integer> financeAmountList
+												, @RequestParam("closingStatementCode") List<String> closingStatementCodeList) {
+		for(int comSystemNumeral : comSystemNumeralList) {
+			logger.debug("{} : < comSystemNumeral insertStatementCompanyFinance() StatementCompanyController", comSystemNumeral);
+		}
+		for(int financeAmount : financeAmountList) {
+			logger.debug("{} : < financeAmount insertStatementCompanyFinance() StatementCompanyController", financeAmount);
+		}
+		for(String closingStatementCode : closingStatementCodeList) {
+			logger.debug("{} : < closingStatementCode insertStatementCompanyFinance() StatementCompanyController", closingStatementCode);
+		}
+		statementCompanyService.insertStatementCompanyFinance(statementCompanyFinanceList);
 		return "redirect:/";
 	}
 	
 	// 회사 처음 입력 재무 등록 화면
 	@RequestMapping(value = "/statement/financeRegistrationByCompany", method = RequestMethod.GET)
-	public String insertStatementCompanyFinance() {
+	public String selectStatementCompanySystem(Model model) {
+		logger.debug("< insertStatementCompanyFinance() StatementCompanyController");
+		List<ComSystem> list = statementCompanyService.selectStatementCompanySystem();
+		model.addAttribute("comSystemList", list);
 		return "statement/financeRegistrationByCompany";
 	}
 }
