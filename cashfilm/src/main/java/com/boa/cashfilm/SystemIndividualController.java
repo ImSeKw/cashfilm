@@ -27,6 +27,25 @@ public class SystemIndividualController {
 	private SystemIndividualService systemIndiService;
 	private static final Logger logger=LoggerFactory.getLogger(SystemIndividualService.class);
 	
+	//개인계정 세부 검색(세부명별검색)
+	@RequestMapping(value="/IndividualSystem/selectIndividualSubjectDetail",method = RequestMethod.POST)
+	public String selectIndividualSubjectDetail(Model model, @RequestParam(value="individualSubjectDetailName",required=true)String individualSubjectDetailName){
+		logger.debug("{} :selectIndividualSubjectDetail post SystemIndividualController.java");
+		List<IndividualSubjectDetail> isdlist= systemIndiService.selectAllIndividualSubjectDetail();
+		model.addAttribute("isdlist", isdlist);
+		IndividualSubjectDetail isd=systemIndiService.selectOneIndividualSubjectDetail(individualSubjectDetailName);
+		model.addAttribute("isd", isd);
+		return "system/selectIndividualSubjectDetail";
+	}
+	//개인계정 세부 검색(모든검색)
+	@RequestMapping(value="/IndividualSystem/selectIndividualSubjectDetail",method = RequestMethod.GET)
+	public String selectIndividualSubjectDetail(Model model){
+		logger.debug("{} :selectIndividualSubjectDetail get SystemIndividualController.java");
+		List<IndividualSubjectDetail> isdlist= systemIndiService.selectAllIndividualSubjectDetail();
+		model.addAttribute("isdlist", isdlist);
+		return "system/selectIndividualSubjectDetail";
+	}
+
 	//개인계정 세부 등록(action)
 	@RequestMapping(value="/IndividualSystem/insertIndividualSubjectDetail",method = RequestMethod.POST)
 	public String addIndividualSubjectDetail(IndividualSubjectDetail isd) {

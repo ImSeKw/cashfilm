@@ -173,10 +173,12 @@
 	<insert id="insertSignUpOrders" parameterType="String">
 		INSERT INTO cforders (
 			memberEmail
+			, comCode
 			, myItemCode
 		)
 		VALUES (
 			#{memberEmail}
+			, 0
 			, 1
 		)
 	</insert>
@@ -209,12 +211,14 @@
 		INSERT INTO cfmemberemail (
 			memberEmail
 			, memberClassificationCode
+			, comCode
 			, memberName
 			, memberPassword
 			, memberCondition
 		) VALUES (
 			#{memberEmail}
 			, 3
+			, 0
 			, #{memberName}
 			, #{memberPassword}
 			, '활동'
@@ -289,7 +293,7 @@
 			WHERE e.memberEmail = #{memberEmail}
 			AND e.memberPassword = #{memberPassword}
 		) AS ecb
-		INNER JOIN (
+		LEFT JOIN (
 			SELECT 
 				o.memberEmail
 				, o.comCode
@@ -308,7 +312,7 @@
 					FROM cfvoucherpayment AS vo
 					INNER JOIN cforders AS od 
 					ON vo.ordersCode = od.ordersCode
-					WHERE od.comCode IS NULL 
+					WHERE od.comCode = 0
 					AND od.memberEmail = #{memberEmail}
 				)
 		) AS ovi

@@ -4,6 +4,25 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.boa.cashfilm.mapper.systemIndividualMapper">
+
+	<!--개인계정 세부 검색(세부명별 조회) -->
+	<select id="selectOneIndividualSubjectDetail" parameterType="String" resultType="com.boa.cashfilm.sysindi.dto.IndividualSubjectDetail">
+		SELECT individualSubjectDetailNumeral
+			,individualSubjectNumeral
+			,individualSubjectDetailName
+			,individualSubjectDetailContent
+		FROM cfindividualsubjectdetail
+		WHERE individualSubjectDetailName=#{individualSubjectDetailName}
+	</select>
+	
+	<!--개인계정 세부 검색(모든검색) -->
+	<select id="selectAllIndividualSubjectDetail" resultType="com.boa.cashfilm.sysindi.dto.IndividualSubjectDetail">
+		SELECT individualSubjectDetailNumeral
+			,individualSubjectNumeral
+			,individualSubjectDetailName
+			,individualSubjectDetailContent
+		FROM cfindividualsubjectdetail;
+	</select>
 	
 	<!--개인계정 세부 등록 -->
 	<insert id="insertIndividualSubjectDetail" parameterType="com.boa.cashfilm.sysindi.dto.IndividualSubjectDetail" >
