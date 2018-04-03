@@ -39,9 +39,9 @@
 		</tr>
 		<tr>
 			<td>
-				<select>
+				<select name="comSystemNumeral">
 					<c:forEach var="list" items="${comSystemList}">
-						<option name="comSystemNumeral" value="${list.comSystemNumeral}">${list.comSystemName}</option>
+						<option value="${list.comSystemNumeral}">${list.comSystemName}</option>
 					</c:forEach>
 				</select>
 			</td>
