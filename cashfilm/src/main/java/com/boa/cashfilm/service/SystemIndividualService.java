@@ -15,6 +15,7 @@ import com.boa.cashfilm.sysindi.dto.IndividualSystem;
 import com.boa.cashfilm.sysindi.dto.IndividualSystemAndSubject;
 import com.boa.cashfilm.sysindi.dto.IndividualSystemAndUSubject;
 import com.boa.cashfilm.sysindi.dto.Individualcontent;
+import com.boa.cashfilm.sysindi.dto.IndividualcontentAndSubAndUsub;
 import com.boa.cashfilm.sysindi.dto.UserIndividualSubject;
 
 
@@ -24,6 +25,12 @@ public class SystemIndividualService {
 	@Autowired
 	private SystemIndividualDao systemindividualDao;
 	private static final Logger logger = LoggerFactory.getLogger(SystemIndividualService.class);
+	
+	//개인적요 검색(이메일별)
+	public List<IndividualcontentAndSubAndUsub> selectIndividualcontent(String memberEmail) {
+		logger.debug("{} :selectIndividualcontent SystemIndividualService.java",memberEmail);
+		return systemindividualDao.selectIndividualcontent(memberEmail);
+	}
 	
 	//개인적요 등록
 	public int insertIndividualcontent(Individualcontent ic) {

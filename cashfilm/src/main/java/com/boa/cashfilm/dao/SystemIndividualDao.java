@@ -14,6 +14,7 @@ import com.boa.cashfilm.sysindi.dto.IndividualSystem;
 import com.boa.cashfilm.sysindi.dto.IndividualSystemAndSubject;
 import com.boa.cashfilm.sysindi.dto.IndividualSystemAndUSubject;
 import com.boa.cashfilm.sysindi.dto.Individualcontent;
+import com.boa.cashfilm.sysindi.dto.IndividualcontentAndSubAndUsub;
 import com.boa.cashfilm.sysindi.dto.UserIndividualSubject;
 
 
@@ -24,6 +25,12 @@ public class SystemIndividualDao {
 	private static final Logger logger = LoggerFactory.getLogger(SystemIndividualDao.class);
 	private final String NAMESPACE ="com.boa.cashfilm.mapper.systemIndividualMapper.";
 	
+	//개인적요 검색(이메일별)
+	public List<IndividualcontentAndSubAndUsub> selectIndividualcontent(String memberEmail) {
+		logger.debug("uisubject selectIndividualcontent");
+		return sqlsessiontemplate.selectList(NAMESPACE + "selectIndividualcontent", memberEmail);
+	}
+		
 	//개인적요 등록
 	public int insertIndividualcontent(Individualcontent ic) {
 		logger.debug("uisubject insertIndividualcontent");

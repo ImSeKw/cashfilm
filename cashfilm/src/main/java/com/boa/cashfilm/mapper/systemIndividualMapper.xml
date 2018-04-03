@@ -5,10 +5,25 @@
 
 <mapper namespace="com.boa.cashfilm.mapper.systemIndividualMapper">
 
+	<!--개인적요 검색 -->
+	<select id="selectIndividualcontent" parameterType="String" resultType="com.boa.cashfilm.sysindi.dto.IndividualcontentAndSubAndUsub">
+		SELECT 
+			 ic.individualContentCode
+			 ,ic.individualSubjectNumeral
+			 ,isub.individualSubjectName
+			 ,ic.userIndividualSubjectCode
+			 ,uisub.userIndividualSubjectName
+			 ,ic.individualContentName
+			 ,ic.memberEmail
+			 ,ic.individualContentRegistrationDay 
+		FROM cfindividualcontent As ic INNER JOIN cfindividualsubject AS isub ON ic.individualSubjectNumeral=isub.individualSubjectNumeral
+ 		INNER JOIN cfuserindividualsubject AS uisub ON ic.userIndividualSubjectCode=uisub.userIndividualSubjectCode
+		WHERE ic.memberEmail=#{memberEmail};
+	</select>
+	
 	<!--개인적요 등록 -->
 	<insert id="insertIndividualcontent" parameterType="com.boa.cashfilm.sysindi.dto.Individualcontent">
 		INSERT INTO cfindividualcontent (
-	 		individualSubjectNumeral
 	 		,userIndividualSubjectCode
 	 		,individualContentName
 	 		,memberEmail 

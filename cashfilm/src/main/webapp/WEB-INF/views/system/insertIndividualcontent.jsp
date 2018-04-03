@@ -44,5 +44,6 @@
 	<br>
 	<input type="submit" value="등록"> 
 	</form>
+	<a href="${pageContext.request.contextPath}/IndividualSystem/selectIndividualcontent?memberEmail=${memberSession.memberEmail}">개인적요 검색</a></td>
  
 <jsp:include page="/WEB-INF/views/module/bottom.jsp"/>

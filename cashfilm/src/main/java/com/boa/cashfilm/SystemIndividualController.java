@@ -20,6 +20,7 @@ import com.boa.cashfilm.sysindi.dto.IndividualSystem;
 import com.boa.cashfilm.sysindi.dto.IndividualSystemAndSubject;
 import com.boa.cashfilm.sysindi.dto.IndividualSystemAndUSubject;
 import com.boa.cashfilm.sysindi.dto.Individualcontent;
+import com.boa.cashfilm.sysindi.dto.IndividualcontentAndSubAndUsub;
 import com.boa.cashfilm.sysindi.dto.UserIndividualSubject;
 
 @Controller
@@ -28,12 +29,21 @@ public class SystemIndividualController {
 	private SystemIndividualService systemIndiService;
 	private static final Logger logger=LoggerFactory.getLogger(SystemIndividualService.class);
 	
+	//개인적요 검색(이메일별)
+	@RequestMapping(value="/IndividualSystem/selectIndividualcontent",method = RequestMethod.GET)
+	public String selectIndividualcontent(Model model,@RequestParam(value="memberEmail",required=true)String memberEmail){
+		logger.debug("{} :selectIndividualcontent SystemIndividualController.java",memberEmail);
+		List<IndividualcontentAndSubAndUsub> icsuslist =systemIndiService.selectIndividualcontent(memberEmail); 
+		model.addAttribute("icsuslist", icsuslist);
+		return "system/selectIndividualcontent";
+	}
+	
 	//개인적요 등록 action
 	@RequestMapping(value="/IndividualSystem/insertIndividualcontent",method = RequestMethod.POST)
 	public String insertIndividualcontent(Individualcontent ic) {
 		logger.debug("{} :addIndividualcontent SystemIndividualController.java",ic);
 		systemIndiService.insertIndividualcontent(ic);
-		return "redirect:/";
+		return "redirect:/system/selectIndividualcontent";
 	}
 	
 	//개인적요 등록 form

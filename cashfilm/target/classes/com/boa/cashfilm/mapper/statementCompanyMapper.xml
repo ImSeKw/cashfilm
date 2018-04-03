@@ -5,7 +5,7 @@
 
 <mapper namespace="com.boa.cashfilm.mapper.statementCompanyMapper">
 	<!-- 회사 처음 입력 재무 등록 처리 -->
-	<insert id="insertStatementCompanyFinance" parameterType="com.boa.cashfilm.smtcom.dto.StatementCompanyFinance">
+	<insert id="insertStatementCompanyFinance" parameterType="java.util.List">
 		INSERT INTO cffinance (
 			comCode
 			, comSystemNumeral
@@ -22,7 +22,11 @@
 	</insert>
 	
 	<!-- 회사 처음 입력 재무 등록 화면 -->
-	<select id="">
-	
+	<select id="selectStatementCompanySystem" resultType="com.boa.cashfilm.company.dto.ComSystem">
+		SELECT
+			comSystemNumeral
+			, comSystemName
+		FROM cfcomsystem
+		ORDER BY comSystemNumeral ASC
 	</select>
 </mapper>
