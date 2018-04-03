@@ -24,9 +24,21 @@ public class SystemIndividualService {
 	private SystemIndividualDao systemindividualDao;
 	private static final Logger logger = LoggerFactory.getLogger(SystemIndividualService.class);
 	
-	//개인계정 세부 검색(세부명별 조회)
+	//개인계정 세부 수정
+	public int updateIndividualSubjectDetail(IndividualSubjectDetail isd) {
+		logger.debug("{} :updateIndividualSubjectDetail SystemIndividualService.java",isd);
+		return systemindividualDao.updateIndividualSubjectDetail(isd);
+	}
+	
+	//개인계정 세부 수정을 위한 검색
+	public IndividualSubjectDetail selectOneNuIndividualSubjectDetail(int individualSubjectDetailNumeral) {
+		logger.debug("{} :selectOneNuIndividualSubjectDetail SystemIndividualService.java",individualSubjectDetailNumeral);
+		return systemindividualDao.selectOneNuIndividualSubjectDetail(individualSubjectDetailNumeral);
+	}
+	
+	//개인계정 세부 검색(세부명별 검색)
 	public IndividualSubjectDetail selectOneIndividualSubjectDetail(String individualSubjectDetailName){
-		logger.debug("{} :selectOneIndividualSubjectDetail SystemIndividualService.java");
+		logger.debug("{} :selectOneIndividualSubjectDetail SystemIndividualService.java",individualSubjectDetailName);
 		return systemindividualDao.selectOneIndividualSubjectDetail(individualSubjectDetailName);
 	}
 	

@@ -21,8 +21,8 @@
 					    <td>${IndividualSubjectDetail.individualSubjectNumeral}</td>
 					    <td>${IndividualSubjectDetail.individualSubjectDetailName}</td>
 					    <td>${IndividualSubjectDetail.individualSubjectDetailContent}</td>
-					    <td><a href="${pageContext.request.contextPath}/IndividualSystem/updateIndividualSubject?individualSubjectNumeral=${IndividualSubject.individualSubjectNumeral}">수정</a></td>
-					    <td><a href="${pageContext.request.contextPath}/IndividualSystem/deleteIndividualSubject?individualSubjectNumeral=${IndividualSubject.individualSubjectNumeral}">삭제</a></td>
+					    <td><a href="${pageContext.request.contextPath}/IndividualSystem/updateIndividualSubjectDetail?individualSubjectDetailNumeral=${IndividualSubjectDetail.individualSubjectDetailNumeral}">수정</a></td>
+					    <td><a href="${pageContext.request.contextPath}/IndividualSystem/deleteIndividualSubjectDetail?individualSubjectDetailNumeral=${IndividualSubjectDetail.individualSubjectDetailNumeral}">삭제</a></td>
 					  </tr>
 				  </c:forEach>
 				</table>
@@ -42,13 +42,11 @@
 					    <td>${isd.individualSubjectNumeral}</td>
 					    <td>${isd.individualSubjectDetailName}</td>
 					    <td>${isd.individualSubjectDetailContent}</td>
-					    <td><a href="${pageContext.request.contextPath}/IndividualSystem/updateIndividualSubject?individualSubjectNumeral=${IndividualSubject.individualSubjectNumeral}">수정</a></td>
-					    <td><a href="${pageContext.request.contextPath}/IndividualSystem/deleteIndividualSubject?individualSubjectNumeral=${IndividualSubject.individualSubjectNumeral}">삭제</a></td>
-				 </tr>
-				 
+					    <td><a href="${pageContext.request.contextPath}/IndividualSystem/updateIndividualSubjectDetail?individualSubjectDetailNumeral=${isd.individualSubjectDetailNumeral}">수정</a></td>
+					    <td><a href="${pageContext.request.contextPath}/IndividualSystem/deleteIndividualSubjectDetail?individualSubjectDetailNumeral=${isd.individualSubjectDetailNumeral}">삭제</a></td>
+				  </tr>
 				</table>
-		    	
-            </c:otherwise>
+		   </c:otherwise>
 		</c:choose>
 
 	

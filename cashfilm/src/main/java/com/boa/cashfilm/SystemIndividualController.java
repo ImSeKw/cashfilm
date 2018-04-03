@@ -27,6 +27,26 @@ public class SystemIndividualController {
 	private SystemIndividualService systemIndiService;
 	private static final Logger logger=LoggerFactory.getLogger(SystemIndividualService.class);
 	
+	//개인계정 세부 수정action
+	@RequestMapping(value="/IndividualSystem/updateIndividualSubjectDetail",method = RequestMethod.POST)
+	public String updateIndividualSubjectDetail(IndividualSubjectDetail isd) {
+		logger.debug("{} :updateIndividualSubjectDetail action SystemIndividualController.java",isd);
+		systemIndiService.updateIndividualSubjectDetail(isd);
+		return "redirect:/IndividualSystem/selectIndividualSubjectDetail";
+	}
+	
+	//개인계정 세부 수정 form
+	@RequestMapping(value="/IndividualSystem/updateIndividualSubjectDetail",method = RequestMethod.GET)
+	public String selectOneNuIndividualSubjectDetail(Model model, @RequestParam(value="individualSubjectDetailNumeral",required=true)int individualSubjectDetailNumeral){
+		logger.debug("{} :selectOneNuIndividualSubjectDetail SystemIndividualService.java",individualSubjectDetailNumeral);
+		List<IndividualSubject> list=systemIndiService.selectAllIndividualSubject();
+		model.addAttribute("list", list); 
+		IndividualSubjectDetail isd=systemIndiService.selectOneNuIndividualSubjectDetail(individualSubjectDetailNumeral);
+		model.addAttribute("isd", isd);
+	return "system/updateIndividualSubjectDetail";
+	}
+
+		
 	//개인계정 세부 검색(세부명별검색)
 	@RequestMapping(value="/IndividualSystem/selectIndividualSubjectDetail",method = RequestMethod.POST)
 	public String selectIndividualSubjectDetail(Model model, @RequestParam(value="individualSubjectDetailName",required=true)String individualSubjectDetailName){

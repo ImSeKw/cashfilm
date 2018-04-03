@@ -23,7 +23,21 @@ public class SystemIndividualDao {
 	private static final Logger logger = LoggerFactory.getLogger(SystemIndividualDao.class);
 	private final String NAMESPACE ="com.boa.cashfilm.mapper.systemIndividualMapper.";
 	
-	//개인계정 세부 검색(세부명별 조회)
+	//개인계정 세부 수정
+	public int updateIndividualSubjectDetail(IndividualSubjectDetail isd) {
+		logger.debug("uisubject updateIndividualSubjectDetail");
+		return sqlsessiontemplate.update(NAMESPACE + "updateIndividualSubjectDetail",isd);
+	}
+	
+	//개인계정 세부 수정을 위한 검색
+	public IndividualSubjectDetail selectOneNuIndividualSubjectDetail(int individualSubjectDetailNumeral) {
+		logger.debug("uisubject selectOneNuIndividualSubjectDetail");
+		return sqlsessiontemplate.selectOne(NAMESPACE + "selectOneNuIndividualSubjectDetail", individualSubjectDetailNumeral);
+	}
+		
+	
+	
+	//개인계정 세부 검색(세부명별 검색)
 	public IndividualSubjectDetail selectOneIndividualSubjectDetail(String individualSubjectDetailName){
 		logger.debug("uisubject selectOneIndividualSubjectDetail");
 		return sqlsessiontemplate.selectOne(NAMESPACE + "selectOneIndividualSubjectDetail", individualSubjectDetailName);

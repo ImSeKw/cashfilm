@@ -5,7 +5,25 @@
 
 <mapper namespace="com.boa.cashfilm.mapper.systemIndividualMapper">
 
-	<!--개인계정 세부 검색(세부명별 조회) -->
+	<!--개인계정 세부 수정 -->
+	<update id="updateIndividualSubjectDetail" parameterType="com.boa.cashfilm.sysindi.dto.IndividualSubjectDetail">
+		UPDATE cfindividualsubjectdetail 
+		SET	individualSubjectNumeral=#{individualSubjectNumeral}
+			,individualSubjectDetailName=#{individualSubjectDetailName}
+			,individualSubjectDetailContent=#{individualSubjectDetailContent}
+		WHERE individualSubjectDetailNumeral=#{individualSubjectDetailNumeral};
+	</update>
+	
+	<!--개인계정 세부 수정을 위한 검색  -->
+	<select id="selectOneNuIndividualSubjectDetail" parameterType="int" resultType="com.boa.cashfilm.sysindi.dto.IndividualSubjectDetail">
+		SELECT individualSubjectDetailNumeral
+			,individualSubjectDetailName
+			,individualSubjectDetailContent
+		FROM cfindividualsubjectdetail
+		WHERE individualSubjectDetailNumeral=#{individualSubjectDetailNumeral}
+	</select>
+
+	<!--개인계정 세부 검색(세부명별 검색) -->
 	<select id="selectOneIndividualSubjectDetail" parameterType="String" resultType="com.boa.cashfilm.sysindi.dto.IndividualSubjectDetail">
 		SELECT individualSubjectDetailNumeral
 			,individualSubjectNumeral

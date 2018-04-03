@@ -6,8 +6,8 @@
 	<form action="${pageContext.request.contextPath}/IndividualSystem/insertIndividualSubjectDetail" method="post">
 	개인계정과목:<select name="individualSubjectNumeral">
 		<c:forEach var="IndividualSubject" items="${list}">
-       <option value="${IndividualSubject.individualSubjectNumeral}">${IndividualSubject.individualSubjectName}</option>
-       </c:forEach>
+      		 <option value="${IndividualSubject.individualSubjectNumeral}">${IndividualSubject.individualSubjectName}</option>
+        </c:forEach>
 	</select>
 	<br>
 	개인계정과목세부명:<input type="text" name="individualSubjectDetailName">
