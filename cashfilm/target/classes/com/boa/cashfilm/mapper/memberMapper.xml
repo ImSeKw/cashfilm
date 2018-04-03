@@ -30,6 +30,19 @@
 		INSERT INTO cfmemberclassification (memberClassificationName)
 		VALUES (#{memberClassificationName})
 	</insert>
+	
+	<!-- 전체 회원 조회 -->
+	<select id="selectMemberList" resultType="com.boa.cashfilm.member.dto.MemberList">
+		SELECT
+			e.memberEmail
+			, c.memberClassificationName
+			, e.memberName
+			, e.memberCondition
+		FROM cfmemberemail AS e
+		INNER JOIN cfmemberclassification AS c
+		ON e.memberClassificationCode = c.memberClassificationCode
+		ORDER BY c.memberClassificationCode DESC
+	</select>
 
 	<!-- 회원 탈퇴 정보 삭제 :  -->
 	

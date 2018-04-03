@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.boa.cashfilm.dao.SystemIndividualDao;
 import com.boa.cashfilm.sysindi.dto.IndividualSubject;
+import com.boa.cashfilm.sysindi.dto.IndividualSubjectDetail;
 import com.boa.cashfilm.sysindi.dto.IndividualSystem;
 import com.boa.cashfilm.sysindi.dto.IndividualSystemAndSubject;
 import com.boa.cashfilm.sysindi.dto.IndividualSystemAndUSubject;
@@ -23,6 +24,12 @@ public class SystemIndividualService {
 	private SystemIndividualDao systemindividualDao;
 	private static final Logger logger = LoggerFactory.getLogger(SystemIndividualService.class);
 	
+	
+	//개인계정 세부 등록
+	public int insertIndividualSubjectDetail(IndividualSubjectDetail isd) {
+		logger.debug("{} :insertIndividualSubjectDetail SystemIndividualService.java",isd);
+		return systemindividualDao.insertIndividualSubjectDetail(isd);
+	}
 	
 	//개인 사용자 계정과목  삭제 
 	public int deleteUserIndiSubject(UserIndividualSubject uis) {

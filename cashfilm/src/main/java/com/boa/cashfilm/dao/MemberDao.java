@@ -14,6 +14,7 @@ import com.boa.cashfilm.member.dto.MemberCheck;
 import com.boa.cashfilm.member.dto.MemberClassification;
 import com.boa.cashfilm.member.dto.MemberDel;
 import com.boa.cashfilm.member.dto.MemberInfo;
+import com.boa.cashfilm.member.dto.MemberList;
 import com.boa.cashfilm.member.dto.MemberSession;
 import com.boa.cashfilm.member.dto.MemberSessionByCompanyPayment;
 import com.boa.cashfilm.member.dto.MemberSignUp;
@@ -48,6 +49,12 @@ public class MemberDao {
 	public void insertMemberClassification(String memberClassificationName) {
 		logger.debug("{} : < memberClassificationName insertMemberClassification() MemberDao", memberClassificationName);
 		sqlSessionTemplate.insert(NAMESPACE + "insertMemberClassification", memberClassificationName);
+	}
+	
+	// 회원 조회
+	public List<MemberList> selectMemberList() {
+		logger.debug("< selectMemberList() MemberDao");
+		return sqlSessionTemplate.selectList(NAMESPACE + "selectMemberList");
 	}
 	
 	// 회원 탈퇴 요청 승인

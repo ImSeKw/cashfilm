@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.boa.cashfilm.service.SystemIndividualService;
 import com.boa.cashfilm.sysindi.dto.IndividualSubject;
+import com.boa.cashfilm.sysindi.dto.IndividualSubjectDetail;
 import com.boa.cashfilm.sysindi.dto.IndividualSystem;
 import com.boa.cashfilm.sysindi.dto.IndividualSystemAndSubject;
 import com.boa.cashfilm.sysindi.dto.IndividualSystemAndUSubject;
@@ -25,6 +26,25 @@ public class SystemIndividualController {
 	@Autowired
 	private SystemIndividualService systemIndiService;
 	private static final Logger logger=LoggerFactory.getLogger(SystemIndividualService.class);
+	
+	//개인계정 세부 등록(action)
+	@RequestMapping(value="/IndividualSystem/insertIndividualSubjectDetail",method = RequestMethod.POST)
+	public String addIndividualSubjectDetail(IndividualSubjectDetail isd) {
+		logger.debug("{} :addIndividualSubjectDetail action SystemIndividualController.java",isd);
+		systemIndiService.insertIndividualSubjectDetail(isd);
+		return "redirect:/";
+	}
+	
+	//개인계정 세부 등록(form)
+	@RequestMapping(value="/IndividualSystem/insertIndividualSubjectDetail",method = RequestMethod.GET)
+	public String addIndividualSubjectDetail(Model model) {
+		logger.debug("{} :addIndividualSubjectDetail form SystemIndividualController.java",model);
+		List<IndividualSubject> list=systemIndiService.selectAllIndividualSubject();
+		model.addAttribute("list", list);
+		return "system/InsertIndividualSubjectDetail";
+		
+		
+	}
 	
 	//개인 사용자 계정과목  삭제 
 	@RequestMapping(value="/IndividualSystem/deleteUserIndiSubject",method = RequestMethod.GET)
