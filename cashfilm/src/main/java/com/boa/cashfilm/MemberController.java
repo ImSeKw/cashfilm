@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.boa.cashfilm.member.dto.MemberCheck;
 import com.boa.cashfilm.member.dto.MemberClassification;
 import com.boa.cashfilm.member.dto.MemberInfo;
+import com.boa.cashfilm.member.dto.MemberList;
 import com.boa.cashfilm.member.dto.MemberSession;
 import com.boa.cashfilm.member.dto.MemberSessionByCompanyPayment;
 import com.boa.cashfilm.member.dto.MemberSignUp;
@@ -65,6 +66,15 @@ public class MemberController {
 		logger.debug("{} : < memberClassificationName insertMemberClassification() MemberController", memberClassificationName);
 		memberService.insertMemberClassification(memberClassificationName);
 		return "redirect:/member/memberClassificationList";
+	}
+	
+	// 회원 조회
+	@RequestMapping(value = "/member/memberList", method = RequestMethod.GET)
+	public String selectMemberList(Model model) {
+		logger.debug("< selectMemberList() MemberController");
+		List<MemberList> list = memberService.selectMemberList();
+		model.addAttribute("memberList", list);
+		return "member/memberList";
 	}
 	
 	// 회원 탈퇴 요청 승인 (관리자)
