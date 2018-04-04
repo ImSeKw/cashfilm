@@ -27,6 +27,7 @@
 				<a href="${pageContext.request.contextPath}/company/comInfo?comCode=${memberSession.comCode}">회사정보</a>
 				<c:if test="${memberSession.comSystemChange eq 1 }">
 					<a href="${pageContext.request.contextPath}//">회사체계변경입니다.공사중!!</a>
+					<a href="${pageContext.request.contextPath}/company/comAuthorityApprovalList?comCode=${memberSession.comCode}&memberEmail=${memberSession.memberEmail}"> 사원 등록 요청 조회</a>
 				
 				</c:if>
 			</c:otherwise>
