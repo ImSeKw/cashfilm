@@ -26,6 +26,18 @@ public class SystemIndividualService {
 	private SystemIndividualDao systemindividualDao;
 	private static final Logger logger = LoggerFactory.getLogger(SystemIndividualService.class);
 	
+	//개인적요 삭제
+	public int deleteIndividualcontent(IndividualcontentAndSubAndUsub icsus) {
+		logger.debug("{} :deleteIndividualcontent SystemIndividualService.java",icsus);
+		return systemindividualDao.deleteIndividualcontent(icsus);
+	}
+		
+	//개인적요 수정 
+	public int updateIndividualcontent(IndividualcontentAndSubAndUsub icsus) {
+		logger.debug("{} :updateIndividualcontent SystemIndividualService.java",icsus);
+		return systemindividualDao.updateIndividualcontent(icsus);		
+	}
+	
 	//개인적요 수정을위한 검색
 	public IndividualcontentAndSubAndUsub selectOneIndividualcontent(int individualContentCode) {
 		logger.debug("{} :selectOneIndividualcontent SystemIndividualService.java",individualContentCode);

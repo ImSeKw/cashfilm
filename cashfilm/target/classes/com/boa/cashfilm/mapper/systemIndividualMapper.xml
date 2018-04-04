@@ -5,6 +5,18 @@
 
 <mapper namespace="com.boa.cashfilm.mapper.systemIndividualMapper">
 	
+	<!--개인적용 삭제 -->
+	<delete id="deleteIndividualcontent" parameterType="com.boa.cashfilm.sysindi.dto.IndividualcontentAndSubAndUsub">
+		DELETE FROM cfindividualcontent WHERE individualContentCode=#{individualContentCode};
+	</delete>
+	
+	<!--개인적요 수정  -->
+	<update id="updateIndividualcontent" parameterType="com.boa.cashfilm.sysindi.dto.IndividualcontentAndSubAndUsub">
+		UPDATE cfindividualcontent 
+		SET individualContentName=#{individualContentName}
+		WHERE individualContentCode=#{individualContentCode};
+	</update>
+	
 	<!--개인적요 수정을위한 검색 -->
 	<select id="selectOneIndividualcontent" parameterType="int" resultType="com.boa.cashfilm.sysindi.dto.IndividualcontentAndSubAndUsub">
 		SELECT 

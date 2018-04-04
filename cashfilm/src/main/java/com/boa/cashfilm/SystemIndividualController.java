@@ -29,10 +29,26 @@ public class SystemIndividualController {
 	private SystemIndividualService systemIndiService;
 	private static final Logger logger=LoggerFactory.getLogger(SystemIndividualService.class);
 	
+	//개인적요 삭제
+	@RequestMapping(value="/IndividualSystem/deleteIndividualcontent",method = RequestMethod.GET)
+	public String deleteIndividualcontent(IndividualcontentAndSubAndUsub icsus) {
+		logger.debug("{} :deleteIndividualcontent SystemIndividualController.java",icsus);
+		systemIndiService.deleteIndividualcontent(icsus);
+		return"redirect:/";
+	}
+	
+	//개인적요 수정 
+	@RequestMapping(value="/IndividualSystem/updateIndividualcontent",method = RequestMethod.POST)
+	public String updateIndividualcontent(IndividualcontentAndSubAndUsub icsus) {
+		logger.debug("{} :updateIndividualcontent SystemIndividualController.java",icsus);
+		systemIndiService.updateIndividualcontent(icsus);	
+		return"redirect:/";
+	}
+	
 	//개인적요 수정(form)
 	@RequestMapping(value="/IndividualSystem/updateIndividualcontent",method = RequestMethod.GET)
 	public String selectOneIndividualcontent(Model model,@RequestParam(value="individualContentCode",required=true)int individualContentCode) {
-		logger.debug("{} :selectOneIndividualcontent SystemIndividualService.java",individualContentCode);
+		logger.debug("{} :selectOneIndividualcontent SystemIndividualController.java",individualContentCode);
 		IndividualcontentAndSubAndUsub icsus =systemIndiService.selectOneIndividualcontent(individualContentCode);
 		model.addAttribute("icsus", icsus);
 		return "system/updateIndividualcontent";

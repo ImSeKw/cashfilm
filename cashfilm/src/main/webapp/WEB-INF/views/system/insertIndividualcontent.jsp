@@ -2,25 +2,25 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/module/topFirst.jsp"/>
 
-<script>
-	$(document).ready(function(){
-		$('input:radio[name=individualSubject]').click(function() {
-			var chkvalue = $('input:radio[name=individualSubject]:checked').val();
-			if(chkvalue == "1"){
-				$('#individualSubjectNumeral').css('display','block')      // 보이게
-				$('#userIndividualSubjectCode').css('display','none')   // 안보이게 */
-				$('#is').prop("disabled",false);
-				$('#uis').prop("disabled",true);
-			}else{
-				$('#individualSubjectNumeral').css('display','none')   // 안보이게 */
-				$('#userIndividualSubjectCode').css('display','block')        // 보이게
-				$('#is').prop("disabled",true);
-				$('#uis').prop("disabled",false);
-				
-			};
+	<script>
+		$(document).ready(function(){
+			$('input:radio[name=individualSubject]').click(function() {
+				var chkvalue = $('input:radio[name=individualSubject]:checked').val();
+				if(chkvalue == "1"){
+					$('#individualSubjectNumeral').css('display','block')      // 보이게
+					$('#userIndividualSubjectCode').css('display','none')   // 안보이게 */
+					$('#is').prop("disabled",false);
+					$('#uis').prop("disabled",true);
+				}else{
+					$('#individualSubjectNumeral').css('display','none')   // 안보이게 */
+					$('#userIndividualSubjectCode').css('display','block')        // 보이게
+					$('#is').prop("disabled",true);
+					$('#uis').prop("disabled",false);
+					
+				};
+			});
 		});
-	});
-</script>
+	</script>
 
 <jsp:include page="/WEB-INF/views/module/topSecond.jsp"/>
 	<h1>개인적요등록</h1>
