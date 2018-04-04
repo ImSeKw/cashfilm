@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.boa.cashfilm.company.dto.ComAuthority;
 import com.boa.cashfilm.company.dto.ComCustomer;
 import com.boa.cashfilm.company.dto.ComListByIndividual;
 import com.boa.cashfilm.company.dto.Company;
@@ -25,7 +26,30 @@ public class CompanyController {
 	@Autowired
 	CompanyService companyService;
 	private static final Logger logger = LoggerFactory.getLogger(CompanyController.class);
+	//회사체계변경 권한을 가진 회원이 회사권한승인  1(memberEmail테이블에 회원구분코드 기업회원으로 변경,회사코드 생성)
+	//회사체계변경 권한을 가진 회원이 회사권한승인  2(회사별권한여부 테이블에 회사별권한여부 0->1,회사별권한승인일,회사별승인이메일 update )
+	@RequestMapping(value = "company/comAuthorityApprovalByMember" , method = RequestMethod.GET)
+	public String comAuthorityApprovalByMember(@RequestParam("memberEmail") String memberEmail,@RequestParam("comCode") int comCode,@RequestParam("memberEmailApproval") String memberEmailApproval) {
+		logger.debug("{} : CompanyController comAuthorityApprovalByMember memberEmail",memberEmail);
+		logger.debug("{} : CompanyController comAuthorityApprovalByMember comCode",comCode);
+		logger.debug("{} : CompanyController comAuthorityApprovalByMember memberEmailApproval",memberEmailApproval);
+
+		companyService.comAuthorityApprovalByMember(memberEmail, comCode);
+		
+		companyService.comAuthorityApprovalByAuthority(memberEmail, comCode, memberEmailApproval);
+		
+		return "redirect:/";
+	}
 	
+	//개인회원이 회사승인 요청 후 회사체계변경가능자가 승인요청 조회(회사별 권한 승인 여부 조회)
+	@RequestMapping(value = "company/comAuthorityApprovalList" , method = RequestMethod.GET)
+	public String comAuthorityApprovalList(@RequestParam("memberEmail") String memberEmail,@RequestParam("comCode") int comCode,Model model) {
+		logger.debug("{} : CompanyController comAuthorityApprovalList comCode",comCode);
+		logger.debug("{} : CompanyController comAuthorityApprovalList memberEmail",memberEmail);
+		List<ComAuthority> list =companyService.comAuthorityApprovalList(memberEmail,comCode);
+		model.addAttribute("list", list);
+		return "company/comAuthorityApprovalList";
+	}
 	//회사 탈퇴 조회
 	@RequestMapping(value = "company/comDelList" , method = RequestMethod.GET)
 	public String comDelList() {
@@ -88,11 +112,7 @@ public class CompanyController {
 	public String comAuthorityApprovalRequest() {
 		return "";
 	}
-	//회사별 권한 여부 조회
-	@RequestMapping(value = "company/comAuthorityApprovalList" , method = RequestMethod.GET)
-	public String comAuthorityApprovalList() {
-		return "";
-	}
+
 	//회사별 권한 여부 수정
 	@RequestMapping(value = "company/comAuthorityApprovalModification" , method = RequestMethod.GET)
 	public String comAuthorityApprovalModification() {
@@ -153,12 +173,12 @@ public class CompanyController {
 	//자신의 회사 정보  권한 조회(회사정보수정,부서관리,직급관리는 회사별권한승인여부의 값으로 판단한다)
 	@RequestMapping(value = "company/selectComAuthorityApproval" , method = RequestMethod.GET)
 	public String selectComAuthorityApproval(@RequestParam("memberEmail") String memberEmail, @RequestParam("comCode") int comCode , Model model) {
-	logger.debug("{} : CompanyController selectComAuthorityApproval memberEmail",memberEmail );
-	logger.debug("{} : CompanyController selectComAuthorityApproval comCode",comCode );
-	List<Object> ComAuthorityApproval = companyService.selectComAuthorityApproval(memberEmail, comCode);
-	logger.debug("{} : CompanyController selectComAuthorityApproval ComAuthorityApproval",ComAuthorityApproval );
-
-	model.addAttribute("ComAuthorityApproval", ComAuthorityApproval);
+		logger.debug("{} : CompanyController selectComAuthorityApproval memberEmail",memberEmail );
+		logger.debug("{} : CompanyController selectComAuthorityApproval comCode",comCode );
+		int ComAuthorityApproval = companyService.selectComAuthorityApproval(memberEmail, comCode);
+		logger.debug("{} : CompanyController selectComAuthorityApproval ComAuthorityApproval",ComAuthorityApproval );
+		
+		model.addAttribute("ComAuthorityApproval", ComAuthorityApproval);
 		return "company/selectComAuthorityApproval";
 	}
 	//자신의 회사 정보 검색

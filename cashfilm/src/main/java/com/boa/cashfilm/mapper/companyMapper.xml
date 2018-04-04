@@ -10,6 +10,63 @@
 	
 	<!--회사코드를 기준으로 회사개설신청 이메일 조회  -->
 	
+	<!--회사 부서 등록  -->
+	<!--회사 부서 조회  -->
+	<!--회사 부서 수정  -->
+	<!--회사 부서 삭제  -->
+	<!--회사 직급 등록  -->
+	<!--회사 직급 조회  -->
+	<!--회사 직급 수정  -->
+	<!--회사 직급 삭제  -->
+	<!--기업회원 부서 등록전 조회  -->
+
+	<!--기업회원 부서 등록  -->
+	<!--기업회원 부서 조회  -->
+	<!--기업회원 부서 수정  -->
+	<!--기업회원 부서 삭제  -->
+	<!--기업회원 직급 등록전 조회  -->
+	<!--기업회원 직급 등록  -->
+	<!--기업회원 직급 조회  -->
+	<!--기업회원 직급 수정  -->
+	<!--기업회원 직급 삭제  -->
+	<!--회사체계변경 권한을 가진 회원이 회사권한승인  2(회사별권한여부 테이블에 회사별권한여부 0->1,회사별권한승인일,회사별승인이메일 update )-->
+ 	<update id="comAuthorityApprovalByAuthority" parameterType="java.util.Map">
+	UPDATE 
+		cfcomauthority
+	SET 
+		comAuthorityApproval=1
+		,comAuthorityApprovalDay=now()
+		,comAuthorityApprovalEmail=#{memberEmailApproval}
+	WHERE 
+		cfcomauthority.memberEmail=#{memberEmail};
+	
+	</update> 
+	<!--회사체계변경 권한을 가진 회원이 회사권한승인  1(memberEmail테이블에 회원구분코드 기업회원으로 변경,회사코드 생성)-->
+	<update id="comAuthorityApprovalByMember" parameterType="com.boa.cashfilm.member.dto.MemberSimple">
+	UPDATE 
+		cfmemberemail
+	SET 
+		comCode=#{comCode}
+		,memberClassificationCode=2
+	WHERE 
+		memberEmail=#{memberEmail};
+	</update>
+	<!--개인회원이 회사승인 요청 후 회사체계변경가능자가 승인요청 조회  -->
+	<select id="comAuthorityApprovalList" parameterType="java.util.List" resultType="java.util.Map" >
+	SELECT DISTINCT
+		mem.memberEmail
+		,mem.memberName
+		,coma.comAuthorityApproval
+		,coma.comCode
+	FROM cfcomauthority AS coma
+	LEFT JOIN  cfmemberemail AS mem
+	ON
+		mem.memberEmail=coma.memberEmail
+	WHERE 
+		coma.comCode=#{comCode}
+	AND
+		coma.comAuthorityApproval=0;
+	</select>
 	
 	<!--회사별 거래처 조회  -->
 	<select id="comCustomerList" parameterType="int" resultType="com.boa.cashfilm.company.dto.ComCustomer">
@@ -59,7 +116,7 @@
 	);	
 	</insert>	
 	<!--자신의 회사 정보 권한 조회(회사정보수정은 회사별권한승인여부의 값으로 판단한다)  -->
-	<select id="selectComAuthorityApproval" parameterType="java.util.Map" resultType="com.boa.cashfilm.company.dto.ComAuthority">
+	<select id="selectComAuthorityApproval" parameterType="java.util.Map" resultType="int">
 	SELECT
 		comAuthorityApproval
 	FROM
@@ -70,7 +127,7 @@
 		comCode=#{comCode}	
 	</select>
 	<!--자신의 회사 정보 조회  -->
-	<select id="comInfo" parameterType="int" resultType="com.boa.cashfilm.company.dto.Company">
+	<select id="comInfo" parameterType="java.util.List" resultType="com.boa.cashfilm.company.dto.Company">
 	SELECT
 		comCode
 		,comName
@@ -97,7 +154,7 @@
 	<!--개인회원이  회사소속으로 승인요청  -->
 	<insert id="comApprovalByIndividual" parameterType= "java.util.Map" >
 	INSERT INTO
-		cfComAuthority(
+		cfcomauthority(
 		comCode
 		, memberEmail
 	)VALUES(

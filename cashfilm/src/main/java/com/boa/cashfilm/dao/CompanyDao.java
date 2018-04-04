@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.boa.cashfilm.company.dto.ComAuthority;
 import com.boa.cashfilm.company.dto.ComCustomer;
 import com.boa.cashfilm.company.dto.ComListByIndividual;
 import com.boa.cashfilm.company.dto.Company;
@@ -22,6 +23,22 @@ public class CompanyDao {
 	//경로 설정 중복처리
 	private final String NAMESPACE = "com.boa.cashfilm.mapper.CompanyMapper.";
 	
+	//회사체계변경 권한을 가진 회원이 회사권한승인  2(회사별권한여부 테이블에 회사별권한여부 0->1,회사별권한승인일,회사별승인이메일 update )
+	public void comAuthorityApprovalByAuthority(Map<String,Object> map) {
+		logger.debug("{} : <map comAuthorityApprovalByAuthority CompanyDao.java",map);
+		sqlSessionTemplate.update(NAMESPACE + "comAuthorityApprovalByAuthority", map);
+	}
+	
+	//회사체계변경 권한을 가진 회원이 회사권한승인  1(memberEmail테이블에 회원구분코드 기업회원으로 변경,회사코드 생성)
+	public void comAuthorityApprovalByMember(Map<String,Object> map) {
+		logger.debug("{} : <map comAuthorityApprovalByMember CompanyDao.java",map);
+		sqlSessionTemplate.update(NAMESPACE + "comAuthorityApprovalByMember", map);
+	}
+	//개인회원이 회사승인 요청 후 회사체계변경가능자가 승인요청 조회
+	public List<ComAuthority> comAuthorityApprovalList(Map<String,Object> map){
+		logger.debug("{} : <map comAuthorityApprovalList CompanyDao.java",map);
+		return sqlSessionTemplate.selectList(NAMESPACE + "comAuthorityApprovalList", map);
+	}
 	//회사별 거래처 조회
 	public List<ComCustomer> comCustomerList(int comCode) {
 		logger.debug("{} : <comCode comCustomerList CompanyDao.java",comCode);
@@ -34,9 +51,9 @@ public class CompanyDao {
 		sqlSessionTemplate.insert(NAMESPACE + "comCustomerRegistration",comCustomer);
 	}
 	//자신의 회사 정보  권한 조회(회사정보수정,부서관리,직급관리는 회사별권한승인여부의 값으로 판단한다)
-	public List<Object> selectComAuthorityApproval(Map<String,Object> map) {
+	public int selectComAuthorityApproval(Map<String,Object> map) {
 		logger.debug("{} : <map selectComAuthorityApproval CompanyDao.java",map);
-		return sqlSessionTemplate.selectList(NAMESPACE + "selectComAuthorityApproval", map);
+		return sqlSessionTemplate.selectOne(NAMESPACE + "selectComAuthorityApproval", map);
 	}
 	//자신의 회사 정보 조회
 	public List<Company> comInfo(int comCode){

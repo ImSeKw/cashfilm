@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.boa.cashfilm.company.dto.ComAuthority;
 import com.boa.cashfilm.company.dto.ComCustomer;
 import com.boa.cashfilm.company.dto.ComListByIndividual;
 import com.boa.cashfilm.company.dto.Company;
@@ -22,12 +23,37 @@ public class CompanyService {
 	@Autowired
 	CompanyDao companyDao;
 	private static final Logger logger = LoggerFactory.getLogger(CompanyService.class);
+	
+	//회사체계변경 권한을 가진 회원이 회사권한승인  2(회사별권한여부 테이블에 회사별권한여부 0->1,회사별권한승인일,회사별승인이메일 update )
+	public void comAuthorityApprovalByAuthority(String memberEmail,int comCode,String memberEmailApproval) {
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("memberEmail", memberEmail);
+		map.put("comCode", comCode);
+		map.put("memberEmailApproval", memberEmailApproval);
+		logger.debug("{} : <map comAuthorityApprovalByAuthority CompanyService.java",map);
+		companyDao.comAuthorityApprovalByAuthority(map);
+	}
+	//회사체계변경 권한을 가진 회원이 회사권한승인  1(memberEmail테이블에 회원구분코드 기업회원으로 변경,회사코드 생성)
+	public void comAuthorityApprovalByMember(String memberEmail,int comCode) {
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("memberEmail", memberEmail);
+		map.put("comCode", comCode);
+		logger.debug("{} : <map comAuthorityApprovalByMember CompanyService.java",map);
+		companyDao.comAuthorityApprovalByMember(map);
+	}
+	//개인회원이 회사승인 요청 후 회사체계변경가능자가 승인요청 조회
+	public List<ComAuthority> comAuthorityApprovalList(String memberEmail,int comCode){
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("memberEmail", memberEmail);
+		map.put("comCode", comCode);
+		logger.debug("{} : <map comAuthorityApprovalList CompanyService.java",map);
+		return companyDao.comAuthorityApprovalList(map);
+	}
 	//회사별 거래처 조회
 	public List<ComCustomer> comCustomerList(int comCode) {
 		logger.debug("{} : <comCode comCustomerList CompanyService.java",comCode);
 		return companyDao.comCustomerList(comCode);
 	}
-	
 	//회사 거래처 등록 Action
 	public void comCustomerRegistration(ComCustomer comCustomer) {
 		//세팅
@@ -56,11 +82,11 @@ public class CompanyService {
 	
 	
 	//자신의 회사 정보  권한 조회(회사정보수정,부서관리,직급관리는 회사별권한승인여부의 값으로 판단한다)
-	public List<Object> selectComAuthorityApproval(String memberEmail, int comCode) {
+	public int selectComAuthorityApproval(String memberEmail, int comCode) {
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("memberEmail", memberEmail);
 		map.put("comCode", comCode);
-		List<Object> ComAuthorityApproval = companyDao.selectComAuthorityApproval(map);
+		int ComAuthorityApproval = companyDao.selectComAuthorityApproval(map);
 		return ComAuthorityApproval;
 	}
 	//자신의 회사 정보 조회
