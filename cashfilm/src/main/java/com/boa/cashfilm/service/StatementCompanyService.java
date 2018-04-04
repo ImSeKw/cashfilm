@@ -1,5 +1,6 @@
 package com.boa.cashfilm.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -20,9 +21,29 @@ public class StatementCompanyService {
 	private static final Logger logger = LoggerFactory.getLogger(StatementCompanyService.class);
 	
 	// 회사 처음 입력 재무 등록 처리
-	public void insertStatementCompanyFinance(List<StatementCompanyFinance> statementCompanyFinanceList) {
-		logger.debug("{} : < statementCompanyFinanceList insertStatementCompanyFinance() StatementCompanyService", statementCompanyFinanceList);
-		statementCompanyDao.insertStatementCompanyFinance(statementCompanyFinanceList);
+	public void insertStatementCompanyFinance(List<Integer> comSystemNumeralList
+											, List<Integer> financeAmountList
+											, String closingStatementCode
+											, String memberEmail
+											, int comCode) {
+		logger.debug("{} : < closingStatementCode insertStatementCompanyFinance() StatementCompanyService", closingStatementCode);
+		logger.debug("{} : < memberEmail insertStatementCompanyFinance() StatementCompanyService", memberEmail);
+		logger.debug("{} : < comCode insertStatementCompanyFinance() StatementCompanyService", comCode);
+		List<StatementCompanyFinance> list = new ArrayList();
+		StatementCompanyFinance statementCompanyFinance = null;
+		for(int i = 0; i < comSystemNumeralList.size(); i++) {
+			logger.debug("{} : < comSystemNumeral insertStatementCompanyFinance() StatementCompanyService", comSystemNumeralList.get(i));
+			logger.debug("{} : < financeAmount insertStatementCompanyFinance() StatementCompanyService", financeAmountList.get(i));
+			statementCompanyFinance = new StatementCompanyFinance();
+			statementCompanyFinance.setComSystemNumeral(comSystemNumeralList.get(i));
+			statementCompanyFinance.setFinanceAmount(financeAmountList.get(i));
+			statementCompanyFinance.setClosingStatementCode(closingStatementCode);
+			statementCompanyFinance.setMemberEmail(memberEmail);
+			statementCompanyFinance.setComCode(comCode);
+		}
+		
+		
+//		statementCompanyDao.insertStatementCompanyFinance(statementCompanyFinanceList);
 	}
 	
 	// 회사 처음 입력 재무 등록 화면

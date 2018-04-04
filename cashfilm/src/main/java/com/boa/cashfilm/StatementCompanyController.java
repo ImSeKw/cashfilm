@@ -36,7 +36,7 @@ public class StatementCompanyController {
 		logger.debug("{} : < closingStatementCode insertStatementCompanyFinance() StatementCompanyController", closingStatementCode);
 		logger.debug("{} : < memberEmail insertStatementCompanyFinance() StatementCompanyController", memberEmail);
 		logger.debug("{} : < comCode insertStatementCompanyFinance() StatementCompanyController", comCode);
-//		statementCompanyService.insertStatementCompanyFinance(statementCompanyFinanceList);
+		statementCompanyService.insertStatementCompanyFinance(comSystemNumeralList, financeAmountList, closingStatementCode, memberEmail, comCode);
 		return "redirect:/";
 	}
 	

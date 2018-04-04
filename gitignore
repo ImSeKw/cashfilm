@@ -2,6 +2,7 @@
 # MANIFEST.MF file
 MANIFEST.MF
 .target
+/target/
 
 # Created by https://www.gitignore.io/api/java,maven,windows
 
