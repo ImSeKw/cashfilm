@@ -25,7 +25,10 @@
 				<a href="${pageContext.request.contextPath}/company/comCustomerList?comCode=${memberSession.comCode}">거래처 조회</a>
 				<a href="${pageContext.request.contextPath}/company/comInfo?comCode=${memberSession.comCode}">회사정보</a>
 				<a href="${pageContext.request.contextPath}/company/comInfo?comCode=${memberSession.comCode}">회사정보</a>
+				<c:if test="${memberSession.comSystemChange eq 1 }">
+					<a href="${pageContext.request.contextPath}//">회사체계변경입니다.공사중!!</a>
 				
+				</c:if>
 			</c:otherwise>
 		</c:choose>
 		<c:if test="${memberSession.memberClassificationCode eq 1}">
