@@ -19,6 +19,7 @@ import com.boa.cashfilm.sysindi.dto.IndividualSubjectDetail;
 import com.boa.cashfilm.sysindi.dto.IndividualSystem;
 import com.boa.cashfilm.sysindi.dto.IndividualSystemAndSubject;
 import com.boa.cashfilm.sysindi.dto.IndividualSystemAndUSubject;
+import com.boa.cashfilm.sysindi.dto.IndividualSystemDetail;
 import com.boa.cashfilm.sysindi.dto.Individualcontent;
 import com.boa.cashfilm.sysindi.dto.IndividualcontentAndSubAndUsub;
 import com.boa.cashfilm.sysindi.dto.UserIndividualSubject;
@@ -29,6 +30,25 @@ public class SystemIndividualController {
 	private SystemIndividualService systemIndiService;
 	private static final Logger logger=LoggerFactory.getLogger(SystemIndividualService.class);
 	
+	//개인 계정상세 등록 action
+	@RequestMapping(value="/IndividualSystem/insertIndiSystemDetail",method = RequestMethod.POST)
+	public String addIndiSystemDetail(IndividualSystemDetail isysdetail) {
+		logger.debug("{} :addIndiSystemDetail action SystemIndividualController.java",isysdetail);
+		systemIndiService.insertIndiSystemDetail(isysdetail);
+		return "redirect:/";
+	}
+	
+	//개인 계정상세 등록 form
+	@RequestMapping(value="/IndividualSystem/insertIndiSystemDetail",method = RequestMethod.GET)
+	public String addIndiSystemDetail(Model model,@RequestParam(value="memberEmail",required=true)String memberEmail){
+		logger.debug("{} :addIndiSystemDetail form SystemIndividualController.java",memberEmail);
+		List<IndividualSubject> isublist=systemIndiService.selectAllIndividualSubject();
+		model.addAttribute("isublist", isublist);
+		List<IndividualSystemAndUSubject> isuslist=systemIndiService.selectUserIndiSubject(memberEmail);
+		model.addAttribute ("isuslist",  isuslist);
+		return "/system/insertIndiSystemDetail";
+	}
+
 	//개인적요 삭제
 	@RequestMapping(value="/IndividualSystem/deleteIndividualcontent",method = RequestMethod.GET)
 	public String deleteIndividualcontent(IndividualcontentAndSubAndUsub icsus) {

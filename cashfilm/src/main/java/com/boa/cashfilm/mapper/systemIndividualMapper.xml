@@ -4,6 +4,21 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.boa.cashfilm.mapper.systemIndividualMapper">
+
+	<!--개인 계정상세 등록 -->
+	<insert id="insertIndiSystemDetail" parameterType="com.boa.cashfilm.sysindi.dto.IndividualSystemDetail" >
+		INSERT INTO cfindividualsystemdetail(
+					<if test="individualSubjectNumeral!=0">
+					individualSubjectNumeral</if>
+					<if test="individualUserSubjecCode!=0">
+					individualUserSubjecCode </if>
+					,individualSystemDetailName
+					,memberEmail
+			)VALUES (<if test="individualSubjectNumeral!=0">#{individualSubjectNumeral}</if>
+					<if test="individualUserSubjecCode!=0">#{individualUserSubjecCode}</if>
+					,#{individualSystemDetailName}
+					,#{memberEmail});
+	</insert>
 	
 	<!--개인적용 삭제 -->
 	<delete id="deleteIndividualcontent" parameterType="com.boa.cashfilm.sysindi.dto.IndividualcontentAndSubAndUsub">

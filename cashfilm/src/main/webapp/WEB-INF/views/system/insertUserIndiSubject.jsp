@@ -21,8 +21,8 @@
 	   	<input type="submit" value="등록"> 
 	</form>
 	<c:set var="memberSession" value="${memberSession}"/>
-	<a href="${pageContext.request.contextPath}//IndividualSystem/selectUserIndiSubject?memberEmail=${memberSession.memberEmail}">내 계정과목조회</a></td>
-	<a href="${pageContext.request.contextPath}/IndividualSystem/insertIndividualcontent?memberEmail=${memberSession.memberEmail}">개인적요 등록</a></td>
-
+	<a href="${pageContext.request.contextPath}//IndividualSystem/selectUserIndiSubject?memberEmail=${memberSession.memberEmail}">내 계정과목조회</a>
+	<a href="${pageContext.request.contextPath}/IndividualSystem/insertIndividualcontent?memberEmail=${memberSession.memberEmail}">개인적요 등록</a>
+	<a href="${pageContext.request.contextPath}/IndividualSystem/insertIndiSystemDetail?memberEmail=${memberSession.memberEmail}">개인계정상세 등록</a>
 
 <jsp:include page="/WEB-INF/views/module/bottom.jsp"/>
