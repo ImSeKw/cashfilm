@@ -1,4 +1,7 @@
 
+# MANIFEST.MF file
+MANIFEST.MF
+
 # Created by https://www.gitignore.io/api/java,maven,windows
 
 ### Java ###
@@ -26,7 +29,7 @@
 hs_err_pid*
 
 ### Maven ###
-/target/
+target/
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
