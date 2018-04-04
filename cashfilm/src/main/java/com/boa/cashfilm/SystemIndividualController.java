@@ -20,6 +20,7 @@ import com.boa.cashfilm.sysindi.dto.IndividualSystem;
 import com.boa.cashfilm.sysindi.dto.IndividualSystemAndSubject;
 import com.boa.cashfilm.sysindi.dto.IndividualSystemAndUSubject;
 import com.boa.cashfilm.sysindi.dto.IndividualSystemDetail;
+import com.boa.cashfilm.sysindi.dto.IndividualSystemDetailAndSubjectAndUsubject;
 import com.boa.cashfilm.sysindi.dto.Individualcontent;
 import com.boa.cashfilm.sysindi.dto.IndividualcontentAndSubAndUsub;
 import com.boa.cashfilm.sysindi.dto.UserIndividualSubject;
@@ -29,6 +30,15 @@ public class SystemIndividualController {
 	@Autowired
 	private SystemIndividualService systemIndiService;
 	private static final Logger logger=LoggerFactory.getLogger(SystemIndividualService.class);
+	
+	//개인 계정상세 조회(이메일별)
+	@RequestMapping(value="/IndividualSystem/selectIndiSystemDetailOfEmail",method = RequestMethod.GET)
+	public String selectIndiSystemDetailOfEmail(Model model,@RequestParam(value="memberEmail",required=true)String memberEmail){
+		logger.debug("{} :selectIndiSystemDetailOfEmail action SystemIndividualController.java",memberEmail);
+		List<IndividualSystemDetailAndSubjectAndUsubject> isdlist =systemIndiService.selectIndiSystemDetailOfEmail(memberEmail);
+		model.addAttribute("isdlist", isdlist);
+		return "/system/selectIndiSystemDetail";
+	}
 	
 	//개인 계정상세 등록 action
 	@RequestMapping(value="/IndividualSystem/insertIndiSystemDetail",method = RequestMethod.POST)
