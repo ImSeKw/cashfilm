@@ -25,6 +25,7 @@
 				<a href="${pageContext.request.contextPath}/company/comCustomerList?comCode=${memberSession.comCode}">거래처 조회</a>
 				<a href="${pageContext.request.contextPath}/company/comInfo?comCode=${memberSession.comCode}">회사정보</a>
 				<a href="${pageContext.request.contextPath}/company/comInfo?comCode=${memberSession.comCode}">회사정보</a>
+				
 			</c:otherwise>
 		</c:choose>
 		<c:if test="${memberSession.memberClassificationCode eq 1}">
