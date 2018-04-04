@@ -24,7 +24,7 @@ public class StatementCompanyController {
 	@RequestMapping(value = "/statement/financeRegistrationByCompany", method = RequestMethod.POST)
 	public String insertStatementCompanyFinance(@RequestParam("comSystemNumeral") List<Integer> comSystemNumeralList
 												, @RequestParam("financeAmount") List<Integer> financeAmountList
-												, @RequestParam("closingStatementCode") List<String> closingStatementCodeList
+												, @RequestParam("closingStatementCode") String closingStatementCode
 												, @RequestParam("memberEmail") String memberEmail
 												, @RequestParam("comCode") int comCode) {
 		for(int comSystemNumeral : comSystemNumeralList) {
@@ -33,9 +33,7 @@ public class StatementCompanyController {
 		for(int financeAmount : financeAmountList) {
 			logger.debug("{} : < financeAmount insertStatementCompanyFinance() StatementCompanyController", financeAmount);
 		}
-		for(String closingStatementCode : closingStatementCodeList) {
-			logger.debug("{} : < closingStatementCode insertStatementCompanyFinance() StatementCompanyController", closingStatementCode);
-		}
+		logger.debug("{} : < closingStatementCode insertStatementCompanyFinance() StatementCompanyController", closingStatementCode);
 		logger.debug("{} : < memberEmail insertStatementCompanyFinance() StatementCompanyController", memberEmail);
 		logger.debug("{} : < comCode insertStatementCompanyFinance() StatementCompanyController", comCode);
 //		statementCompanyService.insertStatementCompanyFinance(statementCompanyFinanceList);

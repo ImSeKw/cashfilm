@@ -6,14 +6,14 @@
 	$(document).ready(function(){
 		var tag = '<tr>';
 		tag += '<td>';
-		tag += '<select>';
+		tag += '<select name="comSystemNumeral">';
 		tag += '<c:forEach var="list" items="${comSystemList}">';
 		tag += '<option value="${list.comSystemNumeral}">${list.comSystemName}</option>';
 		tag += '</c:forEach>';
 		tag += '</select>';
 		tag += '</td>';
 		tag += '<td><input type="text" name="financeAmount"></td>';
-		tag += '<td><input type="date" name="closingStatementCode"></td>';
+		tag += '<td></td>';
 		tag += '</tr>';
 		$("#selectAddButton").click(function(){
 			$("#selectAdd").append(tag);
@@ -25,12 +25,12 @@
 </script>
 
 <jsp:include page="/WEB-INF/views/module/topSecond.jsp"/>
+<c:set var="memberEmail" value="${memberSession.memberEmail}"/>
+<c:set var="comCode" value="${memberSession.comCode}"/>
 
-<div id="test">
-	<button type="button" id="testButton">추가</button>
-</div>
-
-<form id="financeRegistrationBC" action="/statement/financeRegistrationByCompany" method="post">
+<form id="financeRegistrationBC" action="${pageContext.request.contextPath}/statement/financeRegistrationByCompany" method="post">
+<input type="hidden" name="memberEmail" value="${memberEmail}">
+<input type="hidden" name="comCode" value="${comCode}">
 	<table id="selectAdd">
 		<tr>
 			<td>계정체계명</td>
@@ -52,4 +52,5 @@
 	<button type="button" id="selectAddButton">추가</button>
 	<button type="button" id="financeRegistrationBCButton">등록</button>
 </form>
+
 <jsp:include page="/WEB-INF/views/module/bottom.jsp"/>

@@ -8,6 +8,7 @@ public class MemberSession {
 	private String comName;
 	private String memberName;
 	private String memberCondition;
+	private int comSystemChange;
 	private int voucherPaymentCode;
 	private String voucherPaymentDay;
 	private int myItemCode;
@@ -55,6 +56,12 @@ public class MemberSession {
 	public void setMemberCondition(String memberCondition) {
 		this.memberCondition = memberCondition;
 	}
+	public int getComSystemChange() {
+		return comSystemChange;
+	}
+	public void setComSystemChange(int comSystemChange) {
+		this.comSystemChange = comSystemChange;
+	}
 	public int getVoucherPaymentCode() {
 		return voucherPaymentCode;
 	}
@@ -84,8 +91,8 @@ public class MemberSession {
 	public String toString() {
 		return "MemberSession [memberEmail=" + memberEmail + ", memberClassificationCode=" + memberClassificationCode
 				+ ", memberClassificationName=" + memberClassificationName + ", comCode=" + comCode + ", comName="
-				+ comName + ", memberName=" + memberName + ", memberCondition=" + memberCondition
-				+ ", voucherPaymentCode=" + voucherPaymentCode + ", voucherPaymentDay=" + voucherPaymentDay
-				+ ", myItemCode=" + myItemCode + ", myItemName=" + myItemName + "]";
+				+ comName + ", memberName=" + memberName + ", memberCondition=" + memberCondition + ", comSystemChange="
+				+ comSystemChange + ", voucherPaymentCode=" + voucherPaymentCode + ", voucherPaymentDay="
+				+ voucherPaymentDay + ", myItemCode=" + myItemCode + ", myItemName=" + myItemName + "]";
 	}
 }

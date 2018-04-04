@@ -272,6 +272,7 @@
 			, ecb.comName
 			, ecb.memberName
 			, ecb.memberCondition
+			, ecb.comSystemChange
 			, ovi.voucherPaymentCode
 			, ovi.voucherPaymentDay
 			, ovi.myItemCode
@@ -285,11 +286,14 @@
 				, b.comName
 				, e.memberName
 				, e.memberCondition
+				, a.comSystemChange
 			FROM cfmemberemail AS e
 			INNER JOIN cfmemberclassification AS c
 			ON e.memberClassificationCode = c.memberClassificationCode
 			LEFT JOIN cfcombaseinfo AS b
 			ON e.comCode = b.comCode
+			LEFT JOIN cfcomauthority AS a
+			ON e.memberEmail = a.memberEmail
 			WHERE e.memberEmail = #{memberEmail}
 			AND e.memberPassword = #{memberPassword}
 		) AS ecb

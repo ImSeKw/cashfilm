@@ -65,6 +65,10 @@
 		<td>${memberSession.memberCondition}</td>
 	</tr>
 	<tr>
+		<td>회사체계변경</td>
+		<td>${memberSession.comSystemChange}</td>
+	</tr>
+	<tr>
 		<td>결제코드</td>
 		<td>${memberSession.voucherPaymentCode}</td>
 	</tr>
