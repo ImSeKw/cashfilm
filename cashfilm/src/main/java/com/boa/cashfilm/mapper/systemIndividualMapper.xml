@@ -16,15 +16,14 @@
 			 ,ic.individualContentName
 			 ,ic.memberEmail
 			 ,ic.individualContentRegistrationDay 
-		FROM cfindividualcontent As ic INNER JOIN cfindividualsubject AS isub ON ic.individualSubjectNumeral=isub.individualSubjectNumeral
- 		INNER JOIN cfuserindividualsubject AS uisub ON ic.userIndividualSubjectCode=uisub.userIndividualSubjectCode
+		FROM cfindividualcontent As ic LEFT JOIN cfindividualsubject AS isub ON ic.individualSubjectNumeral=isub.individualSubjectNumeral
+ 		LEFT JOIN cfuserindividualsubject AS uisub ON ic.userIndividualSubjectCode=uisub.userIndividualSubjectCode
 		WHERE ic.individualContentCode=#{individualContentCode};
 	</select>
-	
+		
 	<!--개인적요 검색 -->
 	<select id="selectIndividualcontent" parameterType="String" resultType="com.boa.cashfilm.sysindi.dto.IndividualcontentAndSubAndUsub">
-		SELECT 
-			 ic.individualContentCode
+		SELECT ic.individualContentCode
 			 ,ic.individualSubjectNumeral
 			 ,isub.individualSubjectName
 			 ,ic.userIndividualSubjectCode
@@ -32,21 +31,25 @@
 			 ,ic.individualContentName
 			 ,ic.memberEmail
 			 ,ic.individualContentRegistrationDay 
-		FROM cfindividualcontent As ic INNER JOIN cfindividualsubject AS isub ON ic.individualSubjectNumeral=isub.individualSubjectNumeral
- 		INNER JOIN cfuserindividualsubject AS uisub ON ic.userIndividualSubjectCode=uisub.userIndividualSubjectCode
+		FROM cfindividualcontent As ic 
+		LEFT JOIN cfindividualsubject AS isub ON ic.individualSubjectNumeral=isub.individualSubjectNumeral
+		LEFT JOIN cfuserindividualsubject AS uisub ON ic.userIndividualSubjectCode=uisub.userIndividualSubjectCode
 		WHERE ic.memberEmail=#{memberEmail};
 	</select>
 	
 	<!--개인적요 등록 -->
 	<insert id="insertIndividualcontent" parameterType="com.boa.cashfilm.sysindi.dto.Individualcontent">
 		INSERT INTO cfindividualcontent (
-	 		,userIndividualSubjectCode
+			<if test="individualSubjectNumeral!=0">
+			individualSubjectNumeral</if>
+	 		<if test="userIndividualSubjectCode!=0">
+			userIndividualSubjectCode</if>
 	 		,individualContentName
 	 		,memberEmail 
 	 		,individualContentRegistrationDay
 		) VALUES (
-			 #{individualSubjectNumeral}
-			 ,#{userIndividualSubjectCode}
+			 <if test="individualSubjectNumeral!=0">#{individualSubjectNumeral}</if>
+			 <if test="userIndividualSubjectCode!=0">#{userIndividualSubjectCode}</if>
 			 ,#{individualContentName}
 			 ,#{memberEmail}
 			 ,now()

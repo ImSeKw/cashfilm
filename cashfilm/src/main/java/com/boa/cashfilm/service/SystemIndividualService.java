@@ -25,11 +25,13 @@ public class SystemIndividualService {
 	@Autowired
 	private SystemIndividualDao systemindividualDao;
 	private static final Logger logger = LoggerFactory.getLogger(SystemIndividualService.class);
+	
 	//개인적요 수정을위한 검색
 	public IndividualcontentAndSubAndUsub selectOneIndividualcontent(int individualContentCode) {
 		logger.debug("{} :selectOneIndividualcontent SystemIndividualService.java",individualContentCode);
 		return systemindividualDao.selectOneIndividualcontent(individualContentCode);
 	}
+
 	
 	//개인적요 검색(이메일별)
 	public List<IndividualcontentAndSubAndUsub> selectIndividualcontent(String memberEmail) {

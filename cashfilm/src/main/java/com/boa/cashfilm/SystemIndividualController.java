@@ -37,7 +37,7 @@ public class SystemIndividualController {
 		model.addAttribute("icsus", icsus);
 		return "system/updateIndividualcontent";
 	}
-	
+		
 	//개인적요 검색(이메일별)
 	@RequestMapping(value="/IndividualSystem/selectIndividualcontent",method = RequestMethod.GET)
 	public String selectIndividualcontent(Model model,@RequestParam(value="memberEmail",required=true)String memberEmail){

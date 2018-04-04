@@ -9,9 +9,14 @@
 			if(chkvalue == "1"){
 				$('#individualSubjectNumeral').css('display','block')      // 보이게
 				$('#userIndividualSubjectCode').css('display','none')   // 안보이게 */
+				$('#is').prop("disabled",false);
+				$('#uis').prop("disabled",true);
 			}else{
 				$('#individualSubjectNumeral').css('display','none')   // 안보이게 */
 				$('#userIndividualSubjectCode').css('display','block')        // 보이게
+				$('#is').prop("disabled",true);
+				$('#uis').prop("disabled",false);
+				
 			};
 		});
 	});
@@ -19,18 +24,18 @@
 
 <jsp:include page="/WEB-INF/views/module/topSecond.jsp"/>
 	<h1>개인적요등록</h1>
-		    <input type="radio" name="individualSubject" id="individualSubject" value="1" checked="checked"> 개인계정과목코드
+		    <input type="radio" name="individualSubject" id="individualSubject" value="1" checked="checked" > 개인계정과목코드
 			<input type="radio" name="individualSubject" id="individualSubject" value="2"> 개인사용자계정과목코드
 	<form action="${pageContext.request.contextPath}/IndividualSystem/insertIndividualcontent" method="post">
 		<div id="individualSubjectNumeral" style="display:block;">   
-	       <select name="individualSubjectNumeral">
+	       <select name="individualSubjectNumeral" id="is">
 				<c:forEach var="IndividualSubject" items="${list}">
 		      	 <option value="${IndividualSubject.individualSubjectNumeral}">${IndividualSubject.individualSubjectName}</option>
 		        </c:forEach>
 			</select>
 	    </div>
 		<div id="userIndividualSubjectCode" style="display:none;">
-			<select name="userIndividualSubjectCode" >
+			<select name="userIndividualSubjectCode" id="uis" disabled="true">
 			   <c:forEach var="IndividualSystemAndUSubject" items="${isuslist}">
 		       	<option value="${IndividualSystemAndUSubject.userIndividualSubjectCode}">${IndividualSystemAndUSubject.userIndividualSubjectName}</option>
 		       </c:forEach>
