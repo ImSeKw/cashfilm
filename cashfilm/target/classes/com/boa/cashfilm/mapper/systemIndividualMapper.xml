@@ -5,6 +5,14 @@
 
 <mapper namespace="com.boa.cashfilm.mapper.systemIndividualMapper">
 	
+	<!--개인 계정상세 수정을 위한검색 -->
+	<select id="selectOneSystemDetail" parameterType="int" resultType="com.boa.cashfilm.sysindi.dto.IndividualSystemDetail">
+		SELECT individualSystemDetailCode
+			,individualSystemDetailName
+			,memberEmail 
+		FROM cfindividualsystemdetail WHERE individualSystemDetailCode=#{individualSystemDetailCode}
+	</select>
+	
 	<!--개인 계정상세 검색(이메일별) -->
 	<select id="selectIndiSystemDetailOfEmail" parameterType="String" resultType="com.boa.cashfilm.sysindi.dto.IndividualSystemDetailAndSubjectAndUsubject">
 		SELECT isd.individualSystemDetailCode

@@ -27,6 +27,12 @@ public class SystemIndividualDao {
 	private static final Logger logger = LoggerFactory.getLogger(SystemIndividualDao.class);
 	private final String NAMESPACE ="com.boa.cashfilm.mapper.systemIndividualMapper.";
 	
+	//개인 계정상세 수정을 위한검색 
+	public IndividualSystemDetail selectOneSystemDetail(int individualSystemDetailCode) {
+		logger.debug("uisubject selectOneSystemDetail");
+		return sqlsessiontemplate.selectOne(NAMESPACE +"selectOneSystemDetail", individualSystemDetailCode);
+	}
+	
 	//개인 계정상세 검색(이메일별)
 	public List<IndividualSystemDetailAndSubjectAndUsubject> selectIndiSystemDetailOfEmail(String memberEmail){
 		logger.debug("uisubject selectIndiSystemDetailOfEmail");
