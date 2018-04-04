@@ -31,6 +31,31 @@ public class SystemIndividualController {
 	private SystemIndividualService systemIndiService;
 	private static final Logger logger=LoggerFactory.getLogger(SystemIndividualService.class);
 	
+	//개인 계정상세 삭제 
+	@RequestMapping(value="/IndividualSystem/deleteIndividualSystemDetail",method = RequestMethod.GET)
+	public String deleteIndividualSystemDetail(IndividualSystemDetail isd) {
+		logger.debug("{} :deleteIndividualSystemDetail SystemIndividualController.java",isd);
+		systemIndiService.deleteIndividualSystemDetail(isd);
+		return "redirect:/";
+	}
+	
+	//개인 계정상세 수정
+	@RequestMapping(value="/IndividualSystem/updateIndividualSystemDetail",method = RequestMethod.POST)
+	public String updateIndividualSystemDetail(IndividualSystemDetail isd) {
+		logger.debug("{} :selectOneSystemDetail SystemIndividualController.java",isd);
+		systemIndiService.updateIndividualSystemDetail(isd);
+		return "redirect:/";
+	}
+
+	//개인 계정상세 수정을 위한검색 
+	@RequestMapping(value="/IndividualSystem/updateIndividualSystemDetail",method = RequestMethod.GET)
+	public String selectOneSystemDetail(Model model, @RequestParam(value="individualSystemDetailCode",required=true)int individualSystemDetailCode){
+		logger.debug("{} :selectOneSystemDetail SystemIndividualController.java",individualSystemDetailCode);
+		IndividualSystemDetail isd = systemIndiService.selectOneIndividualSystemDetail(individualSystemDetailCode);
+		model.addAttribute("isd", isd);
+		return "/system/updateIndividualSystemDetail";
+	}
+	
 	//개인 계정상세 조회(이메일별)
 	@RequestMapping(value="/IndividualSystem/selectIndiSystemDetailOfEmail",method = RequestMethod.GET)
 	public String selectIndiSystemDetailOfEmail(Model model,@RequestParam(value="memberEmail",required=true)String memberEmail){

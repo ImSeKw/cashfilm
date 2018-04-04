@@ -27,10 +27,22 @@ public class SystemIndividualDao {
 	private static final Logger logger = LoggerFactory.getLogger(SystemIndividualDao.class);
 	private final String NAMESPACE ="com.boa.cashfilm.mapper.systemIndividualMapper.";
 	
+	//개인 계정상세 삭제 
+	public int deleteIndividualSystemDetail(IndividualSystemDetail isd) {
+		logger.debug("uisubject deleteIndividualSystemDetail");
+		return sqlsessiontemplate.delete(NAMESPACE + "deleteIndividualSystemDetail", isd);
+	}
+		
+	//개인 계정상세 수정
+	public int updateIndividualSystemDetail(IndividualSystemDetail isd) {
+		logger.debug("uisubject updateIndividualSystemDetail");
+		return sqlsessiontemplate.update(NAMESPACE +"updateIndividualSystemDetail",isd);
+	}
+	
 	//개인 계정상세 수정을 위한검색 
-	public IndividualSystemDetail selectOneSystemDetail(int individualSystemDetailCode) {
+	public IndividualSystemDetail selectOneIndividualSystemDetail(int individualSystemDetailCode) {
 		logger.debug("uisubject selectOneSystemDetail");
-		return sqlsessiontemplate.selectOne(NAMESPACE +"selectOneSystemDetail", individualSystemDetailCode);
+		return sqlsessiontemplate.selectOne(NAMESPACE +"selectOneIndividualSystemDetail", individualSystemDetailCode);
 	}
 	
 	//개인 계정상세 검색(이메일별)

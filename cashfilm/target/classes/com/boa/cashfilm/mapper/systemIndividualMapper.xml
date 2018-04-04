@@ -5,8 +5,21 @@
 
 <mapper namespace="com.boa.cashfilm.mapper.systemIndividualMapper">
 	
+	<!--개인 계정상세 삭제  -->
+	<delete id="deleteIndividualSystemDetail" parameterType="com.boa.cashfilm.sysindi.dto.IndividualSystemDetail">
+		DELETE FROM cfindividualsystemdetail WHERE individualSystemDetailCode=#{individualSystemDetailCode};
+	</delete>
+	
+	<!--개인 계정상세 수정 -->
+	<update id="updateIndividualSystemDetail" parameterType="com.boa.cashfilm.sysindi.dto.IndividualSystemDetail">
+		UPDATE cfindividualsystemdetail 
+		SET individualSystemDetailName=#{individualSystemDetailName}
+		WHERE individualSystemDetailCode=#{individualSystemDetailCode};
+	</update>
+	
+	
 	<!--개인 계정상세 수정을 위한검색 -->
-	<select id="selectOneSystemDetail" parameterType="int" resultType="com.boa.cashfilm.sysindi.dto.IndividualSystemDetail">
+	<select id="selectOneIndividualSystemDetail" parameterType="int" resultType="com.boa.cashfilm.sysindi.dto.IndividualSystemDetail">
 		SELECT individualSystemDetailCode
 			,individualSystemDetailName
 			,memberEmail 

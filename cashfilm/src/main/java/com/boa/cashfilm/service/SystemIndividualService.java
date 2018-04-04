@@ -28,6 +28,24 @@ public class SystemIndividualService {
 	private SystemIndividualDao systemindividualDao;
 	private static final Logger logger = LoggerFactory.getLogger(SystemIndividualService.class);
 	
+	//개인 계정상세 삭제 
+	public int deleteIndividualSystemDetail(IndividualSystemDetail isd) {
+		logger.debug("{} :deleteIndividualSystemDetail SystemIndividualService.java",isd);
+		return systemindividualDao.deleteIndividualSystemDetail(isd);
+	}
+	
+	//개인 계정상세 수정
+	public int updateIndividualSystemDetail(IndividualSystemDetail isd) {
+		logger.debug("{} :updateIndividualSystemDetail SystemIndividualService.java",isd);
+		return systemindividualDao.updateIndividualSystemDetail(isd);
+	}
+	
+	//개인 계정상세 수정을 위한검색 
+	public IndividualSystemDetail selectOneIndividualSystemDetail(int individualSystemDetailCode) {
+		logger.debug("{} :selectOneSystemDetail SystemIndividualService.java",individualSystemDetailCode);
+		return systemindividualDao.selectOneIndividualSystemDetail(individualSystemDetailCode);
+	}
+	
 	//개인 계정상세 조회(이메일별)
 	public List<IndividualSystemDetailAndSubjectAndUsubject> selectIndiSystemDetailOfEmail(String memberEmail){
 		logger.debug("{} :insertIndiSystemDetail SystemIndividualService.java",memberEmail);
