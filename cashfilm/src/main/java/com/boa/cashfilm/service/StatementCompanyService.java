@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.boa.cashfilm.company.dto.ComSystem;
 import com.boa.cashfilm.dao.StatementCompanyDao;
 import com.boa.cashfilm.smtcom.dto.StatementCompanyFinance;
+import com.boa.cashfilm.smtcom.dto.StatementCompanyFinanceList;
 
 @Service
 @Transactional
@@ -19,6 +20,22 @@ public class StatementCompanyService {
 	@Autowired
 	StatementCompanyDao statementCompanyDao;
 	private static final Logger logger = LoggerFactory.getLogger(StatementCompanyService.class);
+	
+	// 회사 처음 입력 재무 조회
+	public List<StatementCompanyFinanceList> selectStatementCompanyFinanceList(int comCode) {
+		logger.debug("{} : < comCode selectStatementCompanyFinanceList() StatementCompanyService", comCode);
+		List<StatementCompanyFinanceList> list = statementCompanyDao.selectStatementCompanyFinanceList(comCode);
+		for(StatementCompanyFinanceList scfl : list) {
+			logger.debug("{} : > closingStatementCode selectStatementCompanyFinanceList() StatementCompanyService", scfl.getClosingStatementCode());
+			logger.debug("{} : > comCode selectStatementCompanyFinanceList() StatementCompanyService", scfl.getComCode());
+			logger.debug("{} : > comSystemName selectStatementCompanyFinanceList() StatementCompanyService", scfl.getComSystemName());
+			logger.debug("{} : > comSystemNumeral selectStatementCompanyFinanceList() StatementCompanyService", scfl.getComSystemNumeral());
+			logger.debug("{} : > financeAmount selectStatementCompanyFinanceList() StatementCompanyService", scfl.getFinanceAmount());
+			logger.debug("{} : > financeCode selectStatementCompanyFinanceList() StatementCompanyService", scfl.getFinanceCode());
+			logger.debug("{} : > memberEmail selectStatementCompanyFinanceList() StatementCompanyService", scfl.getMemberEmail());
+		}
+		return list;
+	}
 	
 	// 회사 처음 입력 재무 등록 처리
 	public void insertStatementCompanyFinance(List<Integer> comSystemNumeralList

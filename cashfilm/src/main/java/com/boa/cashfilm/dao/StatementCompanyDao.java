@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.boa.cashfilm.company.dto.ComSystem;
 import com.boa.cashfilm.smtcom.dto.StatementCompanyFinance;
+import com.boa.cashfilm.smtcom.dto.StatementCompanyFinanceList;
 
 @Repository
 public class StatementCompanyDao {
@@ -17,6 +18,12 @@ public class StatementCompanyDao {
 	SqlSessionTemplate sqlSessionTemplate;
 	private final String NAMESPACE = "com.boa.cashfilm.mapper.statementCompanyMapper.";
 	private static final Logger logger = LoggerFactory.getLogger(StatementCompanyDao.class);
+	
+	// 회사 처음 입력 재무 조회
+	public List<StatementCompanyFinanceList> selectStatementCompanyFinanceList(int comCode) {
+		logger.debug("{} : < comCode selectStatementCompanyFinanceList() StatementCompanyDao", comCode);
+		return sqlSessionTemplate.selectList(NAMESPACE, comCode);
+	}
 	
 	// 회사 처음 입력 재무 등록 처리
 	public void insertStatementCompanyFinance(List<StatementCompanyFinance> list) {

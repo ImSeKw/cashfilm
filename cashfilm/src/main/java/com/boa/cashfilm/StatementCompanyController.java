@@ -13,12 +13,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.boa.cashfilm.company.dto.ComSystem;
 import com.boa.cashfilm.service.StatementCompanyService;
+import com.boa.cashfilm.smtcom.dto.StatementCompanyFinanceList;
 
 @Controller
 public class StatementCompanyController {
 	@Autowired
 	StatementCompanyService statementCompanyService;
 	private static final Logger logger = LoggerFactory.getLogger(StatementCompanyController.class);
+	
+	// 회사 처음 입력 재무 조회
+	@RequestMapping(value = "/statement/financeListByCompany", method = RequestMethod.GET)
+	public String selectStatementCompanyFinanceList(Model model, @RequestParam("comCode") int comCode) {
+		logger.debug("{} : < comCode selectStatementCompanyFinanceList() StatementCompanyController", comCode);
+		List<StatementCompanyFinanceList> list = statementCompanyService.selectStatementCompanyFinanceList(comCode);
+		model.addAttribute("FinanceListByCompany", list);
+		return "statement/financeListByCompany";
+	}
 	
 	// 회사 처음 입력 재무 등록 처리
 	@RequestMapping(value = "/statement/financeRegistrationByCompany", method = RequestMethod.POST)

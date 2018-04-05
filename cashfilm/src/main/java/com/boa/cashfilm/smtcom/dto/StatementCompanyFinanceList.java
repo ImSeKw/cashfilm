@@ -1,19 +1,61 @@
 package com.boa.cashfilm.smtcom.dto;
 
-import java.util.List;
-
 public class StatementCompanyFinanceList {
-	private List<StatementCompanyFinance> statementCompanyFinanceList;
-
-	public List<StatementCompanyFinance> getStatementCompanyFinanceList() {
-		return statementCompanyFinanceList;
+	private String comSystemName;
+	private int financeCode;
+	private int comCode;
+	private int comSystemNumeral;
+	private String memberEmail;
+	private long financeAmount;
+	private String closingStatementCode;
+	
+	public String getComSystemName() {
+		return comSystemName;
 	}
-	public void setStatementCompanyFinanceList(List<StatementCompanyFinance> statementCompanyFinanceList) {
-		this.statementCompanyFinanceList = statementCompanyFinanceList;
+	public void setComSystemName(String comSystemName) {
+		this.comSystemName = comSystemName;
 	}
-
+	public int getFinanceCode() {
+		return financeCode;
+	}
+	public void setFinanceCode(int financeCode) {
+		this.financeCode = financeCode;
+	}
+	public int getComCode() {
+		return comCode;
+	}
+	public void setComCode(int comCode) {
+		this.comCode = comCode;
+	}
+	public int getComSystemNumeral() {
+		return comSystemNumeral;
+	}
+	public void setComSystemNumeral(int comSystemNumeral) {
+		this.comSystemNumeral = comSystemNumeral;
+	}
+	public String getMemberEmail() {
+		return memberEmail;
+	}
+	public void setMemberEmail(String memberEmail) {
+		this.memberEmail = memberEmail;
+	}
+	public long getFinanceAmount() {
+		return financeAmount;
+	}
+	public void setFinanceAmount(long financeAmount) {
+		this.financeAmount = financeAmount;
+	}
+	public String getClosingStatementCode() {
+		return closingStatementCode;
+	}
+	public void setClosingStatementCode(String closingStatementCode) {
+		this.closingStatementCode = closingStatementCode;
+	}
+	
 	@Override
 	public String toString() {
-		return "StatementCompanyFinanceList [statementCompanyFinanceList=" + statementCompanyFinanceList + "]";
+		return "StatementCompanyFinanceList [comSystemName=" + comSystemName + ", financeCode=" + financeCode
+				+ ", comCode=" + comCode + ", comSystemNumeral=" + comSystemNumeral + ", memberEmail=" + memberEmail
+				+ ", financeAmount=" + financeAmount + ", closingStatementCode=" + closingStatementCode + "]";
 	}
 }
