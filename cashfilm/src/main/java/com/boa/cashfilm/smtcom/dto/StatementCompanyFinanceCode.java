@@ -1,0 +1,24 @@
+package com.boa.cashfilm.smtcom.dto;
+
+public class StatementCompanyFinanceCode {
+	private int comCode;
+	private int financeCode;
+	
+	public int getComCode() {
+		return comCode;
+	}
+	public void setComCode(int comCode) {
+		this.comCode = comCode;
+	}
+	public int getFinanceCode() {
+		return financeCode;
+	}
+	public void setFinanceCode(int financeCode) {
+		this.financeCode = financeCode;
+	}
+	
+	@Override
+	public String toString() {
+		return "StatementCompanyFinanceCode [comCode=" + comCode + ", financeCode=" + financeCode + "]";
+	}
+}

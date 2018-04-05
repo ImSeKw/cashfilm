@@ -19,6 +19,7 @@ public class StatementCompanyDao {
 	private final String NAMESPACE = "com.boa.cashfilm.mapper.statementCompanyMapper.";
 	private static final Logger logger = LoggerFactory.getLogger(StatementCompanyDao.class);
 	
+	
 	// 회사 처음 입력 재무 조회
 	public List<StatementCompanyFinanceList> selectStatementCompanyFinanceList(int comCode) {
 		logger.debug("{} : < comCode selectStatementCompanyFinanceList() StatementCompanyDao", comCode);

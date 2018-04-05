@@ -10,9 +10,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.boa.cashfilm.company.dto.ComSystem;
 import com.boa.cashfilm.service.StatementCompanyService;
+import com.boa.cashfilm.smtcom.dto.StatementCompanyFinanceCode;
 import com.boa.cashfilm.smtcom.dto.StatementCompanyFinanceList;
 
 @Controller
@@ -20,6 +22,14 @@ public class StatementCompanyController {
 	@Autowired
 	StatementCompanyService statementCompanyService;
 	private static final Logger logger = LoggerFactory.getLogger(StatementCompanyController.class);
+	
+	// 회사 처음 입력 재무 조회
+	@RequestMapping(value = "/statement/financeListByCompanyAjax", method = RequestMethod.POST)
+	public @ResponseBody String selectStatementCompanyFinanceList(StatementCompanyFinanceCode statementCompanyFinanceCode) {
+		logger.debug("{} : < financeCode selectStatementCompanyFinanceList() StatementCompanyController", statementCompanyFinanceCode.getFinanceCode());
+//		StatementCompanyFinanceList statementCompanyFinanceList = statementCompanyService.selectStatementCompanyFinanceList(financeCode);
+		return null;
+	}
 	
 	// 회사 처음 입력 재무 조회
 	@RequestMapping(value = "/statement/financeListByCompany", method = RequestMethod.GET)
