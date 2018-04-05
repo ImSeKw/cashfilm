@@ -9,9 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.boa.cashfilm.company.dto.ComSystem;
+
 import com.boa.cashfilm.service.SystemCompanyService;
+import com.boa.cashfilm.syscom.dto.ComSystem;
 
 @Controller
 public class SystemCompanyController {
@@ -19,6 +21,31 @@ public class SystemCompanyController {
 	@Autowired
 	private SystemCompanyService systemcompanyService;
 	private static final Logger logger=LoggerFactory.getLogger(SystemCompanyController.class);
+	
+	//회사 계정체계 삭제 
+	@RequestMapping(value="/ComSystem/deleteComSystem",method=RequestMethod.GET)
+	public String deleteComSystem (ComSystem csys) {
+		logger.debug("{} : deleteComSystem SystemCompanyController",csys);
+		systemcompanyService.deleteComSystem(csys);
+		return "redirect:/";
+	}
+
+	//회사 계정체계 수정 action
+	@RequestMapping(value="/ComSystem/updateComSystem",method=RequestMethod.POST)
+	public String updateComSystem(ComSystem csys) {
+		logger.debug("{} : updateComSystem SystemCompanyController",csys);
+		systemcompanyService.updateComSystem(csys);
+		return "redirect:/";
+	}
+	
+	//회사 계정체계 수정 form
+	@RequestMapping(value="/ComSystem/updateComSystem",method=RequestMethod.GET)
+	public String selectOneComSystem(Model model, @RequestParam(value="comSystemNumeral",required=true)int comSystemNumeral){
+		logger.debug("{} : selectOneComSystem SystemCompanyController",comSystemNumeral);
+		ComSystem csys =systemcompanyService.selectOneComSystem(comSystemNumeral);
+		model.addAttribute("csys", csys);
+		return "system/updateComSystem";
+	}
 	
 	//회사 계정체계 검색 
 	@RequestMapping(value="/ComSystem/selectComSystem",method=RequestMethod.GET)

@@ -14,8 +14,8 @@
 		  <tr>
 		  	<td>${ComSystem.comSystemNumeral}</td>
 		  	<td>${ComSystem.comSystemName}</td>
-			<td><a href="${pageContext.request.contextPath}/ComSystem/selectComSystem?comSystemNumeral=${ComSystem.comSystemNumeral}">수정</a></td>
-		    <td><a href="${pageContext.request.contextPath}/ComSystem/selectComSystem?comSystemNumeral=${ComSystem.comSystemNumeral}">삭제</a></td>
+			<td><a href="${pageContext.request.contextPath}/ComSystem/updateComSystem?comSystemNumeral=${ComSystem.comSystemNumeral}">수정</a></td>
+		    <td><a href="${pageContext.request.contextPath}/ComSystem/deleteComSystem?comSystemNumeral=${ComSystem.comSystemNumeral}">삭제</a></td>
 		  </tr>
 	  </c:forEach>
 	</table>
