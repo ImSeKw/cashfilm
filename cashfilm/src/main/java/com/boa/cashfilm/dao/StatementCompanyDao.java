@@ -22,7 +22,7 @@ public class StatementCompanyDao {
 	// 회사 처음 입력 재무 조회
 	public List<StatementCompanyFinanceList> selectStatementCompanyFinanceList(int comCode) {
 		logger.debug("{} : < comCode selectStatementCompanyFinanceList() StatementCompanyDao", comCode);
-		return sqlSessionTemplate.selectList(NAMESPACE, comCode);
+		return sqlSessionTemplate.selectList(NAMESPACE + "selectStatementCompanyFinanceList", comCode);
 	}
 	
 	// 회사 처음 입력 재무 등록 처리
