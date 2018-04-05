@@ -19,9 +19,12 @@ public class StatementCompanyDao {
 	private static final Logger logger = LoggerFactory.getLogger(StatementCompanyDao.class);
 	
 	// 회사 처음 입력 재무 등록 처리
-	public void insertStatementCompanyFinance(List<StatementCompanyFinance> statementCompanyFinanceList) {
-		logger.debug("{} : < statementCompanyFinanceList insertStatementCompanyFinance() StatementCompanyDao", statementCompanyFinanceList);
-		sqlSessionTemplate.insert(NAMESPACE + "insertStatementCompanyFinance", statementCompanyFinanceList);
+	public void insertStatementCompanyFinance(List<StatementCompanyFinance> list) {
+		logger.debug("{} : < list insertStatementCompanyFinance() StatementCompanyDao", list);
+		for(StatementCompanyFinance scf : list) {
+			sqlSessionTemplate.insert(NAMESPACE + "insertStatementCompanyFinance", scf);
+		}
+		
 	}
 	
 	// 회사 처음 입력 재무 등록 화면

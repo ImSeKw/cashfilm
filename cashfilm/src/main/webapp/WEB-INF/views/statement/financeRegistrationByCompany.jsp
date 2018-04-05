@@ -29,8 +29,8 @@
 <c:set var="comCode" value="${memberSession.comCode}"/>
 
 <form id="financeRegistrationBC" action="${pageContext.request.contextPath}/statement/financeRegistrationByCompany" method="post">
-<input type="hidden" name="memberEmail" value="${memberEmail}">
-<input type="hidden" name="comCode" value="${comCode}">
+	<input type="hidden" name="memberEmail" value="${memberEmail}">
+	<input type="hidden" name="comCode" value="${comCode}">
 	<table id="selectAdd">
 		<tr>
 			<td>계정체계명</td>

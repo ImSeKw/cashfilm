@@ -40,10 +40,9 @@ public class StatementCompanyService {
 			statementCompanyFinance.setClosingStatementCode(closingStatementCode);
 			statementCompanyFinance.setMemberEmail(memberEmail);
 			statementCompanyFinance.setComCode(comCode);
+			list.add(statementCompanyFinance);
 		}
-		
-		
-//		statementCompanyDao.insertStatementCompanyFinance(statementCompanyFinanceList);
+		statementCompanyDao.insertStatementCompanyFinance(list);
 	}
 	
 	// 회사 처음 입력 재무 등록 화면
