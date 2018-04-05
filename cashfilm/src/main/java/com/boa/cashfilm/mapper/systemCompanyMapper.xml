@@ -5,6 +5,42 @@
 
 <mapper namespace="com.boa.cashfilm.mapper.cashfilmMapper">
 	
+	<!--회사 계정과목별 키워드 검색  -->
+	<select id="selectOneComSubjectofsub" parameterType="String" resultType="com.boa.cashfilm.syscom.dto.ComSubject">
+		SELECT comSystemNumeral
+			,comSubjectNumeral
+			,comSubjectName 
+		FROM cfcomsubject
+		WHERE comSubjectName like CONCAT('%',#{comSubjectName},'%')
+		ORDER BY comSubjectNumeral ASC
+	</select>
+	
+	<!--회사 계정체계별 검색  -->
+	<select id="selectOneComSubjectofsys" parameterType="int" resultType="com.boa.cashfilm.syscom.dto.ComSystemAndSubject">
+		SELECT csm.comSystemNumeral
+			,csm.comSystemName
+			,cst.comSubjectNumeral
+			,cst.comSubjectName 
+		FROM cfcomsubject AS cst 
+		INNER JOIN cfcomsystem AS csm 
+		ON cst.comSystemNumeral = csm.comSystemNumeral
+		WHERE cst.comSystemNumeral = #{comSystemNumeral}
+		ORDER BY csm.comSystemNumeral ASC
+	
+	</select>
+	
+	<!--회사계정과목 검색  -->
+	<select id="selectAllComSubject" resultType="com.boa.cashfilm.syscom.dto.ComSystemAndSubject">
+		SELECT csm.comSystemNumeral
+			,csm.comSystemName
+			,cst.comSubjectNumeral
+			,cst.comSubjectName 
+		FROM cfcomsubject AS cst 
+		INNER JOIN cfcomsystem AS csm 
+		ON cst.comSystemNumeral = csm.comSystemNumeral 
+		ORDER BY csm.comSystemNumeral ASC
+	</select>
+	
 	<!--회사 계정과목 등록 -->
 	<insert id="insertComSubject" parameterType="com.boa.cashfilm.syscom.dto.ComSubject">
 		INSERT 

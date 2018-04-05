@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 import com.boa.cashfilm.service.SystemCompanyService;
+import com.boa.cashfilm.syscom.dto.ComSubject;
 import com.boa.cashfilm.syscom.dto.ComSystem;
+import com.boa.cashfilm.syscom.dto.ComSystemAndSubject;
 
 @Controller
 public class SystemCompanyController {
@@ -21,6 +23,44 @@ public class SystemCompanyController {
 	@Autowired
 	private SystemCompanyService systemcompanyService;
 	private static final Logger logger=LoggerFactory.getLogger(SystemCompanyController.class);
+	
+	//회사계정과목 과목키워드 검색
+	@RequestMapping(value="/ComSystem/selectComSubjectKeyword",method=RequestMethod.GET)
+	public String selectOneComSubjectofsub(Model model,@RequestParam(value="comSubjectName",required=true)String comSubjectName) {
+		logger.debug("{} : selectOneComSubjectofsub actionSystemCompanyController",comSubjectName);
+		List<ComSubject> csublist =systemcompanyService.selectOneComSubjectofsub(comSubjectName);
+		model.addAttribute("csublist", csublist);
+		return "system/selectComSubjectKeyword";
+	}
+	
+	//회사계정과목 검색 (전체,체계별)
+	@RequestMapping(value="/ComSystem/selectComSubject",method=RequestMethod.GET)
+	public String selectAllComSubject(Model model,@RequestParam(value="comSystemNumeral",required=true)int comSystemNumeral
+												 ,@RequestParam(value="comSubjectName",required=true)String comSubjectName){
+		logger.debug("{} : selectAllComSubject actionSystemCompanyController");
+		List<ComSystemAndSubject> csyssublist =systemcompanyService.selectAllComSubject();
+		model.addAttribute("csyssublist", csyssublist);
+		List<ComSystemAndSubject> csyssublist1 =systemcompanyService.selectOneComSubjectofsys(comSystemNumeral);
+		model.addAttribute("csyssublist", csyssublist1);
+		return "system/selectComSubject";
+	}
+	
+	//회사 계정과목 등록 action 
+	@RequestMapping(value="/ComSubjct/insertComSubject",method=RequestMethod.POST)
+	public String addComSubject(ComSubject csub) {
+		logger.debug("{} : addComSubject actionSystemCompanyController",csub);
+		systemcompanyService.insertComSubject(csub);
+		return "redirect:/";
+	}
+	
+	//회사 계정과목 등록 form
+	@RequestMapping(value="/ComSubjct/insertComSubject",method=RequestMethod.GET)
+	public String addComSubject(Model model) {
+		logger.debug("{} : addComSubject form SystemCompanyController");
+		List<ComSystem> csyslist =systemcompanyService.selectAllComSystem();
+		model.addAttribute("csyslist", csyslist);
+		return "system/insertComSubject";
+	}
 	
 	//회사 계정체계 삭제 
 	@RequestMapping(value="/ComSystem/deleteComSystem",method=RequestMethod.GET)
