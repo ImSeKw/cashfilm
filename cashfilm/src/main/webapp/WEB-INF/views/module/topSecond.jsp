@@ -40,6 +40,10 @@
 
 <br>
 
+<a href="${pageContext.request.contextPath}/statement/financeListByCompany?comCode=${memberSession.comCode}">회사 처음 입력 재무 조회</a>
+
+<br>
+
 <table border="1">
 	<tr>
 		<td>이메일</td>
