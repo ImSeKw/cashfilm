@@ -5,6 +5,16 @@
 
 <mapper namespace="com.boa.cashfilm.mapper.cashfilmMapper">
 	
+	<!--회사 계정과목 등록 -->
+	<insert id="insertComSubject" parameterType="com.boa.cashfilm.syscom.dto.ComSubject">
+		INSERT 
+		INTO cfcomsubject(
+			comSubjectNumeral
+			,comSystemNumeral
+			,comSubjectName) 
+		VALUES (#{comSubjectNumeral},#{comSystemNumeral},#{comSubjectName});
+	</insert>
+	
 	<!--회사 계정체계 삭제 -->
 	<delete id="deleteComSystem" parameterType="com.boa.cashfilm.syscom.dto.ComSystem">
 		DELETE FROM cfcomsystem 
