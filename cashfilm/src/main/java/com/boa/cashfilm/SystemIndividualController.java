@@ -29,7 +29,7 @@ import com.boa.cashfilm.sysindi.dto.UserIndividualSubject;
 public class SystemIndividualController {
 	@Autowired
 	private SystemIndividualService systemIndiService;
-	private static final Logger logger=LoggerFactory.getLogger(SystemIndividualService.class);
+	private static final Logger logger=LoggerFactory.getLogger(SystemIndividualController.class);
 	
 	//개인 계정상세 삭제 
 	@RequestMapping(value="/IndividualSystem/deleteIndividualSystemDetail",method = RequestMethod.GET)
