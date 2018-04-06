@@ -23,12 +23,13 @@
 				<a href="${pageContext.request.contextPath}/company/comInfo?comCode=${memberSession.comCode}">회사정보</a>
 				<a href="${pageContext.request.contextPath}/company/comCustomerRegistration">거래처 등록</a>
 				<a href="${pageContext.request.contextPath}/company/comCustomerList?comCode=${memberSession.comCode}">거래처 조회</a>
-				<a href="${pageContext.request.contextPath}/company/comInfo?comCode=${memberSession.comCode}">회사정보</a>
-				<a href="${pageContext.request.contextPath}/company/comInfo?comCode=${memberSession.comCode}">회사정보</a>
+	
+
 				<c:if test="${memberSession.comSystemChange eq 1 }">
 					<a href="${pageContext.request.contextPath}//">회사체계변경입니다.공사중!!</a>
 					<a href="${pageContext.request.contextPath}/company/comAuthorityApprovalList?comCode=${memberSession.comCode}&memberEmail=${memberSession.memberEmail}"> 사원 등록 요청 조회</a>
-				
+					<a href="${pageContext.request.contextPath}/company/comSectionListBeforeApproval?comCode=${memberSession.comCode}">부서 미등록 직원 조회 및 등록</a>
+					<a href="${pageContext.request.contextPath}/company/comPositionListBeforeApproval?comCode=${memberSession.comCode}">직급 미동록 직원 조회 및 등록</a>
 				</c:if>
 			</c:otherwise>
 		</c:choose>
