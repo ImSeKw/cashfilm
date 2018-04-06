@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.boa.cashfilm.syscom.dto.ComSubject;
 import com.boa.cashfilm.syscom.dto.ComSystem;
 import com.boa.cashfilm.syscom.dto.ComSystemAndSubject;
+import com.boa.cashfilm.syscom.dto.ComSystemAndUSubject;
 import com.boa.cashfilm.syscom.dto.UserComSubject;
 
 
@@ -23,6 +24,30 @@ public class SystemCompanyDao {
 	private static final Logger logger = LoggerFactory.getLogger(SystemCompanyDao.class);
 	private final String NAMESPACE ="com.boa.cashfilm.mapper.cashfilmMapper.";
 	
+	//회사 사용자 계정과목 삭제  -->
+	public int deleteUComSubject(UserComSubject ucsub) {
+		logger.debug("{} : deleteUComSubject SystemCompanyDao",ucsub);
+		return sqlsessiontemplate.delete(NAMESPACE +"deleteUComSubject", ucsub);
+	}
+	
+	//회사 사용자 계정과목 수정 
+	public int updateUComSub(UserComSubject ucsub) {
+		logger.debug("{} : updateUComSub SystemCompanyDao",ucsub);
+		return sqlsessiontemplate.update(NAMESPACE + "updateUComSubject",ucsub);
+	}
+	
+	//회사 사용자 계정과목 수정을 위한 검색  
+	public UserComSubject selectOneUComSubject(int userComSubjectCode) {
+		logger.debug("{} : selectOneUComSubject SystemCompanyDao",userComSubjectCode);
+		return sqlsessiontemplate.selectOne(NAMESPACE + "selectOneUComSubject", userComSubjectCode);
+	}
+	
+	//회사 사용자 계정과목 검색 
+	public List<ComSystemAndUSubject> selectUComSubject(int comCode) {
+		logger.debug("{} : selectUComSubject SystemCompanyDao",comCode);
+		return sqlsessiontemplate.selectList(NAMESPACE +"selectUComSubject", comCode);
+	}
+		
 	//회사 사용자 계정과목 등록
 	public int insertUComSubject(UserComSubject ucsub) {
 		logger.debug("{} : insertUComSubject SystemCompanyDao",ucsub);

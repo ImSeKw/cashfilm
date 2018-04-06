@@ -5,8 +5,51 @@
 
 <mapper namespace="com.boa.cashfilm.mapper.cashfilmMapper">
 
+	<!--회사 사용자 계정과목 삭제  -->
+	<delete id="deleteUComSubject" parameterType="com.boa.cashfilm.syscom.dto.UserComSubject">
+		DELETE FROM cfusercomsubject WHERE userComSubjectCode=#{userComSubjectCode};
+	</delete>
+	
+	<!--회사 사용자 계정과목 수정  -->
+	<update id="updateUComSubject" parameterType="com.boa.cashfilm.syscom.dto.UserComSubject">
+		UPDATE cfusercomsubject
+		SET comSystemNumeral = #{comSystemNumeral}
+			,comCode = #{comCode}
+			,userComSubjectName = #{userComSubjectName}
+			,memberEmail = #{memberEmail}
+			,userComSubjectNumeral = #{userComSubjectNumeral}
+		WHERE userComSubjectCode=#{userComSubjectCode};
+	</update>
+	
+	<!--회사 사용자 계정과목 수정을 위한 검색  -->
+	<select id="selectOneUComSubject" parameterType="int" resultType="com.boa.cashfilm.syscom.dto.UserComSubject">
+		SELECT  userComSubjectCode
+			,comSystemNumeral
+			,comCode,userComSubjectName
+			,memberEmail
+			,userComSubjectNumeral 
+		FROM cfusercomsubject 
+		WHERE userComSubjectCode=#{userComSubjectCode}
+	</select>
+	
+
+	<!--회사 사용자 계정과목 검색  -->
+	<select id="selectUComSubject" parameterType="int" resultType="com.boa.cashfilm.syscom.dto.ComSystemAndUSubject">
+		SELECT uc.userComSubjectCode
+			,s.comSystemNumeral
+			,s.comSystemName
+			,uc.comCode
+			,uc.userComSubjectName
+			,uc.memberEmail
+			,uc.userComSubjectNumeral 
+		FROM cfusercomsubject AS uc 
+		INNER JOIN cfcomsystem AS s 
+		ON uc.comSystemNumeral = s.comSystemNumeral 
+		WHERE uc.comCode = #{comCode};
+	</select>
+	
 	<!--회사 사용자 계정과목 등록 -->
-	<select id="insertUComSubject" parameterType="com.boa.cashfilm.syscom.dto.UserComSubject">
+	<insert id="insertUComSubject" parameterType="com.boa.cashfilm.syscom.dto.UserComSubject">
 		INSERT 
 		INTO cfusercomsubject(
 			comSystemNumeral
@@ -19,7 +62,7 @@
 			,#{userComSubjectName}
 			,#{memberEmail}
 			,#{userComSubjectNumeral});
-	</select>
+	</insert>
 	
 	<!--회사 계정과목 삭제  -->
 	<delete id="deleteComSubject" parameterType="com.boa.cashfilm.syscom.dto.ComSubject">
