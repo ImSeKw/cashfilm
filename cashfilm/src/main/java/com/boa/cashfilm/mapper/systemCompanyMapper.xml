@@ -5,6 +5,27 @@
 
 <mapper namespace="com.boa.cashfilm.mapper.cashfilmMapper">
 	
+	<!--회사 계정과목 삭제  -->
+	<delete id="deleteComSubject" parameterType="com.boa.cashfilm.syscom.dto.ComSubject">
+		DELETE FROM cfcomsubject WHERE comSubjectNumeral = #{comSubjectNumeral};
+	</delete>
+	
+	<!--회사 계정과목 수정  -->
+	<update id="updateComSubject" parameterType="com.boa.cashfilm.syscom.dto.ComSubject">
+		UPDATE cfcomsubject 
+		SET comSubjectName = #{comSubjectName}
+		WHERE comSubjectNumeral = #{comSubjectNumeral} 
+	</update>
+	
+	<!--회사 계정과목 수정을 위한 검색  -->
+	<select id="selectOneComSubject" parameterType="int" resultType="com.boa.cashfilm.syscom.dto.ComSubject">
+		SELECT comSubjectNumeral
+			,comSystemNumeral
+			,comSubjectName
+		FROM cfcomsubject 
+		WHERE comSubjectNumeral=#{comSubjectNumeral}
+	</select>
+	
 	<!--회사 계정과목별 키워드 검색  -->
 	<select id="selectOneComSubjectofsub" parameterType="String" resultType="com.boa.cashfilm.syscom.dto.ComSubject">
 		SELECT comSystemNumeral

@@ -24,10 +24,35 @@ public class SystemCompanyController {
 	private SystemCompanyService systemcompanyService;
 	private static final Logger logger=LoggerFactory.getLogger(SystemCompanyController.class);
 	
+	//회사 계정과목 삭제 
+	@RequestMapping(value="/ComSystem/deleteComSubject",method=RequestMethod.GET)
+	public String deleteComSubject(ComSubject csub) {
+		logger.debug("{} : deleteComSubject SystemCompanyController",csub);
+		systemcompanyService.deleteComSubject(csub);
+		return "redirect:/";
+	}
+	
+	//회사 계정과목 수정 action
+	@RequestMapping(value="/ComSystem/updateComSubject",method=RequestMethod.POST)
+	public String updateComSubject(ComSubject csub) {
+		logger.debug("{} : updateComSubject action SystemCompanyController",csub);
+		systemcompanyService.updateComSubject(csub);
+		return "redirect:/";
+	}
+	
+	//회사 계정과목 수정을 form 
+	@RequestMapping(value="/ComSystem/updateComSubject",method=RequestMethod.GET)
+	public String selectOneComSubject(Model model, @RequestParam(value="comSubjectNumeral",required=true)int comSubjectNumeral){
+		logger.debug("{} : selectOneComSubject form SystemCompanyController",comSubjectNumeral);
+		ComSubject csub=systemcompanyService.selectOneComSubject(comSubjectNumeral);
+		model.addAttribute("csub", csub);
+		return "system/updateComSubject";
+	}
+	
 	//회사계정과목 과목키워드 검색
 	@RequestMapping(value="/ComSystem/selectComSubjectKeyword",method=RequestMethod.GET)
 	public String selectOneComSubjectofsub(Model model,@RequestParam(value="comSubjectName",required=true)String comSubjectName) {
-		logger.debug("{} : selectOneComSubjectofsub actionSystemCompanyController",comSubjectName);
+		logger.debug("{} : selectOneComSubjectofsub SystemCompanyController",comSubjectName);
 		List<ComSubject> csublist =systemcompanyService.selectOneComSubjectofsub(comSubjectName);
 		model.addAttribute("csublist", csublist);
 		return "system/selectComSubjectKeyword";
@@ -35,26 +60,28 @@ public class SystemCompanyController {
 	
 	//회사계정과목 검색 (전체,체계별)
 	@RequestMapping(value="/ComSystem/selectComSubject",method=RequestMethod.GET)
-	public String selectAllComSubject(Model model,@RequestParam(value="comSystemNumeral",required=true)int comSystemNumeral
-												 ,@RequestParam(value="comSubjectName",required=true)String comSubjectName){
-		logger.debug("{} : selectAllComSubject actionSystemCompanyController");
-		List<ComSystemAndSubject> csyssublist =systemcompanyService.selectAllComSubject();
-		model.addAttribute("csyssublist", csyssublist);
-		List<ComSystemAndSubject> csyssublist1 =systemcompanyService.selectOneComSubjectofsys(comSystemNumeral);
-		model.addAttribute("csyssublist", csyssublist1);
+	public String selectAllComSubject(Model model,@RequestParam(value="comSystemNumeral",required=true)int comSystemNumeral){
+		logger.debug("{} : selectAllComSubject SystemCompanyController", comSystemNumeral);
+		if(comSystemNumeral == 0) {
+			List<ComSystemAndSubject> csyssublist =systemcompanyService.selectAllComSubject();
+			model.addAttribute("csyssublist", csyssublist);
+		} else if(comSystemNumeral != 0) {
+			List<ComSystemAndSubject> csyssublist1 =systemcompanyService.selectOneComSubjectofsys(comSystemNumeral);
+			model.addAttribute("csyssublist", csyssublist1);
+		}
 		return "system/selectComSubject";
 	}
 	
 	//회사 계정과목 등록 action 
-	@RequestMapping(value="/ComSubjct/insertComSubject",method=RequestMethod.POST)
+	@RequestMapping(value="/ComSystem/insertComSubject",method=RequestMethod.POST)
 	public String addComSubject(ComSubject csub) {
-		logger.debug("{} : addComSubject actionSystemCompanyController",csub);
+		logger.debug("{} : addComSubject action SystemCompanyController",csub);
 		systemcompanyService.insertComSubject(csub);
 		return "redirect:/";
 	}
 	
 	//회사 계정과목 등록 form
-	@RequestMapping(value="/ComSubjct/insertComSubject",method=RequestMethod.GET)
+	@RequestMapping(value="/ComSystem/insertComSubject",method=RequestMethod.GET)
 	public String addComSubject(Model model) {
 		logger.debug("{} : addComSubject form SystemCompanyController");
 		List<ComSystem> csyslist =systemcompanyService.selectAllComSystem();
@@ -101,7 +128,7 @@ public class SystemCompanyController {
 	public String addComSystem(ComSystem csys) {
 		logger.debug("{} : addComSystem action SystemCompanyController",csys);
 		systemcompanyService.insertComSystem(csys);
-		return "redirect:/";
+		return "redirect:/ComSystem/selectComSystem";
 	}
 	
 	//회사계정체계 등록 form

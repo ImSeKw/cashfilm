@@ -13,14 +13,15 @@
 	     <th>삭제</th>
 	  </tr>
 	  <c:forEach var="ComSystemAndSubject" items="${csyssublist}">
-		  <tr>
-		  	<td>${ComSystemAndSubject.comSystemNumeral}</td>
-		  	<td>${ComSystemAndSubject.comSystemName}</td>
-		  	<td>${ComSystemAndSubject.comSubjectNumeral}</td>
-		  	<td>${ComSystemAndSubject.comSubjectName}</td>
-			<td><a href="${pageContext.request.contextPath}/ComSystem/updateComSubject?comSubjectNumeral=${ComSystemAndSubject.comSubjectNumeral}">수정</a></td>
-		    <td><a href="${pageContext.request.contextPath}/ComSystem/deleteComSubject?comSubjectNumeral=${ComSystemAndSubject.comSubjectNumeral}">삭제</a></td>
-		  </tr>
+	  			  <tr>
+				  	<td>${ComSystemAndSubject.comSystemNumeral}</td>
+				  	<td>${ComSystemAndSubject.comSystemName}</td>
+				  	<td>${ComSystemAndSubject.comSubjectNumeral}</td>
+				  	<td>${ComSystemAndSubject.comSubjectName}</td>
+					<td><a href="${pageContext.request.contextPath}/ComSystem/updateComSubject?comSubjectNumeral=${ComSystemAndSubject.comSubjectNumeral}">수정</a></td>
+				    <td><a href="${pageContext.request.contextPath}/ComSystem/deleteComSubject?comSubjectNumeral=${ComSystemAndSubject.comSubjectNumeral}">삭제</a></td>
+				  </tr>
+			      			  
 	  </c:forEach>
 	</table>
 	

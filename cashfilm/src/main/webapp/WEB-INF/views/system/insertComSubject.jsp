@@ -4,7 +4,7 @@
 <jsp:include page="/WEB-INF/views/module/topSecond.jsp"/>
 	<h1>회사계정과목 등록</h1>
 	
-	<form action="${pageContext.request.contextPath}/ComSubjct/insertComSubject" method="post">
+	<form action="${pageContext.request.contextPath}/ComSystem/insertComSubject" method="post">
 		회사계정체계명:
 		<select name="comSystemNumeral">
 			<c:forEach var="ComSystem" items="${csyslist}">
@@ -18,7 +18,7 @@
 		<br>
 		<input type="submit" value="등록"> 
 	</form>
-	<a href="${pageContext.request.contextPath}/ComSystem/selectComSubject">회사계정과목 전체검색</a><br>
+	<a href="${pageContext.request.contextPath}/ComSystem/selectComSubject?comSystemNumeral=0">회사계정과목 전체검색</a><br>
 	회사계정체계별 검색:
 	<form action="${pageContext.request.contextPath}/ComSystem/selectComSubject?comSystemNumeral=${ComSystem.comSystemNumeral}" method="get">
 		<select name="comSystemNumeral">

@@ -22,6 +22,24 @@ public class SystemCompanyDao {
 	private static final Logger logger = LoggerFactory.getLogger(SystemCompanyDao.class);
 	private final String NAMESPACE ="com.boa.cashfilm.mapper.cashfilmMapper.";
 	
+	//회사 계정과목 삭제 
+	public int deleteComSubject(ComSubject csub) {
+		logger.debug("{} : deleteComSubject SystemCompanyDao",csub);
+		return sqlsessiontemplate.delete(NAMESPACE + "deleteComSubject",csub);
+	}
+	
+	//회사 계정과목 수정 
+	public int updateComSubject(ComSubject csub) {
+		logger.debug("{} : updateComSubject SystemCompanyDao",csub);
+		return sqlsessiontemplate.update(NAMESPACE + "updateComSubject", csub);
+	}
+	
+	//회사 계정과목 수정을 위한 검색 
+	public ComSubject selectOneComSubject(int comSubjectNumeral){
+		logger.debug("{} : selectOneComSubject SystemCompanyDao",comSubjectNumeral);
+		return sqlsessiontemplate.selectOne(NAMESPACE + "selectOneComSubject", comSubjectNumeral);
+	}
+		
 	//회사 계정명별 검색
 	public List<ComSubject> selectOneComSubjectofsub(String comSubjectName){
 		logger.debug("{} : selectOneComSubjectofsys SystemCompanyDao",comSubjectName);

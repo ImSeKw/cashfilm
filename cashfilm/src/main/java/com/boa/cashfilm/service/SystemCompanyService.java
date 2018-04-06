@@ -22,6 +22,24 @@ public class SystemCompanyService {
 	private SystemCompanyDao systemcomDao;
 	private static final Logger logger = LoggerFactory.getLogger(SystemCompanyService.class);
 	
+	//회사 계정과목 삭제 
+	public int deleteComSubject(ComSubject csub) {
+		logger.debug("{} : deleteComSubject SystemCompanyService",csub);
+		return systemcomDao.deleteComSubject(csub);
+	}
+	
+	//회사 계정과목 수정 
+	public int updateComSubject(ComSubject csub) {
+		logger.debug("{} : updateComSubject SystemCompanyService",csub);
+		return systemcomDao.updateComSubject(csub);
+	}
+	
+	//회사 계정과목 수정을 위한 검색 
+	public ComSubject selectOneComSubject(int comSubjectNumeral){
+		logger.debug("{} : selectOneComSubject SystemCompanyService",comSubjectNumeral);
+		return systemcomDao.selectOneComSubject(comSubjectNumeral);
+	}
+	
 	//회사 계정명별 검색
 	public List<ComSubject> selectOneComSubjectofsub(String comSubjectName){
 		logger.debug("{} : selectOneComSubjectofsys SystemCompanyService",comSubjectName);
