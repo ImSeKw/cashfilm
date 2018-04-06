@@ -16,6 +16,7 @@ import com.boa.cashfilm.service.SystemCompanyService;
 import com.boa.cashfilm.syscom.dto.ComSubject;
 import com.boa.cashfilm.syscom.dto.ComSystem;
 import com.boa.cashfilm.syscom.dto.ComSystemAndSubject;
+import com.boa.cashfilm.syscom.dto.UserComSubject;
 
 @Controller
 public class SystemCompanyController {
@@ -23,6 +24,23 @@ public class SystemCompanyController {
 	@Autowired
 	private SystemCompanyService systemcompanyService;
 	private static final Logger logger=LoggerFactory.getLogger(SystemCompanyController.class);
+	
+	//회사 사용자 계정과목 등록 action
+	@RequestMapping(value="/ComSystem/insertUComSubject",method=RequestMethod.POST)
+	public String insertUComSubject(UserComSubject ucsub) {
+		logger.debug("{} : insertUComSubject SystemCompanyController",ucsub);
+	systemcompanyService.insertUComSubject(ucsub);
+		return "redirect:/";
+	}
+	
+	//회사 사용자 계정과목 등록 form
+	@RequestMapping(value="/ComSystem/insertUComSubject",method=RequestMethod.GET)
+	public String insertUComSubject(Model model) {
+		logger.debug("{} : insertUComSubject SystemCompanyController");
+		List<ComSystem> csyslist =systemcompanyService.selectAllComSystem();
+		model.addAttribute("csyslist", csyslist);
+		return "system/insertUComSubject";
+	}
 	
 	//회사 계정과목 삭제 
 	@RequestMapping(value="/ComSystem/deleteComSubject",method=RequestMethod.GET)

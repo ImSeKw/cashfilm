@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.boa.cashfilm.syscom.dto.ComSubject;
 import com.boa.cashfilm.syscom.dto.ComSystem;
 import com.boa.cashfilm.syscom.dto.ComSystemAndSubject;
+import com.boa.cashfilm.syscom.dto.UserComSubject;
 
 
 
@@ -21,6 +22,12 @@ public class SystemCompanyDao {
 	private SqlSessionTemplate sqlsessiontemplate;
 	private static final Logger logger = LoggerFactory.getLogger(SystemCompanyDao.class);
 	private final String NAMESPACE ="com.boa.cashfilm.mapper.cashfilmMapper.";
+	
+	//회사 사용자 계정과목 등록
+	public int insertUComSubject(UserComSubject ucsub) {
+		logger.debug("{} : insertUComSubject SystemCompanyDao",ucsub);
+		return sqlsessiontemplate.insert(NAMESPACE + "insertUComSubject",ucsub);
+	}
 	
 	//회사 계정과목 삭제 
 	public int deleteComSubject(ComSubject csub) {

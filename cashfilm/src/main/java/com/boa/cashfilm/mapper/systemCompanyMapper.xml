@@ -4,6 +4,22 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.boa.cashfilm.mapper.cashfilmMapper">
+
+	<!--회사 사용자 계정과목 등록 -->
+	<select id="insertUComSubject" parameterType="com.boa.cashfilm.syscom.dto.UserComSubject">
+		INSERT 
+		INTO cfusercomsubject(
+			comSystemNumeral
+			,comCode
+			,userComSubjectName
+			,memberEmail
+			,userComSubjectNumeral) 
+		VALUES (#{comSystemNumeral}
+			,#{comCode}
+			,#{userComSubjectName}
+			,#{memberEmail}
+			,#{userComSubjectNumeral});
+	</select>
 	
 	<!--회사 계정과목 삭제  -->
 	<delete id="deleteComSubject" parameterType="com.boa.cashfilm.syscom.dto.ComSubject">

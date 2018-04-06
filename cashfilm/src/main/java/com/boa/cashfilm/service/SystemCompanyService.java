@@ -12,6 +12,7 @@ import com.boa.cashfilm.dao.SystemCompanyDao;
 import com.boa.cashfilm.syscom.dto.ComSubject;
 import com.boa.cashfilm.syscom.dto.ComSystem;
 import com.boa.cashfilm.syscom.dto.ComSystemAndSubject;
+import com.boa.cashfilm.syscom.dto.UserComSubject;
 
 
 @Service
@@ -21,6 +22,12 @@ public class SystemCompanyService {
 	@Autowired
 	private SystemCompanyDao systemcomDao;
 	private static final Logger logger = LoggerFactory.getLogger(SystemCompanyService.class);
+	
+	//회사 사용자 계정과목 등록
+	public int insertUComSubject(UserComSubject ucsub) {
+		logger.debug("{} : insertUComSubject SystemCompanyService",ucsub);
+		return systemcomDao.insertUComSubject(ucsub);
+	}
 	
 	//회사 계정과목 삭제 
 	public int deleteComSubject(ComSubject csub) {
