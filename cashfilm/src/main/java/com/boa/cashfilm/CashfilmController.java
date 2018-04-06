@@ -37,7 +37,8 @@ public class CashfilmController {
 	// 메인화면
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		logger.debug("메인화면");
+		logger.debug("메인화면 debug");
+		logger.info("메인 화면 info");
 		return "cashfilm";
 	}
 }
