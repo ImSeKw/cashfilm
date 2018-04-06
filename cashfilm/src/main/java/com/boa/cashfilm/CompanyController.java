@@ -176,13 +176,25 @@ public class CompanyController {
 		List<ComSectionListAndMember> list = companyService.comSectionList(memberSession.getComCode());
 		model.addAttribute("list", list);
 		logger.debug("{} : CompanyController comSectionRegistration list", list);
-
 		return "company/comSectionList";
 	}
-	//회사 부서 수정
+	//회사 부서 수정 form 
 	@RequestMapping(value = "company/comSectionModification" , method = RequestMethod.GET)
-	public String comSectionModification() {
-		return "";
+	public String comSectionModificationform(HttpSession httpSession,Model model) {
+		MemberSession memberSession = (MemberSession) httpSession.getAttribute("memberSession");
+		logger.debug("{} : CompanyController comSectionRegistration memberSession.getComCode()", memberSession.getComCode());
+		//comSection 조회를 통해서 화면에서 보여주기 때문에 comSectionList를 호출했다.
+		List<ComSectionListAndMember> list = companyService.comSectionList(memberSession.getComCode());
+		model.addAttribute("list", list);
+		logger.debug("{} : CompanyController comSectionModificationform list", list);
+		return "company/comSectionModification";
+	}
+	//회사 부서 수정 Action
+	@RequestMapping(value = "company/comSectionModification" , method = RequestMethod.POST)
+	public String comSectionModification(ComSection comSection) {
+		logger.debug("{} : CompanyController comSectionModificationform comSection", comSection);
+		companyService.comSectionModification(comSection);
+		return "redirect:/company/comSectionList";
 	}
 	//회사 부서 삭제
 	@RequestMapping(value = "company/comSectionDel" , method = RequestMethod.GET)
@@ -211,10 +223,6 @@ public class CompanyController {
 	public String comPositionDel() {
 		return "";
 	}
-	
-	
-	
-	
 	
 	//자신의 회사 정보  권한 조회(회사정보수정,부서관리,직급관리는 회사별권한승인여부의 값으로 판단한다)
 	@RequestMapping(value = "company/selectComAuthorityApproval" , method = RequestMethod.GET)

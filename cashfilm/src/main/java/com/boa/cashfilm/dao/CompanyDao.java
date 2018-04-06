@@ -26,6 +26,11 @@ public class CompanyDao {
 	//경로 설정 중복처리
 	private final String NAMESPACE = "com.boa.cashfilm.mapper.CompanyMapper.";
 	
+	
+	//회사 부서 수정
+	public void comSectionModification(ComSection comSection) {
+		sqlSessionTemplate.update(NAMESPACE + "comSectionModification", comSection);
+	}
 	//회사 부서 조회
 	public List<ComSection> comSectionList(Map<String,Object> map){
 		logger.debug("{} : <map comSectionList CompanyDao.java",map);

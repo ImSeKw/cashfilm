@@ -30,6 +30,9 @@
 					<a href="${pageContext.request.contextPath}/company/comAuthorityApprovalList?comCode=${memberSession.comCode}&memberEmail=${memberSession.memberEmail}"> 사원 등록 요청 조회</a>
 					<a href="${pageContext.request.contextPath}/company/comSectionListBeforeApproval?comCode=${memberSession.comCode}">부서 미등록 직원 조회 및 등록</a>
 					<a href="${pageContext.request.contextPath}/company/comPositionListBeforeApproval?comCode=${memberSession.comCode}">직급 미동록 직원 조회 및 등록</a>
+					<a href="${pageContext.request.contextPath}/company/comSectionRegistration?comCode=${memberSession.comCode}">부서 등록</a>
+					<a href="${pageContext.request.contextPath}/company/comSectionList?comCode=${memberSession.comCode}">부서 조회</a>
+					
 				</c:if>
 			</c:otherwise>
 		</c:choose>

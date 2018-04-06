@@ -27,6 +27,15 @@ public class CompanyService {
 	@Autowired
 	CompanyDao companyDao;
 	private static final Logger logger = LoggerFactory.getLogger(CompanyService.class);
+	
+	//회사 부서 수정
+	public void comSectionModification(ComSection comSection) {
+		logger.debug("{} : <comSection comSectionModification CompanyService.java",comSection);
+		comSection.setComCode(comSection.getComCode());
+		comSection.setComSectionCode(comSection.getComSectionCode());
+		comSection.setComSectionName(comSection.getComSectionName());
+		companyDao.comSectionModification(comSection);
+	}
 	//회사 부서 조회
 	public List<ComSection> comSectionList(MemberSession memberSession){
 		Map<String,Object> map = new HashMap<String,Object>();

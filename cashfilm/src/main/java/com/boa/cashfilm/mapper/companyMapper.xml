@@ -33,6 +33,16 @@
 		comCode=#{comCode}
 	</select>
 	<!--회사 부서 수정  -->
+	<update id="comSectionModification" parameterType="com.boa.cashfilm.company.dto.ComSection">
+	UPDATE 
+		cfcomsection 
+	SET 
+		comSectionName=#{comSectionName}
+	WHERE 
+		comCode=#{comCode}
+	AND
+		comSectionCode=#{comSectionCode};	
+	</update>
 	<!--회사 부서 삭제  -->
 	<!--회사 직급 등록  -->
 	<!--회사 직급 조회  -->

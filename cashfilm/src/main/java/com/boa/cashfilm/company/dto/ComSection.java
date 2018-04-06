@@ -1,14 +1,14 @@
 package com.boa.cashfilm.company.dto;
 
 public class ComSection {
-	private int comSection;
+	private int comSectionCode;
 	private int comCode;
 	private String comSectionName;
-	public int getComSection() {
-		return comSection;
+	public int getComSectionCode() {
+		return comSectionCode;
 	}
-	public void setComSection(int comSection) {
-		this.comSection = comSection;
+	public void setComSectionCode(int comSectionCode) {
+		this.comSectionCode = comSectionCode;
 	}
 	public int getComCode() {
 		return comCode;
@@ -24,8 +24,8 @@ public class ComSection {
 	}
 	@Override
 	public String toString() {
-		return "ComSection [comSection=" + comSection + ", comCode=" + comCode + ", comSectionName=" + comSectionName
-				+ "]";
+		return "ComSection [comSectionCode=" + comSectionCode + ", comCode=" + comCode + ", comSectionName="
+				+ comSectionName + "]";
 	}
 	
 }

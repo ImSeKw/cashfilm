@@ -17,7 +17,7 @@
 					${list.comSectionName}
 				</td>
 				<td>
-				<a href="${pageContext.request.contextPath}/company/?comCode=${list.comCode}&memberEmail=${list.memberEmail}&memberEmailApproval=${memberSession.memberEmail} " > 수정 
+				<a href="${pageContext.request.contextPath}/company/comSectionModification?comCode=${list.comCode}&comSectionCode=${list.comSectionCode}&comSectionName=${list.comSectionName} " > 수정 
 				</a> 
 				</td>
 				<td>
