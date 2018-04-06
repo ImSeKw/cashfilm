@@ -17,9 +17,11 @@ import com.boa.cashfilm.company.dto.ComAuthority;
 import com.boa.cashfilm.company.dto.ComCustomer;
 import com.boa.cashfilm.company.dto.ComListByIndividual;
 import com.boa.cashfilm.company.dto.ComPositionListAndMember;
+import com.boa.cashfilm.company.dto.ComSection;
 import com.boa.cashfilm.company.dto.ComSectionListAndMember;
 import com.boa.cashfilm.company.dto.Company;
 import com.boa.cashfilm.company.dto.InsertCompanyBaseInfo;
+import com.boa.cashfilm.member.dto.MemberSession;
 import com.boa.cashfilm.service.CompanyService;
 
 @Controller
@@ -30,8 +32,13 @@ public class CompanyController {
 	private static final Logger logger = LoggerFactory.getLogger(CompanyController.class);
 	
 	
-	
-	
+	//테스트입니다
+	@RequestMapping(value = "company/comcomcom" , method = RequestMethod.POST)
+	public String Test(ComAuthority comAuthority) {
+		logger.debug("{} : CompanyController Test comAuthority.getMemberEmail()",comAuthority.getMemberEmail());
+		return "redirect:/";
+	}
+
 	//기업회원 직급 등록을 위한 조회
 	@RequestMapping(value = "company/comPositionListBeforeApproval" , method = RequestMethod.GET)
 	public String comPositionListBeforeApproval(@RequestParam("comCode") int comCode,Model model) {
@@ -146,15 +153,31 @@ public class CompanyController {
 	public String comAuthorityList() {
 		return "";
 	}
-	//회사 부서 등록
+	
+	
+	//회사 부서 등록 form
 	@RequestMapping(value = "company/comSectionRegistration" , method = RequestMethod.GET)
 	public String comSectionRegistration() {
-		return "";
+
+		return "company/comSectionRegistrationForm";
+	}
+	//회사 부서 등록 Action
+	@RequestMapping(value = "company/comSectionRegistration" , method = RequestMethod.POST)
+	public String comSectionRegistration(ComSection comSection) {
+		logger.debug("{} : CompanyController comSectionRegistration comSection", comSection);
+		companyService.comSectionRegistration(comSection);
+		return "redirect:/company/comSectionList";
 	}
 	//회사 부서 조회
 	@RequestMapping(value = "company/comSectionList" , method = RequestMethod.GET)
-	public String comSectionList() {
-		return "";
+	public String comSectionList(HttpSession httpSession,Model model) {
+		MemberSession memberSession = (MemberSession) httpSession.getAttribute("memberSession");
+		logger.debug("{} : CompanyController comSectionRegistration memberSession.getComCode()", memberSession.getComCode());
+		List<ComSectionListAndMember> list = companyService.comSectionList(memberSession.getComCode());
+		model.addAttribute("list", list);
+		logger.debug("{} : CompanyController comSectionRegistration list", list);
+
+		return "company/comSectionList";
 	}
 	//회사 부서 수정
 	@RequestMapping(value = "company/comSectionModification" , method = RequestMethod.GET)

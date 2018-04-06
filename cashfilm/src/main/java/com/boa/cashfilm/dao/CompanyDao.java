@@ -13,6 +13,7 @@ import com.boa.cashfilm.company.dto.ComAuthority;
 import com.boa.cashfilm.company.dto.ComCustomer;
 import com.boa.cashfilm.company.dto.ComListByIndividual;
 import com.boa.cashfilm.company.dto.ComPositionListAndMember;
+import com.boa.cashfilm.company.dto.ComSection;
 import com.boa.cashfilm.company.dto.ComSectionListAndMember;
 import com.boa.cashfilm.company.dto.Company;
 import com.boa.cashfilm.company.dto.InsertCompanyBaseInfo;
@@ -24,8 +25,20 @@ public class CompanyDao {
 	private static final Logger logger = LoggerFactory.getLogger(CompanyDao.class);
 	//경로 설정 중복처리
 	private final String NAMESPACE = "com.boa.cashfilm.mapper.CompanyMapper.";
+	
+	//회사 부서 조회
+	public List<ComSection> comSectionList(Map<String,Object> map){
+		logger.debug("{} : <map comSectionList CompanyDao.java",map);
+		return sqlSessionTemplate.selectList(NAMESPACE + "comSectionList", map);
+	}
+	
+	//회사 부서 등록
+	public void comSectionRegistration(ComSection comSection) {
+		logger.debug("{} : <comSection comSectionRegistration CompanyDao.java",comSection);
+		sqlSessionTemplate.insert(NAMESPACE + "comSectionRegistration", comSection);
+	}
 	//회사 부서 조회(기업회원 부서 등록을 위한 조회)
-	public List<ComSectionListAndMember> comSectionList(Map<String,Object> map){
+	public List<ComSectionListAndMember> comSectionListRegistration(Map<String,Object> map){
 		logger.debug("{} : <map comSectionList CompanyDao.java",map);
 		return sqlSessionTemplate.selectList(NAMESPACE + "comSectionList", map);
 	}

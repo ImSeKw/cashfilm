@@ -5,42 +5,60 @@
 
 <c:set var="memberSession" value="${memberSession}"/>
 <c:set var="memberSessionBCP" value="${memberSessionByCompanyPayment}" />
+	<script type="text/javascript">
+		JQuery("#selectBox option:selected").val();
+		JQuery("select[name=selectBox]").val()
+		
+		$(document).ready(function(){
+			$("#insertButton").click(function(){
+				$("#comcomcom").submit();
+			});
+		});
+	</script>
+	<form action = "${pageContext.request.contextPath}/company/comcomcom" method = "post" id = "comcomcom"><table border=1>
+		<tr>
+			<th>회원 이메일</th>
+			<th>회원 이름</th>
+			<th>부서 이름</th>
+		</tr>
+		<c:forEach var="list" items="${list}">
+		
+				<tr>
+					<td>
+						<input type="text" name ="memberEmail" id = "memberEmail" value="${list.memberEmail}" readonly>	
 
-<table border=1>
-	<tr>
-		<th>회원 이메일</th>
-		<th>회원 이름</th>
-		<th>부서 이름</th>
-	</tr>
-	<c:forEach var="list" items="${list}">
+					</td>
+					<td>
+						<input type="text" name ="memberName" id = "memberName" value="${list.memberName}" readonly>	
+						
+					</td>
+					<td>			
+						<select id="selectBox" name="selectBox" SIZE=1>
+							<OPTION VALUE="">선택</OPTION>
+							<c:forEach var="sectionList" items="${sectionList}">
+						        <OPTION VALUE="${sectionList.comSectionCode}">${sectionList.comSectionName}</OPTION>
+						    </c:forEach>
+	  
+					    </select>
+					</td>
+					<td>
+						<button type="button" id="insertButton" >확인</button>
+					</td>
+				</tr>
+		</c:forEach>
+	</table>
+		
 	
-			<tr>
-				<td>
-					${list.memberEmail}
-				</td>
-				<td>
-					${list.memberName}
-				</td>
-				<td>
-
-				</td>
-			</tr>
-
-	</c:forEach>
-	<c:forEach var="sectionList" items="${sectionList}">
-				<SELECT NAME=sltSample SIZE=1>
-			        <OPTION VALUE="${sectionList.comSectionName}">${sectionList.comSectionName}</OPTION>
-			    </SELECT>
-	</c:forEach>
-
-
-
-
-<%-- 		<td>
-		<a href="${pageContext.request.contextPath}/company/?comCode=${list.comCode}&memberEmail=${list.memberEmail}&memberEmailApproval=${memberSession.memberEmail} " > 승인 
-		</a> 
-		</td> --%>
-			
-
-</table>
+	<%-- 
+		<a href="${pageContext.request.contextPath}/company/comcomcom?memberEmail=${list.memberEmail}&comSectionName=${sectionList.comSectionCode} " > 승인 
+		</a>   --%>
+	
+	<%-- 		<td>
+			<a href="${pageContext.request.contextPath}/company/?comCode=${list.comCode}&memberEmail=${list.memberEmail}&memberEmailApproval=${memberSession.memberEmail} " > 승인 
+			</a> 
+			</td> --%>
+				
+	
+	
+	</form>
 <jsp:include page="/WEB-INF/views/module/bottom.jsp"/>

@@ -11,6 +11,17 @@
 	<!--회사코드를 기준으로 회사개설신청 이메일 조회  -->
 
 	<!--회사 부서 등록  -->
+	<insert id="comSectionRegistration" parameterType="com.boa.cashfilm.company.dto.ComSection">
+		INSERT INTO 
+			cfcomsection(
+			comCode
+			,comSectionName
+		)VALUES(
+			#{comCode}
+			,#{comSectionName}
+		)
+	</insert>
+	
 	<!--회사 부서 조회  -->
 	<select id="comSectionList" parameterType="java.util.List" resultType="java.util.Map">
 	SELECT 
@@ -63,6 +74,10 @@
 		comau.comCode=#{comCode}
 	AND
 		comPositionCode IS NULL
+	AND
+		comSectionCode IS NOT NULL
+
+		
 	</select>
 	<!--기업회원 직급 등록  -->
 	<!--기업회원 직급 조회  -->

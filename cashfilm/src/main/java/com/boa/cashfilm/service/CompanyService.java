@@ -15,22 +15,41 @@ import com.boa.cashfilm.company.dto.ComAuthority;
 import com.boa.cashfilm.company.dto.ComCustomer;
 import com.boa.cashfilm.company.dto.ComListByIndividual;
 import com.boa.cashfilm.company.dto.ComPositionListAndMember;
+import com.boa.cashfilm.company.dto.ComSection;
 import com.boa.cashfilm.company.dto.ComSectionListAndMember;
 import com.boa.cashfilm.company.dto.Company;
 import com.boa.cashfilm.company.dto.InsertCompanyBaseInfo;
 import com.boa.cashfilm.dao.CompanyDao;
+import com.boa.cashfilm.member.dto.MemberSession;
 
 @Service
 public class CompanyService {
 	@Autowired
 	CompanyDao companyDao;
 	private static final Logger logger = LoggerFactory.getLogger(CompanyService.class);
+	//회사 부서 조회
+	public List<ComSection> comSectionList(MemberSession memberSession){
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("comCode", memberSession.getComCode());
+		companyDao.comSectionList(map);
+		return null;
+	}
+	//회사 부서 등록
+	public void comSectionRegistration(ComSection comSection) {
+		logger.debug("{} : <comSection.getComCode() comSectionRegistration CompanyService.java",comSection.getComCode());
+		logger.debug("{} : <comSection.getComSectionName() comSectionRegistration CompanyService.java",comSection.getComSectionName());
+		comSection.setComCode(comSection.getComCode());
+		comSection.setComSectionName(comSection.getComSectionName());
+		companyDao.comSectionRegistration(comSection);
+	}
+	
+	
 	//회사 부서 조회(기업회원 부서 등록을 위한 조회)
 	public List<ComSectionListAndMember> comSectionList(int comCode){
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("comCode", comCode);
 		logger.debug("{} : <map comSectionList CompanyService.java",map);
-		List<ComSectionListAndMember> returnList =  companyDao.comSectionList(map);
+		List<ComSectionListAndMember> returnList =  companyDao.comSectionListRegistration(map);
 		logger.debug("{} : <returnList comSectionList CompanyService.java",returnList);
 		return returnList;
 	}
