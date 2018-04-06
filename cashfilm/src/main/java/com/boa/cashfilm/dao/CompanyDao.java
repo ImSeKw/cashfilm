@@ -12,6 +12,8 @@ import org.springframework.stereotype.Repository;
 import com.boa.cashfilm.company.dto.ComAuthority;
 import com.boa.cashfilm.company.dto.ComCustomer;
 import com.boa.cashfilm.company.dto.ComListByIndividual;
+import com.boa.cashfilm.company.dto.ComPositionListAndMember;
+import com.boa.cashfilm.company.dto.ComSectionListAndMember;
 import com.boa.cashfilm.company.dto.Company;
 import com.boa.cashfilm.company.dto.InsertCompanyBaseInfo;
 
@@ -22,7 +24,21 @@ public class CompanyDao {
 	private static final Logger logger = LoggerFactory.getLogger(CompanyDao.class);
 	//경로 설정 중복처리
 	private final String NAMESPACE = "com.boa.cashfilm.mapper.CompanyMapper.";
-	
+	//회사 부서 조회(기업회원 부서 등록을 위한 조회)
+	public List<ComSectionListAndMember> comSectionList(Map<String,Object> map){
+		logger.debug("{} : <map comSectionList CompanyDao.java",map);
+		return sqlSessionTemplate.selectList(NAMESPACE + "comSectionList", map);
+	}
+	//기업회원 직급 등록을 위한 조회
+	public List<ComPositionListAndMember> comPositionListBeforeApproval(Map<String,Object> map){
+		logger.debug("{} : <map comPositionListBeforeApproval CompanyDao.java",map);
+		return sqlSessionTemplate.selectList(NAMESPACE + "comPositionListBeforeApproval", map);
+	}
+	//기업회원 부서 등록을 위한 조회
+	public List<ComSectionListAndMember> comSectionListBeforeApproval(Map<String,Object> map){
+		logger.debug("{} : <map comSectionListBeforeApproval CompanyDao.java",map);
+		return sqlSessionTemplate.selectList(NAMESPACE + "comSectionListBeforeApproval", map);
+	}
 	//회사체계변경 권한을 가진 회원이 회사권한승인  2(회사별권한여부 테이블에 회사별권한여부 0->1,회사별권한승인일,회사별승인이메일 update )
 	public void comAuthorityApprovalByAuthority(Map<String,Object> map) {
 		logger.debug("{} : <map comAuthorityApprovalByAuthority CompanyDao.java",map);

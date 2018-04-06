@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.boa.cashfilm.company.dto.ComAuthority;
 import com.boa.cashfilm.company.dto.ComCustomer;
 import com.boa.cashfilm.company.dto.ComListByIndividual;
+import com.boa.cashfilm.company.dto.ComPositionListAndMember;
+import com.boa.cashfilm.company.dto.ComSectionListAndMember;
 import com.boa.cashfilm.company.dto.Company;
 import com.boa.cashfilm.company.dto.InsertCompanyBaseInfo;
 import com.boa.cashfilm.service.CompanyService;
@@ -26,6 +28,31 @@ public class CompanyController {
 	@Autowired
 	CompanyService companyService;
 	private static final Logger logger = LoggerFactory.getLogger(CompanyController.class);
+	
+	
+	
+	
+	//기업회원 직급 등록을 위한 조회
+	@RequestMapping(value = "company/comPositionListBeforeApproval" , method = RequestMethod.GET)
+	public String comPositionListBeforeApproval(@RequestParam("comCode") int comCode,Model model) {
+		logger.debug("{} : CompanyController comPositionListBeforeApproval comCode",comCode);
+		List<ComPositionListAndMember> list = companyService.comPositionListBeforeApproval(comCode);
+		logger.debug("{} : CompanyController comPositionListBeforeApproval list",list);
+		model.addAttribute("list", list);
+		return "company/comPositionListBeforeApproval";
+	}
+	//기업회원 부서 등록을 위한 조회
+	//회사 부서 조회(기업회원 부서 등록을 위한 조회)
+	@RequestMapping(value = "company/comSectionListBeforeApproval" , method = RequestMethod.GET)
+	public String comSectionListBeforeApproval(@RequestParam("comCode") int comCode,Model model) {
+		logger.debug("{} : CompanyController comSectionListBeforeApproval comCode",comCode);
+		List<ComSectionListAndMember> list = companyService.comSectionListBeforeApproval(comCode);
+		List<ComSectionListAndMember> sectionList = companyService.comSectionList(comCode);
+		logger.debug("{} : CompanyController comSectionListBeforeApproval list",list);
+		model.addAttribute("list", list);
+		model.addAttribute("sectionList", sectionList);
+		return "company/comSectionListBeforeApproval";
+	}
 	//회사체계변경 권한을 가진 회원이 회사권한승인  1(memberEmail테이블에 회원구분코드 기업회원으로 변경,회사코드 생성)
 	//회사체계변경 권한을 가진 회원이 회사권한승인  2(회사별권한여부 테이블에 회사별권한여부 0->1,회사별권한승인일,회사별승인이메일 update )
 	@RequestMapping(value = "company/comAuthorityApprovalByMember" , method = RequestMethod.GET)
@@ -33,14 +60,10 @@ public class CompanyController {
 		logger.debug("{} : CompanyController comAuthorityApprovalByMember memberEmail",memberEmail);
 		logger.debug("{} : CompanyController comAuthorityApprovalByMember comCode",comCode);
 		logger.debug("{} : CompanyController comAuthorityApprovalByMember memberEmailApproval",memberEmailApproval);
-
 		companyService.comAuthorityApprovalByMember(memberEmail, comCode);
-		
 		companyService.comAuthorityApprovalByAuthority(memberEmail, comCode, memberEmailApproval);
-		
 		return "redirect:/";
 	}
-	
 	//개인회원이 회사승인 요청 후 회사체계변경가능자가 승인요청 조회(회사별 권한 승인 여부 조회)
 	@RequestMapping(value = "company/comAuthorityApprovalList" , method = RequestMethod.GET)
 	public String comAuthorityApprovalList(@RequestParam("memberEmail") String memberEmail,@RequestParam("comCode") int comCode,Model model) {

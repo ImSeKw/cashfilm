@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.boa.cashfilm.company.dto.ComAuthority;
 import com.boa.cashfilm.company.dto.ComCustomer;
 import com.boa.cashfilm.company.dto.ComListByIndividual;
+import com.boa.cashfilm.company.dto.ComPositionListAndMember;
+import com.boa.cashfilm.company.dto.ComSectionListAndMember;
 import com.boa.cashfilm.company.dto.Company;
 import com.boa.cashfilm.company.dto.InsertCompanyBaseInfo;
 import com.boa.cashfilm.dao.CompanyDao;
@@ -23,7 +25,33 @@ public class CompanyService {
 	@Autowired
 	CompanyDao companyDao;
 	private static final Logger logger = LoggerFactory.getLogger(CompanyService.class);
-	
+	//회사 부서 조회(기업회원 부서 등록을 위한 조회)
+	public List<ComSectionListAndMember> comSectionList(int comCode){
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("comCode", comCode);
+		logger.debug("{} : <map comSectionList CompanyService.java",map);
+		List<ComSectionListAndMember> returnList =  companyDao.comSectionList(map);
+		logger.debug("{} : <returnList comSectionList CompanyService.java",returnList);
+		return returnList;
+	}
+	//기업회원 직급 등록을 위한 조회
+	public List<ComPositionListAndMember> comPositionListBeforeApproval(int comCode){
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("comCode", comCode);
+		logger.debug("{} : <map comPositionListBeforeApproval CompanyService.java",map);
+		List<ComPositionListAndMember> returnList =  companyDao.comPositionListBeforeApproval(map);
+		logger.debug("{} : <returnList comPositionListBeforeApproval CompanyService.java",returnList);
+		return returnList;
+	}
+	//기업회원 부서 등록을 위한 조회
+	public List<ComSectionListAndMember> comSectionListBeforeApproval(int comCode){
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("comCode", comCode);
+		logger.debug("{} : <map comSectionListBeforeApproval CompanyService.java",map);
+		List<ComSectionListAndMember> returnList =  companyDao.comSectionListBeforeApproval(map);
+		logger.debug("{} : <returnList comSectionListBeforeApproval CompanyService.java",returnList);
+		return returnList;
+	}
 	//회사체계변경 권한을 가진 회원이 회사권한승인  2(회사별권한여부 테이블에 회사별권한여부 0->1,회사별권한승인일,회사별승인이메일 update )
 	public void comAuthorityApprovalByAuthority(String memberEmail,int comCode,String memberEmailApproval) {
 		Map<String,Object> map = new HashMap<String, Object>();
@@ -142,6 +170,7 @@ public class CompanyService {
 		logger.debug("{} : CountryService insertCompanyBaseInfo insertCompanyBaseInfo.getComCondition()", insertCompanyBaseInfo.getComCondition());
 
 	}
+
 
 
 

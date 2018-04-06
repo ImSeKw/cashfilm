@@ -9,22 +9,61 @@
 	<!--회사코드를 기준으로 회사별권한승인여부 조회  -->
 	
 	<!--회사코드를 기준으로 회사개설신청 이메일 조회  -->
-	
+
 	<!--회사 부서 등록  -->
 	<!--회사 부서 조회  -->
+	<select id="comSectionList" parameterType="java.util.List" resultType="java.util.Map">
+	SELECT 
+		comSectionCode
+		,comSectionName
+	FROM
+		cfcomsection
+	WHERE
+		comCode=#{comCode}
+	</select>
 	<!--회사 부서 수정  -->
 	<!--회사 부서 삭제  -->
 	<!--회사 직급 등록  -->
 	<!--회사 직급 조회  -->
 	<!--회사 직급 수정  -->
 	<!--회사 직급 삭제  -->
-	<!--기업회원 부서 등록전 조회  -->
+	<!-- 기업회원 부서 등록을 위한 조회  -->
+	<select id="comSectionListBeforeApproval" parameterType="java.util.List" resultType="java.util.Map">
+	SELECT
+		comau.memberEmail
+		,mem.memberName
+	FROM
+		cfcomauthority AS comau
+	INNER JOIN
+		cfmemberemail AS mem
+	ON
+		comau.memberEmail=mem.memberEmail
+	WHERE
+		comau.comCode=#{comCode}
+	AND
+		comSectionCode IS NULL
 
+	</select>
 	<!--기업회원 부서 등록  -->
 	<!--기업회원 부서 조회  -->
 	<!--기업회원 부서 수정  -->
 	<!--기업회원 부서 삭제  -->
 	<!--기업회원 직급 등록전 조회  -->
+	<select id="comPositionListBeforeApproval" parameterType="java.util.List" resultType="java.util.Map">
+	SELECT
+		comau.memberEmail
+		,mem.memberName
+	FROM
+		cfcomauthority AS comau
+	INNER JOIN
+		cfmemberemail AS mem
+	ON
+		comau.memberEmail=mem.memberEmail
+	WHERE
+		comau.comCode=#{comCode}
+	AND
+		comPositionCode IS NULL
+	</select>
 	<!--기업회원 직급 등록  -->
 	<!--기업회원 직급 조회  -->
 	<!--기업회원 직급 수정  -->
@@ -35,6 +74,7 @@
 		cfcomauthority
 	SET 
 		comAuthorityApproval=1
+		
 		,comAuthorityApprovalDay=now()
 		,comAuthorityApprovalEmail=#{memberEmailApproval}
 	WHERE 
