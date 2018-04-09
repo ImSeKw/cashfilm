@@ -27,16 +27,20 @@
 											<li class="submenu"><a href="${pageContext.request.contextPath}/company/comListByIndividual">회사검색</a></li>
 										</c:when>
 								<c:otherwise>
-									<li class="submenu"><a href="${pageContext.request.contextPath}/company/comInfo?comCode=${memberSession.comCode}">회사정보</a></li>
+									<li class="submenu">회사정보<a href="${pageContext.request.contextPath}/company/comInfo?comCode=${memberSession.comCode}">회사정보</a></li>
 									<li class="submenu"><a href="${pageContext.request.contextPath}/company/comCustomerRegistration">거래처 등록</a></li>
 									<li class="submenu"><a href="${pageContext.request.contextPath}/company/comCustomerList?comCode=${memberSession.comCode}">거래처 조회</a></li>
 								<c:if test="${memberSession.comSystemChange eq 1 }">
-									<li class="submenu"><a href="${pageContext.request.contextPath}//">회사체계변경입니다.공사중!!</a></li>
-									<li class="submenu"><a href="${pageContext.request.contextPath}/company/comAuthorityApprovalList?comCode=${memberSession.comCode}&memberEmail=${memberSession.memberEmail}"> 사원 등록 요청 조회</a></li>
-									<li class="submenu"><a href="${pageContext.request.contextPath}/company/comSectionListBeforeApproval?comCode=${memberSession.comCode}">부서 미등록 직원 조회 및 등록</a></li>
-									<li class="submenu"><a href="${pageContext.request.contextPath}/company/comPositionListBeforeApproval?comCode=${memberSession.comCode}">직급 미동록 직원 조회 및 등록</a></li>
-									<li class="submenu"><a href="${pageContext.request.contextPath}/company/comSectionRegistration?comCode=${memberSession.comCode}">부서 등록</a></li>
-									<li class="submenu"><a href="${pageContext.request.contextPath}/company/comSectionList?comCode=${memberSession.comCode}">부서 조회</a></li>
+									<li class="submenu">
+										<a href="#">회사체계변경공사중!!</a>
+										<ul>
+											<li><a href="${pageContext.request.contextPath}/company/comAuthorityApprovalList?comCode=${memberSession.comCode}&memberEmail=${memberSession.memberEmail}"> 사원 등록 요청 조회</a></li>
+											<li><a href="${pageContext.request.contextPath}/company/comSectionListBeforeApproval?comCode=${memberSession.comCode}">부서 미등록 직원 조회 및 등록</a></li>
+											<li><a href="${pageContext.request.contextPath}/company/comPositionListBeforeApproval?comCode=${memberSession.comCode}">직급 미동록 직원 조회 및 등록</a></li>
+											<li><a href="${pageContext.request.contextPath}/company/comSectionRegistration?comCode=${memberSession.comCode}">부서 등록</a></li>
+											<li><a href="${pageContext.request.contextPath}/company/comSectionList?comCode=${memberSession.comCode}">부서 조회</a></li>
+										</ul>
+									</li>	
 								</c:if>
 								</c:otherwise>
 									</c:choose>
