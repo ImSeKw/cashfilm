@@ -4,8 +4,23 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.boa.cashfilm.mapper.itemMapper">
+	<!-- 상품 판매 조회 -->
+	<select id="selectMyItemSell" parameterType="com.boa.cashfilm.item.dto.IndiOrCom" resultType="com.boa.cashfilm.item.dto.Item">
+		SELECT
+			myItemCode
+			, myItemName
+			, myItemAmount
+			, myItemExpiration
+		FROM cfmyitem
+		<if test="indiOrCom != 1">
+			WHERE myItemName LIKE '%개인%'
+		</if>
+		<if test="indiOrCom != 0">
+			WHERE myItemName LIKE '%회사%'
+		</if>
+	</select>
 
-	<!-- CfMyItem 상품추가 쿼리 -->
+	<!-- CfMyItem 관리자 상품추가 쿼리 -->
 	<insert id="insertCfMyItem" parameterType="com.boa.cashfilm.item.dto.Item">
 		INSERT INTO 
 			cfmyitem (
@@ -20,7 +35,7 @@
 			)
 	</insert>
 	
-	<!-- cfMyItem 상품조회 -->
+	<!-- cfMyItem 관리자 상품조회 -->
 	<select id="selectCfMyItem" resultType="com.boa.cashfilm.item.dto.Item">
 		SELECT
 			myItemCode
@@ -30,7 +45,7 @@
 		FROM cfmyitem;
 	</select>
 	
-	<!-- cfMyItem 상품수정 -->
+	<!-- cfMyItem 관리자 상품수정 -->
 	<update id="updateCfMyItem" parameterType="com.boa.cashfilm.item.dto.Item">	
 		UPDATE cfmyitem
 		SET 
@@ -41,7 +56,7 @@
 			myItemCode = #{myItemCode}
 	</update>
 	
-	<!-- cfmyItem 상품수정 code조회 select -->
+	<!-- cfmyItem 관리자 상품수정 code조회 select -->
 	<select id="selectAndupdateCfMyItem" parameterType="int" resultType="com.boa.cashfilm.item.dto.Item">
 		SELECT
 			myItemCode
@@ -53,7 +68,7 @@
 			myItemCode = #{myItemCode}
 	</select>
 
-	<!-- cfMyItem 상품삭제 -->
+	<!-- cfMyItem 관리자 상품삭제 -->
 	<delete id="deleteCfMyItem" parameterType="com.boa.cashfilm.item.dto.Item">
 		DELETE
 		FROM
@@ -61,4 +76,5 @@
 		WHERE 
 			myItemCode = #{myItemCode}
 	</delete>
+
 </mapper>
