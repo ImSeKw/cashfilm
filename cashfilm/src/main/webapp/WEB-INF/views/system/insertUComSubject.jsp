@@ -12,7 +12,6 @@
 		       </c:forEach>
 			</select>
 		<br>
-		
 		회사코드:<input type="text" name="comCode" value="${memberSession.comCode}" readonly="readonly">
 		<br>
 		회사 사용자계정과목명:<input type="text" name="userComSubjectName">
@@ -24,5 +23,5 @@
 	</form>
 	
 	<a href="${pageContext.request.contextPath}/ComSystem/selectUComSubject?comCode=${memberSession.comCode}">회사 사용자 계정과목 검색</a>
-	
+	<a href="${pageContext.request.contextPath}/ComSystem/insertComContent?comCode=${memberSession.comCode}">회사 적요등록</a>
 <jsp:include page="/WEB-INF/views/module/bottom.jsp"/>

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 import com.boa.cashfilm.service.SystemCompanyService;
+import com.boa.cashfilm.syscom.dto.ComContent;
 import com.boa.cashfilm.syscom.dto.ComSubject;
 import com.boa.cashfilm.syscom.dto.ComSystem;
 import com.boa.cashfilm.syscom.dto.ComSystemAndSubject;
@@ -28,7 +29,26 @@ public class SystemCompanyController {
 	private SystemCompanyService systemcompanyService;
 	private static final Logger logger=LoggerFactory.getLogger(SystemCompanyController.class);
 	
-	//회사 사용자 계정과목 삭제  -->
+	//회사 적요등록 action 
+	@RequestMapping(value="/ComSystem/insertComContent",method=RequestMethod.POST)
+	public String insertComContent(ComContent ccon) {
+		logger.debug("{} : insertComContent action SystemCompanyController",ccon);
+		systemcompanyService.insertComContent(ccon);
+		return "redirect:/";
+	}
+	
+	//회사 적요등록 form
+	@RequestMapping(value="/ComSystem/insertComContent",method=RequestMethod.GET)
+	public String insertComContent(Model model,@RequestParam(value="comCode")int comCode) {
+		logger.debug("{} : insertComContent SystemCompanyController");
+		List<ComSystemAndSubject> csyssublist =systemcompanyService.selectAllComSubject();
+		model.addAttribute("csyssublist", csyssublist);
+		List<ComSystemAndUSubject> csysusublist = systemcompanyService.selectUComSubject(comCode);
+		model.addAttribute("csysusublist", csysusublist);
+		return "system/insertComContent";
+	}
+		
+	//회사 사용자 계정과목 삭제 
 	@RequestMapping(value="/ComSystem/deleteUComSubject",method=RequestMethod.GET)
 	public String deleteUComSubject(UserComSubject ucsub) {
 		logger.debug("{} : deleteUComSubject SystemCompanyController",ucsub);

@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.boa.cashfilm.syscom.dto.ComContent;
 import com.boa.cashfilm.syscom.dto.ComSubject;
 import com.boa.cashfilm.syscom.dto.ComSystem;
 import com.boa.cashfilm.syscom.dto.ComSystemAndSubject;
@@ -23,6 +24,12 @@ public class SystemCompanyDao {
 	private SqlSessionTemplate sqlsessiontemplate;
 	private static final Logger logger = LoggerFactory.getLogger(SystemCompanyDao.class);
 	private final String NAMESPACE ="com.boa.cashfilm.mapper.cashfilmMapper.";
+	
+	//회사 적요관리 
+	public int insertComContent(ComContent ccon) {
+		logger.debug("{} : insertComContent SystemCompanyDao",ccon);
+		return sqlsessiontemplate.insert(NAMESPACE + "insertComContent",ccon);
+	}
 	
 	//회사 사용자 계정과목 삭제  -->
 	public int deleteUComSubject(UserComSubject ucsub) {

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.boa.cashfilm.dao.SystemCompanyDao;
+import com.boa.cashfilm.syscom.dto.ComContent;
 import com.boa.cashfilm.syscom.dto.ComSubject;
 import com.boa.cashfilm.syscom.dto.ComSystem;
 import com.boa.cashfilm.syscom.dto.ComSystemAndSubject;
@@ -24,6 +25,11 @@ public class SystemCompanyService {
 	private SystemCompanyDao systemcomDao;
 	private static final Logger logger = LoggerFactory.getLogger(SystemCompanyService.class);
 	
+	//회사 적요관리 
+	public int insertComContent(ComContent ccon) {
+		logger.debug("{} : insertComContent SystemCompanyService",ccon);
+		return systemcomDao.insertComContent(ccon);
+	}
 
 	//회사 사용자 계정과목 삭제  -->
 	public int deleteUComSubject(UserComSubject ucsub) {
