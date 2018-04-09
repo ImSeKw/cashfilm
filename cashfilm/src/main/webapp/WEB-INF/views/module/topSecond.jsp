@@ -6,7 +6,7 @@
 
 			<!-- Header -->
 				<header id="header" class="alt">
-					<h1 id="logo"><a href="index.html">Cash <span>Film</span></a></h1>
+					<h1 id="logo"><a href="${pageContext.request.contextPath}/">Cash <span>Film</span></a></h1>
 					<c:set var="memberSession" value="${memberSession}"/>
 					<c:set var="memberSessionBCP" value="${memberSessionByCompanyPayment}" />
 					<nav id="nav">
@@ -27,7 +27,7 @@
 											<li class="submenu"><a href="${pageContext.request.contextPath}/company/comListByIndividual">회사검색</a></li>
 										</c:when>
 								<c:otherwise>
-									<li class="submenu">회사정보<a href="${pageContext.request.contextPath}/company/comInfo?comCode=${memberSession.comCode}">회사정보</a></li>
+									<li class="submenu"><a href="${pageContext.request.contextPath}/company/comInfo?comCode=${memberSession.comCode}">회사정보</a></li>
 									<li class="submenu"><a href="${pageContext.request.contextPath}/company/comCustomerRegistration">거래처 등록</a></li>
 									<li class="submenu"><a href="${pageContext.request.contextPath}/company/comCustomerList?comCode=${memberSession.comCode}">거래처 조회</a></li>
 								<c:if test="${memberSession.comSystemChange eq 1 }">
@@ -49,26 +49,6 @@
 									</c:if>
 								</c:otherwise>
 									</c:choose>
-							<!-- <li class="submenu">
-								<a href="#">Layouts</a>
-								<ul>
-									<li><a href="left-sidebar.html">Left Sidebar</a></li>
-									<li><a href="right-sidebar.html">Right Sidebar</a></li>
-									<li><a href="no-sidebar.html">No Sidebar</a></li>
-									<li><a href="contact.html">Contact</a></li>
-									<li class="submenu">
-										<a href="#">Submenu</a>
-										<ul>
-											<li><a href="#">Dolore Sed</a></li>
-											<li><a href="#">Consequat</a></li>
-											<li><a href="#">Lorem Magna</a></li>
-											<li><a href="#">Sed Magna</a></li>
-											<li><a href="#">Ipsum Nisl</a></li>
-										</ul>
-									</li>
-								</ul>
-							</li>
-							<li><a href="#" class="button special">Sign Up</a></li> -->
 						</ul>
 					</nav>
 				</header>
