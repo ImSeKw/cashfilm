@@ -5,6 +5,52 @@
 
 <mapper namespace="com.boa.cashfilm.mapper.cashfilmMapper">
 	
+	<!--회사 적요 삭제  -->
+	<delete id="deleteComContent" parameterType="com.boa.cashfilm.syscom.dto.ComContent">
+		DELETE FROM cfcomcontent WHERE comContentCode=#{comContentCode};
+	</delete>
+	
+	<!--회사 적요 수정 -->
+	<update id="updateComContent" parameterType="com.boa.cashfilm.syscom.dto.ComContent">
+		UPDATE cfcomcontent 
+		SET 
+		comContentName=#{comContentName}
+		WHERE  comContentCode=#{comContentCode}
+	</update>
+
+	<!--회사 적요 수정을 위한 검색-->
+	<select id="selectOneComContent" parameterType="int" resultType="com.boa.cashfilm.syscom.dto.ComContent">
+		SELECT comContentCode
+			,comSubjectNumeral
+			,userComSubjectCode
+			,comContentName
+			,comCode
+			,memberEmail
+			,comContentRegistrationDay 
+		FROM cfcomcontent 
+		WHERE comContentCode=#{comContentCode}
+	</select>
+	
+	<!--회사 적요 검색 -->
+	<select id="selectAllComContent" parameterType="int" resultType="com.boa.cashfilm.syscom.dto.ComContentAndSubUsub">
+		SELECT 
+			cc.comContentCode
+			,cc.comSubjectNumeral
+			,cs.comSubjectName
+			,cc.userComSubjectCode
+			,ucs.userComSubjectName
+			,cc.comContentName
+			,cc.comCode
+			,cc.memberEmail
+			,cc.comContentRegistrationDay
+		FROM cfcomcontent AS cc
+		LEFT JOIN cfcomsubject AS cs 
+		ON cc.comSubjectNumeral = cs.comSubjectNumeral
+		LEFT JOIN cfusercomsubject AS ucs
+		ON cc.userComSubjectCode = ucs.userComSubjectCode
+		WHERE cc.comCode=#{comCode};
+	
+	</select>
 	<!--회사 적요 등록 -->
 	<insert id="insertComContent" parameterType="com.boa.cashfilm.syscom.dto.ComContent">
 		INSERT 

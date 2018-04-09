@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.boa.cashfilm.dao.SystemCompanyDao;
 import com.boa.cashfilm.syscom.dto.ComContent;
+import com.boa.cashfilm.syscom.dto.ComContentAndSubUsub;
 import com.boa.cashfilm.syscom.dto.ComSubject;
 import com.boa.cashfilm.syscom.dto.ComSystem;
 import com.boa.cashfilm.syscom.dto.ComSystemAndSubject;
@@ -24,6 +25,30 @@ public class SystemCompanyService {
 	@Autowired
 	private SystemCompanyDao systemcomDao;
 	private static final Logger logger = LoggerFactory.getLogger(SystemCompanyService.class);
+	
+	//회사 적요 삭제
+	public int deleteComContent(ComContent cc) {
+		logger.debug("{} : deleteComContent SystemCompanyService",cc);
+		return systemcomDao.deleteComContent(cc);
+	}
+	
+	//회사 적요 수정
+	public int updateComContent(ComContent cc) {
+		logger.debug("{} : updateComContent SystemCompanyService",cc);
+		return systemcomDao.updateComContent(cc);
+	}
+	
+	//회사 적요 수정을 위한 검색
+	public ComContent selectOneComContent(int comContentCode){
+		logger.debug("{} : selectOneComContent SystemCompanyService",comContentCode);
+		return systemcomDao.selectOneComContent(comContentCode);
+	}
+	
+	//회사 적요 검색 
+	public List<ComContentAndSubUsub> selectAllComContent(int comCode){
+		logger.debug("{} : selectAllComContent SystemCompanyService",comCode);
+		return systemcomDao.selectAllComContent(comCode);
+	}
 	
 	//회사 적요관리 
 	public int insertComContent(ComContent ccon) {

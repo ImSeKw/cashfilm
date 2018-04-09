@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.boa.cashfilm.service.SystemCompanyService;
 import com.boa.cashfilm.syscom.dto.ComContent;
+import com.boa.cashfilm.syscom.dto.ComContentAndSubUsub;
 import com.boa.cashfilm.syscom.dto.ComSubject;
 import com.boa.cashfilm.syscom.dto.ComSystem;
 import com.boa.cashfilm.syscom.dto.ComSystemAndSubject;
@@ -28,6 +29,40 @@ public class SystemCompanyController {
 	@Autowired
 	private SystemCompanyService systemcompanyService;
 	private static final Logger logger=LoggerFactory.getLogger(SystemCompanyController.class);
+	
+	//회사 적요 삭제
+	@RequestMapping(value="/ComSystem/deleteComContent",method=RequestMethod.GET)
+	public String deleteComContent(ComContent cc) {
+		logger.debug("{} : deleteComContent SystemCompanyController",cc);
+		systemcompanyService.deleteComContent(cc);
+		return "redirect:/";
+	}
+	
+	//회사 적요 수정
+	@RequestMapping(value="/ComSystem/updateComContent",method=RequestMethod.POST)
+	public String updateComContent(ComContent cc) {
+		logger.debug("{} : updateComContent SystemCompanyController",cc);
+		systemcompanyService.updateComContent(cc);
+		return "redirect:/";
+	}
+	
+	//회사 적요 수정form
+	@RequestMapping(value="/ComSystem/updateComContent",method=RequestMethod.GET)
+	public String selectOneComContent(Model model,@RequestParam(value="comContentCode")int comContentCode){
+		logger.debug("{} : selectOneComContent form SystemCompanyController",comContentCode);
+		ComContent cc =systemcompanyService.selectOneComContent(comContentCode);
+		model.addAttribute("cc", cc);
+		return "system/updateComContent";
+	}
+	
+	//회사 적요 검색 
+	@RequestMapping(value="/ComSystem/selecttComContent",method=RequestMethod.GET)
+	public String selectAllComContent(Model model,@RequestParam(value="comCode")int comCode){
+		logger.debug("{} : selectAllComContent SystemCompanyController",comCode);
+		List<ComContentAndSubUsub> ccsubusublist=systemcompanyService.selectAllComContent(comCode);
+		model.addAttribute("ccsubusublist", ccsubusublist);
+		return "system/selecttComContent";
+	}
 	
 	//회사 적요등록 action 
 	@RequestMapping(value="/ComSystem/insertComContent",method=RequestMethod.POST)

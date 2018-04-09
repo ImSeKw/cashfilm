@@ -49,7 +49,7 @@
 		회원이메일:<input type="text" name="memberEmail" value="${memberSession.memberEmail}" readonly="readonly">
 		<input type="submit" value="등록">
 	</form>
-	<a href="${pageContext.request.contextPath}/ComSystem/selectComSystem">회사적요 검색</a>
+	<a href="${pageContext.request.contextPath}/ComSystem/selecttComContent?comCode=${memberSession.comCode}">회사적요 검색</a>
 	<br>
 	
 <jsp:include page="/WEB-INF/views/module/bottom.jsp"/>

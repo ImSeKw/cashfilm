@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.boa.cashfilm.syscom.dto.ComContent;
+import com.boa.cashfilm.syscom.dto.ComContentAndSubUsub;
 import com.boa.cashfilm.syscom.dto.ComSubject;
 import com.boa.cashfilm.syscom.dto.ComSystem;
 import com.boa.cashfilm.syscom.dto.ComSystemAndSubject;
@@ -25,6 +26,30 @@ public class SystemCompanyDao {
 	private static final Logger logger = LoggerFactory.getLogger(SystemCompanyDao.class);
 	private final String NAMESPACE ="com.boa.cashfilm.mapper.cashfilmMapper.";
 	
+	//회사 적요 삭제
+	public int deleteComContent(ComContent cc) {
+		logger.debug("{} : deleteComContent SystemCompanyDao",cc);
+		return sqlsessiontemplate.delete(NAMESPACE + "deleteComContent", cc);
+	}
+	
+	//회사 적요 수정
+	public int updateComContent(ComContent cc) {
+		logger.debug("{} : updateComContent SystemCompanyDao",cc);
+		return sqlsessiontemplate.update(NAMESPACE + "updateComContent", cc);
+	}
+	
+	//회사 적요 수정을 위한 검색
+	public ComContent selectOneComContent(int comContentCode){
+		logger.debug("{} : selectOneComContent SystemCompanyDao",comContentCode);
+		return sqlsessiontemplate.selectOne(NAMESPACE + "selectOneComContent", comContentCode);
+	}
+	
+	//회사 적요 검색 
+	public List<ComContentAndSubUsub> selectAllComContent(int comCode){
+		logger.debug("{} : selectAllComContent SystemCompanyDao",comCode);
+		return sqlsessiontemplate.selectList(NAMESPACE + "selectAllComContent", comCode);
+	}
+		
 	//회사 적요관리 
 	public int insertComContent(ComContent ccon) {
 		logger.debug("{} : insertComContent SystemCompanyDao",ccon);
