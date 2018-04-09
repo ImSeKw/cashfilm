@@ -14,6 +14,7 @@
 	<c:otherwise>
 		<a href="${pageContext.request.contextPath}/member/signOut">로그아웃</a>
 		<a href="${pageContext.request.contextPath}/member/memberInfo?memberEmail=${memberSession.memberEmail}">나의정보</a>
+		<a href="${pageContext.request.contextPath}/item/itemListSell?indiOrCom=0">상품주문</a>
 		<c:choose>
 			<c:when test="${empty memberSession.comCode || memberSession.comCode == ''}">
 				<a href="${pageContext.request.contextPath}/company/insertCompanyBaseInfo">회사등록</a>
