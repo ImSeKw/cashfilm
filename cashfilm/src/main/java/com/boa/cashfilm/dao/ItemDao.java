@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.boa.cashfilm.item.dto.IndiOrCom;
 import com.boa.cashfilm.item.dto.Item;
 
 @Repository
@@ -17,6 +18,12 @@ public class ItemDao {
 	private static final Logger logger = LoggerFactory.getLogger(ItemDao.class);
 	//중복경로설정
 	private final String NAMESPACE = "com.boa.cashfilm.mapper.itemMapper.";
+	
+	// 상품 판매 조회
+	public List<Item> selectMyItemSell(IndiOrCom indiOrCom) {
+		logger.debug("{} : < indiOrCom selectMyItemSell() ItemDao", indiOrCom.getIndiOrCom());
+		return sqlSessionTemplate.selectList(NAMESPACE + "selectMyItemSell", indiOrCom);
+	}
 	
 	// cfmyitem 상품등록 Dao
 	public void insertCfMyItem(Item item) {
