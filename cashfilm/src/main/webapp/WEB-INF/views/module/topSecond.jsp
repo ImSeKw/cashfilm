@@ -1,49 +1,98 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 </head>
-<body>
+<body class="index">
+	<div id="page-wrapper">
 
-<c:set var="memberSession" value="${memberSession}"/>
-<c:set var="memberSessionBCP" value="${memberSessionByCompanyPayment}" />
+			<!-- Header -->
+				<header id="header" class="alt">
+					<h1 id="logo"><a href="index.html">Cash <span>Film</span></a></h1>
+					<c:set var="memberSession" value="${memberSession}"/>
+					<c:set var="memberSessionBCP" value="${memberSessionByCompanyPayment}" />
+					<nav id="nav">
+						<ul>
+							<li class="current"><a href="${pageContext.request.contextPath}/">Welcome</a></li>
+							<c:choose>
+								<c:when test="${empty memberSession.memberEmail}">
+									<li><a href="${pageContext.request.contextPath}/member/signIn" class="button special">Login</a></li>
+									<li><a href="${pageContext.request.contextPath}/member/signUp" class="button special">Membership</a></li>
+								</c:when>
+								<c:otherwise>
+									<li><a href="${pageContext.request.contextPath}/member/signOut" class="button special">Logout</a></li>
+									<li class="submenu"><a href="${pageContext.request.contextPath}/member/memberInfo?memberEmail=${memberSession.memberEmail}">Myinfo</a></li>
+									<li class="submenu"><a href="${pageContext.request.contextPath}/item/itemListSell?indiOrCom=0">상품주문</a></li>
+									<c:choose>
+										<c:when test="${empty memberSession.comCode || memberSession.comCode == ''}">
+											<li class="submenu"><a href="${pageContext.request.contextPath}/company/insertCompanyBaseInfo">회사등록</a></li>
+											<li class="submenu"><a href="${pageContext.request.contextPath}/company/comListByIndividual">회사검색</a></li>
+										</c:when>
+								<c:otherwise>
+									<li class="submenu"><a href="${pageContext.request.contextPath}/company/comInfo?comCode=${memberSession.comCode}">회사정보</a></li>
+									<li class="submenu"><a href="${pageContext.request.contextPath}/company/comCustomerRegistration">거래처 등록</a></li>
+									<li class="submenu"><a href="${pageContext.request.contextPath}/company/comCustomerList?comCode=${memberSession.comCode}">거래처 조회</a></li>
+								<c:if test="${memberSession.comSystemChange eq 1 }">
+									<li class="submenu"><a href="${pageContext.request.contextPath}//">회사체계변경입니다.공사중!!</a></li>
+									<li class="submenu"><a href="${pageContext.request.contextPath}/company/comAuthorityApprovalList?comCode=${memberSession.comCode}&memberEmail=${memberSession.memberEmail}"> 사원 등록 요청 조회</a></li>
+									<li class="submenu"><a href="${pageContext.request.contextPath}/company/comSectionListBeforeApproval?comCode=${memberSession.comCode}">부서 미등록 직원 조회 및 등록</a></li>
+									<li class="submenu"><a href="${pageContext.request.contextPath}/company/comPositionListBeforeApproval?comCode=${memberSession.comCode}">직급 미동록 직원 조회 및 등록</a></li>
+									<li class="submenu"><a href="${pageContext.request.contextPath}/company/comSectionRegistration?comCode=${memberSession.comCode}">부서 등록</a></li>
+									<li class="submenu"><a href="${pageContext.request.contextPath}/company/comSectionList?comCode=${memberSession.comCode}">부서 조회</a></li>
+								</c:if>
+								</c:otherwise>
+									</c:choose>
+									<c:if test="${memberSession.memberClassificationCode eq 1}">
+										<li class="submenu"><a href="${pageContext.request.contextPath}/cashfilm/cashfilmControlTower?memberClassificationCode=${memberSession.memberClassificationCode}">관리자</a></li>
+									</c:if>
+								</c:otherwise>
+									</c:choose>
+							<!-- <li class="submenu">
+								<a href="#">Layouts</a>
+								<ul>
+									<li><a href="left-sidebar.html">Left Sidebar</a></li>
+									<li><a href="right-sidebar.html">Right Sidebar</a></li>
+									<li><a href="no-sidebar.html">No Sidebar</a></li>
+									<li><a href="contact.html">Contact</a></li>
+									<li class="submenu">
+										<a href="#">Submenu</a>
+										<ul>
+											<li><a href="#">Dolore Sed</a></li>
+											<li><a href="#">Consequat</a></li>
+											<li><a href="#">Lorem Magna</a></li>
+											<li><a href="#">Sed Magna</a></li>
+											<li><a href="#">Ipsum Nisl</a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li><a href="#" class="button special">Sign Up</a></li> -->
+						</ul>
+					</nav>
+				</header>
 
-<c:choose>
-	<c:when test="${empty memberSession.memberEmail}">
-		<a href="${pageContext.request.contextPath}/member/signIn">로그인</a>
-		<a href="${pageContext.request.contextPath}/member/signUp">회원가입</a>
-	</c:when>
-	<c:otherwise>
-		<a href="${pageContext.request.contextPath}/member/signOut">로그아웃</a>
-		<a href="${pageContext.request.contextPath}/member/memberInfo?memberEmail=${memberSession.memberEmail}">나의정보</a>
-		<a href="${pageContext.request.contextPath}/item/itemListSell?indiOrCom=0">상품주문</a>
-		<c:choose>
-			<c:when test="${empty memberSession.comCode || memberSession.comCode == ''}">
-				<a href="${pageContext.request.contextPath}/company/insertCompanyBaseInfo">회사등록</a>
-				<a href="${pageContext.request.contextPath}/company/comListByIndividual">회사검색</a>
-			</c:when>
-			<c:otherwise>
-				<a href="${pageContext.request.contextPath}/company/comInfo?comCode=${memberSession.comCode}">회사정보</a>
-				<a href="${pageContext.request.contextPath}/company/comCustomerRegistration">거래처 등록</a>
-				<a href="${pageContext.request.contextPath}/company/comCustomerList?comCode=${memberSession.comCode}">거래처 조회</a>
-	
+			<!-- Banner -->
+				<section id="banner">
 
-				<c:if test="${memberSession.comSystemChange eq 1 }">
-					<a href="${pageContext.request.contextPath}//">회사체계변경입니다.공사중!!</a>
-					<a href="${pageContext.request.contextPath}/company/comAuthorityApprovalList?comCode=${memberSession.comCode}&memberEmail=${memberSession.memberEmail}"> 사원 등록 요청 조회</a>
-					<a href="${pageContext.request.contextPath}/company/comSectionListBeforeApproval?comCode=${memberSession.comCode}">부서 미등록 직원 조회 및 등록</a>
-					<a href="${pageContext.request.contextPath}/company/comPositionListBeforeApproval?comCode=${memberSession.comCode}">직급 미동록 직원 조회 및 등록</a>
-					<a href="${pageContext.request.contextPath}/company/comSectionRegistration?comCode=${memberSession.comCode}">부서 등록</a>
-					<a href="${pageContext.request.contextPath}/company/comSectionList?comCode=${memberSession.comCode}">부서 조회</a>
-					
-				</c:if>
-			</c:otherwise>
-		</c:choose>
-		<c:if test="${memberSession.memberClassificationCode eq 1}">
-			<a href="${pageContext.request.contextPath}/cashfilm/cashfilmControlTower?memberClassificationCode=${memberSession.memberClassificationCode}">관리자</a>
-		</c:if>
-	</c:otherwise>
-</c:choose>
+						<div class="inner">
 
-<br>
+						<header>
+							<h2>TWENTY</h2>
+						</header>
+						<p>This is <strong>Twenty</strong>, a free
+						<br />
+						responsive template
+						<br />
+						by <a href="http://html5up.net">HTML5 UP</a>.</p>
+						<footer>
+							<ul class="buttons vertical">
+								<li><a href="#main" class="button fit scrolly">Tell Me More</a></li>
+							</ul>
+						</footer>
+
+					</div>
+
+				</section>
+
+<%-- <br>
 
 <a href="${pageContext.request.contextPath}/statement/financeListByCompany?comCode=${memberSession.comCode}">회사 처음 입력 재무 조회</a>
 
@@ -122,4 +171,4 @@
 		<td>상품명</td>
 		<td>${memberSessionBCP.myItemName}</td>
 	</tr>
-</table>
+</table> --%>

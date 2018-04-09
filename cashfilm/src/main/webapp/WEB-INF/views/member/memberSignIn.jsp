@@ -3,6 +3,9 @@
 <jsp:include page="/WEB-INF/views/module/topFirst.jsp"/>
 <jsp:include page="/WEB-INF/views/module/topSecond.jsp"/>
 
+<article id="main">
+
+
 <form action="${pageContext.request.contextPath}/member/signIn" method="post">
 	관리자 : <input type="text" name="memberEmail" value="id001@naver.com">
 	<input type="text" name="memberPassword" value="pw001">
@@ -26,5 +29,6 @@
 	<input type="text" name="memberPassword" value="pw111">
 	<button type="submit">확인</button>
 </form>
+</article>
 
 <jsp:include page="/WEB-INF/views/module/bottom.jsp"/>
