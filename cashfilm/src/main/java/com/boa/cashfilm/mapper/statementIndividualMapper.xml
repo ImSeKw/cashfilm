@@ -4,7 +4,38 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.boa.cashfilm.mapper.statementIndividualMapper">
-
+	
+	<!--회사 처음 입력 재무 조회 -->
+	<select id="selectStatementIndiFinanceList" parameterType="String" resultType="com.boa.cashfilm.smtindi.dto.StatementIndividualList">
+		SELECT 
+			 i.individualSystemName
+			 ,f.financeCode
+			 ,f.individualSystemNumeral
+			 ,f.memberEmail
+			 ,f.financeAmount
+			 ,f.closingStatementCode 
+			FROM 
+			 cffinance f 
+			INNER JOIN 
+			 cfindividualsystem i 
+			ON f.individualSystemNumeral=i.individualSystemNumeral 
+			WHERE f.memberEmail=#{memberEmail};
+	</select>
+	
+	<!-- 개인 처음 입력 재무 등록 처리 -->
+	<insert id="insertStatementIndiFinance" parameterType="com.boa.cashfilm.smtindi.dto.StatementIndividual">
+		INSERT INTO cffinance (
+  			individualSystemNumeral
+  			,memberEmail
+			,financeAmount
+			,closingStatementCode
+	 ) VALUES (
+	  #{individualSystemNumeral}
+	  ,#{memberEmail}
+	  ,#{financeAmount}
+	  ,#{closingStatementCode}
+	 )
+	</insert>
 	<!-- 개인 처음 입력 재무 등록 화면 -->
 	<select id="selectStatementIndiSystem" resultType="com.boa.cashfilm.sysindi.dto.IndividualSystem">
 		SELECT individualSystemNumeral

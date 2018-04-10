@@ -5,7 +5,7 @@ public class StatementIndividual {
 	private int individualSystemNumeral;
 	private String memberEmail;
 	private long financeAmount;
-	private int closingStatementCode;
+	private String closingStatementCode;
 	
 	public int getFinanceCode() {
 		return financeCode;
@@ -31,10 +31,10 @@ public class StatementIndividual {
 	public void setFinanceAmount(long financeAmount) {
 		this.financeAmount = financeAmount;
 	}
-	public int getClosingStatementCode() {
+	public String getClosingStatementCode() {
 		return closingStatementCode;
 	}
-	public void setClosingStatementCode(int closingStatementCode) {
+	public void setClosingStatementCode(String closingStatementCode) {
 		this.closingStatementCode = closingStatementCode;
 	}
 	
