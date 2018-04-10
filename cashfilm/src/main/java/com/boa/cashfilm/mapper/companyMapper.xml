@@ -50,7 +50,6 @@
 	WHERE
 		comSectionCode=#{comSectionCode}
 	</delete>
-		
 	<!--회사 직급 등록  -->
 	<select id="comPositionRegistration" parameterType="com.boa.cashfilm.company.dto.ComPosition">
 	SELECT 
@@ -72,7 +71,23 @@
 		comCode=#{comCode}
 	</select>
 	<!--회사 직급 수정  -->
+	<update id="comPositionModification" parameterType="com.boa.cashfilm.company.dto.ComPosition">
+	UPDATE 
+		cfcomposition
+	SET 
+		comPositionName=#{comPositionName}
+	WHERE 
+		comCode=#{comCode}
+	AND
+		comPositionCode=#{comPositionCode};	
+	</update>
 	<!--회사 직급 삭제  -->
+	<delete id="comPositionDel" parameterType="com.boa.cashfilm.company.dto.ComPosition">
+	DELETE FROM 
+		cfcomposition
+	WHERE
+		comPositionCode=#{comPositionCode}
+	</delete>
 	<!-- 기업회원 부서 등록을 위한 조회  -->
 	<select id="comSectionListBeforeApproval" parameterType="java.util.List" resultType="java.util.Map">
 	SELECT
