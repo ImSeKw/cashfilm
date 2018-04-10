@@ -44,10 +44,50 @@
 		comSectionCode=#{comSectionCode};	
 	</update>
 	<!--회사 부서 삭제  -->
+	<delete id="comSectionDel" parameterType="com.boa.cashfilm.company.dto.ComSection">
+	DELETE FROM 
+		cfcomsection 
+	WHERE
+		comSectionCode=#{comSectionCode}
+	</delete>
 	<!--회사 직급 등록  -->
+	<select id="comPositionRegistration" parameterType="com.boa.cashfilm.company.dto.ComPosition">
+	SELECT 
+		comPositionCode
+		,comPositionName
+	FROM
+		cfcomposition
+	WHERE
+		comCode=#{comCode}
+	</select>
 	<!--회사 직급 조회  -->
+	<select id="comPositionList" parameterType="java.util.List" resultType="java.util.Map">
+	SELECT 
+		comPositionCode
+		,comPositionName
+	FROM
+		cfcomposition
+	WHERE
+		comCode=#{comCode}
+	</select>
 	<!--회사 직급 수정  -->
+	<update id="comPositionModification" parameterType="com.boa.cashfilm.company.dto.ComPosition">
+	UPDATE 
+		cfcomposition
+	SET 
+		comPositionName=#{comPositionName}
+	WHERE 
+		comCode=#{comCode}
+	AND
+		comPositionCode=#{comPositionCode};	
+	</update>
 	<!--회사 직급 삭제  -->
+	<delete id="comPositionDel" parameterType="com.boa.cashfilm.company.dto.ComPosition">
+	DELETE FROM 
+		cfcomposition
+	WHERE
+		comPositionCode=#{comPositionCode}
+	</delete>
 	<!-- 기업회원 부서 등록을 위한 조회  -->
 	<select id="comSectionListBeforeApproval" parameterType="java.util.List" resultType="java.util.Map">
 	SELECT
@@ -63,12 +103,7 @@
 		comau.comCode=#{comCode}
 	AND
 		comSectionCode IS NULL
-
 	</select>
-	<!--기업회원 부서 등록  -->
-	<!--기업회원 부서 조회  -->
-	<!--기업회원 부서 수정  -->
-	<!--기업회원 부서 삭제  -->
 	<!--기업회원 직급 등록전 조회  -->
 	<select id="comPositionListBeforeApproval" parameterType="java.util.List" resultType="java.util.Map">
 	SELECT
@@ -86,13 +121,7 @@
 		comPositionCode IS NULL
 	AND
 		comSectionCode IS NOT NULL
-
-		
 	</select>
-	<!--기업회원 직급 등록  -->
-	<!--기업회원 직급 조회  -->
-	<!--기업회원 직급 수정  -->
-	<!--기업회원 직급 삭제  -->
 	<!--회사체계변경 권한을 가진 회원이 회사권한승인  2(회사별권한여부 테이블에 회사별권한여부 0->1,회사별권한승인일,회사별승인이메일 update )-->
  	<update id="comAuthorityApprovalByAuthority" parameterType="java.util.Map">
 	UPDATE 
@@ -104,7 +133,6 @@
 		,comAuthorityApprovalEmail=#{memberEmailApproval}
 	WHERE 
 		cfcomauthority.memberEmail=#{memberEmail};
-	
 	</update> 
 	<!--회사체계변경 권한을 가진 회원이 회사권한승인  1(memberEmail테이블에 회원구분코드 기업회원으로 변경,회사코드 생성)-->
 	<update id="comAuthorityApprovalByMember" parameterType="com.boa.cashfilm.member.dto.MemberSimple">
@@ -132,7 +160,6 @@
 	AND
 		coma.comAuthorityApproval=0;
 	</select>
-	
 	<!--회사별 거래처 조회  -->
 	<select id="comCustomerList" parameterType="int" resultType="com.boa.cashfilm.company.dto.ComCustomer">
 	SELECT

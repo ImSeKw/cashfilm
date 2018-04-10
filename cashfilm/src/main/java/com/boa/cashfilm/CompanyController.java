@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.boa.cashfilm.company.dto.ComAuthority;
 import com.boa.cashfilm.company.dto.ComCustomer;
 import com.boa.cashfilm.company.dto.ComListByIndividual;
+import com.boa.cashfilm.company.dto.ComPosition;
 import com.boa.cashfilm.company.dto.ComPositionListAndMember;
 import com.boa.cashfilm.company.dto.ComSection;
 import com.boa.cashfilm.company.dto.ComSectionListAndMember;
@@ -49,6 +50,7 @@ public class CompanyController {
 		return "company/comPositionListBeforeApproval";
 	}
 	//기업회원 부서 등록을 위한 조회
+	
 	//회사 부서 조회(기업회원 부서 등록을 위한 조회)
 	@RequestMapping(value = "company/comSectionListBeforeApproval" , method = RequestMethod.GET)
 	public String comSectionListBeforeApproval(@RequestParam("comCode") int comCode,Model model) {
@@ -155,12 +157,19 @@ public class CompanyController {
 	}
 	
 	
+	
+	
 	//회사 부서 등록 form
 	@RequestMapping(value = "company/comSectionRegistration" , method = RequestMethod.GET)
 	public String comSectionRegistration() {
-
 		return "company/comSectionRegistrationForm";
 	}
+	//회사 직급 등록 form
+	@RequestMapping(value = "company/comPositionRegistration" , method = RequestMethod.GET)
+	public String comPositionRegistration() {
+		return "company/comPositionRegistrationForm";
+	}
+	
 	//회사 부서 등록 Action
 	@RequestMapping(value = "company/comSectionRegistration" , method = RequestMethod.POST)
 	public String comSectionRegistration(ComSection comSection) {
@@ -168,33 +177,71 @@ public class CompanyController {
 		companyService.comSectionRegistration(comSection);
 		return "redirect:/company/comSectionList";
 	}
+	//회사 직급 등록 Action
+	@RequestMapping(value = "company/comPositionRegistration" , method = RequestMethod.POST)
+	public String comPositionRegistration(ComPosition comPosition) {
+		logger.debug("{} : CompanyController comPositionRegistration comPosition", comPosition);
+		companyService.comPositionRegistration(comPosition);
+		return "redirect:/company/comSectionList";
+	}
 	//회사 부서 조회
 	@RequestMapping(value = "company/comSectionList" , method = RequestMethod.GET)
 	public String comSectionList(HttpSession httpSession,Model model) {
 		MemberSession memberSession = (MemberSession) httpSession.getAttribute("memberSession");
-		logger.debug("{} : CompanyController comSectionRegistration memberSession.getComCode()", memberSession.getComCode());
+		logger.debug("{} : CompanyController comSectionList memberSession.getComCode()", memberSession.getComCode());
 		List<ComSectionListAndMember> list = companyService.comSectionList(memberSession.getComCode());
 		model.addAttribute("list", list);
-		logger.debug("{} : CompanyController comSectionRegistration list", list);
+		logger.debug("{} : CompanyController comSectionList list", list);
 		return "company/comSectionList";
 	}
+	
+	//회사 직급 조회
+	@RequestMapping(value = "company/comPositionList" , method = RequestMethod.GET)
+	public String comPositionList(HttpSession httpSession,Model model) {
+		MemberSession memberSession = (MemberSession) httpSession.getAttribute("memberSession");
+		logger.debug("{} : CompanyController comPositionList memberSession.getComCode()", memberSession.getComCode());
+		List<ComPositionListAndMember> list = companyService.comPositionList(memberSession.getComCode());
+		model.addAttribute("list", list);
+		logger.debug("{} : CompanyController comPositionList list", list);
+		return "company/comPositionList";
+	}
+	
 	//회사 부서 수정 form 
 	@RequestMapping(value = "company/comSectionModification" , method = RequestMethod.GET)
-	public String comSectionModificationform(HttpSession httpSession,Model model) {
+	public String comSectionModificationForm(HttpSession httpSession,Model model) {
 		MemberSession memberSession = (MemberSession) httpSession.getAttribute("memberSession");
-		logger.debug("{} : CompanyController comSectionRegistration memberSession.getComCode()", memberSession.getComCode());
+		logger.debug("{} : CompanyController comSectionModificationform memberSession.getComCode()", memberSession.getComCode());
 		//comSection 조회를 통해서 화면에서 보여주기 때문에 comSectionList를 호출했다.
 		List<ComSectionListAndMember> list = companyService.comSectionList(memberSession.getComCode());
 		model.addAttribute("list", list);
 		logger.debug("{} : CompanyController comSectionModificationform list", list);
 		return "company/comSectionModification";
 	}
+
+	//회사 직급 수정 form
+	@RequestMapping(value = "company/comPositionModification" , method = RequestMethod.GET)
+	public String comPositionModificationForm(HttpSession httpSession,Model model) {
+		MemberSession memberSession = (MemberSession) httpSession.getAttribute("memberSession");
+		logger.debug("{} : CompanyController comPositionModificationForm memberSession.getComCode()", memberSession.getComCode());
+		//comSection 조회를 통해서 화면에서 보여주기 때문에 comSectionList를 호출했다.
+		List<ComPositionListAndMember> list = companyService.comPositionList(memberSession.getComCode());
+		model.addAttribute("list", list);
+		logger.debug("{} : CompanyController comPositionModificationForm list", list);
+		return "company/comPositionModification";
+	}
 	//회사 부서 수정 Action
 	@RequestMapping(value = "company/comSectionModification" , method = RequestMethod.POST)
 	public String comSectionModification(ComSection comSection) {
-		logger.debug("{} : CompanyController comSectionModificationform comSection", comSection);
+		logger.debug("{} : CompanyController comSectionModification comSection", comSection);
 		companyService.comSectionModification(comSection);
 		return "redirect:/company/comSectionList";
+	}
+	//회사 직급 수정 Action
+	@RequestMapping(value = "company/comPositionModification" , method = RequestMethod.POST)
+	public String comPositionModification(ComPosition comPosition) {
+		logger.debug("{} : CompanyController comPositionModification comPosition", comPosition);
+		companyService.comPositionModification(comPosition);
+		return "redirect:/company/comPositionList";
 	}
 	//회사 부서 삭제
 	@RequestMapping(value = "company/comSectionDel" , method = RequestMethod.GET)
@@ -202,27 +249,16 @@ public class CompanyController {
 		
 		return "";
 	}
-	//회사 직급 등록
-	@RequestMapping(value = "company/comPositionRegistration" , method = RequestMethod.GET)
-	public String comPositionRegistration() {
-		return "";
-	}
-	//회사 직급 조회
-	@RequestMapping(value = "company/comPositionList" , method = RequestMethod.GET)
-	public String comPositionList() {
-		return "";
-	}
-
-	//회사 직급 수정
-	@RequestMapping(value = "company/comPositionModification" , method = RequestMethod.GET)
-	public String comPositionModification() {
-		return "";
-	}
 	//회사 직급 삭제
 	@RequestMapping(value = "company/comPositionDel" , method = RequestMethod.GET)
 	public String comPositionDel() {
 		return "";
 	}
+
+
+
+
+
 	
 	//자신의 회사 정보  권한 조회(회사정보수정,부서관리,직급관리는 회사별권한승인여부의 값으로 판단한다)
 	@RequestMapping(value = "company/selectComAuthorityApproval" , method = RequestMethod.GET)

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.boa.cashfilm.company.dto.ComAuthority;
 import com.boa.cashfilm.company.dto.ComCustomer;
 import com.boa.cashfilm.company.dto.ComListByIndividual;
+import com.boa.cashfilm.company.dto.ComPosition;
 import com.boa.cashfilm.company.dto.ComPositionListAndMember;
 import com.boa.cashfilm.company.dto.ComSection;
 import com.boa.cashfilm.company.dto.ComSectionListAndMember;
@@ -28,6 +29,14 @@ public class CompanyService {
 	CompanyDao companyDao;
 	private static final Logger logger = LoggerFactory.getLogger(CompanyService.class);
 	
+	//회사 직급 수정
+	public void comPositionModification(ComPosition comPosition) {
+		logger.debug("{} : <comPosition comPositionModification CompanyService.java",comPosition);
+		comPosition.setComCode(comPosition.getComCode());
+		comPosition.setComPositionCode(comPosition.getComPositionCode());
+		comPosition.setComPositionName(comPosition.getComPositionName());
+		companyDao.comPositionModification(comPosition);
+	}
 	//회사 부서 수정
 	public void comSectionModification(ComSection comSection) {
 		logger.debug("{} : <comSection comSectionModification CompanyService.java",comSection);
@@ -36,12 +45,27 @@ public class CompanyService {
 		comSection.setComSectionName(comSection.getComSectionName());
 		companyDao.comSectionModification(comSection);
 	}
+	//회사 직급 조회
+	public List<ComPosition> comPositionList(MemberSession memberSession){
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("comCode", memberSession.getComCode());
+
+		return 	companyDao.comPositionList(map);
+	}
 	//회사 부서 조회
 	public List<ComSection> comSectionList(MemberSession memberSession){
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("comCode", memberSession.getComCode());
-		companyDao.comSectionList(map);
-		return null;
+		
+		return companyDao.comSectionList(map);
+	}
+	//회사 직급 등록
+	public void comPositionRegistration(ComPosition comPosition) {
+		logger.debug("{} : <comPosition.getComCode() comPositionRegistration CompanyService.java",comPosition.getComCode());
+		logger.debug("{} : <comPosition.getComSectionName() comPositionRegistration CompanyService.java",comPosition.getComPositionName());
+		comPosition.setComCode(comPosition.getComCode());
+		comPosition.setComPositionName(comPosition.getComPositionName());
+		companyDao.comPositionRegistration(comPosition);
 	}
 	//회사 부서 등록
 	public void comSectionRegistration(ComSection comSection) {
@@ -53,6 +77,15 @@ public class CompanyService {
 	}
 	
 	
+	//회사 직급 조회(기업회원 직급 등록을 위한 조회)
+	public List<ComPositionListAndMember> comPositionList(int comCode){
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("comCode", comCode);
+		logger.debug("{} : <map comPositionList CompanyService.java",map);
+		List<ComPositionListAndMember> returnList =  companyDao.comPositionListRegistration(map);
+		logger.debug("{} : <returnList comPositionList CompanyService.java",returnList);
+		return returnList;
+	}
 	//회사 부서 조회(기업회원 부서 등록을 위한 조회)
 	public List<ComSectionListAndMember> comSectionList(int comCode){
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -62,6 +95,11 @@ public class CompanyService {
 		logger.debug("{} : <returnList comSectionList CompanyService.java",returnList);
 		return returnList;
 	}
+	
+	
+	
+	
+	
 	//기업회원 직급 등록을 위한 조회
 	public List<ComPositionListAndMember> comPositionListBeforeApproval(int comCode){
 		Map<String,Object> map = new HashMap<String,Object>();
