@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.boa.cashfilm.company.dto.ComSystem;
 import com.boa.cashfilm.service.StatementCompanyService;
+import com.boa.cashfilm.smtcom.dto.StatementCompanyFinance;
 import com.boa.cashfilm.smtcom.dto.StatementCompanyFinanceCode;
 import com.boa.cashfilm.smtcom.dto.StatementCompanyFinanceList;
 
@@ -23,19 +24,43 @@ public class StatementCompanyController {
 	StatementCompanyService statementCompanyService;
 	private static final Logger logger = LoggerFactory.getLogger(StatementCompanyController.class);
 	
-	// 회사 처음 입력 재무 조회
+	// 회사 처음 입력 재무 수정 : 처리
+	@RequestMapping(value = "/statement/financeModificationByCompany", method = RequestMethod.POST)
+	public String updateStatementCompanyFinance(StatementCompanyFinance statementCompanyFinance) {
+		logger.debug("{} : closingStatementCode updateStatementCompanyFinance() StatementCompanyController", statementCompanyFinance.getClosingStatementCode());
+		logger.debug("{} : comCode updateStatementCompanyFinance() StatementCompanyController", statementCompanyFinance.getComCode());
+		logger.debug("{} : comSystemNumeral updateStatementCompanyFinance() StatementCompanyController", statementCompanyFinance.getComSystemNumeral());
+		logger.debug("{} : financeAmount updateStatementCompanyFinance() StatementCompanyController", statementCompanyFinance.getFinanceAmount());
+		logger.debug("{} : financeCode updateStatementCompanyFinance() StatementCompanyController", statementCompanyFinance.getFinanceCode());
+		logger.debug("{} : memberEmail updateStatementCompanyFinance() StatementCompanyController", statementCompanyFinance.getMemberEmail());
+//		statementCompanyService.updateStatementCompanyFinance(statementCompanyFinance);
+		return "redirect:/statement/financeListByCompany?comCode="+statementCompanyFinance.getComCode();
+	}
+	
+	// 회사 처음 입력 재무 수정 : 계정 체계 목록
+	@RequestMapping(value = "/statement/financeComSystemAjax", method = RequestMethod.POST)
+	public @ResponseBody List<ComSystem> selectStatementCompanySystem() {
+		logger.debug("{} : < 계정 체계 목록 ajax selectStatementCompanySystem()");
+		List<ComSystem> list = statementCompanyService.selectStatementCompanySystem();
+		return list;
+	}
+	
+	// 회사 처음 입력 재무 수정 : 화면
 	@RequestMapping(value = "/statement/financeListByCompanyAjax", method = RequestMethod.POST)
-	public @ResponseBody String selectStatementCompanyFinanceList(StatementCompanyFinanceCode statementCompanyFinanceCode) {
+	public @ResponseBody List<StatementCompanyFinanceList> selectStatementCompanyFinanceList(StatementCompanyFinanceCode statementCompanyFinanceCode) {
 		logger.debug("{} : < financeCode selectStatementCompanyFinanceList() StatementCompanyController", statementCompanyFinanceCode.getFinanceCode());
-//		StatementCompanyFinanceList statementCompanyFinanceList = statementCompanyService.selectStatementCompanyFinanceList(financeCode);
-		return null;
+		logger.debug("{} : < comCode selectStatementCompanyFinanceList() StatementCompanyController", statementCompanyFinanceCode.getComCode());
+		List<StatementCompanyFinanceList> list = statementCompanyService.selectStatementCompanyFinanceList(statementCompanyFinanceCode);
+		return list;
 	}
 	
 	// 회사 처음 입력 재무 조회
 	@RequestMapping(value = "/statement/financeListByCompany", method = RequestMethod.GET)
 	public String selectStatementCompanyFinanceList(Model model, @RequestParam("comCode") int comCode) {
 		logger.debug("{} : < comCode selectStatementCompanyFinanceList() StatementCompanyController", comCode);
-		List<StatementCompanyFinanceList> list = statementCompanyService.selectStatementCompanyFinanceList(comCode);
+		StatementCompanyFinanceCode statementCompanyFinanceCode = new StatementCompanyFinanceCode();
+		statementCompanyFinanceCode.setComCode(comCode);
+		List<StatementCompanyFinanceList> list = statementCompanyService.selectStatementCompanyFinanceList(statementCompanyFinanceCode);
 		model.addAttribute("FinanceListByCompany", list);
 		return "statement/financeListByCompany";
 	}

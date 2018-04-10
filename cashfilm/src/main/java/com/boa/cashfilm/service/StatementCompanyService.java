@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.boa.cashfilm.company.dto.ComSystem;
 import com.boa.cashfilm.dao.StatementCompanyDao;
 import com.boa.cashfilm.smtcom.dto.StatementCompanyFinance;
+import com.boa.cashfilm.smtcom.dto.StatementCompanyFinanceCode;
 import com.boa.cashfilm.smtcom.dto.StatementCompanyFinanceList;
 
 @Service
@@ -21,10 +22,17 @@ public class StatementCompanyService {
 	StatementCompanyDao statementCompanyDao;
 	private static final Logger logger = LoggerFactory.getLogger(StatementCompanyService.class);
 	
+	// 회사 처음 입력 재무 수정
+	public void updateStatementCompanyFinance(StatementCompanyFinance statementCompanyFinance) {
+		logger.debug("{} : statementCompanyFinance updateStatementCompanyFinance() StatementCompanyService", statementCompanyFinance);
+		statementCompanyDao.updateStatementCompanyFinance(statementCompanyFinance);
+	}
+	
 	// 회사 처음 입력 재무 조회
-	public List<StatementCompanyFinanceList> selectStatementCompanyFinanceList(int comCode) {
-		logger.debug("{} : < comCode selectStatementCompanyFinanceList() StatementCompanyService", comCode);
-		List<StatementCompanyFinanceList> list = statementCompanyDao.selectStatementCompanyFinanceList(comCode);
+	public List<StatementCompanyFinanceList> selectStatementCompanyFinanceList(StatementCompanyFinanceCode statementCompanyFinanceCode) {
+		logger.debug("{} : < comCode selectStatementCompanyFinanceList() StatementCompanyService", statementCompanyFinanceCode.getComCode());
+		logger.debug("{} : < financeCode selectStatementCompanyFinanceList() StatementCompanyService", statementCompanyFinanceCode.getFinanceCode());
+		List<StatementCompanyFinanceList> list = statementCompanyDao.selectStatementCompanyFinanceList(statementCompanyFinanceCode);
 		for(StatementCompanyFinanceList scfl : list) {
 			logger.debug("{} : > closingStatementCode selectStatementCompanyFinanceList() StatementCompanyService", scfl.getClosingStatementCode());
 			logger.debug("{} : > comCode selectStatementCompanyFinanceList() StatementCompanyService", scfl.getComCode());

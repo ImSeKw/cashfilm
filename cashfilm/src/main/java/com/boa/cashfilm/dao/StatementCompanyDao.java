@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.boa.cashfilm.company.dto.ComSystem;
 import com.boa.cashfilm.smtcom.dto.StatementCompanyFinance;
+import com.boa.cashfilm.smtcom.dto.StatementCompanyFinanceCode;
 import com.boa.cashfilm.smtcom.dto.StatementCompanyFinanceList;
 
 @Repository
@@ -19,11 +20,17 @@ public class StatementCompanyDao {
 	private final String NAMESPACE = "com.boa.cashfilm.mapper.statementCompanyMapper.";
 	private static final Logger logger = LoggerFactory.getLogger(StatementCompanyDao.class);
 	
+	// 회사 처음 입력 재무 수정
+	public void updateStatementCompanyFinance(StatementCompanyFinance statementCompanyFinance) {
+		logger.debug("{} : statementCompanyFinance updateStatementCompanyFinance() StatementCompanyDao", statementCompanyFinance);
+		sqlSessionTemplate.update(NAMESPACE + "updateStatementCompanyFinance", statementCompanyFinance);
+	}
 	
 	// 회사 처음 입력 재무 조회
-	public List<StatementCompanyFinanceList> selectStatementCompanyFinanceList(int comCode) {
-		logger.debug("{} : < comCode selectStatementCompanyFinanceList() StatementCompanyDao", comCode);
-		return sqlSessionTemplate.selectList(NAMESPACE + "selectStatementCompanyFinanceList", comCode);
+	public List<StatementCompanyFinanceList> selectStatementCompanyFinanceList(StatementCompanyFinanceCode statementCompanyFinanceCode) {
+		logger.debug("{} : < comCode selectStatementCompanyFinanceList() StatementCompanyDao", statementCompanyFinanceCode.getComCode());
+		logger.debug("{} : < financeCode selectStatementCompanyFinanceList() StatementCompanyDao", statementCompanyFinanceCode.getFinanceCode());
+		return sqlSessionTemplate.selectList(NAMESPACE + "selectStatementCompanyFinanceList", statementCompanyFinanceCode);
 	}
 	
 	// 회사 처음 입력 재무 등록 처리
@@ -32,7 +39,6 @@ public class StatementCompanyDao {
 		for(StatementCompanyFinance scf : list) {
 			sqlSessionTemplate.insert(NAMESPACE + "insertStatementCompanyFinance", scf);
 		}
-		
 	}
 	
 	// 회사 처음 입력 재무 등록 화면
