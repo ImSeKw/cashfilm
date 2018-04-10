@@ -264,7 +264,7 @@
 	
 	<!-- 로그인 처리 (개인 및 개인결제 정보) -->
 	<select id="selectSignInMember" parameterType="com.boa.cashfilm.member.dto.MemberCheck" resultType="com.boa.cashfilm.member.dto.MemberSession">
-		SELECT 
+		SELECT DISTINCT
 			ecb.memberEmail
 			, ecb.memberClassificationCode
 			, ecb.memberClassificationName
