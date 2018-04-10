@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.boa.cashfilm.company.dto.ComAuthority;
 import com.boa.cashfilm.company.dto.ComCustomer;
 import com.boa.cashfilm.company.dto.ComListByIndividual;
+import com.boa.cashfilm.company.dto.ComPosition;
 import com.boa.cashfilm.company.dto.ComPositionListAndMember;
 import com.boa.cashfilm.company.dto.ComSection;
 import com.boa.cashfilm.company.dto.ComSectionListAndMember;
@@ -27,9 +28,18 @@ public class CompanyDao {
 	private final String NAMESPACE = "com.boa.cashfilm.mapper.CompanyMapper.";
 	
 	
+	//회사 직급 수정
+	public void comPositionModification(ComPosition comPosition) {
+		sqlSessionTemplate.update(NAMESPACE + "comPositionModification", comPosition);
+	}
 	//회사 부서 수정
 	public void comSectionModification(ComSection comSection) {
 		sqlSessionTemplate.update(NAMESPACE + "comSectionModification", comSection);
+	}
+	//회사 직급 조회
+	public List<ComPosition> comPositionList(Map<String,Object> map){
+		logger.debug("{} : <map comPositionList CompanyDao.java",map);
+		return sqlSessionTemplate.selectList(NAMESPACE + "comPositionList", map);
 	}
 	//회사 부서 조회
 	public List<ComSection> comSectionList(Map<String,Object> map){
@@ -37,16 +47,31 @@ public class CompanyDao {
 		return sqlSessionTemplate.selectList(NAMESPACE + "comSectionList", map);
 	}
 	
+	//회사 직급 등록
+	public void comPositionRegistration(ComPosition comPosition) {
+		logger.debug("{} : <comPosition comPositionRegistration CompanyDao.java",comPosition);
+		sqlSessionTemplate.insert(NAMESPACE + "comPositionRegistration", comPosition);
+	}
 	//회사 부서 등록
 	public void comSectionRegistration(ComSection comSection) {
 		logger.debug("{} : <comSection comSectionRegistration CompanyDao.java",comSection);
 		sqlSessionTemplate.insert(NAMESPACE + "comSectionRegistration", comSection);
 	}
+	//회사 직급 조회(기업회원 직급 등록을 위한 조회)
+	public List<ComPositionListAndMember> comPositionListRegistration(Map<String,Object> map){
+		logger.debug("{} : <map comPositionListRegistration CompanyDao.java",map);
+		return sqlSessionTemplate.selectList(NAMESPACE + "comPositionList", map);
+	}
 	//회사 부서 조회(기업회원 부서 등록을 위한 조회)
 	public List<ComSectionListAndMember> comSectionListRegistration(Map<String,Object> map){
-		logger.debug("{} : <map comSectionList CompanyDao.java",map);
+		logger.debug("{} : <map comSectionListRegistration CompanyDao.java",map);
 		return sqlSessionTemplate.selectList(NAMESPACE + "comSectionList", map);
 	}
+	
+	
+	
+	
+	
 	//기업회원 직급 등록을 위한 조회
 	public List<ComPositionListAndMember> comPositionListBeforeApproval(Map<String,Object> map){
 		logger.debug("{} : <map comPositionListBeforeApproval CompanyDao.java",map);
