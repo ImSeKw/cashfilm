@@ -3,6 +3,13 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.boa.cashfilm.mapper.cashfilmMapper">
+<mapper namespace="com.boa.cashfilm.mapper.statementIndividualMapper">
+
+	<!-- 개인 처음 입력 재무 등록 화면 -->
+	<select id="selectStatementIndiSystem" resultType="com.boa.cashfilm.sysindi.dto.IndividualSystem">
+		SELECT individualSystemNumeral
+			, individualSystemName 
+		FROM cfindividualsystem
+	</select>
 	
 </mapper>
