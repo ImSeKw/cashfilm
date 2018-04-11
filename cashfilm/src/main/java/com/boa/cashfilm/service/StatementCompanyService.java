@@ -28,7 +28,9 @@ public class StatementCompanyService {
 		statementCompanyDao.updateStatementCompanyFinance(statementCompanyFinance);
 		// 처리 후 재조회
 		StatementCompanyFinanceCode statementCompanyFinanceCode = new StatementCompanyFinanceCode();
-		statementCompanyFinanceCode.setClosingStatementCode(statementCompanyFinance.getClosingStatementCode());
+		String closingStatementCode = statementCompanyFinance.getClosingStatementCode();
+		logger.debug("{} : | closingStatementCode updateStatementCompanyFinance() StatementCompanyService", closingStatementCode);
+		statementCompanyFinanceCode.setClosingStatementCode(closingStatementCode.substring(0, 4));
 		statementCompanyFinanceCode.setComCode(statementCompanyFinance.getComCode());
 		List<StatementCompanyFinanceList> list = statementCompanyDao.selectStatementCompanyFinanceList(statementCompanyFinanceCode);
 		return list;

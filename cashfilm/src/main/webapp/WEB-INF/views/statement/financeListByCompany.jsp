@@ -81,7 +81,7 @@
 								tagform += '<td><input type="hidden" id="financeCode" name="financeCode" value="'+elt.financeCode+'">'+elt.financeCode+'</td>';
 								tagform += '<td>${memberSession.comCode}</td>';
 								tagform += '<td>'+elt.comSystemNumeral+'</td>';
-								tagform += '<td>${memberSession.memberEmail}</td>';
+								tagform += '<td><input type="hidden" name="memberEmail" value="${memberSession.memberEmail}">${memberSession.memberEmail}</td>';
 								tagform += '<td><input type="text" id="financeAmount" name="financeAmount" value="'+elt.financeAmount+'"></td>';
 								tagform += '<td><input type="text" id="closingStatementCode" name="closingStatementCode" value="'+elt.closingStatementCode+'"></td>';
 								tagform += '<td colspan="2"><button type="button" id="financeModificationSubmit">확인</button></td>';
@@ -100,6 +100,7 @@
 		
 		// 처음 입력 재무 수정 확인
 		$(document).on("click", "#financeModificationSubmit", function(){
+			var memberEmail = $("input[name=memberEmail]").val();
 			$.ajax({
 				url : "/cashfilm/statement/financeModificationByCompanyAjax"
 				, type : "post"
@@ -110,7 +111,7 @@
 					, comCode : ${memberSession.comCode}
 					, financeAmount : $("#financeAmount").val()
 					, closingStatementCode : $("#closingStatementCode").val()
-					, memberEmail : id@naver.com
+					, memberEmail : memberEmail
 				}
 				, success : function(data){
 					var tagform = '<tbody>';
