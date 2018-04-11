@@ -1,5 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+	<script>
+		// 첫 화면만 배너 보임
+		$(document).ready(function(){
+			/* alert($(location).attr('pathname')); */
+			var nowHref = $(location).attr('pathname');
+			if(nowHref == '/cashfilm/') {
+				$(".inner").show();
+			} else {
+				$(".inner").hide();
+			}
+		
+			$("#control").on("click", function(){
+				$(".button").show();
+				
+			});
+			
+		});
+	</script>
+	
 </head>
 <body class="index">
 	<div id="page-wrapper">
@@ -29,57 +49,9 @@
 									
 									<c:choose>
 										<c:when test="${memberSession.memberClassificationCode eq 1}">
-											<li class="submenu">
-												<a href="#">회원관리</a>
-												<ul>
-													<li><a href="${pageContext.request.contextPath}/member/memberList">회원 조회</a></li>
-													<li><a href="#">회원 구분 등록</a></li>
-													<li><a href="${pageContext.request.contextPath}/member/memberClassificationList">회원구분 조회</a></li>
-													<li><a href="#">회원 구분 수정</a></li>
-													<li><a href="${pageContext.request.contextPath}/member/memberDelList">회원탈퇴 조회</a></li>
-												</ul>
-											</li>
-											<li class="submenu">
-												<a href="#">회사관리</a>
-												<ul>
-													<li><a href="${pageContext.request.contextPath}/company/insertCompanyBaseInfo">회사등록</a></li>
-													<li><a href="${pageContext.request.contextPath}/company/comListByIndividual">회사검색</a></li>
-													<li><a href="#">회사수정</a></li>
-													<li><a href="#">회사 등록 요청 조회</a></li>
-												</ul>
-											</li>
-											<li class="submenu">
-												<a href ="#">상품관리</a>
-												<ul>
-													<%-- <li><a href="${pageContext.request.contextPath}/item/itemListSell?indiOrCom=0">상품주문</a></li> --%>
-													<li><a href="${pageContext.request.contextPath}/item/itemList">상품 조회</a></li>
-													<li><a href="${pageContext.request.contextPath}/item/itemList">상품 수정</a></li>
-													<li><a href="#">결제 조회</a></li>
-													<li><a href="#">환불 조회</a></li>
-												</ul>
-											</li>
-											<li class="submenu">
-												<a href ="#">개인체계관리</a>
-												<ul>
-													<li><a href="${pageContext.request.contextPath}">개인 계정 체계 </a></li>
-													<li><a href="${pageContext.request.contextPath}">개인 계정 과목 </a></li>
-													<%-- <li><a href="${pageContext.request.contextPath}">개인 사용자 계정 과목 </a></li> --%>
-													<%-- <li><a href="${pageContext.request.contextPath}">개인 계정 상세 </a></li> --%>
-													<li><a href="${pageContext.request.contextPath}">개인 계정 과목 세부 </a></li>
-													<%-- <li><a href="${pageContext.request.contextPath}">개인 적요 </a></li> --%>
-												</ul>
-											</li>
-											<li class="submenu">
-												<a href ="#">회사체계관리</a>
-												<ul>
-													<li><a href="${pageContext.request.contextPath}">회사 계정 체계 </a></li>
-													<li><a href="${pageContext.request.contextPath}">회사 계정 과목 </a></li>
-													<%-- <li><a href="${pageContext.request.contextPath}">회사 사용자 계정 과목 </a></li> --%>
-													<%-- <li><a href="${pageContext.request.contextPath}">회사 계정 상세 </a></li>
-													<li><a href="${pageContext.request.contextPath}">회사 적요 </a></li> --%>
-												</ul>
-											</li>
-											<li class="current"><a href="${pageContext.request.contextPath}/cashfilm/cashfilmControlTower?memberClassificationCode=${memberSession.memberClassificationCode}">관리자</a></li>
+											<li class="current" id="control">
+												<a href="#" id="control">관리자</a>
+											</li>		
 										</c:when>
 										<c:otherwise>
 											<c:choose>
@@ -145,33 +117,39 @@
 									</c:choose>
 									
 								</c:otherwise>
-									</c:choose>
+							</c:choose>
 						</ul>
 					</nav>
 				</header>
 
 			<!-- Banner -->
 				<section id="banner">
-
-						<div class="inner">
-
-						<header>
-							<h2>CASHFILM</h2>
-						</header>
-						<p>This is <strong>CASHIFILM</strong>, a free
-						<br />
-						responsive template
-						<br />
-						
-						<footer>
-							<ul class="buttons vertical">
-								<li><a href="#main" class="button fit scrolly">Tell Me More</a></li>
-							</ul>
-						</footer>
-
+					<div class="wrap">
+					  <a href="${pageContext.request.contextPath}/member/memberList" id="btn" class="button" style="display:none;">회원관리</a>
+					  <a href="${pageContext.request.contextPath}/company/comListByIndividual" id="btn"class="button" style="display:none;">회사관리</a>
+					  <a href="${pageContext.request.contextPath}/item/itemList" id="btn"class="button" style="display:none;">상품관리</a>
+					  <a href="${pageContext.request.contextPath}/IndividualSystem/selectIndividualSystem" id="btn"class="button" style="display:none;">개인체계관리</a>
+					  <a href="${pageContext.request.contextPath}/ComSystem/selectComSystem" id="btn"class="button" style="display:none;">회사체계관리</a>
 					</div>
-
+					
+					
+						<div class="inner">
+							<header>
+								<h2>CASHFILM</h2>
+							</header>
+							<p>This is <strong>CASHIFILM</strong>, a free
+							<br />
+							responsive template
+							<br />
+							<footer>
+								<ul class="buttons vertical">
+									<li><a href="#main" class="button fit scrolly">Tell Me More</a></li>
+								</ul>
+							</footer>
+						</div> 
+				
 				</section>
+				
 
 <a href="${pageContext.request.contextPath}/statement/financeListByCompany?comCode=${memberSession.comCode}">회사 처음 입력 재무 조회</a>
 
