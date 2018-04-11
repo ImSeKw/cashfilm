@@ -20,16 +20,15 @@ public class StatementCompanyDao {
 	private final String NAMESPACE = "com.boa.cashfilm.mapper.statementCompanyMapper.";
 	private static final Logger logger = LoggerFactory.getLogger(StatementCompanyDao.class);
 	
-	// 회사 처음 입력 재무 수정
+	// 회사 처음 입력 재무 수정 처리
 	public void updateStatementCompanyFinance(StatementCompanyFinance statementCompanyFinance) {
-		logger.debug("{} : statementCompanyFinance updateStatementCompanyFinance() StatementCompanyDao", statementCompanyFinance);
+		logger.debug("{} : < statementCompanyFinance updateStatementCompanyFinance() StatementCompanyDao", statementCompanyFinance);
 		sqlSessionTemplate.update(NAMESPACE + "updateStatementCompanyFinance", statementCompanyFinance);
 	}
 	
 	// 회사 처음 입력 재무 조회
 	public List<StatementCompanyFinanceList> selectStatementCompanyFinanceList(StatementCompanyFinanceCode statementCompanyFinanceCode) {
-		logger.debug("{} : < comCode selectStatementCompanyFinanceList() StatementCompanyDao", statementCompanyFinanceCode.getComCode());
-		logger.debug("{} : < financeCode selectStatementCompanyFinanceList() StatementCompanyDao", statementCompanyFinanceCode.getFinanceCode());
+		logger.debug("{} : < statementCompanyFinanceCode selectStatementCompanyFinanceList() StatementCompanyDao", statementCompanyFinanceCode);
 		return sqlSessionTemplate.selectList(NAMESPACE + "selectStatementCompanyFinanceList", statementCompanyFinanceCode);
 	}
 	

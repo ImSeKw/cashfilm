@@ -43,7 +43,7 @@
 			<script src="${pageContext.request.contextPath}/resources/assets/js/skel.min.js"></script>
 			<script src="${pageContext.request.contextPath}/resources/assets/js/util.js"></script>
 			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-			<script src="resources/assets/js/main.js"></script>
+			<script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
 
 		  <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
 	    <script src='<c:url value="/resources/js/bootstrap.min.js"/>'></script>

@@ -4,13 +4,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.boa.cashfilm.mapper.statementCompanyMapper">
-	<!-- 회사 처음 입력 재무 수정 -->
+	<!-- 회사 처음 입력 재무 수정 처리 -->
 	<update id="updateStatementCompanyFinance" parameterType="com.boa.cashfilm.smtcom.dto.StatementCompanyFinance">
 		UPDATE cffinance 
 		SET 
-			individualSystemNumeral = 3
-			, financeAmount = 5000000000 
-		WHERE financeCode = 3
+			comSystemNumeral = #{comSystemNumeral}
+			, memberEmail = #{memberEmail}
+			, financeAmount = #{financeAmount}
+			, closingStatementCode = #{closingStatementCode}
+		WHERE financeCode = #{financeCode}
 	</update>
 	
 	<!-- 회사 처음 입력 재무 조회 -->
@@ -29,6 +31,9 @@
 		WHERE f.comCode = #{comCode}
 		<if test="financeCode != 0">
 			AND f.financeCode = #{financeCode}
+		</if>
+		<if test="closingStatementCode != null">
+			AND f.closingStatementCode LIKE CONCAT('%', CONCAT(#{closingStatementCode}, '%'))
 		</if>
 	</select>
 	
