@@ -39,6 +39,8 @@
 											<li><a href="${pageContext.request.contextPath}/company/comPositionListBeforeApproval?comCode=${memberSession.comCode}">직급 미동록 직원 조회 및 등록</a></li>
 											<li><a href="${pageContext.request.contextPath}/company/comSectionRegistration?comCode=${memberSession.comCode}">부서 등록</a></li>
 											<li><a href="${pageContext.request.contextPath}/company/comSectionList?comCode=${memberSession.comCode}">부서 조회</a></li>
+											<li><a href="${pageContext.request.contextPath}/company/comPositionRegistration?comCode=${memberSession.comCode}">직급 등록</a></li>
+											<li><a href="${pageContext.request.contextPath}/company/comSectionList?comCode=${memberSession.comCode}">직급 조회</a></li>
 										</ul>
 									</li>	
 								</c:if>
