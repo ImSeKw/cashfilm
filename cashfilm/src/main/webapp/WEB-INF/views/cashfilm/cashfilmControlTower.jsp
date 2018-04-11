@@ -5,11 +5,11 @@
 
 관리자 페이지
 
-<a href="${pageContext.request.contextPath}/member/memberDelList">회원탈퇴 조회</a>
+
 <br>
-<a href="${pageContext.request.contextPath}/member/memberClassificationList">회원구분 조회</a>
+
 <br>
-<a href="${pageContext.request.contextPath}/member/memberList">회원 조회</a>
+
 <br>
-<a href="${pageContext.request.contextPath}/item/itemList">상품 조회</a>
+
 <jsp:include page="/WEB-INF/views/module/bottom.jsp"/>
