@@ -4,9 +4,14 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.boa.cashfilm.mapper.statementIndividualMapper">
+	<!--개인 처음 입력 재무 삭제  -->
+	<delete id="deleteStatementIndiFinance" parameterType="com.boa.cashfilm.smtindi.dto.StatementIndividual">
+		DELETE FROM cffinance WHERE financeCode=#{financeCode};
+	</delete>
 	
-	<!--회사 처음 입력 재무 조회 -->
-	<select id="selectStatementIndiFinanceList" parameterType="String" resultType="com.boa.cashfilm.smtindi.dto.StatementIndividualList">
+	
+	<!--개인 처음 입력 재무 수정을 위한 검색  -->
+	<select id="selectStatementIndiFinanceOne" parameterType="int" resultType="com.boa.cashfilm.smtindi.dto.StatementIndividualList">
 		SELECT 
 			 i.individualSystemName
 			 ,f.financeCode
@@ -14,12 +19,29 @@
 			 ,f.memberEmail
 			 ,f.financeAmount
 			 ,f.closingStatementCode 
-			FROM 
-			 cffinance f 
-			INNER JOIN 
-			 cfindividualsystem i 
-			ON f.individualSystemNumeral=i.individualSystemNumeral 
-			WHERE f.memberEmail=#{memberEmail};
+		FROM 
+		 cffinance f 
+		INNER JOIN 
+		 cfindividualsystem i 
+		ON f.individualSystemNumeral=i.individualSystemNumeral 
+		WHERE f.financeCode=#{financeCode};
+	</select>
+	
+	<!--회사 처음 입력 재무 조회 -->
+	<select id="selectStatementIndiFinanceList" parameterType="com.boa.cashfilm.smtindi.dto.StatementIndiFinanceCode" resultType="com.boa.cashfilm.smtindi.dto.StatementIndividualList">
+		SELECT 
+			 i.individualSystemName
+			 ,f.financeCode
+			 ,f.individualSystemNumeral
+			 ,f.memberEmail
+			 ,f.financeAmount
+			 ,f.closingStatementCode 
+		FROM 
+		 cffinance f 
+		INNER JOIN 
+		 cfindividualsystem i 
+		ON f.individualSystemNumeral=i.individualSystemNumeral 
+		WHERE f.memberEmail=#{memberEmail};
 	</select>
 	
 	<!-- 개인 처음 입력 재무 등록 처리 -->

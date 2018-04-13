@@ -50,5 +50,6 @@
 	<button type="button" id="selectAddButton">추가</button>
 	<button type="button" id="financeRegistrationBCButton">등록</button>
 </form>
+<a href="${pageContext.request.contextPath}/statement/selectStatementIndiFinanceList?memberEmail=${memberSession.memberEmail}">개인처음입력재무 검색</a></td>
 
 <jsp:include page="/WEB-INF/views/module/bottom.jsp"/>
