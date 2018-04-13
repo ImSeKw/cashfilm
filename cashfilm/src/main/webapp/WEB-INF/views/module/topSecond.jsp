@@ -13,7 +13,7 @@
 			}
 		
 			$("#control").on("click", function(){
-				$(".button").show();
+				$(".ctrlBtn").show();
 				
 			});
 			
@@ -121,25 +121,99 @@
 						</ul>
 					</nav>
 				</header>
+				
 
-			<!-- Banner -->
+				
+				<!-- Banner -->
 				<section id="banner">
-					<div class="wrap">
+					<%-- <div class="wrap">
 					  <a href="${pageContext.request.contextPath}/member/memberList" id="btn" class="button" style="display:none;">회원관리</a>
 					  <a href="${pageContext.request.contextPath}/company/comListByIndividual" id="btn"class="button" style="display:none;">회사관리</a>
 					  <a href="${pageContext.request.contextPath}/item/itemList" id="btn"class="button" style="display:none;">상품관리</a>
 					  <a href="${pageContext.request.contextPath}/IndividualSystem/selectIndividualSystem" id="btn"class="button" style="display:none;">개인체계관리</a>
 					  <a href="${pageContext.request.contextPath}/ComSystem/selectComSystem" id="btn"class="button" style="display:none;">회사체계관리</a>
+					</div> --%>
+		<div class="container">
+		    <div class="row">
+		 		<div class="col-lg-12">
+						
+					<div class="tabbable-panel">
+						<div class="tabbable-line">
+							<ul class="nav nav-tabs ">
+								<li class="active">
+									<a href="${pageContext.request.contextPath}/member/memberList" id="btn" class="ctrlBtn" data-toggle="tab"  style="display:none;">
+									회원관리 </a>
+								</li>
+								<li>
+									<a href="#tab_default_2" id="btn" class="ctrlBtn" data-toggle="tab"  style="display:none;">
+									회사관리</a>
+								</li>
+								<li>
+									<a href="#tab_default_3" id="btn" class="ctrlBtn" data-toggle="tab"  style="display:none;">
+									개인체계관리 </a>
+								</li>
+								<li>
+									<a href="#tab_default_4" id="btn"  class="ctrlBtn" data-toggle="tab"  style="display:none;">
+									회사체계관리 </a>
+								</li>
+								<li>
+									<a href="#tab_default_5" id="btn" class="ctrlBtn" data-toggle="tab"  style="display:none;">
+									상품관리 </a>
+								</li>
+							</ul>
+									<!-- <div class="tab-content">
+								<div class="tab-pane active" id="tab_default_1">
+									<p>
+										Howdy, I'm in Tab 2.
+									</p>
+									<p>
+										Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat. Ut wisi enim ad minim veniam, quis nostrud exerci tation.
+									</p>
+									<p>
+										<a class="btn btn-warning" href="http://j.mp/metronictheme" target="_blank">
+											Click for more features...
+										</a>
+									</p>
+								</div>
+								<div class="tab-pane" id="tab_default_2">
+									<p>
+										Howdy, I'm in Tab 2.
+									</p>
+									<p>
+										Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat. Ut wisi enim ad minim veniam, quis nostrud exerci tation.
+									</p>
+									<p>
+										<a class="btn btn-warning" href="http://j.mp/metronictheme" target="_blank">
+											Click for more features...
+										</a>
+									</p>
+								</div>
+								<div class="tab-pane" id="tab_default_3">
+									<p>
+										Howdy, I'm in Tab 3.
+									</p>
+									<p>
+										Duis autem vel eum iriure dolor in hendrerit in vulputate. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat
+									</p>
+									<p>
+										<a class="btn btn-info" href="http://j.mp/metronictheme" target="_blank">
+											Learn more...
+										</a>
+									</p>
+								</div>
+							</div> -->
+						</div>	
 					</div>
-					
-					
+				</div>
+			</div>
+		</div>			
 						<div class="inner">
 							<header>
 								<h2>CASHFILM</h2>
 							</header>
-							<p>This is <strong>CASHIFILM</strong>, a free
+							<p>this is <strong>CASHIFILM</strong>, a free
 							<br />
-							responsive template
+							asset management system
 							<br />
 							<footer>
 								<ul class="buttons vertical">
@@ -151,8 +225,8 @@
 				</section>
 				
 
-<a href="${pageContext.request.contextPath}/statement/financeListByCompany?comCode=${memberSession.comCode}">회사 처음 입력 재무 조회</a>
-
+<%-- <a href="${pageContext.request.contextPath}/statement/financeListByCompany?comCode=${memberSession.comCode}">회사 처음 입력 재무 조회</a>
+ --%>
 <%-- <br>
 
 

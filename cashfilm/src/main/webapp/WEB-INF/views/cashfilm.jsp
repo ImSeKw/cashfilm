@@ -9,22 +9,17 @@
 
 					<header class="special container">
 						<span class="icon fa-bar-chart-o"></span>
-						<h2>As this is my <strong>twentieth</strong> freebie for HTML5 UP
+						<h2>개인 기업  <strong>자산관리 </strong> 프로그램
 						<br />
-						I decided to give it a really creative name.</h2>
-						<p>Turns out <strong>Twenty</strong> was the best I could come up with. Anyway, lame name aside,
+						individual & company management system</h2>
+						<p>개인과 기업의  효과적인 자가 <strong>자산관리</strong> 
 						<br />
-						it's minimally designed, fully responsive, built on HTML5/CSS3/<strong>skel</strong>,
-						and, like all my stuff,
-						<br />
-						released for free under the <a href="http://html5up.net/license">Creative Commons Attribution 3.0</a> license. Have fun!</p>
-					</header>
+						
 
 					<!-- One -->
 						<section class="wrapper style2 container special-alt">
 							<div class="row 50%">
 								<div class="8u 12u(narrower)">
-
 									<header>
 										<h2>Behold the <strong>icons</strong> that visualize what you’re all about. or just take up space. your call bro.</h2>
 									</header>
