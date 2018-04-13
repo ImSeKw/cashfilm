@@ -1,15 +1,13 @@
 package com.boa.cashfilm.smtindi.dto;
 
 public class StatementIndiFinanceCode {
-	private int memberEmail;
+	private String memberEmail;
 	private int financeCode;
 	private String closingStatementCode;
-	
-	
-	public int getMemberEmail() {
+	public String getMemberEmail() {
 		return memberEmail;
 	}
-	public void setMemberEmail(int memberEmail) {
+	public void setMemberEmail(String memberEmail) {
 		this.memberEmail = memberEmail;
 	}
 	public int getFinanceCode() {
@@ -29,6 +27,8 @@ public class StatementIndiFinanceCode {
 		return "StatementIndiFinanceCode [memberEmail=" + memberEmail + ", financeCode=" + financeCode
 				+ ", closingStatementCode=" + closingStatementCode + "]";
 	}
+	
+	
 	
 	
 }

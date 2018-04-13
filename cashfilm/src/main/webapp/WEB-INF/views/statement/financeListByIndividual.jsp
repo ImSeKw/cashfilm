@@ -83,7 +83,6 @@
 			}
 		});
 	});
-	});
 	</script>
 
 <jsp:include page="/WEB-INF/views/module/topSecond.jsp"/>
