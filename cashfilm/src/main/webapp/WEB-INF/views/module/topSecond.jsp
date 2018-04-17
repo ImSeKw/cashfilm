@@ -35,7 +35,7 @@
 							<li class="current"><a href="${pageContext.request.contextPath}/">Welcome</a></li>
 							<c:choose>
 								<c:when test="${empty memberSession.memberEmail}">
-									<!-- <li><a href="#" data-toggle="modal" data-target="#loginModal" class="button special">Login</a></li> -->
+									<!-- <li data-toggle="modal" data-target="#loginModal"><a href="#" class="button special js-scroll-trigger">Login</a></li> -->
 									<li><a href="${pageContext.request.contextPath}/member/signIn" class="button special">Login</a></li>
 									<li><a href="${pageContext.request.contextPath}/member/signUp" class="button special">sign up</a></li>
 									
@@ -123,7 +123,8 @@
 						</ul>
 					</nav>
 				</header>
-				<!-- Modal -->
+				
+	<!-- Modal -->
 	<div class="modal fade" id="loginModal" role="dialog">
 		<div class="modal-dialog">
 			<!-- Modal content-->
@@ -150,7 +151,8 @@
 				</form>
 			</div>
 		</div>
-	</div>		
+	</div>
+	<!-- Modal end-->		
 
 				
 				<!-- Banner -->
@@ -167,25 +169,25 @@
 		 		<div class="col-lg-12">
 					<div class="tabbable-panel">
 						<div class="tabbable-line">
-							<ul class="nav nav-tabs ">
-								<li class="active">
-									<a href="${pageContext.request.contextPath}/member/memberList" id="btn" class="ctrlBtn" data-toggle="tab"  style="display:none;">
+							<ul class="nav nav-tabs">
+								<li>
+									<a href="${pageContext.request.contextPath}/member/memberList" class="ctrlBtn" style="display:none;">
 									회원관리 </a>
 								</li>
 								<li>
-									<a href="#tab_default_2" id="btn" class="ctrlBtn" data-toggle="tab"  style="display:none;">
+									<a href="#tab_default_2" data-toggle="tab"  class="ctrlBtn" style="display:none;">
 									회사관리</a>
 								</li>
 								<li>
-									<a href="#tab_default_3" id="btn" class="ctrlBtn" data-toggle="tab"  style="display:none;">
+									<a href="#tab_default_3" data-toggle="tab"  class="ctrlBtn" style="display:none;">
 									개인체계관리 </a>
 								</li>
 								<li>
-									<a href="#tab_default_4" id="btn"  class="ctrlBtn" data-toggle="tab"  style="display:none;">
+									<a href="#tab_default_4" data-toggle="tab"  class="ctrlBtn" style="display:none;">
 									회사체계관리 </a>
 								</li>
 								<li>
-									<a href="#tab_default_5" id="btn" class="ctrlBtn" data-toggle="tab"  style="display:none;">
+									<a href="#tab_default_5" data-toggle="tab"  class="ctrlBtn" style="display:none;">
 									상품관리 </a>
 								</li>
 							</ul>

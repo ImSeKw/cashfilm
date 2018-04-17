@@ -34,7 +34,7 @@
 <div class="col-sm-3"></div>
 <div class="col-sm-6">
 	<div class="col-md-8">
-		<form class="form-horizontal">
+		<form class="form-horizontal" action="${pageContext.request.contextPath}/member/signIn" method="post">>
 			 <div class="form-group">
 	          <label class="control-label col-sm-3">Email ID <span class="text-danger">*</span></label>
 	          <div class="col-md-8 col-sm-9">
