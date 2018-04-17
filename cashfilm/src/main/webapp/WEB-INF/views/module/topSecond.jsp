@@ -19,13 +19,14 @@
 				$(".ctrlBtn").show();
 				
 			});
-			
+						
 		});
 	</script>
 	
 </head>
 <body class="index">
-	<div id="page-wrapper">
+
+	<div id="page-wrapper" class="col-lg-12">
 
 			<!-- Header -->
 				<header id="header" class="alt">
@@ -37,8 +38,10 @@
 							<li class="current"><a href="${pageContext.request.contextPath}/">Welcome</a></li>
 							<c:choose>
 								<c:when test="${empty memberSession.memberEmail}">
+									<!-- <li data-toggle="modal" data-target="#loginModal"><a href="#" class="button special js-scroll-trigger">Login</a></li> -->
 									<li><a href="${pageContext.request.contextPath}/member/signIn" class="button special">Login</a></li>
-									<li><a href="${pageContext.request.contextPath}/member/signUp" class="button special">Membership</a></li>
+									<li><a href="${pageContext.request.contextPath}/member/signUp" class="button special">sign up</a></li>
+									
 								</c:when>
 								<c:otherwise>
 									<li><a href="${pageContext.request.contextPath}/member/signOut" class="button special">Logout</a></li>
@@ -118,13 +121,41 @@
 											</c:choose>
 										</c:otherwise>
 									</c:choose>
-									
 								</c:otherwise>
 							</c:choose>
 						</ul>
 					</nav>
 				</header>
 				
+	<!-- Modal -->
+	<div class="modal fade" id="loginModal" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<form class="form-horizontal" action="${pageContext.request.contextPath}/member/loginMember" method="post">
+					 <div class="form-group">
+			          <label class="control-label col-sm-3">Email ID <span class="text-danger">*</span></label>
+			          <div class="col-md-8 col-sm-9">
+			          	<div class="input-group">
+			             <span class="input-group-addon"><i class="fas fa-at"></i></span>
+			             <input type="email" name="memberEmail" id="memberEmail" placeholder="Enter your Email ID"> 
+			            </div>
+			          </div>
+			        </div>
+			        <div class="form-group">
+			          <label class="control-label col-sm-3"> Password <span class="text-danger">*</span></label>
+			          <div class="col-md-8 col-sm-9">
+			            <div class="input-group">
+			              <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+			              <input type="password" name="memberPassword" placeholder="Choose password (5-15 chars)" value="">
+			           </div>   
+			          </div>
+			        </div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- Modal end-->		
 
 				
 				<!-- Banner -->
@@ -139,32 +170,31 @@
 		<div class="container">
 		    <div class="row">
 		 		<div class="col-lg-12">
-						
 					<div class="tabbable-panel">
 						<div class="tabbable-line">
-							<ul class="nav nav-tabs ">
-								<li class="active">
-									<a href="${pageContext.request.contextPath}/member/memberList" id="btn" class="ctrlBtn" data-toggle="tab"  style="display:none;">
+							<ul class="nav nav-tabs">
+								<li>
+									<a href="${pageContext.request.contextPath}/member/memberList" class="ctrlBtn" style="display:none;">
 									회원관리 </a>
 								</li>
 								<li>
-									<a href="#tab_default_2" id="btn" class="ctrlBtn" data-toggle="tab"  style="display:none;">
+									<a href="#tab_default_2" data-toggle="tab"  class="ctrlBtn" style="display:none;">
 									회사관리</a>
 								</li>
 								<li>
-									<a href="#tab_default_3" id="btn" class="ctrlBtn" data-toggle="tab"  style="display:none;">
+									<a href="#tab_default_3" data-toggle="tab"  class="ctrlBtn" style="display:none;">
 									개인체계관리 </a>
 								</li>
 								<li>
-									<a href="#tab_default_4" id="btn"  class="ctrlBtn" data-toggle="tab"  style="display:none;">
+									<a href="#tab_default_4" data-toggle="tab"  class="ctrlBtn" style="display:none;">
 									회사체계관리 </a>
 								</li>
 								<li>
-									<a href="#tab_default_5" id="btn" class="ctrlBtn" data-toggle="tab"  style="display:none;">
+									<a href="#tab_default_5" data-toggle="tab"  class="ctrlBtn" style="display:none;">
 									상품관리 </a>
 								</li>
 							</ul>
-									<!-- <div class="tab-content">
+									<!--  <div class="tab-content">
 								<div class="tab-pane active" id="tab_default_1">
 									<p>
 										Howdy, I'm in Tab 2.
@@ -178,7 +208,7 @@
 										</a>
 									</p>
 								</div>
-								<div class="tab-pane" id="tab_default_2">
+								<div class="tab-pane" id="tab_default_2" >
 									<p>
 										Howdy, I'm in Tab 2.
 									</p>
@@ -223,9 +253,49 @@
 									<li><a href="#main" class="button fit scrolly">Tell Me More</a></li>
 								</ul>
 							</footer>
-						</div> 
+						</div>
+						
 				
 				</section>
+				<!-- <div class="col-sm-4">
+				</div>
+				<div class="col-sm-4">
+					<div class="center-block">
+							  <div class="mat-div">
+							    <label>First Name</label>
+							    <input type="text" class="mat-input" id="first-name">
+							  </div>
+							  
+							    <div class="mat-div">
+							    <label>Last Name</label>
+							    <input type="text" class="mat-input" id="last-name">
+							  </div>
+							
+							    <div class="mat-div">
+							    <label>Address</label>
+							    <input type="text" class="mat-input" id="address">
+							  </div>
+							    <button>Submit</button>
+					</div>		    
+				</div>
+				<div class="col-sm-4">
+				</div> -->
+						
+						<script>
+						    $(".mat-input").focus(function(){
+						  $(this).parent().addClass("is-active is-completed");
+						});
+						
+						$(".mat-input").focusout(function(){
+						  if($(this).val() === "")
+						    $(this).parent().removeClass("is-completed");
+						  $(this).parent().removeClass("is-active");
+						})
+						</script>
+				
+						
+			 
+						
 				
 
 <a href="${pageContext.request.contextPath}/statement/financeListByCompany?comCode=${memberSession.comCode}&closingStatementCode=${pastYear - 1}">회사 처음 입력 재무 조회</a>

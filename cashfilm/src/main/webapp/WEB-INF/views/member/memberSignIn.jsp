@@ -31,6 +31,34 @@
 	<input type="text" name="memberPassword" value="pw111">
 	<button type="submit">확인</button>
 </form>
+<div class="col-sm-3"></div>
+<div class="col-sm-6">
+	<div class="col-md-8">
+		<form class="form-horizontal" action="${pageContext.request.contextPath}/member/signIn" method="post">>
+			 <div class="form-group">
+	          <label class="control-label col-sm-3">Email ID <span class="text-danger">*</span></label>
+	          <div class="col-md-8 col-sm-9">
+	          	<div class="input-group">
+	             <span class="input-group-addon"><i class="fas fa-at"></i></span>
+	             <input type="email" name="memberEmail" id="memberEmail" placeholder="Enter your Email ID"> 
+	            </div>
+	          </div>
+	        </div>
+	        <div class="form-group">
+	          <label class="control-label col-sm-3"> Password <span class="text-danger">*</span></label>
+	          <div class="col-md-8 col-sm-9">
+	            <div class="input-group">
+	              <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+	              <input type="password" name="memberPassword" placeholder="Choose password (5-15 chars)" value="">
+	           </div>   
+	          </div>
+	        </div>
+	        <div class="text-center">
+	        <button type="submit" class="button special">login</button>
+	        </div>
+		</form>
+	</div>
+</div>
 </article>
 
 <jsp:include page="/WEB-INF/views/module/bottom.jsp"/>

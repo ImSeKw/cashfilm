@@ -33,17 +33,108 @@
 
 <jsp:include page="/WEB-INF/views/module/topSecond.jsp"/>
 
-<form id="signUp" action="${pageContext.request.contextPath}/member/signUp" method="post">
-	이메일 : <input type="email" name="memberEmail" id="memberEmail"> <button type="button" id="emailOverlap">중복확인</button>
-	이름 : <input type="text" name="memberName">
-	비밀번호 : <input type="password" name="memberPassword">
-	휴대폰 식별 번호 : <input type="text" name="memberPhoneFirst">
-	휴대폰 번호 : <input type="text" name="memberPhoneSecond">
-	우편번호 : <input type="text" name="memberPostalCode">
-	주소 : <input type="text" name="memberAddress">
-	실명인증여부 : <input type="number" name="memberCertification">
-	전화번호 : <input type="tel" name="memberPhone">
-</form>
-<button type="button" id="signUpButton">확인</button>
+<div class="col-sm-3"></div>
+<div class="col-sm-6">
+	<div class="container">
+		<div class="row">
+	    <div class="col-md-8">
+	      <section>      
+	        <h1 class="entry-title"><span>Sign Up</span> </h1>
+	        <hr>
+	        <form class="form-horizontal" method="post" name="signup" id="signup" enctype="multipart/form-data" >
+	           
+	        <div class="form-group">
+	          <label class="control-label col-sm-3">Email ID <span class="text-danger">*</span></label>
+	          <div class="col-md-8 col-sm-9">
+	          	<div><span style="float:right"><button type="button" id="emailOverlap" class="button special">중복확인</button></span></div>    
+	           	<div class="input-group">
+	             <span class="input-group-addon"><i class="fas fa-at"></i></span>
+	             <input type="email" name="memberEmail" id="memberEmail" placeholder="Enter your Email ID"> 
+	            </div>
+	          </div>
+	        </div>
+	        <div class="form-group">
+	          <label class="control-label col-sm-3"> Password <span class="text-danger">*</span></label>
+	          <div class="col-md-8 col-sm-9">
+	            <div class="input-group">
+	              <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+	              <input type="password" name="memberPassword" placeholder="Choose password (5-15 chars)" value="">
+	           </div>   
+	          </div>
+	        </div>
+	        <div class="form-group">
+	          <label class="control-label col-sm-3"> Name <span class="text-danger">*</span></label>
+	          <div class="col-md-8 col-sm-9">
+	          	<div class="input-group">
+		          	<span class="input-group-addon"><i class="fas fa-user"></i></span>
+		            <input type="text" name="memberName" placeholder="Enter your Name here" value="">
+		        </div>    
+	          </div>
+	        </div>
+	        <div class="form-group">
+	          <label class="control-label col-sm-3"> 휴대폰 식별 번호 <span class="text-danger">*</span></label>
+	          <div class="col-md-8 col-sm-9">
+	          	<div class="input-group">
+		          	<span class="input-group-addon"><i class="fab fa-nutritionix"></i></span>
+		            <input type="text" name="memberPhoneFirst" placeholder="Enter your first sellphone number here" value="">
+		        </div>    
+	          </div>
+	        </div>
+	        <div class="form-group">
+	          <label class="control-label col-sm-3"> 휴대폰 번호 <span class="text-danger">*</span></label>
+	          <div class="col-md-8 col-sm-9">
+	          	<div class="input-group">
+		          	<span class="input-group-addon"><i class="fas fa-mobile-alt"></i></span>
+		            <input type="text" name="memberPhoneSecond" placeholder="Enter your second sellphone number here" value="">
+		        </div>    
+	          </div>
+	        </div>
+	        <div class="form-group">
+	          <label class="control-label col-sm-3"> 우편번호 <span class="text-danger">*</span></label>
+	          <div class="col-md-8 col-sm-9">
+	          	<div class="input-group">
+		          	<span class="input-group-addon"><i class="far fa-envelope"></i></span>
+		            <input type="text" name="memberPostalCode" placeholder="Enter your PostalCode here" value="">
+		        </div>    
+	          </div>
+	        </div>
+	        <div class="form-group">
+	          <label class="control-label col-sm-3"> 주소 <span class="text-danger">*</span></label>
+	          <div class="col-md-8 col-sm-9">
+	          	<div class="input-group">
+		          	<span class="input-group-addon"><i class="fas fa-home"></i></span>
+		            <input type="text" name="memberAddress" placeholder="Enter your address here" value="">
+		        </div>    
+	          </div>
+	        </div>
+	        <div class="form-group">
+	          <label class="control-label col-sm-3"> 실명인증여부 <span class="text-danger">*</span></label>
+	          <div class="col-md-8 col-sm-9">
+	          	<div class="input-group">
+		          	<span class="input-group-addon"><i class="fas fa-check"></i></span>
+		            <input type="number" name="memberCertification" placeholder="Enter your Certification here" value="">
+		        </div>    
+	          </div>
+	        </div>
+	        <div class="form-group">
+	          <label class="control-label col-sm-3"> 전화번호 <span class="text-danger">*</span></label>
+	          <div class="col-md-8 col-sm-9">
+	          	<div class="input-group">
+		          	<span class="input-group-addon"><i class="fas fa-phone"></i></span>
+		            <input type="tel" name="memberPhone" placeholder="Enter your phone here" value="">
+		        </div>    
+	          </div>
+	        </div>
+	     </form>
+	    <div class="col-md-12 text-center">
+		<button type="button" class="button special" id="signUpButton">확인</button>
+		</div>
+	    </div>
+	 </div>
+	</div>
+</div>
+<div class="col-sm-3"></div>
+	
+
 
 <jsp:include page="/WEB-INF/views/module/bottom.jsp"/>
