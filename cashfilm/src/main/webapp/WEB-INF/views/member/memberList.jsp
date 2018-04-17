@@ -8,11 +8,11 @@
         <tr class="row-name">
            <!-- <th style="width:12%">Check/UnCheck</th>
            <th style="width:10%">New/Old</th> -->
-           <th>Email</th>
-           <th>Classification</th>
-           <th>Name</th>
-           <th>Condition</th>
-           <th>Settings</th>
+           <th><strong>Email</strong></th>
+           <th><strong>Classification</strong></th>
+           <th><strong>Name</strong></th>
+           <th><strong>Condition</strong></th>
+           <th><strong>Settings</strong></th>
         </tr>
      </thead>   
      <tbody>
