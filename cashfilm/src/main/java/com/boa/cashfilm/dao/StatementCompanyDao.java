@@ -20,6 +20,12 @@ public class StatementCompanyDao {
 	private final String NAMESPACE = "com.boa.cashfilm.mapper.statementCompanyMapper.";
 	private static final Logger logger = LoggerFactory.getLogger(StatementCompanyDao.class);
 	
+	// 회사 처음 입력 재무 삭제 처리
+	public void deleteStatementCompanyFinance(int financeCode) {
+		logger.debug("{} : < statementCompanyFinanceCode deleteStatementCompanyFinance() StatementCompanyDao", financeCode);
+		sqlSessionTemplate.delete(NAMESPACE + "deleteStatementCompanyFinance", financeCode);
+	}
+	
 	// 회사 처음 입력 재무 수정 처리
 	public void updateStatementCompanyFinance(StatementCompanyFinance statementCompanyFinance) {
 		logger.debug("{} : < statementCompanyFinance updateStatementCompanyFinance() StatementCompanyDao", statementCompanyFinance);

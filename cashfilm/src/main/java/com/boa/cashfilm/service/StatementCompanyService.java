@@ -22,18 +22,16 @@ public class StatementCompanyService {
 	StatementCompanyDao statementCompanyDao;
 	private static final Logger logger = LoggerFactory.getLogger(StatementCompanyService.class);
 	
+	// 회사 처음 입력 재무 삭제 처리
+	public void deleteStatementCompanyFinance(int financeCode) {
+		logger.debug("{} : < statementCompanyFinanceCode deleteStatementCompanyFinance() StatementCompanyService", financeCode);
+		statementCompanyDao.deleteStatementCompanyFinance(financeCode);
+	}
+	
 	// 회사 처음 입력 재무 수정 처리
-	public List<StatementCompanyFinanceList> updateStatementCompanyFinance(StatementCompanyFinance statementCompanyFinance) {
+	public void updateStatementCompanyFinance(StatementCompanyFinance statementCompanyFinance) {
 		logger.debug("{} : < statementCompanyFinance updateStatementCompanyFinance() StatementCompanyService", statementCompanyFinance);
 		statementCompanyDao.updateStatementCompanyFinance(statementCompanyFinance);
-		// 처리 후 재조회
-		StatementCompanyFinanceCode statementCompanyFinanceCode = new StatementCompanyFinanceCode();
-		String closingStatementCode = statementCompanyFinance.getClosingStatementCode();
-		logger.debug("{} : | closingStatementCode updateStatementCompanyFinance() StatementCompanyService", closingStatementCode);
-		statementCompanyFinanceCode.setClosingStatementCode(closingStatementCode.substring(0, 4));
-		statementCompanyFinanceCode.setComCode(statementCompanyFinance.getComCode());
-		List<StatementCompanyFinanceList> list = statementCompanyDao.selectStatementCompanyFinanceList(statementCompanyFinanceCode);
-		return list;
 	}
 	
 	// 회사 처음 입력 재무 조회

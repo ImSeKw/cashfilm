@@ -4,6 +4,12 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.boa.cashfilm.mapper.statementCompanyMapper">
+	<!-- 회사 처음 입력 재무 삭제 처리 -->
+	<delete id="deleteStatementCompanyFinance" parameterType="int">
+		DELETE FROM cffinance
+		WHERE financeCode = #{financeCode}
+	</delete>
+
 	<!-- 회사 처음 입력 재무 수정 처리 -->
 	<update id="updateStatementCompanyFinance" parameterType="com.boa.cashfilm.smtcom.dto.StatementCompanyFinance">
 		UPDATE cffinance 
@@ -33,7 +39,7 @@
 			AND f.financeCode = #{financeCode}
 		</if>
 		<if test="closingStatementCode != null">
-			AND f.closingStatementCode LIKE CONCAT('%', CONCAT(#{closingStatementCode}, '%'))
+			AND f.closingStatementCode LIKE CONCAT('%', #{closingStatementCode}, '%')
 		</if>
 	</select>
 	

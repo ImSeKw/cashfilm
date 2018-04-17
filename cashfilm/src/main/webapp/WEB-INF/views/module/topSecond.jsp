@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
+<jsp:useBean id="nowYear" class="java.util.Date"/>
+<fmt:formatDate var="pastYear" value="${nowYear}" pattern="yyyy"/>
 
 	<script>
 		// 첫 화면만 배너 보임
@@ -225,8 +228,7 @@
 				</section>
 				
 
-<%-- <a href="${pageContext.request.contextPath}/statement/financeListByCompany?comCode=${memberSession.comCode}">회사 처음 입력 재무 조회</a>
- --%>
+<a href="${pageContext.request.contextPath}/statement/financeListByCompany?comCode=${memberSession.comCode}&closingStatementCode=${pastYear - 1}">회사 처음 입력 재무 조회</a>
 <%-- <br>
 
 

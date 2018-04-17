@@ -24,17 +24,32 @@ public class StatementCompanyController {
 	StatementCompanyService statementCompanyService;
 	private static final Logger logger = LoggerFactory.getLogger(StatementCompanyController.class);
 	
+	// 회사 처음 입력 재무 삭제 처리
+	@RequestMapping(value = "/statement/financeDeletionByCompany", method = RequestMethod.GET)
+	public String deleteStatementCompanyFinance(StatementCompanyFinanceCode statementCompanyFinanceCode) {
+		logger.debug("{} : closingStatementCode deleteStatementCompanyFinance() StatementCompanyController", statementCompanyFinanceCode.getClosingStatementCode());
+		logger.debug("{} : comCode deleteStatementCompanyFinance() StatementCompanyController", statementCompanyFinanceCode.getComCode());
+		logger.debug("{} : financeCode deleteStatementCompanyFinance() StatementCompanyController", statementCompanyFinanceCode.getFinanceCode());
+		// 삭제 처리
+		int financeCode = statementCompanyFinanceCode.getFinanceCode();
+		statementCompanyService.deleteStatementCompanyFinance(financeCode);
+		// 조회
+		int comCode = statementCompanyFinanceCode.getComCode();
+		String closingStatementCode = statementCompanyFinanceCode.getClosingStatementCode();
+		return "redirect:/statement/financeListByCompany?comCode="+comCode+"&closingStatementCode="+closingStatementCode;
+	}
+	
 	// 회사 처음 입력 재무 수정 : 처리
-	@RequestMapping(value = "/statement/financeModificationByCompanyAjax", method = RequestMethod.POST)
-	public @ResponseBody List<StatementCompanyFinanceList> updateStatementCompanyFinance(StatementCompanyFinance statementCompanyFinance) {
+	@RequestMapping(value = "/statement/financeModificationByCompany", method = RequestMethod.POST)
+	public String updateStatementCompanyFinance(StatementCompanyFinance statementCompanyFinance) {
 		logger.debug("{} : < closingStatementCode updateStatementCompanyFinance() StatementCompanyController", statementCompanyFinance.getClosingStatementCode());
 		logger.debug("{} : < comCode updateStatementCompanyFinance() StatementCompanyController", statementCompanyFinance.getComCode());
 		logger.debug("{} : < comSystemNumeral updateStatementCompanyFinance() StatementCompanyController", statementCompanyFinance.getComSystemNumeral());
 		logger.debug("{} : < financeAmount updateStatementCompanyFinance() StatementCompanyController", statementCompanyFinance.getFinanceAmount());
 		logger.debug("{} : < financeCode updateStatementCompanyFinance() StatementCompanyController", statementCompanyFinance.getFinanceCode());
 		logger.debug("{} : < memberEmail updateStatementCompanyFinance() StatementCompanyController", statementCompanyFinance.getMemberEmail());
-		List<StatementCompanyFinanceList> list = statementCompanyService.updateStatementCompanyFinance(statementCompanyFinance);
-		return list;
+		statementCompanyService.updateStatementCompanyFinance(statementCompanyFinance);
+		return "redirect:/statement/financeListByCompany";
 	}
 	
 	// 회사 처음 입력 재무 수정 : 계정 체계 목록

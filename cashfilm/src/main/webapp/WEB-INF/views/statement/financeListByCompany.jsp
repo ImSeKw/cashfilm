@@ -9,8 +9,8 @@
 		var selectValue = document.getElementById("year");
 		var optionIndex = -1;
 		
-		for(var i=year; i>=year-150; i--){
-				selectValue.add(new Option(i+"년", i), optionIndex--);
+		for(var i=year-1; i>=year-150; i--){
+				selectValue.add(new Option(i+"년도", i), optionIndex--);
 		}
 	}
 
@@ -41,7 +41,7 @@
 						tagform += '<td>'+change.financeAmount+'</td>';
 						tagform += '<td>'+change.closingStatementCode+'</td>';
 						tagform += '<td><button type="button" class="financeModificationButton" value="'+change.financeCode+'">수정</button></td>';
-						tagform += '<td><button type="button" class="financeDeletionButton">삭제</button></td>';
+						tagform += '<td><button type="button" class="financeDeletionButton value="'+change.financeCode+'">삭제</button></td>';
 						tagform += '</tr>';
 					});
 					tagform += '</tbody>';
@@ -55,6 +55,7 @@
 			var fmbthis = $(this);
 			var fmbval = $(this).val();
 			var comCode = ${memberSession.comCode};
+			console.log("fmbval : " + fmbval);
 			$.ajax({
 				url : '/cashfilm/statement/financeListByCompanyAjax'
 				, type : "post"
@@ -98,40 +99,19 @@
 			});
 		});
 		
-		// 처음 입력 재무 수정 확인
+		// 처음 입력 재무 수정 처리
 		$(document).on("click", "#financeModificationSubmit", function(){
-			var memberEmail = $("input[name=memberEmail]").val();
-			$.ajax({
-				url : "/cashfilm/statement/financeModificationByCompanyAjax"
-				, type : "post"
-				, datatype : "json"
-				, data : {
-					comSystemNumeral : $("#comSystemNumeral").val()
-					, financeCode : $("#financeCode").val()
-					, comCode : ${memberSession.comCode}
-					, financeAmount : $("#financeAmount").val()
-					, closingStatementCode : $("#closingStatementCode").val()
-					, memberEmail : memberEmail
-				}
-				, success : function(data){
-					var tagform = '<tbody>';
-					$.each(data, function(index, change){
-						tagform += '<tr>';
-						tagform += '<td>'+change.comSystemName+'</td>';
-						tagform += '<td>'+change.financeCode+'</td>';
-						tagform += '<td>'+change.comCode+'</td>';
-						tagform += '<td>'+change.comSystemNumeral+'</td>';
-						tagform += '<td>'+change.memberEmail+'</td>';
-						tagform += '<td>'+change.financeAmount+'</td>';
-						tagform += '<td>'+change.closingStatementCode+'</td>';
-						tagform += '<td><button type="button" class="financeModificationButton" value="'+change.financeCode+'">수정</button></td>';
-						tagform += '<td><button type="button" class="financeDeletionButton">삭제</button></td>';
-						tagform += '</tr>';
-					});
-					tagform += '</tbody>';
-					$("tbody").replaceWith(tagform);
-				}
-			});
+			$("#financeModification").submit();
+		});
+		
+		// 처음 입력 재무 삭제 처리
+		$(document).on("click", ".financeDeletionButton", function(){
+			var financeCode = $(this).val();
+			var comCode = ${memberSession.comCode};
+			var closingStatementCode = $("#year").val();
+			console.log("financeCode : " + financeCode);
+			console.log("comCode : " + comCode);
+			console.log("closingStatementCode : " + closingStatementCode);
 		});
 	});
 </script>
@@ -141,7 +121,6 @@
 <c:set var="comCode" value="${memberSession.comCode}"/>
 
 <select id="year">
-	<option>- 결산년도선택 -</option>
 </select>
 
 <form id="financeModification" action="${pageContext.request.contextPath}/statement/financeModificationByCompany" method="post">
@@ -170,7 +149,7 @@
 					<td>${list.financeAmount}</td>
 					<td>${list.closingStatementCode}</td>
 					<td><button type="button" class="financeModificationButton" value="${list.financeCode}">수정</button></td>
-					<td><button type="button" class="financeDeletionButton">삭제</button></td>
+					<td><button type="button" class="financeDeletionButton" value="${list.financeCode}">삭제</button></td>
 				</tr>
 			</c:forEach>
 		</tbody>
