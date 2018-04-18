@@ -2,22 +2,107 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <jsp:include page="/WEB-INF/views/module/topFirst.jsp"/>
+	<script>
+	$( document ).ready(function() {
+	     $('#updatesystem').on('show.bs.modal', function(e){
+	     	var individualSystemNumeral= $(e.relatedTarget).data('individualSystemNumeral');
+		 $(e.currentTarget).find('input[name="individualSystemNumeral"]').val(individualSystemNumeral);
+		});
+	});
+	</script>	
 <jsp:include page="/WEB-INF/views/module/topSecond.jsp"/>
+	
+	<a class="btn" href="#"><span class="label label-success" data-toggle="modal" data-target="#insertsystem"><i class="fas fa-plus"></i> &nbsp 추가</span></a>
+	<table class="table table-striped">
+     <thead>
+        <tr class="row-name">
+           <th><strong>계정체계명</strong></th>
+           <th><strong>Settings</strong></th>
+        </tr>
+     </thead>   
+     <tbody>
+    	<c:forEach var="IndividualSystem" items="${list}">
+        <tr class="row-content">
+           <td>${IndividualSystem.individualSystemName}</td>
+           <td>
+              <a class="btn btn-danger edit" href="${pageContext.request.contextPath}/IndividualSystem/deleteIndividualSystem?individualSystemNumeral=${IndividualSystem.individualSystemNumeral}" aria-label="Settings">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+              </a>
+              &nbsp 
+              <a class="btn btn-info edit" href="#updatesystem" data-toggle="modal" data-individualSystemNumeral="${IndividualSystem.individualSystemNumeral}" aria-label="Settings">
+                <i class="fas fa-wrench" aria-hidden="true"></i>
+              </a> 
+           </td>
+        </tr>
+        </c:forEach>
+	   </tbody>
+	  </table>
+	  
+  <!-- 추가 Modal -->
+  <div class="modal fade" id="insertsystem" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">×</button>
+          <h4 class="modal-title">계정체계 등록</h4>
+        </div>
+        <div class="modal-body">
+        	 <div class="col-md-3"></div>
+       		 <div class="form-group">
+	         <div class="col-md-6">
+	         	 <form action="${pageContext.request.contextPath}/IndividualSystem/insertIndividualSystem" method="post">
+	         	 	<div><span style="float:right"><button type="submit" id="emailOverlap" class="button special">등록</button></span></div>    
+	          		<div class="input-group">
+	          	 		<input type="text" name="individualSystemName" placeholder="Enter SystemName">
+	          	 	</div>	
+	             </form>  
+	         </div>
+	         <div class="col-md-3"></div>
+	        </div>
+	    </div>
+	    <div class="modal-footer">   
+        	<div class="btn-group">
+            	<button class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+            </div>
+        </div>
+      </div>
+  	</div>
+  </div>
+  
+  <!--수정 모달 --> 
+   <div class="modal fade" id="updatesystem" role="dialog">
+    <div class="modal-dialog">
+     <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">×</button>
+          <h4 class="modal-title">계정체계 등록</h4>
+        </div>
+        <div class="modal-body">
+        	 <div class="col-md-3"></div>
+       		 <div class="form-group">
+	         <div class="col-md-6">
+	         	 <form action="${pageContext.request.contextPath}/IndividualSystem/updateIndividualSystem" method="post">
+	         	 	<div><span style="float:right"><button type="submit" id="emailOverlap" class="button special">수정</button></span></div>    
+	          		<div class="input-group">
+	          	 		<input type="text" name="individualSystemNumeral" value="${indiSystem.individualSystemNumeral}">
+	          	 		<input type="text" name="individualSystemName" value="${indiSystem.individualSystemName}">
+	          	 	</div>	
+	             </form>  
+	         </div>
+	         <div class="col-md-3"></div>
+	        </div>
+	    </div>
+	    <div class="modal-footer">   
+        	<div class="btn-group">
+            	<button class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+            </div>
+        </div>
+      </div>
+  	</div>
+  </div>
 
-	<table border="1">
-	  <tr>
-	      <th>계정체계명</th>
-	      <th>수정</th>
-	      <th>삭제</th>
-	  </tr>
-	  <c:forEach var="IndividualSystem" items="${list}">
-		  <tr>
-		    <td>${IndividualSystem.individualSystemName}</td>
-		    <td><a href="${pageContext.request.contextPath}/IndividualSystem/updateIndividualSystem?individualSystemNumeral=${IndividualSystem.individualSystemNumeral}">수정</a></td>
-		    <td><a href="${pageContext.request.contextPath}/IndividualSystem/deleteIndividualSystem?individualSystemNumeral=${IndividualSystem.individualSystemNumeral}">삭제</a></td>
-		  </tr>
-	  </c:forEach>
-	</table>
-
- 
+	 
 <jsp:include page="/WEB-INF/views/module/bottom.jsp"/>
