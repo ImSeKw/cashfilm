@@ -2,12 +2,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <jsp:include page="/WEB-INF/views/module/topFirst.jsp"/>
-	<script>
-	$( document ).ready(function() {
-	     $('#updatesystem').on('show.bs.modal', function(e){
-	     	var individualSystemNumeral= $(e.relatedTarget).data('individualSystemNumeral');
-		 $(e.currentTarget).find('input[name="individualSystemNumeral"]').val(individualSystemNumeral);
-		});
+	<script type="text/javascript">
+	$(document).ready(function() {
+	    function show(str){
+	    	 $("#individualSystemNumeral").text("${IndividualSystem.individualSystemNumeral}");
+
+	    	/* var a = $(event.relatedTarget)
+	     	var individualSystemNumeral= a.data('individualSystemNumeral');
+	    	
+		 ${event.currentTarget}.find('input[name="individualSystemNumeral"]').text(individualSystemNumeral);
+		}); */
 	});
 	</script>	
 <jsp:include page="/WEB-INF/views/module/topSecond.jsp"/>
@@ -29,7 +33,7 @@
                 <i class="fa fa-trash" aria-hidden="true"></i>
               </a>
               &nbsp 
-              <a class="btn btn-info edit" href="#updatesystem" data-toggle="modal" data-individualSystemNumeral="${IndividualSystem.individualSystemNumeral}" aria-label="Settings">
+              <a class="btn btn-info edit" href="#updatesystem" data-toggle="modal" onclick="show('${IndividualSystem.individualSystemNumeral}') aria-label="Settings">
                 <i class="fas fa-wrench" aria-hidden="true"></i>
               </a> 
            </td>
@@ -87,8 +91,8 @@
 	         	 <form action="${pageContext.request.contextPath}/IndividualSystem/updateIndividualSystem" method="post">
 	         	 	<div><span style="float:right"><button type="submit" id="emailOverlap" class="button special">수정</button></span></div>    
 	          		<div class="input-group">
-	          	 		<input type="text" name="individualSystemNumeral" value="${indiSystem.individualSystemNumeral}">
-	          	 		<input type="text" name="individualSystemName" value="${indiSystem.individualSystemName}">
+	          	 		<input type="text" name="individualSystemNumeral" id="individualSystemNumeral" >
+	          	 		<input type="text" name="individualSystemName" id="individualSystemName" >
 	          	 	</div>	
 	             </form>  
 	         </div>
