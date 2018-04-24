@@ -41,7 +41,7 @@
 						tagform += '<td>'+change.financeAmount+'</td>';
 						tagform += '<td>'+change.closingStatementCode+'</td>';
 						tagform += '<td><button type="button" class="financeModificationButton" value="'+change.financeCode+'">수정</button></td>';
-						tagform += '<td><button type="button" class="financeDeletionButton value="'+change.financeCode+'">삭제</button></td>';
+						tagform += '<td><button type="button" class="financeDeletionButton" value="'+change.financeCode+'">삭제</button></td>';
 						tagform += '</tr>';
 					});
 					tagform += '</tbody>';
@@ -112,6 +112,14 @@
 			console.log("financeCode : " + financeCode);
 			console.log("comCode : " + comCode);
 			console.log("closingStatementCode : " + closingStatementCode);
+			var str = "financeDeletionByCompany?financeCode="+financeCode+"&comCode="+comCode+"&closingStatementCode="+closingStatementCode;
+			location.replace(str);
+		});
+		
+		// 처음 입력 재무 등록 화면
+		$(document).on("click", ".financeRegistrationButton", function(){
+			var str = "financeRegistrationByCompany"
+			location.href = str;
 		});
 	});
 </script>
@@ -122,6 +130,8 @@
 
 <select id="year">
 </select>
+
+<button type="button" class="financeRegistrationButton">등록</button>
 
 <form id="financeModification" action="${pageContext.request.contextPath}/statement/financeModificationByCompany" method="post">
 	<input type="hidden" name="comCode" value="${memberSession.comCode}">

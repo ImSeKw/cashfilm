@@ -26,16 +26,15 @@ public class StatementCompanyController {
 	
 	// 회사 처음 입력 재무 삭제 처리
 	@RequestMapping(value = "/statement/financeDeletionByCompany", method = RequestMethod.GET)
-	public String deleteStatementCompanyFinance(StatementCompanyFinanceCode statementCompanyFinanceCode) {
-		logger.debug("{} : closingStatementCode deleteStatementCompanyFinance() StatementCompanyController", statementCompanyFinanceCode.getClosingStatementCode());
-		logger.debug("{} : comCode deleteStatementCompanyFinance() StatementCompanyController", statementCompanyFinanceCode.getComCode());
-		logger.debug("{} : financeCode deleteStatementCompanyFinance() StatementCompanyController", statementCompanyFinanceCode.getFinanceCode());
+	public String deleteStatementCompanyFinance(@RequestParam("closingStatementCode") String closingStatementCode
+												, @RequestParam("comCode") int comCode
+												, @RequestParam("financeCode") int financeCode) {
+		logger.debug("{} : < closingStatementCode deleteStatementCompanyFinance() StatementCompanyController", closingStatementCode);
+		logger.debug("{} : < comCode deleteStatementCompanyFinance() StatementCompanyController", comCode);
+		logger.debug("{} : < financeCode deleteStatementCompanyFinance() StatementCompanyController", financeCode);
 		// 삭제 처리
-		int financeCode = statementCompanyFinanceCode.getFinanceCode();
 		statementCompanyService.deleteStatementCompanyFinance(financeCode);
 		// 조회
-		int comCode = statementCompanyFinanceCode.getComCode();
-		String closingStatementCode = statementCompanyFinanceCode.getClosingStatementCode();
 		return "redirect:/statement/financeListByCompany?comCode="+comCode+"&closingStatementCode="+closingStatementCode;
 	}
 	
@@ -96,7 +95,7 @@ public class StatementCompanyController {
 		logger.debug("{} : < memberEmail insertStatementCompanyFinance() StatementCompanyController", memberEmail);
 		logger.debug("{} : < comCode insertStatementCompanyFinance() StatementCompanyController", comCode);
 		statementCompanyService.insertStatementCompanyFinance(comSystemNumeralList, financeAmountList, closingStatementCode, memberEmail, comCode);
-		return "redirect:/";
+		return "redirect:/statement/financeListByCompany?comCode="+comCode+"&closingStatementCode="+closingStatementCode;
 	}
 	
 	// 회사 처음 입력 재무 등록 화면
