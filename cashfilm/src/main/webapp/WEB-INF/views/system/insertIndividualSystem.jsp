@@ -8,5 +8,4 @@
 	<input type="text" name="individualSystemName">
 	<input type="submit" value="등록"> 
 	</form>
-
 <jsp:include page="/WEB-INF/views/module/bottom.jsp"/>

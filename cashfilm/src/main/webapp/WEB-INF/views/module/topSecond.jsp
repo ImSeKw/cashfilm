@@ -178,11 +178,11 @@
 									회원관리 </a>
 								</li>
 								<li>
-									<a href="#tab_default_2" data-toggle="tab"  class="ctrlBtn" style="display:none;">
+									<a href="${pageContext.request.contextPath}/company/comListBeforeApproval" class="ctrlBtn" style="display:none;">
 									회사관리</a>
 								</li>
 								<li>
-									<a href="#tab_default_3" data-toggle="tab"  class="ctrlBtn" style="display:none;">
+									<a href="${pageContext.request.contextPath}/IndividualSystem/selectIndividualSystem" class="ctrlBtn" style="display:none;">
 									개인체계관리 </a>
 								</li>
 								<li>
@@ -194,47 +194,6 @@
 									상품관리 </a>
 								</li>
 							</ul>
-									<!--  <div class="tab-content">
-								<div class="tab-pane active" id="tab_default_1">
-									<p>
-										Howdy, I'm in Tab 2.
-									</p>
-									<p>
-										Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat. Ut wisi enim ad minim veniam, quis nostrud exerci tation.
-									</p>
-									<p>
-										<a class="btn btn-warning" href="http://j.mp/metronictheme" target="_blank">
-											Click for more features...
-										</a>
-									</p>
-								</div>
-								<div class="tab-pane" id="tab_default_2" >
-									<p>
-										Howdy, I'm in Tab 2.
-									</p>
-									<p>
-										Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat. Ut wisi enim ad minim veniam, quis nostrud exerci tation.
-									</p>
-									<p>
-										<a class="btn btn-warning" href="http://j.mp/metronictheme" target="_blank">
-											Click for more features...
-										</a>
-									</p>
-								</div>
-								<div class="tab-pane" id="tab_default_3">
-									<p>
-										Howdy, I'm in Tab 3.
-									</p>
-									<p>
-										Duis autem vel eum iriure dolor in hendrerit in vulputate. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat
-									</p>
-									<p>
-										<a class="btn btn-info" href="http://j.mp/metronictheme" target="_blank">
-											Learn more...
-										</a>
-									</p>
-								</div>
-							</div> -->
 						</div>	
 					</div>
 				</div>
