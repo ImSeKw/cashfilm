@@ -4,6 +4,40 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.boa.cashfilm.mapper.statementCompanyMapper">
+	<!-- 회사 전표 및 거래 등록 화면 : 거래구분 -->
+	<select id="selectStatementCompanyTradeClassification" resultType="StatementCompanyTradeClassification">
+		SELECT
+			tradeClassificationCode
+			, tradeClassificationName
+		FROM cfTradeClassification
+	</select>
+	
+	<!-- 회사 전표 및 거래 등록 화면 : 모든거래처 -->
+	<select id="selectStatementCompanyCustomer" parameterType="int" resultType="StatementCompanyCustomer">
+		SELECT
+			customerCode
+			, comCode
+			, customerNumber
+			, customerCeo
+			, customerName
+			, customerAddress
+			, customerPhone
+			, customerCreditNumber
+			, customerContactNumber
+			, customerCategory
+			, customerRemarks
+		FROM cfcustomer
+		WHERE comCode = #{comCode}
+	</select>
+	
+	<!-- 회사 전표 및 거래 등록 화면 : 전표분류 -->
+	<select id="selectStatementCompanyStatementClassification" resultType="StatementCompanyStatementClassification">
+		SELECT
+			statementClassificationCode
+			, statementClassificationName
+		FROM cfstatementclassification
+	</select>
+
 	<!-- 회사 처음 입력 재무 삭제 처리 -->
 	<delete id="deleteStatementCompanyFinance" parameterType="int">
 		DELETE FROM cffinance

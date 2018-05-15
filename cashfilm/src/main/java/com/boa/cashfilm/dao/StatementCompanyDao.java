@@ -9,9 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.boa.cashfilm.company.dto.ComSystem;
+import com.boa.cashfilm.smtcom.dto.StatementCompanyCustomer;
 import com.boa.cashfilm.smtcom.dto.StatementCompanyFinance;
 import com.boa.cashfilm.smtcom.dto.StatementCompanyFinanceCode;
 import com.boa.cashfilm.smtcom.dto.StatementCompanyFinanceList;
+import com.boa.cashfilm.smtcom.dto.StatementCompanyStatementClassification;
+import com.boa.cashfilm.smtcom.dto.StatementCompanyTradeClassification;
 
 @Repository
 public class StatementCompanyDao {
@@ -19,6 +22,23 @@ public class StatementCompanyDao {
 	SqlSessionTemplate sqlSessionTemplate;
 	private final String NAMESPACE = "com.boa.cashfilm.mapper.statementCompanyMapper.";
 	private static final Logger logger = LoggerFactory.getLogger(StatementCompanyDao.class);
+	
+	
+	
+	// 회사 전표 및 거래 등록 화면 : 거래구분
+	public List<StatementCompanyTradeClassification> selectStatementCompanyTradeClassification() {
+		return sqlSessionTemplate.selectList(NAMESPACE + "selectStatementCompanyTradeClassification");
+	}
+	
+	// 회사 전표 및 거래 등록 화면 : 모든거래처
+	public List<StatementCompanyCustomer> selectStatementCompanyCustomer(int comCode) {
+		return sqlSessionTemplate.selectList(NAMESPACE + "selectStatementCompanyCustomer", comCode);
+	}
+	
+	// 회사 전표 및 거래 등록 화면 : 전표분류
+	public List<StatementCompanyStatementClassification> selectStatementCompanyStatementClassification() {
+		return sqlSessionTemplate.selectList(NAMESPACE + "selectStatementCompanyStatementClassification");
+	}
 	
 	// 회사 처음 입력 재무 삭제 처리
 	public void deleteStatementCompanyFinance(int financeCode) {

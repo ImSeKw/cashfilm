@@ -24,6 +24,8 @@ public class StatementCompanyController {
 	StatementCompanyService statementCompanyService;
 	private static final Logger logger = LoggerFactory.getLogger(StatementCompanyController.class);
 	
+	
+	
 	// 회사 처음 입력 재무 삭제 처리
 	@RequestMapping(value = "/statement/financeDeletionByCompany", method = RequestMethod.GET)
 	public String deleteStatementCompanyFinance(@RequestParam("closingStatementCode") String closingStatementCode
