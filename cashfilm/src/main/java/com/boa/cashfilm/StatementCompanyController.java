@@ -1,6 +1,7 @@
 package com.boa.cashfilm;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +25,15 @@ public class StatementCompanyController {
 	StatementCompanyService statementCompanyService;
 	private static final Logger logger = LoggerFactory.getLogger(StatementCompanyController.class);
 	
-	
+	// 회사 전표 및 거래 등록 : 화면
+	@RequestMapping(value = "/statement/statementAndTradeRegistrationByCompany", method = RequestMethod.GET)
+	public String selectStatementCompanyStatementAndTradeRegistration(Model model, @RequestParam("comCode") int comCode) {
+		logger.debug("{} : < comCode selectStatementCompanyStatementAndTradeRegistration()", comCode);
+		Map map = statementCompanyService.selectStatementCompanyStatementAndTradeRegistration(comCode);
+		model.addAttribute("SCSCList", map.get("SCSCList"));
+		model.addAttribute("SCCList", map.get("SCCList"));
+		return "statement/statementAndTradeRegistrationByCompany";
+	}
 	
 	// 회사 처음 입력 재무 삭제 처리
 	@RequestMapping(value = "/statement/financeDeletionByCompany", method = RequestMethod.GET)

@@ -24,19 +24,20 @@ public class StatementCompanyDao {
 	private static final Logger logger = LoggerFactory.getLogger(StatementCompanyDao.class);
 	
 	
-	
-	// 회사 전표 및 거래 등록 화면 : 거래구분
+	// 회사 전표 및 거래 등록 : 화면 - 거래구분
 	public List<StatementCompanyTradeClassification> selectStatementCompanyTradeClassification() {
 		return sqlSessionTemplate.selectList(NAMESPACE + "selectStatementCompanyTradeClassification");
 	}
 	
-	// 회사 전표 및 거래 등록 화면 : 모든거래처
+	// 회사 전표 및 거래 등록 : 화면 - 모든거래처
 	public List<StatementCompanyCustomer> selectStatementCompanyCustomer(int comCode) {
+		logger.debug("{} : < comCode selectStatementCompanyCustomer()", comCode);
 		return sqlSessionTemplate.selectList(NAMESPACE + "selectStatementCompanyCustomer", comCode);
 	}
 	
-	// 회사 전표 및 거래 등록 화면 : 전표분류
+	// 회사 전표 및 거래 등록 : 화면 - 전표분류
 	public List<StatementCompanyStatementClassification> selectStatementCompanyStatementClassification() {
+		logger.debug("< selectStatementCompanyStatementClassification()");
 		return sqlSessionTemplate.selectList(NAMESPACE + "selectStatementCompanyStatementClassification");
 	}
 	

@@ -14,5 +14,4 @@ public class CashfilmService {
 	@Autowired
 	CashfilmDao cashfilmDao;
 	private static final Logger logger = LoggerFactory.getLogger(CashfilmService.class);
-	
 }

@@ -1,7 +1,9 @@
 package com.boa.cashfilm.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,9 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.boa.cashfilm.company.dto.ComSystem;
 import com.boa.cashfilm.dao.StatementCompanyDao;
+import com.boa.cashfilm.smtcom.dto.StatementCompanyCustomer;
 import com.boa.cashfilm.smtcom.dto.StatementCompanyFinance;
 import com.boa.cashfilm.smtcom.dto.StatementCompanyFinanceCode;
 import com.boa.cashfilm.smtcom.dto.StatementCompanyFinanceList;
+import com.boa.cashfilm.smtcom.dto.StatementCompanyStatementClassification;
 
 @Service
 @Transactional
@@ -21,6 +25,27 @@ public class StatementCompanyService {
 	@Autowired
 	StatementCompanyDao statementCompanyDao;
 	private static final Logger logger = LoggerFactory.getLogger(StatementCompanyService.class);
+	
+	// 회사 전표 및 거래 등록 : 화면
+	public Map selectStatementCompanyStatementAndTradeRegistration(int comCode) {
+		logger.debug("{} : < comCode selectStatementCompanyStatementAndTradeRegistration()", comCode);
+		Map map = new HashMap();
+		List<StatementCompanyStatementClassification> SCSCList = statementCompanyDao.selectStatementCompanyStatementClassification();
+		for(StatementCompanyStatementClassification scsc : SCSCList) {
+			logger.debug("{} : > statementClassificationCode selectStatementCompanyStatementAndTradeRegistration()", scsc.getStatementClassificationCode());
+			logger.debug("{} : > statementClassificationName selectStatementCompanyStatementAndTradeRegistration()", scsc.getStatementClassificationName());
+		}
+		List<StatementCompanyCustomer> SCCList = statementCompanyDao.selectStatementCompanyCustomer(comCode);
+		for(StatementCompanyCustomer scc : SCCList) {
+			logger.debug("{} : > customerCode selectStatementCompanyStatementAndTradeRegistration()", scc.getCustomerCode());
+			logger.debug("{} : > comCode selectStatementCompanyStatementAndTradeRegistration()", scc.getComCode());
+			logger.debug("{} : > customerName selectStatementCompanyStatementAndTradeRegistration()", scc.getCustomerName());
+			logger.debug("{} : > customerPhone selectStatementCompanyStatementAndTradeRegistration()", scc.getCustomerPhone());
+		}
+		map.put("SCSCList", SCSCList);
+		map.put("SCCList", SCCList);
+		return map;
+	}
 	
 	// 회사 처음 입력 재무 삭제 처리
 	public void deleteStatementCompanyFinance(int financeCode) {

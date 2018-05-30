@@ -4,16 +4,16 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.boa.cashfilm.mapper.statementCompanyMapper">
-	<!-- 회사 전표 및 거래 등록 화면 : 거래구분 -->
-	<select id="selectStatementCompanyTradeClassification" resultType="StatementCompanyTradeClassification">
+	<!-- 회사 전표 및 거래 등록 : 화면 - 거래구분 -->
+	<select id="selectStatementCompanyTradeClassification" resultType="com.boa.cashfilm.smtcom.dto.StatementCompanyTradeClassification">
 		SELECT
 			tradeClassificationCode
 			, tradeClassificationName
 		FROM cfTradeClassification
 	</select>
 	
-	<!-- 회사 전표 및 거래 등록 화면 : 모든거래처 -->
-	<select id="selectStatementCompanyCustomer" parameterType="int" resultType="StatementCompanyCustomer">
+	<!-- 회사 전표 및 거래 등록 : 화면 - 모든거래처 -->
+	<select id="selectStatementCompanyCustomer" parameterType="int" resultType="com.boa.cashfilm.smtcom.dto.StatementCompanyCustomer">
 		SELECT
 			customerCode
 			, comCode
@@ -30,8 +30,8 @@
 		WHERE comCode = #{comCode}
 	</select>
 	
-	<!-- 회사 전표 및 거래 등록 화면 : 전표분류 -->
-	<select id="selectStatementCompanyStatementClassification" resultType="StatementCompanyStatementClassification">
+	<!-- 회사 전표 및 거래 등록 : 화면 - 전표분류 -->
+	<select id="selectStatementCompanyStatementClassification" resultType="com.boa.cashfilm.smtcom.dto.StatementCompanyStatementClassification">
 		SELECT
 			statementClassificationCode
 			, statementClassificationName
